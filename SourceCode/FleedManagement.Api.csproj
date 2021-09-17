@@ -19,12 +19,14 @@
   </ItemGroup>
 
   <ItemGroup>
+    <Folder Include="Data\Gateways\CMS\" />
     <Folder Include="Data\Database\Migrations\" />
-    <Folder Include="Data\Database\Models\" />
-    <Folder Include="Features\" />
+    <Folder Include="Features\Chauffeur\GetChauffeur\" />
+    <Folder Include="Features\Chauffeur\DeleteChauffeur\" />
+    <Folder Include="Features\Chauffeur\UpdateChauffeur\" />
     <Folder Include="Models\Enums\" />
-    <Folder Include="Models\Dtos\" />
     <Folder Include="Models\Entities\" />
+    <Folder Include="Services\" />
   </ItemGroup>
 
 </Project>
