@@ -13,6 +13,8 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "3. Libs", "3. Libs", "{6589
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Lib.MediatR", "..\Lib.MediatR\Lib.MediatR.csproj", "{C17D6011-CB42-446A-A5FF-9A9F40DEAAA0}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FleetManagement.Test", "..\FleetManagement.Test\FleetManagement.Test.csproj", "{05FF8759-7B0A-4F5C-B826-8F0AFEFAC12F}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -27,6 +29,10 @@ Global
 		{C17D6011-CB42-446A-A5FF-9A9F40DEAAA0}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{C17D6011-CB42-446A-A5FF-9A9F40DEAAA0}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{C17D6011-CB42-446A-A5FF-9A9F40DEAAA0}.Release|Any CPU.Build.0 = Release|Any CPU
+		{05FF8759-7B0A-4F5C-B826-8F0AFEFAC12F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{05FF8759-7B0A-4F5C-B826-8F0AFEFAC12F}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{05FF8759-7B0A-4F5C-B826-8F0AFEFAC12F}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{05FF8759-7B0A-4F5C-B826-8F0AFEFAC12F}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -34,6 +40,7 @@ Global
 	GlobalSection(NestedProjects) = preSolution
 		{5C280D53-43A1-4412-96C1-BD093D244BA3} = {4B10507F-8F3C-4606-9D17-2EAACD40AF39}
 		{C17D6011-CB42-446A-A5FF-9A9F40DEAAA0} = {6589A5FF-7759-42FB-BB42-1082FA8E4074}
+		{05FF8759-7B0A-4F5C-B826-8F0AFEFAC12F} = {165AFCAF-46AB-4E82-96FB-3001FBC02724}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {164121FE-8757-4507-9B7B-5ACD655C7D15}
