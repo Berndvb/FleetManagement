@@ -1,4 +1,3 @@
-using FleetManagement.EFCoreDAL.Infrastructure;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.HttpsPolicy;
@@ -34,6 +33,10 @@ namespace FleetManagement.ReadAPI
             {
                 c.SwaggerDoc("v1", new OpenApiInfo { Title = "FleetManagement.ReadAPI", Version = "v1" });
             });
+            //services.AddTransient(typeof(IGenericRepository<>), typeof(GenericRepository<>));
+            //services.AddTransient<IDeveloperRepository, DeveloperRepository>();
+            //services.AddTransient<IProjectRepository, ProjectRepository>();
+            //services.AddTransient<IUnitOfWork, UnitOfWork>();
             //services.AddDbContext<DatabaseContext>(options => options.UseSqlServer(Configuration.GetConnectionString("DefaultConnection")));
         }
 
