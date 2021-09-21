@@ -4,9 +4,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace FleetManagement.Framework.Models.Dtos
+namespace FleetManager.EFCore.Models
 {
-    public class AdresDto
+    public class Adres
     {
         public string Id { get; set; }
 

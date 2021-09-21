@@ -7,6 +7,7 @@
         OnkostenNota,
         Briefwisseling,
         MedischAttest,
-        Ander
+        Administratie,
+        Extra
     }
 }

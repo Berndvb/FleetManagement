@@ -1,10 +1,11 @@
 ﻿using FleetManagement.Framework.Models.Enums;
 using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 
-namespace FleetManagement.Framework.Models.Dtos
+namespace FleetManager.EFCore.Models
 {
-    public class HerstellingDto : AdministratieDto
+    public class ReadHerstelling : Administratie
     {
         public DateTime DatumVoorval { get; set; }
 
@@ -15,5 +16,6 @@ namespace FleetManagement.Framework.Models.Dtos
         public string ReferentieNummer { get; set; }
 
         public EHerstellingStatus HerstellingStatus { get; set; }
+
     }
 }

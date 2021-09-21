@@ -4,9 +4,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace FleetManagement.Framework.Models.Dtos
+namespace FleetManager.EFCore.Repository
 {
-    public class OnderhoudsbeurtDto : AdministratieDto
+    interface IChauffeurRepository
     {
     }
 }

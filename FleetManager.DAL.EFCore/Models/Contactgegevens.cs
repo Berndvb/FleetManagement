@@ -4,9 +4,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace FleetManagement.Framework.Models.Dtos
+namespace FleetManager.EFCore.Models
 {
-    public class ContactgegevensDto
+    public class Contactgegevens
     {
         public string Id { get; set; }
 
@@ -16,6 +16,6 @@ namespace FleetManagement.Framework.Models.Dtos
 
         public string Telefoonnummer { get; set; }
 
-        public AdresDto Adres { get; set; }
+        public Adres Adres { get; set; }
     }
 }
