@@ -1,7 +1,5 @@
 ﻿using FleetManagement.Framework.Models.Enums;
 using System;
-using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations;
 
 namespace FleetManagement.Domain.Models
 {
@@ -11,7 +9,7 @@ namespace FleetManagement.Domain.Models
 
         public string SchadeOmschrijving { get; set; }
 
-        public string VerzekeringsMaatschappij { get; set; }
+        public string Verzekeringsmaatschappij { get; set; }
 
         public string ReferentieNummer { get; set; }
 

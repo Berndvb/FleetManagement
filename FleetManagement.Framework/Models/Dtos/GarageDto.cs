@@ -1,10 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace FleetManagement.Framework.Models.Dtos
+﻿namespace FleetManagement.Framework.Models.Dtos
 {
     public class GarageDto
     {
@@ -17,5 +11,19 @@ namespace FleetManagement.Framework.Models.Dtos
         public string Ondernemingsnummer { get; set; }
 
         public string Bankrekeningnummer { get; set; }
+
+        public GarageDto(
+            string id,
+            string naam,
+            ContactgegevensDto contactgegevens,
+            string ondernemingsnummer,
+            string bankrekeningnummer)
+        {
+            Id = id;
+            Naam = naam;
+            Contactgegevens = contactgegevens;
+            Ondernemingsnummer = ondernemingsnummer;
+            Bankrekeningnummer = bankrekeningnummer;
+        }
     }
 }

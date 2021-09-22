@@ -1,8 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace FleetManagement.Framework.Models.Dtos
 {
@@ -19,5 +15,21 @@ namespace FleetManagement.Framework.Models.Dtos
         public DateTime AanmaakDatum { get; set; }
 
         public DateTime? AfsluitDatum { get; set; }
+
+        public ChauffeurVoertuigDto(
+            string id,
+            TankkaartDto tankkaart,
+            ChauffeurDto chauffeur,
+            bool actief,
+            DateTime aanmaakDatum,
+            DateTime? afsluitDatum)
+        {
+            Id = id;
+            Tankkaart = tankkaart;
+            Chauffeur = chauffeur;
+            Actief = actief;
+            AanmaakDatum = aanmaakDatum;
+            AfsluitDatum = afsluitDatum;
+        }
     }
 }

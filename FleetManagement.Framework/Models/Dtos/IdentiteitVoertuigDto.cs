@@ -1,9 +1,6 @@
-﻿using FleetManagement.Framework.Models.Enums;
-using System;
+﻿using FleetManagement.Framework.Helpers;
+using FleetManagement.Framework.Models.Enums;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace FleetManagement.Framework.Models.Dtos
 {
@@ -18,5 +15,19 @@ namespace FleetManagement.Framework.Models.Dtos
         public string Merk { get; set; }
 
         public List<string> Nummerplaten { get; set; }
+
+        public IdentiteitVoertuigDto(
+            string chassisnummer,
+            EBrandstofType brandstofType,
+            EWagenType wagenType,
+            string merk,
+            string nummerplaten)
+        {
+            Chassisnummer = chassisnummer;
+            BrandstofType = brandstofType;
+            WagenType = wagenType;
+            Merk = merk;
+            Nummerplaten = nummerplaten.SplitToText(); 
+        }
     }
 }

@@ -1,9 +1,6 @@
-﻿using FleetManagement.Framework.Models.Enums;
-using System;
+﻿using FleetManagement.Framework.Helpers;
+using FleetManagement.Framework.Models.Enums;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace FleetManagement.Framework.Models.Dtos
 {
@@ -13,6 +10,13 @@ namespace FleetManagement.Framework.Models.Dtos
 
         public EBrandstofType BrandstofType { get; set; }
 
-        public List<string> ExtraServices { get; set; }
+        public List<string> ExtraServices { get; private set; }
+
+        public TankkaartOptiesDto(string id, EBrandstofType brandstofType, string extraServices)
+        {
+            Id = id;
+            BrandstofType = brandstofType;
+            ExtraServices = extraServices.SplitToText();
+        }
     }
 }

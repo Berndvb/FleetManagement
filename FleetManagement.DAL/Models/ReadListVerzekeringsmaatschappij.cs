@@ -1,6 +1,4 @@
-﻿using Microsoft.EntityFrameworkCore;
-
-namespace FleetManagement.Domain.Models
+﻿namespace FleetManagement.Domain.Models
 {
     public class ReadListVerzekeringsmaatschappijen
     {

@@ -1,8 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace FleetManagement.Framework.Models.Dtos
 {
@@ -15,5 +11,17 @@ namespace FleetManagement.Framework.Models.Dtos
         public string Rijksregisternummer { get; set; }
 
         public DateTime Geboortedatum { get; set; }
+
+        public IdentiteitPersoonDto(
+            string naam,
+            string voornaam,
+            string rijksregisternummer,
+            DateTime geboortedatum)
+        {
+            Naam = naam;
+            Voornaam = voornaam;
+            Rijksregisternummer = rijksregisternummer;
+            Geboortedatum = geboortedatum;
+        }
     }
 }

@@ -1,9 +1,5 @@
 ﻿using FleetManagement.Framework.Models.Enums;
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace FleetManagement.Framework.Models.Dtos
 {
@@ -25,5 +21,27 @@ namespace FleetManagement.Framework.Models.Dtos
         public ChauffeurDto Chauffeur { get; set; }
 
         public string Message { get; set; }
+
+        public AanvraagDto(
+            string id, 
+            DateTime aanmaakDatum, 
+            EAanvraagType aanvraagType, 
+            DateTime? eersteDatumInplanning, 
+            DateTime? tweedeDatumInplanning, 
+            EAanvraagStatus status, 
+            VoertuigDto voertuig,
+            ChauffeurDto chauffeur, 
+            string message)
+        {
+            Id = id;
+            AanmaakDatum = aanmaakDatum;
+            AanvraagType = aanvraagType;
+            EersteDatumInplanning = eersteDatumInplanning;
+            TweedeDatumInplanning = tweedeDatumInplanning;
+            Status = status;
+            Voertuig = voertuig;
+            Chauffeur = chauffeur;
+            Message = message;
+        }
     }
 }

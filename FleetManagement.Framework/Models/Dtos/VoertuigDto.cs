@@ -1,8 +1,5 @@
-﻿using System;
+﻿using FleetManagement.Framework.Helpers;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace FleetManagement.Framework.Models.Dtos
 {
@@ -21,5 +18,23 @@ namespace FleetManagement.Framework.Models.Dtos
         public List<ChauffeurVoertuigDto> Chauffeurs { get; set; }
 
         public List<AanvraagDto> Aanvragen { get; set; }
+
+        public VoertuigDto(
+            string id,
+            IdentiteitVoertuigDto identiteit,
+            string kilometerstanden,
+            List<OnderhoudsbeurtDto> onderhoudsbeurten,
+            List<HerstellingDto> herstellingen,
+            List<ChauffeurVoertuigDto> chauffeurs,
+            List<AanvraagDto> aanvragen)
+        {
+            Id = id;
+            Identiteit = identiteit;
+            Kilometerstanden = kilometerstanden.SplitToNumbers();
+            Onderhoudsbeurten = onderhoudsbeurten;
+            Herstellingen = herstellingen;
+            Chauffeurs = chauffeurs;
+            Aanvragen = aanvragen;
+        }
     }
 }

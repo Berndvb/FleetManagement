@@ -37,6 +37,7 @@ namespace FleetManagement.ReadAPI
             //services.AddTransient<IDeveloperRepository, DeveloperRepository>();
             //services.AddTransient<IProjectRepository, ProjectRepository>();
             //services.AddTransient<IUnitOfWork, UnitOfWork>();
+            //services.AddSingleton<DapperContext>();
             //services.AddDbContext<DatabaseContext>(options => options.UseSqlServer(Configuration.GetConnectionString("DefaultConnection")));
         }
 

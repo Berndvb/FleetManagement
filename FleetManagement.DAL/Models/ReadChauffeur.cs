@@ -1,9 +1,5 @@
 ﻿using FleetManagement.Framework.Models.Enums;
-using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace FleetManagement.Domain.Models
 {
@@ -17,7 +13,7 @@ namespace FleetManagement.Domain.Models
 
         public ERijbewijsType RijbewijsType { get; set; }
 
-        public bool Indienst { get; set; }
+        public bool InDienst { get; set; }
 
         public List<TankkaartChauffeur> Tankkaarten { get; set; }
 

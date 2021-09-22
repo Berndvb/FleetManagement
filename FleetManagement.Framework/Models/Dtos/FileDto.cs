@@ -1,9 +1,5 @@
 ﻿using FleetManagement.Framework.Models.Enums;
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace FleetManagement.Framework.Models.Dtos
 {
@@ -18,5 +14,19 @@ namespace FleetManagement.Framework.Models.Dtos
         public string ContentType { get; set; }
 
         public Byte[] Content { get; set; }
+
+        public FileDto(
+            string id,
+            EFileType fileType,
+            string fileName,
+            string contentType,
+            Byte[] content)
+        {
+            Id = id;
+            FileType = fileType;
+            FileName = fileName;
+            ContentType = contentType;
+            Content = content;
+        }
     }
 }

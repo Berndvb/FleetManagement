@@ -1,9 +1,6 @@
 ﻿using FleetManagement.Framework.Models.Enums;
 using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace FleetManagement.Framework.Models.Dtos
 {
@@ -22,5 +19,23 @@ namespace FleetManagement.Framework.Models.Dtos
         public bool Geblokkeerd { get; set; }
 
         public List<TankkaartChauffeurDto> Chauffeurs { get; set; }
+
+        public TankkaartDto(
+            string kaartnummer,
+            DateTime geldigheidsDatum,
+            string pincode,
+            EAuthenticatieType authenticatieType,
+            TankkaartOptiesDto tankkaartOpties,
+            bool geblokkeerd,
+            List<TankkaartChauffeurDto> chauffeurs)
+        {
+            Kaartnummer = kaartnummer;
+            GeldigheidsDatum = geldigheidsDatum;
+            Pincode = pincode;
+            AuthenticatieType = authenticatieType;
+            TankkaartOpties = tankkaartOpties;
+            Geblokkeerd = geblokkeerd;
+            Chauffeurs = chauffeurs;
+        }
     }
 }

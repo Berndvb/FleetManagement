@@ -9,43 +9,43 @@ using System.Linq.Expressions;
 
 namespace FleetManager.EFCore.Repositories
 {
-    public class GenericRepository<T> : IGenericRepository<T> where T : class
+    public class GenericRepository<TEntity> : IGenericRepository<TEntity> where TEntity : class
     {
         private readonly DatabaseContext _context;
-        private readonly DbSet<T> _dbSet;
+        private readonly DbSet<TEntity> _dbSet;
 
-        public GenericRepository(DatabaseContext context)
+        public GenericRepository(DatabaseContext context) //open context via 'using' for better disposing?
         {
             _context = context;
-            _dbSet = _context.Set<T>();
+            _dbSet = _context.Set<TEntity>();
         }
 
-        public void Add(T entity)
+        public void Add(TEntity entity)
         {
             _dbSet.Add(entity);
         }
 
-        public void AddRange(IEnumerable<T> entities)
+        public void AddRange(IEnumerable<TEntity> entities)
         {
             _dbSet.AddRange(entities);
         }
 
-        public IEnumerable<T> Find(Expression<Func<T, bool>> expression)
+        public IEnumerable<TEntity> Find(Expression<Func<TEntity, bool>> expression)
         {
             return _dbSet.Where(expression);
         }
 
-        public IEnumerable<T> GetAll()
+        public IEnumerable<TEntity> GetAll()
         {
             return _dbSet.ToList();
         }
 
-        public T GetById(int id)
+        public TEntity GetById(int id)
         {
             return _dbSet.Find(id);
         }
 
-        public void Remove(T entity)
+        public void Remove(TEntity entity)
         {
             _dbSet.Remove(entity);
         }
@@ -55,14 +55,14 @@ namespace FleetManager.EFCore.Repositories
             Remove(GetById(id));
         }
 
-        public void RemoveRange(IEnumerable<T> entities)
+        public void RemoveRange(IEnumerable<TEntity> entities)
         {
             _dbSet.RemoveRange(entities);
         }
 
-        public IEnumerable<T> Include(params Expression<Func<T, object>>[] includes)
+        public IEnumerable<TEntity> Include(params Expression<Func<TEntity, object>>[] includes)
         {
-            IIncludableQueryable<T, object> query = null;
+            IIncludableQueryable<TEntity, object> query = null;
 
             if (includes.Length > 0)
             {

@@ -2,17 +2,11 @@
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Design;
 using Microsoft.Extensions.Configuration;
-using System;
-using System.Collections.Generic;
 using System.IO;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace FleetManagement.Data.Infrastructure
 {
-    public class DatabaseContextFactory :
-    IDesignTimeDbContextFactory<DatabaseContext>
+    public class DatabaseContextFactory : IDesignTimeDbContextFactory<DatabaseContext>
     {
         public DatabaseContext CreateDbContext(string[] args)
         {
@@ -21,10 +15,9 @@ namespace FleetManagement.Data.Infrastructure
                 .AddJsonFile("appsettings.json")
                 .Build();
 
-            var builder = new DbContextOptionsBuilder<DatabaseContext>();
-
             var connectionString = configuration.GetConnectionString("DefaultConnection");
 
+            var builder = new DbContextOptionsBuilder<DatabaseContext>();
             builder.UseSqlServer(connectionString);
 
             return new DatabaseContext(builder.Options);

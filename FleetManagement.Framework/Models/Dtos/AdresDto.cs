@@ -1,10 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace FleetManagement.Framework.Models.Dtos
+﻿namespace FleetManagement.Framework.Models.Dtos
 {
     public class AdresDto
     {
@@ -15,5 +9,17 @@ namespace FleetManagement.Framework.Models.Dtos
         public string Stad { get; set; }
 
         public string Postcode { get; set; }
+
+        public AdresDto(
+            string id, 
+            string straat, 
+            string stad, 
+            string postcode)
+        {
+            Id = id;
+            Straat = straat;
+            Stad = stad;
+            Postcode = postcode;
+        }
     }
 }
