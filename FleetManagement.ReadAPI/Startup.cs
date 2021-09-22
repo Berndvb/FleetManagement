@@ -1,3 +1,4 @@
+using FleetManagement.BLL;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.HttpsPolicy;
@@ -33,12 +34,7 @@ namespace FleetManagement.ReadAPI
             {
                 c.SwaggerDoc("v1", new OpenApiInfo { Title = "FleetManagement.ReadAPI", Version = "v1" });
             });
-            //services.AddTransient(typeof(IGenericRepository<>), typeof(GenericRepository<>));
-            //services.AddTransient<IDeveloperRepository, DeveloperRepository>();
-            //services.AddTransient<IProjectRepository, ProjectRepository>();
-            //services.AddTransient<IUnitOfWork, UnitOfWork>();
-            //services.AddSingleton<DapperContext>();
-            //services.AddDbContext<DatabaseContext>(options => options.UseSqlServer(Configuration.GetConnectionString("DefaultConnection")));
+            services.AddDataAccessServices();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

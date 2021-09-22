@@ -17,13 +17,13 @@ namespace FleetManager.Dapper.Repositories
             _dapperContextFactory = dapperContextFactory;
         }
 
-        public Task Query<TEntity>(TEntity entity, string queryText) // pass on 'null' as parameter when u don't need one
+        public Task Command<TEntity>(TEntity entity, string queryText) // queryText will probably need a $ or @
            => WithConnection(async connectionmethod =>
            {
                await connectionmethod.ExecuteAsync(queryText, entity);
            });
 
-        public Task<TEntity> QueryWithSingleResult<TEntity>(TEntity entity, string queryText)
+        public Task<TEntity> QuerySingleResult<TEntity>(TEntity entity, string queryText)
             => WithConnection<TEntity>(async connectionmethod =>
             {
                 var result = await connectionmethod.QueryAsync<TEntity>(queryText, entity);
@@ -31,7 +31,7 @@ namespace FleetManager.Dapper.Repositories
                 return result.SingleOrDefault();
             });
 
-        public Task<IEnumerable<TEntity>> QueryWithResult<TEntity>(TEntity entity, string queryText)
+        public Task<IEnumerable<TEntity>> QueryMultipleResult<TEntity>(TEntity entity, string queryText)
            => WithConnection<IEnumerable<TEntity>>(async connectionmethod =>
            {
                var result = await connectionmethod.QueryAsync<TEntity>(queryText, entity);

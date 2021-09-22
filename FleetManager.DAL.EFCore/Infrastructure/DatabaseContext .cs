@@ -15,11 +15,5 @@ namespace FleetManagement.EFCore.Infrastructure
         public DatabaseContext(DbContextOptions<DatabaseContext> options) : base(options)
         {
         }
-
-        //protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
-        //{
-        //    optionsBuilder.UseSqlServer(
-        //        @"Server=DESKTOP-1SUAPOV; Database=FleetManagement; Trusted_Connection=True; MultipleActiveResultSets=true;");
-        //}
     }
 }

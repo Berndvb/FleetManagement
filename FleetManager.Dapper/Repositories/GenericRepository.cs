@@ -29,11 +29,13 @@ namespace FleetManager.Dapper.Repositories
             return _dbSet.Where(expression);
         }
 
-        public async Task<IEnumerable<TOutput>> GetAll<TInput, TOutput>(TInput input, TOutput output)
+        public async Task<IEnumerable<TEntity>> GetAll<TEntity>(TEntity entity) // CHECK
         {
-            var queryString = "SELECT * FROM @output";
+            var sb = new StringBuilder();
+            sb.Append
+            var queryString = "SELECT * FROM @entity";
 
-            return await QueryWithResult<TInput, TOutput>(input, queryString);
+            return await QueryMultipleResult<TEntity>(entity, queryString);
         }
 
         public T GetById(int id)
@@ -41,14 +43,18 @@ namespace FleetManager.Dapper.Repositories
             return _dbSet.Find(id);
         }
 
-        public void Remove(T entity)
+        public async Task Remove<TEntity>(TEntity entity) // Check
         {
-            _dbSet.Remove(entity);
+            var queryString = "DELETE @entity";
+
+            await Command<TEntity>(entity, queryString);
         }
 
-        public void Remove(int id)
+        public async Task RemoveById<TEntity>(TEntity entity, int id) // Check
         {
-            Remove(GetById(id));
+            var queryString = "DELETE @entity WHERE Id = @Id";
+
+            await Command<TEntity>(entity, queryString);
         }
 
         public void RemoveRange(IEnumerable<T> entities)
