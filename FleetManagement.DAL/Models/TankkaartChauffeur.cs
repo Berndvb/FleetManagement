@@ -6,7 +6,7 @@ namespace FleetManagement.Domain.Models
     {
         public string Id { get; set; }
 
-        public ReadTankaart Tankkaart { get; set; }
+        public ReadTankkaart Tankkaart { get; set; }
 
         public ReadChauffeur Chauffeur { get; set; }
 

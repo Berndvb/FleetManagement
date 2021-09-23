@@ -6,6 +6,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Linq.Expressions;
+using System.Threading.Tasks;
 
 namespace FleetManager.EFCore.Repositories
 {
@@ -39,19 +40,19 @@ namespace FleetManager.EFCore.Repositories
             return _dbSet.Select(select).ToList();
         }
 
-        public ICollection<TType> FindAndSelect<TType>(Expression<Func<TEntity, bool>> where, Expression<Func<TEntity, TType>> select) where ttype : class
+        public ICollection<TType> FindAndSelect<TType>(Expression<Func<TEntity, bool>> where, Expression<Func<TEntity, TType>> select) where TType : class
         {
             return _dbSet.Where(where).Select(select).ToList();
         }
 
-        public ICollection<TEntity> GetAll()
+        public async Task<ICollection<TEntity>> GetAll()
         {
-            return _dbSet.ToList();
+            return await _dbSet.ToListAsync();
         }
 
-        public TEntity GetById(int id)
+        public async Task<TEntity> GetById(int id)
         {
-            return _dbSet.Find(id);
+            return await _dbSet.FindAsync(id);
         }
 
         public void Remove(TEntity entity)
@@ -59,9 +60,9 @@ namespace FleetManager.EFCore.Repositories
             _dbSet.Remove(entity);
         }
 
-        public void RemoveById(int id)
+        public async Task RemoveById(int id)
         {
-            Remove(GetById(id));
+            Remove(await GetById(id));
         }
 
         public void RemoveRange(ICollection<TEntity> entities)

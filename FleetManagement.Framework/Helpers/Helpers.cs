@@ -31,7 +31,7 @@ namespace FleetManagement.Framework.Helpers
             return numbers;
         }
 
-        public static string Unify<TDatatype>(List<TDatatype> input)
+        public static string Unify<TDatatype>(this List<TDatatype> input)
         {
             return String.Join(SPLITTER, input);
         }

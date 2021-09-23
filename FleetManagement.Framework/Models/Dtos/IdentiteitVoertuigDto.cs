@@ -6,6 +6,8 @@ namespace FleetManagement.Framework.Models.Dtos
 {
     public class IdentiteitVoertuigDto
     {
+        public string Id { get; set; }
+
         public string Chassisnummer { get; set; }
 
         public EBrandstofType BrandstofType { get; set; }
@@ -17,12 +19,14 @@ namespace FleetManagement.Framework.Models.Dtos
         public List<string> Nummerplaten { get; set; }
 
         public IdentiteitVoertuigDto(
+            string id,
             string chassisnummer,
             EBrandstofType brandstofType,
             EWagenType wagenType,
             string merk,
             string nummerplaten)
         {
+            Id = id;
             Chassisnummer = chassisnummer;
             BrandstofType = brandstofType;
             WagenType = wagenType;

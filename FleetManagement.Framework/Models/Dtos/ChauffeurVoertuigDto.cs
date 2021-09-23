@@ -6,7 +6,7 @@ namespace FleetManagement.Framework.Models.Dtos
     {
         public string Id { get; set; }
 
-        public TankkaartDto Tankkaart { get; set; }
+        public VoertuigDto Voertuig { get; set; }
 
         public ChauffeurDto Chauffeur { get; set; }
 
@@ -18,14 +18,14 @@ namespace FleetManagement.Framework.Models.Dtos
 
         public ChauffeurVoertuigDto(
             string id,
-            TankkaartDto tankkaart,
+            VoertuigDto voertuig,
             ChauffeurDto chauffeur,
             bool actief,
             DateTime aanmaakDatum,
             DateTime? afsluitDatum)
         {
             Id = id;
-            Tankkaart = tankkaart;
+            Voertuig = voertuig;
             Chauffeur = chauffeur;
             Actief = actief;
             AanmaakDatum = aanmaakDatum;

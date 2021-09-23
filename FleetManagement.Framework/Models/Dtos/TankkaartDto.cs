@@ -6,6 +6,8 @@ namespace FleetManagement.Framework.Models.Dtos
 {
     public class TankkaartDto
     {
+        public string Id { get; set; }
+
         public string Kaartnummer { get; set; }
 
         public DateTime GeldigheidsDatum { get; set; }
@@ -21,6 +23,7 @@ namespace FleetManagement.Framework.Models.Dtos
         public List<TankkaartChauffeurDto> Chauffeurs { get; set; }
 
         public TankkaartDto(
+            string id,
             string kaartnummer,
             DateTime geldigheidsDatum,
             string pincode,
@@ -29,6 +32,7 @@ namespace FleetManagement.Framework.Models.Dtos
             bool geblokkeerd,
             List<TankkaartChauffeurDto> chauffeurs)
         {
+            Id = id;
             Kaartnummer = kaartnummer;
             GeldigheidsDatum = geldigheidsDatum;
             Pincode = pincode;

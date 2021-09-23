@@ -5,7 +5,7 @@ using System.ComponentModel.DataAnnotations;
 
 namespace FleetManagement.Domain.Models
 {
-    public class ReadTankaart
+    public class ReadTankkaart
     {
         public string Id { get; set; }
 

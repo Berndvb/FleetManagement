@@ -7,11 +7,17 @@ namespace FleetManager.EFCore.UnitOfWork
     public class UnitOfWork : IUnitOfWork
     {
         private readonly DatabaseContext _context;
+
         public IAanvraagRepository Aanvragen { get; private set; }
+
         public IChauffeurRepository Chauffeurs { get; private set; }
+
         public IHerstellingRepository Herstellingen { get; private set; }
+
         public IOnderhoudsbeurtRepository Onderhoudsbeurten { get; private set; }
+
         public ITankkaartRepository Tankkaarten { get; private set; }
+
         public IVoertuigRepository Voertuigen { get; private set; }
 
         public UnitOfWork(DatabaseContext context)

@@ -2,7 +2,7 @@
 using FleetManager.Domain.Interfaces;
 namespace FleetManagement.Domain.Interfaces
 {
-    public interface  ITankkaartRepository : IGenericRepository<ReadTankaart>
+    public interface  ITankkaartRepository : IGenericRepository<ReadTankkaart>
     {
     }
 }

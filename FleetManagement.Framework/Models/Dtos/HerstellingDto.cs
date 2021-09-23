@@ -18,12 +18,14 @@ namespace FleetManagement.Framework.Models.Dtos
 
 
         public HerstellingDto(
+            string id,
             DateTime datumVoorval,
             string schadeOmschrijving,
             string verzekeringmaatschappij,
             string referentieNummer,
             EHerstellingStatus herstellingStatus)
         {
+            Id = id;
             DatumVoorval = datumVoorval;
             SchadeOmschrijving = schadeOmschrijving;
             Verzekeringsmaatschappij = verzekeringmaatschappij;
