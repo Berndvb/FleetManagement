@@ -7,7 +7,8 @@ namespace FleetManagement.Domain.Models
 {
     public class ReadTankaart
     {
-        [Key]
+        public string Id { get; set; }
+
         public string Kaartnummer { get; set; }
 
         public DateTime GeldigheidsDatum { get; set; }

@@ -1,4 +1,5 @@
-﻿using FleetManager.Dapper.Infrastructure;
+﻿using Dapper;
+using FleetManager.Dapper.Infrastructure;
 using FleetManager.Domain.Interfaces;
 using System;
 using System.Collections.Generic;
@@ -8,7 +9,7 @@ using System.Threading.Tasks;
 
 namespace FleetManager.Dapper.Repositories
 {
-    public class GenericRepository : MainGenericRepository
+    public class GenericRepository<TEntity> : MainGenericRepository<TEntity> where TEntity : class
     {
         public GenericRepository(DapperContextFactory dapperContextFactory) : base(dapperContextFactory)
         {
@@ -16,7 +17,7 @@ namespace FleetManager.Dapper.Repositories
 
         public void Add(T entity)
         {
-            _dbSet.Add(entity);
+            string SqlStatement = "Insert Into Customers (FirstName, LastName, Email) Values(@FirstName, @LastName, @Email)";
         }
 
         public void AddRange(IEnumerable<T> entities)
@@ -26,40 +27,51 @@ namespace FleetManager.Dapper.Repositories
 
         public IEnumerable<T> Find(Expression<Func<T, bool>> expression)
         {
-            return _dbSet.Where(expression);
+            return _
         }
 
-        public async Task<IEnumerable<TEntity>> GetAll<TEntity>(TEntity entity) // CHECK
+        public async Task<IEnumerable<TEntity>> GetAll()
         {
-            var sb = new StringBuilder();
-            sb.Append
-            var queryString = "SELECT * FROM @entity";
-
-            return await QueryMultipleResult<TEntity>(entity, queryString);
+            var SqlStatement = "SELECT * FROM @TEntity";
+            return await QueryMultipleResult(null, SqlStatement);
         }
 
-        public T GetById(int id)
+        public async Task<TEntity> GetById(int id) 
         {
-            return _dbSet.Find(id);
+            var SqlStatement = "SELECT * FROM @TEntity WHERE Id = @id";
+            var parameters = new DynamicParameters(id);
+            return await QuerySingleResult(parameters, SqlStatement);
         }
 
-        public async Task Remove<TEntity>(TEntity entity) // Check
+        public async Task Remove(dynamic entityToDelete)
         {
-            var queryString = "DELETE @entity";
+            int id;
+            if (!int.TryParse(entityToDelete.Id, out id))
+                throw new Exception("Couldn't parse the Id-variable into an integer datatype (@Remove-method)");
 
-            await Command<TEntity>(entity, queryString);
+            await RemoveById(id);
         }
 
-        public async Task RemoveById<TEntity>(TEntity entity, int id) // Check
+        public async Task RemoveById(int id)
         {
-            var queryString = "DELETE @entity WHERE Id = @Id";
-
-            await Command<TEntity>(entity, queryString);
+            var SqlStatement = "DELETE FROM @entity WHERE Id = @Id";
+            var parameters = new DynamicParameters(id);
+            await Command(parameters, SqlStatement);
         }
 
-        public void RemoveRange(IEnumerable<T> entities)
+        public async Task RemoveRange(IEnumerable<dynamic> entities)
         {
-            _dbSet.RemoveRange(entities);
+            List<int> ids = new List<int>();
+            foreach (var entity in entities)
+            {
+                int id;
+                if (!int.TryParse(entity.Id, out id))
+                    throw new Exception("Couldn't parse the Id-variable into an integer datatype (@Remove-method)");
+                ids.Add(id);
+            }
+            var SqlStatement = "Delete FROM MY_TABLE WHERE Id in @ids";
+            var parameters = new DynamicParameters(ids.ToArray());
+            await Command(parameters, SqlStatement);
         }
 
         public IEnumerable<T> Include(params Expression<Func<T, object>>[] includes)

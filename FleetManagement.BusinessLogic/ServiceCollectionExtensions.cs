@@ -1,10 +1,5 @@
 ﻿using FleetManagement.Domain.Interfaces;
-using FleetManagement.EFCore.Infrastructure;
-using FleetManager.Dapper.Infrastructure;
-using FleetManager.Domain.Interfaces;
-using FleetManager.EFCore.Repositories;
 using FleetManager.EFCore.UnitOfWork;
-using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;
 
 namespace FleetManagement.BLL

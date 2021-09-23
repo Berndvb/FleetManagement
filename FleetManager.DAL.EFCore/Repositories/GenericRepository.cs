@@ -25,17 +25,26 @@ namespace FleetManager.EFCore.Repositories
             _dbSet.Add(entity);
         }
 
-        public void AddRange(IEnumerable<TEntity> entities)
+        public void AddRange(ICollection<TEntity> entities)
         {
             _dbSet.AddRange(entities);
         }
 
-        public IEnumerable<TEntity> Find(Expression<Func<TEntity, bool>> expression)
+        public ICollection<TEntity> Find(Expression<Func<TEntity, bool>> where)
         {
-            return _dbSet.Where(expression);
+            return _dbSet.Where(where).ToList();
+        }
+        public ICollection<TType> Select<TType>(Expression<Func<TEntity, TType>> select)
+        {
+            return _dbSet.Select(select).ToList();
         }
 
-        public IEnumerable<TEntity> GetAll()
+        public ICollection<TType> FindAndSelect<TType>(Expression<Func<TEntity, bool>> where, Expression<Func<TEntity, TType>> select) where ttype : class
+        {
+            return _dbSet.Where(where).Select(select).ToList();
+        }
+
+        public ICollection<TEntity> GetAll()
         {
             return _dbSet.ToList();
         }
@@ -50,17 +59,17 @@ namespace FleetManager.EFCore.Repositories
             _dbSet.Remove(entity);
         }
 
-        public void Remove(int id)
+        public void RemoveById(int id)
         {
             Remove(GetById(id));
         }
 
-        public void RemoveRange(IEnumerable<TEntity> entities)
+        public void RemoveRange(ICollection<TEntity> entities)
         {
             _dbSet.RemoveRange(entities);
         }
 
-        public IEnumerable<TEntity> Include(params Expression<Func<TEntity, object>>[] includes)
+        public IEnumerable<TEntity> Include(params Expression<Func<TEntity, object>>[] includes) // lacks ToList() - carefull
         {
             IIncludableQueryable<TEntity, object> query = null;
 

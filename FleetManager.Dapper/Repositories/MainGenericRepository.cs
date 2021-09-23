@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace FleetManager.Dapper.Repositories
 {
-    public class MainGenericRepository
+    public class MainGenericRepository <TEntity> where TEntity : class
     {
         private readonly DapperContextFactory _dapperContextFactory;
 
@@ -17,24 +17,25 @@ namespace FleetManager.Dapper.Repositories
             _dapperContextFactory = dapperContextFactory;
         }
 
-        public Task Command<TEntity>(TEntity entity, string queryText) // queryText will probably need a $ or @
+        public Task Command(DynamicParameters parameters, string queryText) 
            => WithConnection(async connectionmethod =>
            {
-               await connectionmethod.ExecuteAsync(queryText, entity);
+               await connectionmethod.ExecuteAsync(queryText, parameters);
            });
 
-        public Task<TEntity> QuerySingleResult<TEntity>(TEntity entity, string queryText)
+        public Task<TEntity> QuerySingleResult(DynamicParameters parameters, string queryText)
             => WithConnection<TEntity>(async connectionmethod =>
             {
-                var result = await connectionmethod.QueryAsync<TEntity>(queryText, entity);
+                var result = await connectionmethod.QueryAsync<TEntity>(queryText, parameters);
 
                 return result.SingleOrDefault();
             });
 
-        public Task<IEnumerable<TEntity>> QueryMultipleResult<TEntity>(TEntity entity, string queryText)
+        public Task<IEnumerable<TEntity>> QueryMultipleResult(DynamicParameters parameters, string queryText)
            => WithConnection<IEnumerable<TEntity>>(async connectionmethod =>
            {
-               var result = await connectionmethod.QueryAsync<TEntity>(queryText, entity);
+               var result = await connectionmethod.QueryAsync<TEntity>(queryText, parameters);
+
                return result;
            });
 
@@ -53,7 +54,6 @@ namespace FleetManager.Dapper.Repositories
             using (var connection = _dapperContextFactory.CreateConnection())
             {
                 connection.Open();
-
                 await connectionMethod(connection);
             }
         }

@@ -5,7 +5,8 @@ namespace FleetManagement.Domain.Models
 {
     public class IdentiteitVoertuig
     {
-        [Key]
+        public string Id { get; set; }
+
         public string Chassisnummer { get; set; }
 
         public EBrandstofType BrandstofType { get; set; }
