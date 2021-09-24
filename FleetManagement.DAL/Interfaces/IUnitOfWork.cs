@@ -10,6 +10,7 @@ namespace FleetManagement.Domain.Interfaces
         IOnderhoudsbeurtRepository Onderhoudsbeurten { get; }
         ITankkaartRepository Tankkaarten { get; }
         IVoertuigRepository Voertuigen { get; }
+        IChauffeurVoertuigRepository ChauffeurVoertuigen { get; }
         int Complete();
     }
 }

@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Linq.Expressions;
 using System.Threading.Tasks;
 
@@ -14,9 +15,11 @@ namespace FleetManager.Domain.Interfaces
         ICollection<TType> FindAndSelect<TType>(Expression<Func<TEntity, bool>> where, Expression<Func<TEntity, TType>> select) where TType : class;
         void Add(TEntity entity);
         void AddRange(ICollection<TEntity> entities);
-        void Remove(TEntity entity);
+        Task Remove(TEntity entity);
         Task RemoveById(int id);
-        void RemoveRange(ICollection<TEntity> entities);
-        IEnumerable<TEntity> Include(params Expression<Func<TEntity, object>>[] includes);
+        Task RemoveRange(ICollection<TEntity> entities);
+        IQueryable<TEntity> Include(params Expression<Func<TEntity, object>>[] includes);
+        Task<TEntity> GetByIdWithIncludesAsync(int id, params Expression<Func<TEntity, object>>[] includes);
+        Task<ICollection<TEntity>> FindWithIncludesAsync(Expression<Func<TEntity, bool>> where, params Expression<Func<TEntity, object>>[] includes);
     }
 }

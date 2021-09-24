@@ -15,7 +15,7 @@ namespace FleetManagement.Framework.Models.Dtos
 
         public List<HerstellingDto> Herstellingen { get; set; }
 
-        public List<ChauffeurVoertuigDto> Chauffeurs { get; set; }
+        public List<ShowChauffeurVoertuigDto> Chauffeurs { get; set; }
 
         public List<AanvraagDto> Aanvragen { get; set; }
 
@@ -25,7 +25,7 @@ namespace FleetManagement.Framework.Models.Dtos
             string kilometerstanden,
             List<OnderhoudsbeurtDto> onderhoudsbeurten,
             List<HerstellingDto> herstellingen,
-            List<ChauffeurVoertuigDto> chauffeurs,
+            List<ShowChauffeurVoertuigDto> chauffeurs,
             List<AanvraagDto> aanvragen)
         {
             Id = id;

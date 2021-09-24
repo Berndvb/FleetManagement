@@ -17,7 +17,7 @@ namespace FleetManagement.Framework.Models.Dtos
 
         public List<TankkaartChauffeurDto> Tankkaarten { get; set; }
 
-        public List<ChauffeurVoertuigDto> Voertuigen { get; set; }
+        public List<ShowChauffeurVoertuigDto> Voertuigen { get; set; }
 
         public List<AanvraagDto> Aanvragen { get; set; }
 
@@ -28,7 +28,7 @@ namespace FleetManagement.Framework.Models.Dtos
             ERijbewijsType rijbewijsType,
             bool inDienst,
             List<TankkaartChauffeurDto> tankkaarten,
-            List<ChauffeurVoertuigDto> voertuigen,
+            List<ShowChauffeurVoertuigDto> voertuigen,
             List<AanvraagDto> aanvragen)
         {
             Id = id;

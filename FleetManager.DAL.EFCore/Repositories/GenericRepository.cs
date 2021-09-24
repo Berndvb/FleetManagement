@@ -55,22 +55,22 @@ namespace FleetManager.EFCore.Repositories
             return await _dbSet.FindAsync(id);
         }
 
-        public void Remove(TEntity entity)
+        public async Task Remove(TEntity entity)
         {
             _dbSet.Remove(entity);
         }
 
         public async Task RemoveById(int id)
         {
-            Remove(await GetById(id));
+            await Remove(await GetById(id));
         }
 
-        public void RemoveRange(ICollection<TEntity> entities)
+        public async Task RemoveRange(ICollection<TEntity> entities)
         {
             _dbSet.RemoveRange(entities);
         }
 
-        public IEnumerable<TEntity> Include(params Expression<Func<TEntity, object>>[] includes) // lacks ToList() - carefull
+        public IQueryable<TEntity> Include(params Expression<Func<TEntity, object>>[] includes) // lacks ToList() - carefull
         {
             IIncludableQueryable<TEntity, object> query = null;
 
@@ -85,6 +85,40 @@ namespace FleetManager.EFCore.Repositories
             }
 
             return query == null ? _dbSet : query;
+        }
+
+        public async Task<TEntity> GetByIdWithIncludesAsync(int id, params Expression<Func<TEntity, object>>[] includes) 
+        {
+            IIncludableQueryable<TEntity, object> query = (IIncludableQueryable<TEntity, object>)await _dbSet.FindAsync(id);
+
+            if (includes.Length > 0)
+            {
+                query.Include(includes[0]);
+            }
+
+            for (int queryIndex = 1; queryIndex < includes.Length; ++queryIndex)
+            {
+                query = query.Include(includes[queryIndex]);
+            }
+
+            return (TEntity)query;
+        }
+
+        public async Task<ICollection<TEntity>> FindWithIncludesAsync(Expression<Func<TEntity, bool>> where, params Expression<Func<TEntity, object>>[] includes)
+        {
+            IIncludableQueryable<TEntity, object> query = (IIncludableQueryable<TEntity, object>)_dbSet.Where(where);
+
+            if (includes.Length > 0)
+            {
+                query.Include(includes[0]);
+            }
+
+            for (int queryIndex = 1; queryIndex < includes.Length; ++queryIndex)
+            {
+                query = query.Include(includes[queryIndex]);
+            }
+
+            return (ICollection<TEntity>)query;
         }
     }
 }

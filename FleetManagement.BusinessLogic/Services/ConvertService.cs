@@ -1,14 +1,14 @@
 ﻿using FleetManagement.Domain.Models;
-using FleetManagement.Framework.Helpers;
 using FleetManagement.Framework.Models.Dtos;
 using System.Collections.Generic;
 using System.Linq;
 
 namespace FleetManagement.BLL.Services
 {
-    public class GeneralServices // opsplitsen aparte classes en vervolgens injecteren
+    public static class ConvertService
     {
-        public IdentiteitPersoonDto ConvertIdentiteitPersoon(IdentiteitPersoon identiteit)
+        //Standard Converting
+        public static IdentiteitPersoonDto ConvertIdentiteitPersoon(this IdentiteitPersoon identiteit)
         {
             if (identiteit != null)
             {
@@ -24,23 +24,7 @@ namespace FleetManagement.BLL.Services
             return null;
         }
 
-        public IdentiteitPersoon ConvertToIdentiteitPersoon(IdentiteitPersoonDto identiteitDto)
-        {
-            if (identiteitDto != null)
-            {
-                var identiteit = new IdentiteitPersoon() {
-                    Id = identiteitDto.Id,
-                    Naam = identiteitDto.Naam,
-                    Voornaam = identiteitDto.Voornaam,
-                    Rijksregisternummer = identiteitDto.Rijksregisternummer,
-                    Geboortedatum = identiteitDto.Geboortedatum};
-
-                return identiteit;
-            }
-            return null;
-        }
-
-        public IdentiteitVoertuigDto ConvertIdentiteitVoertuig(IdentiteitVoertuig identiteit)
+        public static IdentiteitVoertuigDto ConvertIdentiteitVoertuig(this IdentiteitVoertuig identiteit)
         {
             if (identiteit != null)
             {
@@ -57,26 +41,7 @@ namespace FleetManagement.BLL.Services
             return null;
         }
 
-        public IdentiteitVoertuig ConvertToIdentiteitVoertuig(IdentiteitVoertuigDto identiteitDto)
-        {
-            if (identiteitDto != null)
-            {
-                var identiteit = new IdentiteitVoertuig()
-                {
-                    Id = identiteitDto.Id,
-                    Chassisnummer = identiteitDto.Chassisnummer,
-                    BrandstofType = identiteitDto.BrandstofType,
-                    WagenType = identiteitDto.WagenType,
-                    Merk = identiteitDto.Merk,
-                    Nummerplaten = identiteitDto.Nummerplaten.Unify()
-                };
-
-                return identiteit;
-            }
-            return null;
-        }
-
-        public ContactgegevensDto ConvertContactgegevens(Contactgegevens contactgegevens)
+        public static ContactgegevensDto ConvertContactgegevens(this Contactgegevens contactgegevens)
         {
             if (contactgegevens != null)
             {
@@ -92,25 +57,7 @@ namespace FleetManagement.BLL.Services
             return null;
         }
 
-        public ContactgegevensDto ConvertToContactgegevens(ContactgegevensDto contactgegevensDto) 
-        {
-            if (contactgegevensDto != null)
-            {
-                var contactgegevens = new Contactgegevens()
-                {
-                    Id = contactgegevensDto.Id,
-                    EmailAdres = contactgegevensDto.EmailAdres,
-                    GsmNummer = contactgegevensDto.GsmNummer,
-                    Telefoonnummer = contactgegevensDto.Telefoonnummer,
-                    Adres = ConvertToAdres(contactgegevensDto.Adres)
-                };
-
-                return contactgegevensDto;
-            }
-            return null;
-        }
-
-        public AdresDto ConvertAdres(Adres adres)
+        public static AdresDto ConvertAdres(Adres adres)
         {
             if (adres != null)
             {
@@ -125,22 +72,7 @@ namespace FleetManagement.BLL.Services
             return null;
         }
 
-        public Adres ConvertToAdres(AdresDto adresDto)
-        {
-            if (adresDto != null)
-            {
-                var adres = new Adres() {
-                    Id = adresDto.Id,
-                    Straat = adresDto.Straat,
-                    Stad = adresDto.Stad,
-                    Postcode = adresDto.Postcode};
-
-                return adres;
-            }
-            return null;
-        }
-
-        public VoertuigDto ConvertReadVoertuig(ReadVoertuig voertuig)  // laatste stuk-----------------------------------!!!
+        public static VoertuigDto ConvertReadVoertuig(this ReadVoertuig voertuig)
         {
             if (voertuig != null)
             {
@@ -158,7 +90,7 @@ namespace FleetManagement.BLL.Services
             return null;
         }
 
-        public List<AanvraagDto> ConvertReadAanvragen(List<ReadAanvraag> aanvragen)
+        public static List<AanvraagDto> ConvertReadAanvragen(this List<ReadAanvraag> aanvragen)
         {
             if ((aanvragen != null) && (!aanvragen.Any()))
             {
@@ -183,7 +115,7 @@ namespace FleetManagement.BLL.Services
             return null;
         }
 
-        public List<TankkaartChauffeurDto> ConvertTankkaartChauffeurs(List<TankkaartChauffeur> tankkaartchauffeurs)
+        public static List<TankkaartChauffeurDto> ConvertTankkaartChauffeurs(this List<TankkaartChauffeur> tankkaartchauffeurs)
         {
             if ((tankkaartchauffeurs != null) && (!tankkaartchauffeurs.Any()))
             {
@@ -205,11 +137,11 @@ namespace FleetManagement.BLL.Services
             return null;
         }
 
-        public List<ChauffeurVoertuigDto> ConvertChauffeurVoertuigen(List<ChauffeurVoertuig> chauffeurVoertuigen)
+        public static List<ShowChauffeurVoertuigDto> ConvertChauffeurVoertuigen(this List<ChauffeurVoertuig> chauffeurVoertuigen)
         {
             if ((chauffeurVoertuigen != null) && (!chauffeurVoertuigen.Any()))
             {
-                var chauffeurVoertuigDtos = new List<ChauffeurVoertuigDto>();
+                var chauffeurVoertuigDtos = new List<ShowChauffeurVoertuigDto>();
                 foreach (var chauffeurVoertuig in chauffeurVoertuigen)
                 {
                     var chauffeurVoertuigDto = new ChauffeurVoertuigDto(
@@ -227,8 +159,7 @@ namespace FleetManagement.BLL.Services
             return null;
         }
 
-
-        public List<HerstellingDto> ConvertReadHerstellingen(List<ReadHerstelling> herstellingen)
+        public static List<HerstellingDto> ConvertReadHerstellingen(this List<ReadHerstelling> herstellingen)
         {
             if ((herstellingen != null) && (!herstellingen.Any()))
             {
@@ -250,8 +181,7 @@ namespace FleetManagement.BLL.Services
             return null;
         }
 
-
-        public List<OnderhoudsbeurtDto> ConvertReadOnderhoudsbeurten(List<ReadOnderhoudsbeurt> onderhoudsbeurten)
+        public static List<OnderhoudsbeurtDto> ConvertReadOnderhoudsbeurten(this List<ReadOnderhoudsbeurt> onderhoudsbeurten)
         {
             if ((onderhoudsbeurten != null) && (!onderhoudsbeurten.Any()))
             {
@@ -274,7 +204,7 @@ namespace FleetManagement.BLL.Services
             return null;
         }
 
-        public TankkaartDto ConvertReadTankkaart(ReadTankkaart tankkaart)
+        public static TankkaartDto ConvertReadTankkaart(this ReadTankkaart tankkaart)
         {
             if (tankkaart != null)
             {
@@ -293,7 +223,7 @@ namespace FleetManagement.BLL.Services
             return null;
         }
 
-        public ChauffeurDto ConvertReadChauffeur(ReadChauffeur chauffeur)
+        public static ChauffeurDto ConvertReadChauffeur(this ReadChauffeur chauffeur)
         {
             if (chauffeur != null)
             {
@@ -312,7 +242,7 @@ namespace FleetManagement.BLL.Services
             return null;
         }
 
-        public List<ChauffeurDto> ConvertReadChauffeurs(ICollection<ReadChauffeur> chauffeurs)
+        public static List<ChauffeurDto> ConvertReadChauffeurs(this ICollection<ReadChauffeur> chauffeurs)
         {
             if ((chauffeurs != null) && (!chauffeurs.Any()))
             {
@@ -336,31 +266,7 @@ namespace FleetManagement.BLL.Services
             return null;
         }
 
-        public List<ReadChauffeur> ConvertToReadChauffeur(ICollection<ChauffeurDto> chauffeurs)
-        {
-            if ((chauffeurs != null) && (!chauffeurs.Any()))
-            {
-                var readChauffeurs = new List<ReadChauffeur>();
-                foreach (var chauffeur in chauffeurs)
-                {
-                    var readChauffeur = new ReadChauffeur(
-                            chauffeur.Id,
-                            ConvertToIdentiteitPersoon(chauffeur.Identiteit),
-                            ConvertContactgegevens(chauffeur.Contactgegevens),
-                            chauffeur.RijbewijsType,
-                            chauffeur.InDienst,
-                            ConvertTankkaartChauffeurs(chauffeur.Tankkaarten),
-                            ConvertChauffeurVoertuigen(chauffeur.Voertuigen),
-                            ConvertAanvragen(chauffeur.Aanvragen));
-
-                    readChauffeurs.Add(readChauffeur);
-                }
-                return readChauffeurs;
-            }
-            return null;
-        }
-
-        public TankkaartOptiesDto ConvertTankkaartOpties(TankkaartOpties tankkaartOpties)
+        public static TankkaartOptiesDto ConvertTankkaartOpties(this TankkaartOpties tankkaartOpties)
         {
             if (tankkaartOpties != null)
             {
@@ -374,7 +280,7 @@ namespace FleetManagement.BLL.Services
             return null;
         }
 
-        public GarageDto ConvertGarage(Garage garage)
+        public static GarageDto ConvertGarage(Garage garage)
         {
             if (garage != null)
             {
@@ -390,7 +296,7 @@ namespace FleetManagement.BLL.Services
             return null;
         }
 
-        public List<FileDto> ConvertFiles(List<File> files)
+        public static List<FileDto> ConvertFiles(List<File> files)
         {
             if ((files != null) && (!files.Any()))
             {
@@ -412,3 +318,4 @@ namespace FleetManagement.BLL.Services
         }
     }
 }
+

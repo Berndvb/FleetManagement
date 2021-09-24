@@ -24,4 +24,17 @@
     </Content>
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="Features\ChauffeurBeheer\GetChauffeurDetails\" />
+    <Folder Include="Features\ChauffeurBeheer\GetChauffeurVoertuigen\" />
+    <Folder Include="Features\ChauffeurBeheer\GetChauffeurTankkaarten\" />
+    <Folder Include="Features\ChauffeurBeheer\GetChauffeurAanvragen\" />
+    <Folder Include="Features\ChauffeurBeheer\AddChauffeurVoertuig\" />
+    <Folder Include="Features\ChauffeurBeheer\GetChauffeurSynopsis\" />
+    <Folder Include="Features\ChauffeurBeheer\UpdateChauffeurAanvragen\" />
+    <Folder Include="Features\ChauffeurBeheer\UpdateChauffeurTankkaart\" />
+    <Folder Include="Features\ChauffeurBeheer\UpdateChauffeurVoertuig\" />
+    <Folder Include="Features\ChauffeurBeheer\UpdateChauffeur\" />
+  </ItemGroup>
+
 </Project>
