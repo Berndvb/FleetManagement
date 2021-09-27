@@ -8,30 +8,33 @@ namespace FleetManager.EFCore.UnitOfWork
     {
         private readonly DatabaseContext _context;
 
-        public IAanvraagRepository Aanvragen { get; private set; }
+        public IAppealRepository Appeals { get; private set; }
 
-        public IChauffeurRepository Chauffeurs { get; private set; }
+        public IDriverRepository Drivers { get; private set; }
 
-        public IHerstellingRepository Herstellingen { get; private set; }
+        public IReparationRepository Reparations { get; private set; }
 
-        public IOnderhoudsbeurtRepository Onderhoudsbeurten { get; private set; }
+        public IMaintenanceRepository Maintenance { get; private set; }
 
-        public ITankkaartRepository Tankkaarten { get; private set; }
+        public IFuelCardRepository FuelCards { get; private set; }
 
-        public IVoertuigRepository Voertuigen { get; private set; }
+        public IVehicleRepository Vehicles { get; private set; }
 
-        public IChauffeurVoertuigRepository ChauffeurVoertuigen { get; private set; }
+        public IDriverVehicleRepository DriverVehicles { get; private set; }
+
+        public IIdentityVehicleRepository IdentityVehicles { get; set; }
 
         public UnitOfWork(DatabaseContext context)
         {
             _context = context;
-            Aanvragen = new AanvraagRepository(_context);
-            Chauffeurs = new ChauffeurRepository(_context);
-            Herstellingen = new HerstellingRepository(_context);
-            Onderhoudsbeurten = new OnderhoudsbeurtRepository(_context);
-            Tankkaarten = new TankkaartRepository(_context);
-            Voertuigen = new VoertuigRepository(_context);
-            ChauffeurVoertuigen = new ChauffeurVoertuigRepository(_context);
+            Appeals = new AppealRepository(_context);
+            Drivers = new DriverRepository(_context);
+            Reparations = new ReparationRepository(_context);
+            Maintenance = new MaintenanceRepository(_context);
+            FuelCards = new FuelCardRepository(_context);
+            Vehicles = new VehicleRepository(_context);
+            DriverVehicles = new DriverVehicleRepository(_context);
+            IdentityVehicles = new IdentityVehicleRepository(_context);
         }
 
         public int Complete()

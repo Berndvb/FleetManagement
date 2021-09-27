@@ -8,7 +8,7 @@ namespace FleetManagement.BLL.Services
     public static class ConvertService
     {
         //Standard Converting
-        public static IdentiteitPersoonDto ConvertIdentiteitPersoon(this IdentiteitPersoon identiteit)
+        public static IdentiteitPersoonDto ConvertIdentiteitPersoon(this IdentityPerson identiteit)
         {
             if (identiteit != null)
             {
@@ -24,7 +24,7 @@ namespace FleetManagement.BLL.Services
             return null;
         }
 
-        public static IdentiteitVoertuigDto ConvertIdentiteitVoertuig(this IdentiteitVoertuig identiteit)
+        public static IdentiteitVoertuigDto ConvertIdentiteitVoertuig(this IdentityVehicle identiteit)
         {
             if (identiteit != null)
             {
@@ -41,7 +41,7 @@ namespace FleetManagement.BLL.Services
             return null;
         }
 
-        public static ContactgegevensDto ConvertContactgegevens(this Contactgegevens contactgegevens)
+        public static ContactgegevensDto ConvertContactgegevens(this ContactInfo contactgegevens)
         {
             if (contactgegevens != null)
             {
@@ -57,7 +57,7 @@ namespace FleetManagement.BLL.Services
             return null;
         }
 
-        public static AdresDto ConvertAdres(Adres adres)
+        public static AdresDto ConvertAdres(Address adres)
         {
             if (adres != null)
             {
@@ -72,7 +72,7 @@ namespace FleetManagement.BLL.Services
             return null;
         }
 
-        public static VoertuigDto ConvertReadVoertuig(this ReadVoertuig voertuig)
+        public static VoertuigDto ConvertReadVoertuig(this ReadVehicle voertuig)
         {
             if (voertuig != null)
             {
@@ -90,7 +90,7 @@ namespace FleetManagement.BLL.Services
             return null;
         }
 
-        public static List<AanvraagDto> ConvertReadAanvragen(this List<ReadAanvraag> aanvragen)
+        public static List<AanvraagDto> ConvertReadAanvragen(this List<ReadAppeal> aanvragen)
         {
             if ((aanvragen != null) && (!aanvragen.Any()))
             {
@@ -115,7 +115,7 @@ namespace FleetManagement.BLL.Services
             return null;
         }
 
-        public static List<TankkaartChauffeurDto> ConvertTankkaartChauffeurs(this List<TankkaartChauffeur> tankkaartchauffeurs)
+        public static List<TankkaartChauffeurDto> ConvertTankkaartChauffeurs(this List<FuelCardDriver> tankkaartchauffeurs)
         {
             if ((tankkaartchauffeurs != null) && (!tankkaartchauffeurs.Any()))
             {
@@ -137,11 +137,11 @@ namespace FleetManagement.BLL.Services
             return null;
         }
 
-        public static List<ShowChauffeurVoertuigDto> ConvertChauffeurVoertuigen(this List<ChauffeurVoertuig> chauffeurVoertuigen)
+        public static List<ShowVoertuigInfoDto> ConvertChauffeurVoertuigen(this List<DriverVehicle> chauffeurVoertuigen)
         {
             if ((chauffeurVoertuigen != null) && (!chauffeurVoertuigen.Any()))
             {
-                var chauffeurVoertuigDtos = new List<ShowChauffeurVoertuigDto>();
+                var chauffeurVoertuigDtos = new List<ShowVoertuigInfoDto>();
                 foreach (var chauffeurVoertuig in chauffeurVoertuigen)
                 {
                     var chauffeurVoertuigDto = new ChauffeurVoertuigDto(
@@ -159,7 +159,7 @@ namespace FleetManagement.BLL.Services
             return null;
         }
 
-        public static List<HerstellingDto> ConvertReadHerstellingen(this List<ReadHerstelling> herstellingen)
+        public static List<HerstellingDto> ConvertReadHerstellingen(this List<ReadRepare> herstellingen)
         {
             if ((herstellingen != null) && (!herstellingen.Any()))
             {
@@ -181,7 +181,7 @@ namespace FleetManagement.BLL.Services
             return null;
         }
 
-        public static List<OnderhoudsbeurtDto> ConvertReadOnderhoudsbeurten(this List<ReadOnderhoudsbeurt> onderhoudsbeurten)
+        public static List<OnderhoudsbeurtDto> ConvertReadOnderhoudsbeurten(this List<ReadMaintenance> onderhoudsbeurten)
         {
             if ((onderhoudsbeurten != null) && (!onderhoudsbeurten.Any()))
             {
@@ -204,7 +204,7 @@ namespace FleetManagement.BLL.Services
             return null;
         }
 
-        public static TankkaartDto ConvertReadTankkaart(this ReadTankkaart tankkaart)
+        public static TankkaartDto ConvertReadTankkaart(this ReadFuelCard tankkaart)
         {
             if (tankkaart != null)
             {
@@ -223,7 +223,7 @@ namespace FleetManagement.BLL.Services
             return null;
         }
 
-        public static ChauffeurDto ConvertReadChauffeur(this ReadChauffeur chauffeur)
+        public static ChauffeurDto ConvertReadChauffeur(this ReadDriver chauffeur)
         {
             if (chauffeur != null)
             {
@@ -242,7 +242,7 @@ namespace FleetManagement.BLL.Services
             return null;
         }
 
-        public static List<ChauffeurDto> ConvertReadChauffeurs(this ICollection<ReadChauffeur> chauffeurs)
+        public static List<ChauffeurDto> ConvertReadChauffeurs(this ICollection<ReadDriver> chauffeurs)
         {
             if ((chauffeurs != null) && (!chauffeurs.Any()))
             {
@@ -266,7 +266,7 @@ namespace FleetManagement.BLL.Services
             return null;
         }
 
-        public static TankkaartOptiesDto ConvertTankkaartOpties(this TankkaartOpties tankkaartOpties)
+        public static TankkaartOptiesDto ConvertTankkaartOpties(this FuelCardOptions tankkaartOpties)
         {
             if (tankkaartOpties != null)
             {

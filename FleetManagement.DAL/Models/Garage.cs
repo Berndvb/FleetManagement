@@ -4,12 +4,12 @@
     {
         public string Id { get; set; }
 
-        public string Naam { get; set; }
+        public string Name { get; set; }
 
-        public Contactgegevens Contactgegevens { get; set; }
+        public ContactInfo ContactInfo { get; set; }
 
-        public string Ondernemingsnummer { get; set; }
+        public string CompanyNumber { get; set; }
 
-        public string Bankrekeningnummer { get; set; }
+        public string BankaccountNumber { get; set; }
     }
 }

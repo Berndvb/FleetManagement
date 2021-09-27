@@ -4,13 +4,14 @@ namespace FleetManagement.Domain.Interfaces
 {
     public interface IUnitOfWork : IDisposable
     {
-        IAanvraagRepository Aanvragen  { get; }
-        IChauffeurRepository Chauffeurs { get; }
-        IHerstellingRepository Herstellingen { get; }
-        IOnderhoudsbeurtRepository Onderhoudsbeurten { get; }
-        ITankkaartRepository Tankkaarten { get; }
-        IVoertuigRepository Voertuigen { get; }
-        IChauffeurVoertuigRepository ChauffeurVoertuigen { get; }
+        IAppealRepository Appeals { get; }
+        IDriverRepository Drivers { get; }
+        IReparationRepository Reparations { get; }
+        IMaintenanceRepository Maintenance { get; }
+        IFuelCardRepository FuelCards { get; }
+        IVehicleRepository Vehicles { get; }
+        IDriverVehicleRepository DriverVehicles { get; }
+        IIdentityVehicleRepository IdentityVehicles { get; }
         int Complete();
     }
 }

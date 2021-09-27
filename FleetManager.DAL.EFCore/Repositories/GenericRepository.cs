@@ -31,18 +31,24 @@ namespace FleetManager.EFCore.Repositories
             _dbSet.AddRange(entities);
         }
 
-        public ICollection<TEntity> Find(Expression<Func<TEntity, bool>> where)
+        public async Task<TEntity> FindSingle(Expression<Func<TEntity, bool>> where)
         {
-            return _dbSet.Where(where).ToList();
-        }
-        public ICollection<TType> Select<TType>(Expression<Func<TEntity, TType>> select)
-        {
-            return _dbSet.Select(select).ToList();
+            return await _dbSet.SingleOrDefaultAsync(where);
         }
 
-        public ICollection<TType> FindAndSelect<TType>(Expression<Func<TEntity, bool>> where, Expression<Func<TEntity, TType>> select) where TType : class
+        public async Task<ICollection<TEntity>> FindMultiple(Expression<Func<TEntity, bool>> where)
         {
-            return _dbSet.Where(where).Select(select).ToList();
+            return await _dbSet.Where(where).ToListAsync();
+        }
+
+        public async Task<ICollection<TType>> Select<TType>(Expression<Func<TEntity, TType>> select)
+        {
+            return await _dbSet.Select(select).ToListAsync();
+        }
+
+        public async Task<ICollection<TType>> FindAndSelect<TType>(Expression<Func<TEntity, bool>> where, Expression<Func<TEntity, TType>> select) where TType : class
+        {
+            return await _dbSet.Where(where).Select(select).ToListAsync();
         }
 
         public async Task<ICollection<TEntity>> GetAll()
@@ -70,7 +76,7 @@ namespace FleetManager.EFCore.Repositories
             _dbSet.RemoveRange(entities);
         }
 
-        public IQueryable<TEntity> Include(params Expression<Func<TEntity, object>>[] includes) // lacks ToList() - carefull
+        public async Task<ICollection<TEntity>> Include(params Expression<Func<TEntity, object>>[] includes) // lacks ToList() - carefull
         {
             IIncludableQueryable<TEntity, object> query = null;
 
@@ -84,10 +90,10 @@ namespace FleetManager.EFCore.Repositories
                 query = query.Include(includes[queryIndex]);
             }
 
-            return query == null ? _dbSet : query;
+            return query == null ? await _dbSet.ToListAsync() : await query.ToListAsync();
         }
 
-        public async Task<TEntity> GetByIdWithIncludesAsync(int id, params Expression<Func<TEntity, object>>[] includes) 
+        public async Task<TEntity> GetByIdWithIncludes(int id, params Expression<Func<TEntity, object>>[] includes) 
         {
             IIncludableQueryable<TEntity, object> query = (IIncludableQueryable<TEntity, object>)await _dbSet.FindAsync(id);
 
@@ -104,7 +110,7 @@ namespace FleetManager.EFCore.Repositories
             return (TEntity)query;
         }
 
-        public async Task<ICollection<TEntity>> FindWithIncludesAsync(Expression<Func<TEntity, bool>> where, params Expression<Func<TEntity, object>>[] includes)
+        public async Task<ICollection<TEntity>> FindWithIncludes(Expression<Func<TEntity, bool>> where, params Expression<Func<TEntity, object>>[] includes)
         {
             IIncludableQueryable<TEntity, object> query = (IIncludableQueryable<TEntity, object>)_dbSet.Where(where);
 
@@ -118,7 +124,7 @@ namespace FleetManager.EFCore.Repositories
                 query = query.Include(includes[queryIndex]);
             }
 
-            return (ICollection<TEntity>)query;
+            return await query.ToListAsync();
         }
     }
 }

@@ -10,16 +10,17 @@ namespace FleetManager.Domain.Interfaces
     {
         Task<TEntity> GetById(int id);
         Task<ICollection<TEntity>> GetAll();
-        ICollection<TEntity> Find(Expression<Func<TEntity, bool>> expression);
-        ICollection<TType> Select<TType>(Expression<Func<TEntity, TType>> select);
-        ICollection<TType> FindAndSelect<TType>(Expression<Func<TEntity, bool>> where, Expression<Func<TEntity, TType>> select) where TType : class;
+        Task<TEntity> FindSingle(Expression<Func<TEntity, bool>> where);
+        Task<ICollection<TEntity>> FindMultiple(Expression<Func<TEntity, bool>> expression);
+        Task<ICollection<TType>> Select<TType>(Expression<Func<TEntity, TType>> select);
+        Task<ICollection<TType>> FindAndSelect<TType>(Expression<Func<TEntity, bool>> where, Expression<Func<TEntity, TType>> select) where TType : class;
         void Add(TEntity entity);
         void AddRange(ICollection<TEntity> entities);
         Task Remove(TEntity entity);
         Task RemoveById(int id);
         Task RemoveRange(ICollection<TEntity> entities);
-        IQueryable<TEntity> Include(params Expression<Func<TEntity, object>>[] includes);
-        Task<TEntity> GetByIdWithIncludesAsync(int id, params Expression<Func<TEntity, object>>[] includes);
-        Task<ICollection<TEntity>> FindWithIncludesAsync(Expression<Func<TEntity, bool>> where, params Expression<Func<TEntity, object>>[] includes);
+        Task<ICollection<TEntity>> Include(params Expression<Func<TEntity, object>>[] includes);
+        Task<TEntity> GetByIdWithIncludes(int id, params Expression<Func<TEntity, object>>[] includes);
+        Task<ICollection<TEntity>> FindWithIncludes(Expression<Func<TEntity, bool>> where, params Expression<Func<TEntity, object>>[] includes);
     }
 }

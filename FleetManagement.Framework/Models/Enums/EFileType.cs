@@ -2,12 +2,12 @@
 {
     public enum EFileType
     {
-        Factuur,
-        Foto,
+        Invoice,
+        Photo,
         OnkostenNota,
-        Briefwisseling,
-        MedischAttest,
-        Administratie,
+        Correspondence,
+        MedicalCertificate,
+        Administration,
         Extra
     }
 }

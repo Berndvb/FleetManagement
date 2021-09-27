@@ -8,11 +8,11 @@ namespace FleetManagement.BLL.Services
 {
     public static class RevertService
     {
-        public static IdentiteitPersoon RevertIdentiteitPersoonDto(this IdentiteitPersoonDto identiteitDto)
+        public static IdentityPerson RevertIdentiteitPersoonDto(this IdentiteitPersoonDto identiteitDto)
         {
             if (identiteitDto != null)
             {
-                var identiteit = new IdentiteitPersoon()
+                var identiteit = new IdentityPerson()
                 {
                     Id = identiteitDto.Id,
                     Naam = identiteitDto.Naam,
@@ -26,11 +26,11 @@ namespace FleetManagement.BLL.Services
             return null;
         }
 
-        public static IdentiteitVoertuig RevertIdentiteitVoertuigDto(this IdentiteitVoertuigDto identiteitDto)
+        public static IdentityVehicle RevertIdentiteitVoertuigDto(this IdentiteitVoertuigDto identiteitDto)
         {
             if (identiteitDto != null)
             {
-                var identiteit = new IdentiteitVoertuig()
+                var identiteit = new IdentityVehicle()
                 {
                     Id = identiteitDto.Id,
                     Chassisnummer = identiteitDto.Chassisnummer,
@@ -45,11 +45,11 @@ namespace FleetManagement.BLL.Services
             return null;
         }
 
-        public static Contactgegevens RevertContactgegevensDto(this ContactgegevensDto contactgegevensDto)
+        public static ContactInfo RevertContactgegevensDto(this ContactgegevensDto contactgegevensDto)
         {
             if (contactgegevensDto != null)
             {
-                var contactgegevens = new Contactgegevens()
+                var contactgegevens = new ContactInfo()
                 {
                     Id = contactgegevensDto.Id,
                     EmailAdres = contactgegevensDto.EmailAdres,
@@ -63,11 +63,11 @@ namespace FleetManagement.BLL.Services
             return null;
         }
 
-        public static Adres RevertAdresDto(this AdresDto adresDto)
+        public static Address RevertAdresDto(this AdresDto adresDto)
         {
             if (adresDto != null)
             {
-                var adres = new Adres()
+                var adres = new Address()
                 {
                     Id = adresDto.Id,
                     Straat = adresDto.Straat,
@@ -80,11 +80,11 @@ namespace FleetManagement.BLL.Services
             return null;
         }
 
-        public static ReadVoertuig RevertVoertuigDto(this VoertuigDto voertuigDto)
+        public static ReadVehicle RevertVoertuigDto(this VoertuigDto voertuigDto)
         {
             if (voertuigDto != null)
             {
-                var readVoertuig = new ReadVoertuig()
+                var readVoertuig = new ReadVehicle()
                 {
                     Id = voertuigDto.Id,
                     Identiteit = RevertIdentiteitVoertuigDto(voertuigDto.Identiteit),
@@ -101,14 +101,14 @@ namespace FleetManagement.BLL.Services
             return null;
         }
 
-        public static List<ReadAanvraag> RevertAanvragenDto(this List<AanvraagDto> aanvraagDtos)
+        public static List<ReadAppeal> RevertAanvragenDto(this List<AanvraagDto> aanvraagDtos)
         {
             if ((aanvraagDtos != null) && (!aanvraagDtos.Any()))
             {
-                var readAanvragen = new List<ReadAanvraag>();
+                var readAanvragen = new List<ReadAppeal>();
                 foreach (var aanvraag in aanvraagDtos)
                 {
-                    var readAanvraag = new ReadAanvraag()
+                    var readAanvraag = new ReadAppeal()
                     {
                         Id = aanvraag.Id,
                         AanmaakDatum = aanvraag.AanmaakDatum,
@@ -128,14 +128,14 @@ namespace FleetManagement.BLL.Services
             return null;
         }
 
-        public static List<TankkaartChauffeur> RevertTankkaartChauffeursDto(this List<TankkaartChauffeurDto> tankkaartchauffeurDtos)
+        public static List<FuelCardDriver> RevertTankkaartChauffeursDto(this List<TankkaartChauffeurDto> tankkaartchauffeurDtos)
         {
             if ((tankkaartchauffeurDtos != null) && (!tankkaartchauffeurDtos.Any()))
             {
-                var tankkaartChauffeurs = new List<TankkaartChauffeur>();
+                var tankkaartChauffeurs = new List<FuelCardDriver>();
                 foreach (var tankkaartchauffeurDto in tankkaartchauffeurDtos)
                 {
-                    var tankkaartChauffeur = new TankkaartChauffeur()
+                    var tankkaartChauffeur = new FuelCardDriver()
                     {
                         Id = tankkaartchauffeurDto.Id,
                         Tankkaart = RevertTankkaartDto(tankkaartchauffeurDto.Tankkaart),
@@ -152,14 +152,14 @@ namespace FleetManagement.BLL.Services
             return null;
         }
 
-        public static List<ChauffeurVoertuig> RevertChauffeurVoertuigenDto(this List<ShowChauffeurVoertuigDto> chauffeurVoertuigDtos)
+        public static List<DriverVehicle> RevertChauffeurVoertuigenDto(this List<ShowVoertuigInfoDto> chauffeurVoertuigDtos)
         {
             if ((chauffeurVoertuigDtos != null) && (!chauffeurVoertuigDtos.Any()))
             {
-                var chauffeurVoertuigen = new List<ChauffeurVoertuig>();
+                var chauffeurVoertuigen = new List<DriverVehicle>();
                 foreach (var chauffeurVoertuigDto in chauffeurVoertuigDtos)
                 {
-                    var chauffeurVoertuig = new ChauffeurVoertuig()
+                    var chauffeurVoertuig = new DriverVehicle()
                     {
                         Id = chauffeurVoertuigDto.Id,
                         Voertuig = RevertVoertuigDto(chauffeurVoertuigDto.Voertuig),
@@ -176,14 +176,14 @@ namespace FleetManagement.BLL.Services
             return null;
         }
 
-        public static List<ReadHerstelling> RevertHerstellingenDto(this List<HerstellingDto> herstellingDtos)
+        public static List<ReadRepare> RevertHerstellingenDto(this List<HerstellingDto> herstellingDtos)
         {
             if ((herstellingDtos != null) && (!herstellingDtos.Any()))
             {
-                var readHerstellingen = new List<ReadHerstelling>();
+                var readHerstellingen = new List<ReadRepare>();
                 foreach (var HerstellingDto in herstellingDtos)
                 {
-                    var readHerstelling = new ReadHerstelling()
+                    var readHerstelling = new ReadRepare()
                     {
                         Id = HerstellingDto.Id,
                         DatumVoorval = HerstellingDto.DatumVoorval,
@@ -200,14 +200,14 @@ namespace FleetManagement.BLL.Services
             return null;
         }
 
-        public static List<ReadOnderhoudsbeurt> RevertOnderhoudsbeurtenDto(this List<OnderhoudsbeurtDto> pderhoudsbeurtDtos)
+        public static List<ReadMaintenance> RevertOnderhoudsbeurtenDto(this List<OnderhoudsbeurtDto> pderhoudsbeurtDtos)
         {
             if ((pderhoudsbeurtDtos != null) && (!pderhoudsbeurtDtos.Any()))
             {
-                var readOnderhoudsbeurten = new List<ReadOnderhoudsbeurt>();
+                var readOnderhoudsbeurten = new List<ReadMaintenance>();
                 foreach (var onderhoudsbeurtDto in pderhoudsbeurtDtos)
                 {
-                    var readOnderhoudsbeurt = new ReadOnderhoudsbeurt()
+                    var readOnderhoudsbeurt = new ReadMaintenance()
                     {
                         Id = onderhoudsbeurtDto.Id,
                         Voertuig = RevertVoertuigDto(onderhoudsbeurtDto.Voertuig),
@@ -225,11 +225,11 @@ namespace FleetManagement.BLL.Services
             return null;
         }
 
-        public static ReadTankkaart RevertTankkaartDto(this TankkaartDto tankkaartDto)
+        public static ReadFuelCard RevertTankkaartDto(this TankkaartDto tankkaartDto)
         {
             if (tankkaartDto != null)
             {
-                var readTankkaart = new ReadTankkaart()
+                var readTankkaart = new ReadFuelCard()
                 {
                     Id = tankkaartDto.Id,
                     Kaartnummer = tankkaartDto.Kaartnummer,
@@ -246,11 +246,11 @@ namespace FleetManagement.BLL.Services
             return null;
         }
 
-        public static ReadChauffeur RevertChauffeurDto(this ChauffeurDto ChauffeurDto)
+        public static ReadDriver RevertChauffeurDto(this ChauffeurDto ChauffeurDto)
         {
             if (ChauffeurDto != null)
             {
-                var readChauffeur = new ReadChauffeur()
+                var readChauffeur = new ReadDriver()
                 {
                     Id = ChauffeurDto.Id,
                     Identiteit = RevertIdentiteitPersoonDto(ChauffeurDto.Identiteit),
@@ -267,14 +267,14 @@ namespace FleetManagement.BLL.Services
             return null;
         }
 
-        public static List<ReadChauffeur> RevertChauffeursDto(this ICollection<ChauffeurDto> chauffeurDtos)
+        public static List<ReadDriver> RevertChauffeursDto(this ICollection<ChauffeurDto> chauffeurDtos)
         {
             if ((chauffeurDtos != null) && (!chauffeurDtos.Any()))
             {
-                var readChaffeurs = new List<ReadChauffeur>();
+                var readChaffeurs = new List<ReadDriver>();
                 foreach (var chauffeurDto in chauffeurDtos)
                 {
-                    var readChauffeur = new ReadChauffeur()
+                    var readChauffeur = new ReadDriver()
                     {
                         Id = chauffeurDto.Id,
                         Identiteit = RevertIdentiteitPersoonDto(chauffeurDto.Identiteit),
@@ -293,11 +293,11 @@ namespace FleetManagement.BLL.Services
             return null;
         }
 
-        public static TankkaartOpties RevertTankkaartOptiesDto(this TankkaartOptiesDto tankkaartOptiesDto)
+        public static FuelCardOptions RevertTankkaartOptiesDto(this TankkaartOptiesDto tankkaartOptiesDto)
         {
             if (tankkaartOptiesDto != null)
             {
-                var tankkaartOpties = new TankkaartOpties()
+                var tankkaartOpties = new FuelCardOptions()
                 {
                     Id = tankkaartOptiesDto.Id,
                     BrandstofType = tankkaartOptiesDto.BrandstofType,

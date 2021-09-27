@@ -15,6 +15,6 @@ namespace FleetManagement.Domain.Models
 
         public Byte[] Content { get; set; }
 
-        public Administratie Administratie { get; set; }
+        public Administration administration { get; set; }
     }
 }

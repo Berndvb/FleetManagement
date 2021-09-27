@@ -3,6 +3,6 @@
     public enum EAuthenticatieType
     {
         Pin,
-        PinKilometerstand
+        PinMileage
     }
 }
