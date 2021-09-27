@@ -5,7 +5,7 @@ namespace FleetManagement.Domain.Models
 {
     public class Administration
     {
-        public string Id { get; set; }
+        public int Id { get; set; }
 
         public ReadVehicle Vehicle { get; set; }
 

@@ -6,7 +6,7 @@
 
         public string Naam { get; set; }
 
-        public ContactgegevensDto Contactgegevens { get; set; }
+        public ContactInfoDto Contactgegevens { get; set; }
 
         public string Ondernemingsnummer { get; set; }
 
@@ -15,7 +15,7 @@
         public GarageDto(
             string id,
             string naam,
-            ContactgegevensDto contactgegevens,
+            ContactInfoDto contactgegevens,
             string ondernemingsnummer,
             string bankrekeningnummer)
         {

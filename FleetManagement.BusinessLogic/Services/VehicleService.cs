@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace FleetManagement.BLL.Services.DI
 {
-    public class VoertuigService
+    public class VehicleService
     {
     }
 }

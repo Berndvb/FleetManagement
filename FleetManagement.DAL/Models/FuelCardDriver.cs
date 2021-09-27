@@ -4,7 +4,7 @@ namespace FleetManagement.Domain.Models
 {
     public class FuelCardDriver
     {
-        public string Id { get; set; }
+        public int Id { get; set; }
 
         public ReadFuelCard FuelCard { get; set; }
 

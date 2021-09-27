@@ -5,13 +5,13 @@ using System.Collections.Generic;
 
 namespace FleetManagement.Framework.Models.Dtos
 {
-    public class VehicleInfoDto
+    public class ShowVehicleInfoDto
     {
         public DriverVehicleDto DriverVehicle { get; set; }
 
         public VehicleDto Vehicle { get; set; }
 
-        public VehicleInfoDto(
+        public ShowVehicleInfoDto(
             DriverVehicleDto driverVehicle,
             VehicleDto vehicle)
         {
@@ -19,10 +19,9 @@ namespace FleetManagement.Framework.Models.Dtos
             Vehicle = vehicle;
         }
 
-
         public class DriverVehicleDto
         {
-            public string Id { get; set; }
+            public int Id { get; set; }
 
             public bool Active { get; set; }
 
@@ -31,7 +30,7 @@ namespace FleetManagement.Framework.Models.Dtos
             public DateTime? ClosureDate { get; set; }
 
             public DriverVehicleDto(
-                string id,
+                int id,
                 bool active,
                 DateTime creationDate,
                 DateTime? closureDate)
@@ -45,7 +44,7 @@ namespace FleetManagement.Framework.Models.Dtos
 
         public class VehicleDto
         {
-            public string Id { get; set; }
+            public int Id { get; set; }
 
             public VehicleIdentityDto Identity { get; set; }
 
@@ -58,7 +57,7 @@ namespace FleetManagement.Framework.Models.Dtos
             public List<VehicleAppealDto> Appeals { get; set; }
 
             public VehicleDto(
-                string id,
+                int id,
                 VehicleIdentityDto identity,
                 string mileage,
                 List<VehicleMaintenanceDto> maintenance,
@@ -66,7 +65,7 @@ namespace FleetManagement.Framework.Models.Dtos
                 List<VehicleAppealDto> appeals)
             {
                 Id = id;
-                this.Identity = identity;
+                Identity = identity;
                 Mileage = mileage.SplitToNumbers();
                 Maintenance = maintenance;
                 Reparations = reparations;
@@ -77,7 +76,7 @@ namespace FleetManagement.Framework.Models.Dtos
 
             public class VehicleIdentityDto
             {
-                public string Id { get; set; }
+                public int Id { get; set; }
 
                 public EFuelType FuelType { get; set; }
 
@@ -100,7 +99,7 @@ namespace FleetManagement.Framework.Models.Dtos
 
             public class VehicleReparationDto
             {
-                public string Id { get; set; }
+                public int Id { get; set; }
 
                 public EReparationStatus ReparationStatus { get; set; }
 
@@ -123,12 +122,12 @@ namespace FleetManagement.Framework.Models.Dtos
 
             public class VehicleMaintenanceDto
             {
-                public string Id { get; set; }
+                public int Id { get; set; }
 
                 public DateTime InvoiceDate { get; set; }
 
                 public VehicleMaintenanceDto(
-                    string id,
+                    int id,
                     DateTime invoiceDate)
                 {
                     Id = id;
@@ -138,7 +137,7 @@ namespace FleetManagement.Framework.Models.Dtos
 
             public class VehicleAppealDto
             {
-                public string Id { get; set; }
+                public int Id { get; set; }
 
                 public EAppealType AppealType { get; set; }
 
@@ -147,7 +146,7 @@ namespace FleetManagement.Framework.Models.Dtos
                 public DateTime CreationDate { get; set; }
 
                 public VehicleAppealDto(
-                    string id,
+                    int id,
                     EAppealType appealType,
                     EAppealStatus status,
                     DateTime creationDate)

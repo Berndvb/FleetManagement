@@ -5,7 +5,7 @@ namespace FleetManagement.Domain.Models
 {
     public class File
     {
-        public string Id { get; set; }
+        public int Id { get; set; }
 
         public EFileType FileType { get; set; }
 

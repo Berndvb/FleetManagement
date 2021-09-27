@@ -1,8 +1,8 @@
 ﻿namespace FleetManagement.Domain.Models
 {
-    public class ReadListVerzekeringsmaatschappijen
+    public class ReadListInsuranceCompanies
     {
-        public string Id { get; set; }
+        public int Id { get; set; }
         public string InsuranceCompanies { get; set; }
     }
 }

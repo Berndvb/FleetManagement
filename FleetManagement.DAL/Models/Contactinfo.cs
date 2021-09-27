@@ -2,11 +2,11 @@
 {
     public class ContactInfo
     {
-        public string Id { get; set; }
+        public int Id { get; set; }
 
-        public string EmailAdres { get; set; }
+        public string EmailAddress { get; set; }
 
-        public string GsmNumber { get; set; }
+        public string CellPhoneNumber { get; set; }
 
         public string TelephoneNumber { get; set; }
 

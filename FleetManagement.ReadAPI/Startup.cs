@@ -1,4 +1,5 @@
 using FleetManagement.BLL;
+using FleetManagement.BLL.DependencyInjection;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.HttpsPolicy;
@@ -34,7 +35,9 @@ namespace FleetManagement.ReadAPI
             {
                 c.SwaggerDoc("v1", new OpenApiInfo { Title = "FleetManagement.ReadAPI", Version = "v1" });
             });
-            services.AddDataAccessServices(); // From BLL-injection
+            services.AddUnitOfWork();
+            services.AddRepositories();
+            services.AddDatabaseContext(configuration);
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

@@ -5,7 +5,7 @@ namespace FleetManagement.Domain.Models
 {
     public class IdentityVehicle
     {
-        public string Id { get; set; }
+        public int Id { get; set; }
 
         public string Chassisnumber { get; set; }
 

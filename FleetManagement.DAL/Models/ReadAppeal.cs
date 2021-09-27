@@ -5,7 +5,7 @@ namespace FleetManagement.Domain.Models
 {
     public class ReadAppeal
     {
-        public string Id { get; set; }
+        public int Id { get; set; }
 
         public DateTime CreationDate { get; set; }
 

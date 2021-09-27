@@ -1,13 +1,12 @@
 ﻿using FleetManagement.Framework.Models.Enums;
 using System;
 using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations;
 
 namespace FleetManagement.Domain.Models
 {
     public class ReadFuelCard
     {
-        public string Id { get; set; }
+        public int Id { get; set; }
 
         public string CardNumber { get; set; }
 

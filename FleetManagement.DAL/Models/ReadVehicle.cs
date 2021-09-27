@@ -4,9 +4,9 @@ namespace FleetManagement.Domain.Models
 {
     public class ReadVehicle
     {
-        public string Id { get; set; }
+        public int Id { get; set; }
 
-        public IdentityVehicle Identiity { get; set; }
+        public IdentityVehicle Identity { get; set; }
 
         public string Mileage { get; set; }
 

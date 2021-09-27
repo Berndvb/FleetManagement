@@ -5,13 +5,13 @@ namespace FleetManagement.Domain.Models
 {
     public class ReadDriver
     {
-        public string Id { get; set; }
+        public int Id { get; set; } // guid
 
         public IdentityPerson Identity { get; set; }
 
         public ContactInfo Contactinfo { get; set; }
 
-        public EDriversLicenseType DriversLicenseType { get; set; }
+        public EDriversLicenseType DriversLicenseType { get; set; } // No prefixes + flags
 
         public bool InService { get; set; }
 

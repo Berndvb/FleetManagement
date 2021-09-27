@@ -1,6 +1,5 @@
 ﻿using FleetManagement.Domain.Interfaces;
 using FleetManagement.EFCore.Infrastructure;
-using FleetManager.EFCore.Repositories;
 
 namespace FleetManager.EFCore.UnitOfWork
 {
@@ -24,17 +23,26 @@ namespace FleetManager.EFCore.UnitOfWork
 
         public IIdentityVehicleRepository IdentityVehicles { get; set; }
 
-        public UnitOfWork(DatabaseContext context)
+        public UnitOfWork(
+            DatabaseContext context,
+            IAppealRepository appeals,
+            IDriverRepository drivers,
+            IReparationRepository reparations,
+            IMaintenanceRepository maintenance,
+            IFuelCardRepository fuelCards,
+            IVehicleRepository vehicles,
+            IDriverVehicleRepository driverVehicles,
+            IIdentityVehicleRepository identityVehicles)
         {
             _context = context;
-            Appeals = new AppealRepository(_context);
-            Drivers = new DriverRepository(_context);
-            Reparations = new ReparationRepository(_context);
-            Maintenance = new MaintenanceRepository(_context);
-            FuelCards = new FuelCardRepository(_context);
-            Vehicles = new VehicleRepository(_context);
-            DriverVehicles = new DriverVehicleRepository(_context);
-            IdentityVehicles = new IdentityVehicleRepository(_context);
+            Appeals = appeals;
+            Drivers = drivers;
+            Reparations = reparations;
+            Maintenance = maintenance;
+            FuelCards = fuelCards;
+            Vehicles = vehicles;
+            DriverVehicles = driverVehicles;
+            IdentityVehicles = identityVehicles;
         }
 
         public int Complete()
@@ -42,9 +50,11 @@ namespace FleetManager.EFCore.UnitOfWork
             return _context.SaveChanges();
         }
 
-        public void Dispose() // when to dispose?
+        public void Dispose() 
         {
             _context.Dispose();
         }
+
+        ~UnitOfWork() { _context.Dispose(); } //DESTUCTOR!
     }
 }

@@ -53,7 +53,7 @@ namespace FleetManager.EFCore.Repositories
 
         public async Task<ICollection<TEntity>> GetAll()
         {
-            return await _dbSet.ToListAsync();
+            return await _dbSet.ToListAsync(); 
         }
 
         public async Task<TEntity> GetById(int id)
@@ -76,7 +76,7 @@ namespace FleetManager.EFCore.Repositories
             _dbSet.RemoveRange(entities);
         }
 
-        public async Task<ICollection<TEntity>> Include(params Expression<Func<TEntity, object>>[] includes) // lacks ToList() - carefull
+        public async Task<ICollection<TEntity>> Include(params Expression<Func<TEntity, object>>[] includes)
         {
             IIncludableQueryable<TEntity, object> query = null;
 

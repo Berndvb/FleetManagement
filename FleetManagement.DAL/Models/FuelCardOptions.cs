@@ -4,7 +4,7 @@ namespace FleetManagement.Domain.Models
 {
     public class FuelCardOptions
     {
-        public string Id { get; set; }
+        public int Id { get; set; }
 
         public EFuelType Fueltype { get; set; }
 
