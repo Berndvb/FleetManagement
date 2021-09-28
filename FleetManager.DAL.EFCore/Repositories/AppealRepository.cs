@@ -4,7 +4,7 @@ using FleetManagement.EFCore.Infrastructure;
 
 namespace FleetManager.EFCore.Repositories
 {
-    public class AppealRepository : GenericRepository<ReadAppeal>, IAppealRepository
+    public class AppealRepository : GenericRepository<Appeal>, IAppealRepository
     {
         public AppealRepository(DatabaseContext context) : base(context)
         {

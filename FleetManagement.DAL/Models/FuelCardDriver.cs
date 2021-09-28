@@ -1,14 +1,15 @@
-﻿using System;
+﻿using FleetManagement.Domain.Interfaces;
+using System;
 
 namespace FleetManagement.Domain.Models
 {
-    public class FuelCardDriver
+    public class FuelCardDriver : IBaseClass
     {
         public int Id { get; set; }
 
-        public ReadFuelCard FuelCard { get; set; }
+        public FuelCard FuelCard { get; set; }
 
-        public ReadDriver Driver { get; set; }
+        public Driver Driver { get; set; }
 
         public bool Active { get; set; }
 

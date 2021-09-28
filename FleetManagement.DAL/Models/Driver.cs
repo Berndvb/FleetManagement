@@ -1,17 +1,18 @@
-﻿using FleetManagement.Framework.Models.Enums;
+﻿using FleetManagement.Domain.Interfaces;
+using FleetManagement.Framework.Models.Enums;
 using System.Collections.Generic;
 
 namespace FleetManagement.Domain.Models
 {
-    public class ReadDriver
+    public class Driver : IBaseClass
     {
-        public int Id { get; set; } // guid
+        public int Id { get; set; } 
 
         public IdentityPerson Identity { get; set; }
 
         public ContactInfo Contactinfo { get; set; }
 
-        public EDriversLicenseType DriversLicenseType { get; set; } // No prefixes + flags
+        public DriversLicenseType DriversLicenseType { get; set; }
 
         public bool InService { get; set; }
 
@@ -19,6 +20,6 @@ namespace FleetManagement.Domain.Models
 
         public List<DriverVehicle> Vehicles { get; set; }
 
-        public List<ReadAppeal> Appeals { get; set; }
+        public List<Appeal> Appeals { get; set; }
     }
 }

@@ -3,7 +3,7 @@ using FleetManager.Domain.Interfaces;
 
 namespace FleetManagement.Domain.Interfaces
 {
-    public interface IAppealRepository : IGenericRepository<ReadAppeal>
+    public interface IAppealRepository : IGenericRepository<Appeal>
     {
     }
 }

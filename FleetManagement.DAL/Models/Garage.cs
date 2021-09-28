@@ -1,6 +1,8 @@
-﻿namespace FleetManagement.Domain.Models
+﻿using FleetManagement.Domain.Interfaces;
+
+namespace FleetManagement.Domain.Models
 {
-    public class Garage
+    public class Garage : IBaseClass
     {
         public int Id { get; set; }
 

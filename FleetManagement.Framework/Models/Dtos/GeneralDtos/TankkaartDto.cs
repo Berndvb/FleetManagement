@@ -6,7 +6,7 @@ namespace FleetManagement.Framework.Models.Dtos
 {
     public class TankkaartDto
     {
-        public string Id { get; set; }
+        public int Id { get; set; }
 
         public string Kaartnummer { get; set; }
 
@@ -14,7 +14,7 @@ namespace FleetManagement.Framework.Models.Dtos
 
         public string Pincode { get; set; }
 
-        public EAuthenticatieType AuthenticatieType { get; set; }
+        public AuthenticatieType AuthenticatieType { get; set; }
 
         public TankkaartOptiesDto TankkaartOpties { get; set; }
 
@@ -23,11 +23,11 @@ namespace FleetManagement.Framework.Models.Dtos
         public List<TankkaartChauffeurDto> Chauffeurs { get; set; }
 
         public TankkaartDto(
-            string id,
+            int id,
             string kaartnummer,
             DateTime geldigheidsDatum,
             string pincode,
-            EAuthenticatieType authenticatieType,
+            AuthenticatieType authenticatieType,
             TankkaartOptiesDto tankkaartOpties,
             bool geblokkeerd,
             List<TankkaartChauffeurDto> chauffeurs)

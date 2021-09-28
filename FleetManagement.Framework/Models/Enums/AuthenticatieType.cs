@@ -1,6 +1,6 @@
 ﻿namespace FleetManagement.Framework.Models.Enums
 {
-    public enum EAuthenticatieType
+    public enum AuthenticatieType
     {
         Pin,
         PinMileage

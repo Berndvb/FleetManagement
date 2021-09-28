@@ -4,7 +4,7 @@ using FleetManagement.EFCore.Infrastructure;
 
 namespace FleetManager.EFCore.Repositories
 {
-    public class FuelCardRepository : GenericRepository<ReadFuelCard>, IFuelCardRepository
+    public class FuelCardRepository : GenericRepository<FuelCard>, IFuelCardRepository
     {
         public FuelCardRepository(DatabaseContext context) : base(context)
         {

@@ -11,18 +11,27 @@ namespace FleetManagement.Framework.Models.Dtos.ShowDtos
 
         public ContactInfoDto Contactinfo { get; set; }
 
-        public EDriversLicenseType DriversLicenseType { get; set; }
+        public DriversLicenseType DriversLicenseType { get; set; }
 
         public bool InService { get; set; }
 
-        public ShowDriverDetails()
+        public ShowDriverDetails(
+            int id,
+            IdentityPersonDto identity,
+            ContactInfoDto contactInfo,
+            DriversLicenseType driversLicenseType,
+            bool inService)
         {
-
+            Id = id;
+            Identity = identity;
+            Contactinfo = contactInfo;
+            DriversLicenseType = driversLicenseType;
+            InService = inService;
         }
 
         public class ContactInfoDto
         {
-            public string Id { get; set; }
+            public int Id { get; set; }
 
             public string EmailAdres { get; set; }
 
@@ -30,47 +39,70 @@ namespace FleetManagement.Framework.Models.Dtos.ShowDtos
 
             public string Telefoonnummer { get; set; }
 
-            public AddressDto Adres { get; set; }
+            public AddressDto Address { get; set; }
 
             public ContactInfoDto(
-                string id,
+                int id,
                 string emailAdres,
                 string gsmNummer,
                 string telefoonnummer,
-                AddressDto adres)
+                AddressDto address)
             {
                 Id = id;
                 EmailAdres = emailAdres;
                 GsmNummer = gsmNummer;
                 Telefoonnummer = telefoonnummer;
-                Adres = adres;
+                Address = address;
+            }
+
+            public class AddressDto
+            {
+                public int Id { get; set; }
+
+                public string Street { get; set; }
+
+                public string City { get; set; }
+
+                public string Postcode { get; set; }
+
+                public AddressDto(
+                    int id,
+                    string street,
+                    string city,
+                    string postcode)
+                {
+                    Id = id;
+                    Street = street;
+                    City = city;
+                    Postcode = postcode;
+                }
             }
         }
 
         public class IdentityPersonDto
         {
-            public string Id { get; set; }
+            public int Id { get; set; }
 
             public string Name { get; set; }
 
             public string FirstName { get; set; }
 
-            public string NationalInsurancenumber { get; set; }
+            public string NationalInsuranceNumber { get; set; }
 
             public DateTime DateOfBirth { get; set; }
 
             public IdentityPersonDto(
-                string id,
+                int id,
                 string name,
                 string firstName,
                 string nationalInsuranceNumber,
-                DateTime geboortedatum)
+                DateTime dateOfBirth)
             {
                 Id = id;
                 Name = name;
                 FirstName = firstName;
-                NationalInsurancenumber = nationalInsuranceNumber;
-                DateOfBirth = geboortedatum;
+                NationalInsuranceNumber = nationalInsuranceNumber;
+                DateOfBirth = dateOfBirth;
             }
         }
 

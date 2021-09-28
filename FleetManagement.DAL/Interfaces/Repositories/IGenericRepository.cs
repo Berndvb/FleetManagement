@@ -16,9 +16,9 @@ namespace FleetManager.Domain.Interfaces
         Task<ICollection<TType>> FindAndSelect<TType>(Expression<Func<TEntity, bool>> where, Expression<Func<TEntity, TType>> select) where TType : class;
         void Add(TEntity entity);
         void AddRange(ICollection<TEntity> entities);
-        Task Remove(TEntity entity);
+        void Remove(TEntity entity);
         Task RemoveById(int id);
-        Task RemoveRange(ICollection<TEntity> entities);
+        void RemoveRange(ICollection<TEntity> entities);
         Task<ICollection<TEntity>> Include(params Expression<Func<TEntity, object>>[] includes);
         Task<TEntity> GetByIdWithIncludes(int id, params Expression<Func<TEntity, object>>[] includes);
         Task<ICollection<TEntity>> FindWithIncludes(Expression<Func<TEntity, bool>> where, params Expression<Func<TEntity, object>>[] includes);

@@ -1,17 +1,17 @@
-﻿using FleetManagement.Framework.Models.Enums;
-using System.ComponentModel.DataAnnotations;
+﻿using FleetManagement.Domain.Interfaces;
+using FleetManagement.Framework.Models.Enums;
 
 namespace FleetManagement.Domain.Models
 {
-    public class IdentityVehicle
+    public class IdentityVehicle : IBaseClass
     {
         public int Id { get; set; }
 
         public string Chassisnumber { get; set; }
 
-        public EFuelType FuelType { get; set; }
+        public FuelType FuelType { get; set; }
 
-        public ECarType CarType { get; set; }
+        public CarType CarType { get; set; }
 
         public string Brand { get; set; }
 

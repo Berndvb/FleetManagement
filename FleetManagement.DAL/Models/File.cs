@@ -1,13 +1,14 @@
-﻿using FleetManagement.Framework.Models.Enums;
+﻿using FleetManagement.Domain.Interfaces;
+using FleetManagement.Framework.Models.Enums;
 using System;
 
 namespace FleetManagement.Domain.Models
 {
-    public class File
+    public class File : IBaseClass
     {
         public int Id { get; set; }
 
-        public EFileType FileType { get; set; }
+        public FileType FileType { get; set; }
 
         public string FileName { get; set; }
 

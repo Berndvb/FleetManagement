@@ -4,7 +4,7 @@ using FleetManagement.EFCore.Infrastructure;
 
 namespace FleetManager.EFCore.Repositories
 {
-    public class DriverRepository : GenericRepository<ReadDriver>, IDriverRepository
+    public class DriverRepository : GenericRepository<Driver>, IDriverRepository
     {
         public DriverRepository(DatabaseContext context) : base(context)
         {

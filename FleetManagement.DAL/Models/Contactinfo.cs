@@ -1,6 +1,8 @@
-﻿namespace FleetManagement.Domain.Models
+﻿using FleetManagement.Domain.Interfaces;
+
+namespace FleetManagement.Domain.Models
 {
-    public class ContactInfo
+    public class ContactInfo : IBaseClass
     {
         public int Id { get; set; }
 

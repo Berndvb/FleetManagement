@@ -1,6 +1,6 @@
 ﻿namespace FleetManagement.Framework.Models.Enums
 {
-    public enum EReparationStatus
+    public enum ReparationStatus
     {
         InfoCollectionDriver,
         ProcessingFleetManagement,

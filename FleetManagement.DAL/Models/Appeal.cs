@@ -1,25 +1,26 @@
-﻿using FleetManagement.Framework.Models.Enums;
+﻿using FleetManagement.Domain.Interfaces;
+using FleetManagement.Framework.Models.Enums;
 using System;
 
 namespace FleetManagement.Domain.Models
 {
-    public class ReadAppeal
+    public class Appeal : IBaseClass
     {
         public int Id { get; set; }
 
         public DateTime CreationDate { get; set; }
 
-        public EAppealType AppealType { get; set; }
+        public AppealType AppealType { get; set; }
 
         public DateTime? FirstDatePlanning { get; set; }
 
         public DateTime? SecondDatePlanning { get; set; }
 
-        public EAppealStatus Status { get; set; }
+        public AppealStatus Status { get; set; }
 
-        public ReadVehicle Vehicle { get; set; }
+        public Vehicle Vehicle { get; set; }
 
-        public ReadDriver Driver { get; set; }
+        public Driver Driver { get; set; }
 
         public string Message { get; set; }
     }

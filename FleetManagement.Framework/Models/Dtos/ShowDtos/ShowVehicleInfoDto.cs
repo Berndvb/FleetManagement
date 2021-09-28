@@ -78,15 +78,15 @@ namespace FleetManagement.Framework.Models.Dtos
             {
                 public int Id { get; set; }
 
-                public EFuelType FuelType { get; set; }
+                public FuelType FuelType { get; set; }
 
                 public string Brand { get; set; }
 
                 public string Model { get; set; }
 
                 public VehicleIdentityDto(
-                    string id,
-                    EFuelType fuelType,
+                    int id,
+                    FuelType fuelType,
                     string merk,
                     string model)
                 {
@@ -101,15 +101,15 @@ namespace FleetManagement.Framework.Models.Dtos
             {
                 public int Id { get; set; }
 
-                public EReparationStatus ReparationStatus { get; set; }
+                public ReparationStatus ReparationStatus { get; set; }
 
                 public DateTime IncidentDate { get; set; }
 
                 public DateTime? InvoiceDate { get; set; }
 
                 public VehicleReparationDto(
-                    string id,
-                    EReparationStatus reparationStatus,
+                    int id,
+                    ReparationStatus reparationStatus,
                     DateTime incidentDate,
                     DateTime? billingDate)
                 {
@@ -139,16 +139,16 @@ namespace FleetManagement.Framework.Models.Dtos
             {
                 public int Id { get; set; }
 
-                public EAppealType AppealType { get; set; }
+                public AppealType AppealType { get; set; }
 
-                public EAppealStatus Status { get; set; }
+                public AppealStatus Status { get; set; }
 
                 public DateTime CreationDate { get; set; }
 
                 public VehicleAppealDto(
                     int id,
-                    EAppealType appealType,
-                    EAppealStatus status,
+                    AppealType appealType,
+                    AppealStatus status,
                     DateTime creationDate)
                 {
                     Id = id;

@@ -1,9 +1,10 @@
-﻿using FleetManagement.Framework.Models.Enums;
+﻿using FleetManagement.Domain.Interfaces;
+using FleetManagement.Framework.Models.Enums;
 using System;
 
 namespace FleetManagement.Domain.Models
 {
-    public class ReadRepare : Administration
+    public class Repare : Administration, IBaseClass
     {
         public DateTime IncidentDate { get; set; }
 
@@ -13,7 +14,7 @@ namespace FleetManagement.Domain.Models
 
         public string ReferenceNumber { get; set; }
 
-        public EReparationStatus ReparationStatus { get; set; }
+        public ReparationStatus ReparationStatus { get; set; }
 
     }
 }

@@ -1,4 +1,5 @@
-﻿using FleetManagement.EFCore.Infrastructure;
+﻿using FleetManagement.Domain.Interfaces;
+using FleetManagement.EFCore.Infrastructure;
 using FleetManager.Domain.Interfaces;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Query;
@@ -10,12 +11,12 @@ using System.Threading.Tasks;
 
 namespace FleetManager.EFCore.Repositories
 {
-    public class GenericRepository<TEntity> : IGenericRepository<TEntity> where TEntity : class
+    public class GenericRepository<TEntity> : IGenericRepository<TEntity> where TEntity : class, IBaseClass
     {
         private readonly DatabaseContext _context;
         private readonly DbSet<TEntity> _dbSet;
 
-        public GenericRepository(DatabaseContext context) //open context via 'using' for better disposing?
+        public GenericRepository(DatabaseContext context) 
         {
             _context = context;
             _dbSet = _context.Set<TEntity>();
@@ -61,17 +62,17 @@ namespace FleetManager.EFCore.Repositories
             return await _dbSet.FindAsync(id);
         }
 
-        public async Task Remove(TEntity entity)
+        public void Remove(TEntity entity)
         {
             _dbSet.Remove(entity);
         }
 
         public async Task RemoveById(int id)
         {
-            await Remove(await GetById(id));
+            Remove(await GetById(id));
         }
 
-        public async Task RemoveRange(ICollection<TEntity> entities)
+        public void RemoveRange(ICollection<TEntity> entities)
         {
             _dbSet.RemoveRange(entities);
         }

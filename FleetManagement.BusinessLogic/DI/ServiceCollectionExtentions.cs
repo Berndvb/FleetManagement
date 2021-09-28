@@ -28,11 +28,14 @@ namespace FleetManagement.BLL.DependencyInjection
             services.AddScoped<IIdentityVehicleRepository, IdentityVehicleRepository>();
         }
 
-        public static void AddDatabaseContext(this IServiceCollection services, IConfiguration configuration)
+        public static void AddDatabaseContext(this IServiceCollection services) 
         {
-            services.AddDbContext<DatabaseContext>(options =>
-                options.UseSqlServer(configuration.GetConnectionString("DefaultConnection"))); //services.AddDbContextPool<EmployeeDbContext>(options => options.UseSqlServer(dbConnectionString));
+            var builder = new ConfigurationBuilder();
+            builder.AddJsonFile("appsettings.json", optional: false);
+            var configuration = builder.Build();
+            var connectionString = configuration.GetConnectionString("DefaultConnection");
 
+            services.AddDbContext<DatabaseContext>(options => options.UseSqlServer(connectionString));
         }
     }
 }

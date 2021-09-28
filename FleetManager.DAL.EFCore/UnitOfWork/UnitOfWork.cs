@@ -21,7 +21,7 @@ namespace FleetManager.EFCore.UnitOfWork
 
         public IDriverVehicleRepository DriverVehicles { get; private set; }
 
-        public IIdentityVehicleRepository IdentityVehicles { get; set; }
+        public IIdentityVehicleRepository IdentityVehicles { get; private set; }
 
         public UnitOfWork(
             DatabaseContext context,

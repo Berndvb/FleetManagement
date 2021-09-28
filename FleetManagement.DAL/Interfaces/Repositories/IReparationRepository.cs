@@ -3,7 +3,7 @@ using FleetManager.Domain.Interfaces;
 
 namespace FleetManagement.Domain.Interfaces
 {
-    public interface IVehicleRepository : IGenericRepository<ReadVehicle>
+    public interface IReparationRepository : IGenericRepository<Repare>
     {
     }
 }

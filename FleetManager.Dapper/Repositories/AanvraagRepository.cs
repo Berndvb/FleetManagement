@@ -9,7 +9,7 @@ using System.Threading.Tasks;
 
 namespace FleetManager.Dapper.Repositories
 {
-    public class AanvraagRepository : GenericRepository<ReadAppeal>
+    public class AanvraagRepository : GenericRepository<Appeal>
     {
         public AanvraagRepository(DapperContextFactory dapperContextFactory) : base(dapperContextFactory)
         {

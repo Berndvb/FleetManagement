@@ -1,14 +1,15 @@
-﻿using System;
+﻿using FleetManagement.Domain.Interfaces;
+using System;
 
 namespace FleetManagement.Domain.Models
 {
-    public class DriverVehicle
+    public class DriverVehicle : IBaseClass
     {
         public int Id { get; set; }
 
-        public ReadVehicle Vehicle { get; set; }
+        public Vehicle Vehicle { get; set; }
 
-        public ReadDriver Driver { get; set; }
+        public Driver Driver { get; set; }
 
         public bool Active { get; set; }
 

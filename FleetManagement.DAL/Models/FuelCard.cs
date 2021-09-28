@@ -1,10 +1,11 @@
-﻿using FleetManagement.Framework.Models.Enums;
+﻿using FleetManagement.Domain.Interfaces;
+using FleetManagement.Framework.Models.Enums;
 using System;
 using System.Collections.Generic;
 
 namespace FleetManagement.Domain.Models
 {
-    public class ReadFuelCard
+    public class FuelCard : IBaseClass
     {
         public int Id { get; set; }
 
@@ -14,7 +15,7 @@ namespace FleetManagement.Domain.Models
 
         public string Pincode { get; set; }
 
-        public EAuthenticatieType AuthenticationType { get; set; }
+        public AuthenticatieType AuthenticationType { get; set; }
 
         public FuelCardOptions FuelCardOptions { get; set; }
 

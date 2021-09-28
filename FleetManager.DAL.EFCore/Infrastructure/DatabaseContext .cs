@@ -5,13 +5,13 @@ namespace FleetManagement.EFCore.Infrastructure
 {
     public class DatabaseContext : DbContext
     {
-        public DbSet<ReadFuelCard> FuelCards { get; set; }
-        public DbSet<ReadDriver> Drivers { get; set; }
-        public DbSet<ReadAppeal> Appeals { get; set; }
-        public DbSet<ReadVehicle> Vehicles { get; set; }
-        public DbSet<ReadRepare> Reparations { get; set; }
-        public DbSet<ReadMaintenance> Maintenances { get; set; }
-        public DbSet<ReadListInsuranceCompanies> InsuranceCompanies { get; set; }
+        public DbSet<FuelCard> FuelCards { get; set; }
+        public DbSet<Driver> Drivers { get; set; }
+        public DbSet<Appeal> Appeals { get; set; }
+        public DbSet<Vehicle> Vehicles { get; set; }
+        public DbSet<Repare> Reparations { get; set; }
+        public DbSet<Maintenance> Maintenances { get; set; }
+        public DbSet<ListInsuranceCompanies> InsuranceCompanies { get; set; }
 
         public DatabaseContext(DbContextOptions<DatabaseContext> options) : base(options)
         {

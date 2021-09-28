@@ -5,9 +5,9 @@ namespace FleetManagement.Framework.Models.Dtos
 {
     public class FileDto
     {
-        public string Id { get; set; }
+        public int Id { get; set; }
 
-        public EFileType FileType { get; set; }
+        public FileType FileType { get; set; }
 
         public string FileName { get; set; }
 
@@ -16,8 +16,8 @@ namespace FleetManagement.Framework.Models.Dtos
         public Byte[] Content { get; set; }
 
         public FileDto(
-            string id,
-            EFileType fileType,
+            int id,
+            FileType fileType,
             string fileName,
             string contentType,
             Byte[] content)

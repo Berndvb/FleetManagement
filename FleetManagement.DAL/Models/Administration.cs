@@ -1,13 +1,14 @@
-﻿using System;
+﻿using FleetManagement.Domain.Interfaces;
+using System;
 using System.Collections.Generic;
 
 namespace FleetManagement.Domain.Models
 {
-    public class Administration
+    public class Administration : IBaseClass
     {
         public int Id { get; set; }
 
-        public ReadVehicle Vehicle { get; set; }
+        public Vehicle Vehicle { get; set; }
 
         public DateTime CreationDate { get; set; }
 

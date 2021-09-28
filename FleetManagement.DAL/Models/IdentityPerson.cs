@@ -1,9 +1,9 @@
-﻿using System;
-using System.ComponentModel.DataAnnotations;
+﻿using FleetManagement.Domain.Interfaces;
+using System;
 
 namespace FleetManagement.Domain.Models
 {
-    public class IdentityPerson
+    public class IdentityPerson : IBaseClass
     {
         public int Id { get; set; }
 
@@ -11,7 +11,7 @@ namespace FleetManagement.Domain.Models
 
         public string FirstName { get; set; }
 
-        public string NationalInsurancenumber { get; set; }
+        public string NationalInsuranceNumber { get; set; }
 
         public DateTime DateOfBirth { get; set; }
     }

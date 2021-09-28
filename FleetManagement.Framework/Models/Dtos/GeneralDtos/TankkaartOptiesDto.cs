@@ -6,13 +6,16 @@ namespace FleetManagement.Framework.Models.Dtos
 {
     public class TankkaartOptiesDto
     {
-        public string Id { get; set; }
+        public int Id { get; set; }
 
-        public EFuelType BrandstofType { get; set; }
+        public FuelType BrandstofType { get; set; }
 
         public List<string> ExtraServices { get; private set; }
 
-        public TankkaartOptiesDto(string id, EFuelType brandstofType, string extraServices)
+        public TankkaartOptiesDto(
+            int id, 
+            FuelType brandstofType, 
+            string extraServices)
         {
             Id = id;
             BrandstofType = brandstofType;

@@ -1,6 +1,6 @@
 ﻿namespace FleetManagement.Framework.Models.Enums
 {
-    public enum EFileType
+    public enum FileType
     {
         Invoice,
         Photo,

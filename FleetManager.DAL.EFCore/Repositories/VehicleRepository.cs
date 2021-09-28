@@ -4,7 +4,7 @@ using FleetManagement.EFCore.Infrastructure;
 
 namespace FleetManager.EFCore.Repositories
 {
-    public class VehicleRepository : GenericRepository<ReadVehicle>, IVehicleRepository
+    public class VehicleRepository : GenericRepository<Vehicle>, IVehicleRepository
     {
         public VehicleRepository(DatabaseContext context) : base(context)
         {

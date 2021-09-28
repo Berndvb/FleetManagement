@@ -1,9 +1,8 @@
 ﻿using FleetManagement.Domain.Models;
 using FleetManager.Domain.Interfaces;
-
 namespace FleetManagement.Domain.Interfaces
 {
-    public interface IDriverRepository : IGenericRepository<ReadDriver>
+    public interface  IFuelCardRepository : IGenericRepository<FuelCard>
     {
     }
 }
