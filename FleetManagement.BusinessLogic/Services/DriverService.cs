@@ -2,21 +2,29 @@
 using FleetManagement.Framework.Models.Dtos;
 using System.Collections.Generic;
 using System.Threading.Tasks;
+using AutoMapper;
+using System.Linq;
+using Microsoft.EntityFrameworkCore;
 
 namespace FleetManagement.BLL.Services
 {
     public class DriverService 
     {
-        public IUnitOfWork _unitOfWork { get; set; } 
+        private readonly IUnitOfWork _unitOfWork;
+        private readonly IMapper _mapper;
 
-        public DriverService(IUnitOfWork unitOfWork)
+
+        public DriverService(IUnitOfWork unitOfWork, IMapper mapper)
         {
             _unitOfWork = unitOfWork;
+            _mapper = mapper;
         }
 
         public async Task<List<ShowDriverOverviewDto>> GetDriverOverviews() 
         {
             var readDrivers = await _unitOfWork.Drivers.Include(x => x.Identity.Name);
+
+            var test = _mapper.Map<ShowDriverOverviewDto>(readDrivers);
 
             var driverDtos = new List<ShowDriverOverviewDto>();
             foreach (var driver in readDrivers)

@@ -1,4 +1,6 @@
-﻿using FleetManagement.Domain.Interfaces;
+﻿using AutoMapper;
+using FleetManagement.BLL.Services;
+using FleetManagement.Domain.Interfaces;
 using FleetManagement.EFCore.Infrastructure;
 using FleetManager.EFCore.Repositories;
 using FleetManager.EFCore.UnitOfWork;
@@ -36,6 +38,17 @@ namespace FleetManagement.BLL.DependencyInjection
             var connectionString = configuration.GetConnectionString("DefaultConnection");
 
             services.AddDbContext<DatabaseContext>(options => options.UseSqlServer(connectionString));
+        }
+
+        public static void AddMapper(this IServiceCollection services)
+        {
+            var mapperConfig = new MapperConfiguration(mc =>
+            {
+                mc.AddProfile(new MapperService());
+            });
+
+            IMapper mapper = mapperConfig.CreateMapper();
+            services.AddSingleton(mapper);
         }
     }
 }
