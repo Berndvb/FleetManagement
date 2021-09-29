@@ -8,7 +8,7 @@ namespace FleetManagement.BLL.Services
     {
         public MapperService()
         {
-            CreateMap<Driver, DriverOverviewDto>();
+            CreateMap<Driver, DriverOverviewDto>(); //driverbaseDto - shared properties
             CreateMap<Driver, DriverDetailsDto>();
             CreateMap<Driver, VehicleInfoDto>();
         }

@@ -19,8 +19,6 @@ namespace FleetManagement.BLL.Services
             _mapper = mapper;
         }
 
-
-        //test
         public async Task<List<DriverOverviewDto>> GetDriverOverviews(bool onlyInService) 
         {
             var firstDriverQuery = _unitOfWork.Drivers.Include(x => x.Identity.Name);
@@ -46,10 +44,10 @@ namespace FleetManagement.BLL.Services
             return driverdetaillsDto;
         }
 
-        public async Task<List<VehicleInfoDto>> GetVehicleDetails(int driverId) //via driver of vehicle?
+        public async Task<List<VehicleInfoDto>> GetVehicleDetails(int driverId) 
         {
             var vehicles = await _unitOfWork.Drivers
-                .Include(x => x.Vehicles)
+                .Include(x => x.Vehicles) // theninclude
                 .Include(x => x.Vehicles.Select(y => y.Vehicle))
                 .Include(x => x.Vehicles.Select(y => y.Vehicle.Identity))
                 .Include(x => x.Vehicles.Select(y => y.Vehicle.Maintenances.Where(z => z.Driver.Id.Equals(driverId))))

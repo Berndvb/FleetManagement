@@ -1,17 +1,25 @@
-﻿using System;
+﻿using FleetManagement.Domain.Models;
+using FleetManager.Domain.Interfaces;
 
 namespace FleetManagement.Domain.Interfaces
 {
-    public interface IUnitOfWork : IDisposable
+    public interface IUnitOfWork
     {
-        IAppealRepository Appeals { get; }
-        IDriverRepository Drivers { get; }
-        IReparationRepository Reparations { get; }
-        IMaintenanceRepository Maintenance { get; }
-        IFuelCardRepository FuelCards { get; }
-        IVehicleRepository Vehicles { get; }
-        IDriverVehicleRepository DriverVehicles { get; }
-        IIdentityVehicleRepository IdentityVehicles { get; }
+        IGenericRepository<Appeal> Appeals { get; }
+
+        IGenericRepository<Driver> Drivers { get; }
+
+        IGenericRepository<Repare> Reparations { get; }
+
+        IGenericRepository<Maintenance> Maintenance { get; }
+
+        IGenericRepository<FuelCard> FuelCards { get; }
+
+        IGenericRepository<Vehicle> Vehicles { get; }
+
+        IGenericRepository<DriverVehicle> DriverVehicles { get; }
+
+        IGenericRepository<IdentityVehicle> IdentityVehicles { get; }
         int Complete();
     }
 }

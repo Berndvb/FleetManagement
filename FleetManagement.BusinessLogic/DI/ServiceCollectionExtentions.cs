@@ -1,8 +1,10 @@
 ﻿using AutoMapper;
 using FleetManagement.BLL.Services;
 using FleetManagement.Domain.Interfaces;
+using FleetManagement.Domain.Models;
 using FleetManagement.EFCore.Infrastructure;
-using FleetManager.EFCore.Repositories;
+using FleetManager.Dapper.Repositories;
+using FleetManager.Domain.Interfaces;
 using FleetManager.EFCore.UnitOfWork;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
@@ -20,14 +22,14 @@ namespace FleetManagement.BLL.DependencyInjection
 
         public static void AddRepositories(this IServiceCollection services)
         {
-            services.AddScoped<IAppealRepository, AppealRepository>();
-            services.AddScoped<IDriverRepository, DriverRepository>();
-            services.AddScoped<IReparationRepository, ReparationRepository>();
-            services.AddScoped<IMaintenanceRepository, MaintenanceRepository>();
-            services.AddScoped<IFuelCardRepository, FuelCardRepository>();
-            services.AddScoped<IVehicleRepository, VehicleRepository>();
-            services.AddScoped<IDriverVehicleRepository, DriverVehicleRepository>();
-            services.AddScoped<IIdentityVehicleRepository, IdentityVehicleRepository>();
+            services.AddScoped(typeof(IGenericRepository<Appeal>), typeof(GenericRepository<Appeal>));
+            services.AddScoped(typeof(IGenericRepository<Driver>), typeof(GenericRepository<Driver>));
+            services.AddScoped(typeof(IGenericRepository<Repare>), typeof(GenericRepository<Repare>));
+            services.AddScoped(typeof(IGenericRepository<Maintenance>), typeof(GenericRepository<Maintenance>));
+            services.AddScoped(typeof(IGenericRepository<FuelCard>), typeof(GenericRepository<FuelCard>));
+            services.AddScoped(typeof(IGenericRepository<Vehicle>), typeof(GenericRepository<Vehicle>));
+            services.AddScoped(typeof(IGenericRepository<DriverVehicle>), typeof(GenericRepository<DriverVehicle>));
+            services.AddScoped(typeof(IGenericRepository<IdentityVehicle>), typeof(GenericRepository<IdentityVehicle>));
         }
 
         public static void AddDatabaseContext(this IServiceCollection services) 
