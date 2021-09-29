@@ -1,7 +1,7 @@
 ﻿using FleetManagement.Framework.Helpers;
 using System.Collections.Generic;
 
-namespace FleetManagement.Framework.Models.Dtos
+namespace FleetManagement.Framework.Models.Dtos.GeneralDtos
 {
     public class VerzekeringsmaatschappijenDto
     {

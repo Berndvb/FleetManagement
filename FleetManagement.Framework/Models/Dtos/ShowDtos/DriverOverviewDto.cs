@@ -1,21 +1,21 @@
 ﻿using FleetManagement.Framework.Models.Enums;
 
-namespace FleetManagement.Framework.Models.Dtos
+namespace FleetManagement.Framework.Models.Dtos.ShowDtos
 {
-    public class ShowDriverOverviewDto
+    public class DriverOverviewDto
     {
         public int Id { get; set; }
 
         public string Name { get; set; }
 
-        public DriversLicenseType DriversLicenseType { get; set; }
+        public DriversLicenseTypes DriversLicenseType { get; set; }
 
         public bool InService { get; set; }
 
-        public ShowDriverOverviewDto(
+        public DriverOverviewDto(
             int id,
             string name,
-            DriversLicenseType driversLicenseType,
+            DriversLicenseTypes driversLicenseType,
             bool inService)
         {
             Id = id;

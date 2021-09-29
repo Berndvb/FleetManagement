@@ -1,4 +1,4 @@
-﻿namespace FleetManagement.Framework.Models.Dtos
+﻿namespace FleetManagement.Framework.Models.Dtos.GeneralDtos
 {
     public class GarageDto
     {

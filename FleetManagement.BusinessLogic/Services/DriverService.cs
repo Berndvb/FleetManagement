@@ -1,10 +1,10 @@
-﻿using FleetManagement.Domain.Interfaces;
-using FleetManagement.Framework.Models.Dtos;
-using System.Collections.Generic;
-using System.Threading.Tasks;
-using AutoMapper;
-using System.Linq;
+﻿using AutoMapper;
+using FleetManagement.Domain.Interfaces;
+using FleetManagement.Framework.Models.Dtos.ShowDtos;
 using Microsoft.EntityFrameworkCore;
+using System.Collections.Generic;
+using System.Linq;
+using System.Threading.Tasks;
 
 namespace FleetManagement.BLL.Services
 {
@@ -13,173 +13,81 @@ namespace FleetManagement.BLL.Services
         private readonly IUnitOfWork _unitOfWork;
         private readonly IMapper _mapper;
 
-
         public DriverService(IUnitOfWork unitOfWork, IMapper mapper)
         {
             _unitOfWork = unitOfWork;
             _mapper = mapper;
         }
 
-        public async Task<List<ShowDriverOverviewDto>> GetDriverOverviews() 
+        public async Task<List<DriverOverviewDto>> GetDriverOverviews(bool onlyInService) 
         {
-            var readDrivers = await _unitOfWork.Drivers.Include(x => x.Identity.Name);
+            var firstDriverQuery = _unitOfWork.Drivers.Include(x => x.Identity.Name);
+            var secondDriverQuery = onlyInService ? firstDriverQuery.Where(x => x.InService) : firstDriverQuery;
+ 
+            var driverOverviewDtos = await secondDriverQuery
+                .Select(x => _mapper.Map<DriverOverviewDto>(x))
+                .ToListAsync();
 
-            var test = _mapper.Map<ShowDriverOverviewDto>(readDrivers);
-
-            var driverDtos = new List<ShowDriverOverviewDto>();
-            foreach (var driver in readDrivers)
-            {
-                var name = driver.Identity.FirstName + driver.Identity.Name;
-                var driverDto = new ShowDriverOverviewDto(
-                    driver.Id, name, 
-                    driver.DriversLicenseType, 
-                    driver.InService);
-
-                driverDtos.Add(driverDto);
-            }
-
-            return driverDtos;
+            return driverOverviewDtos;
         }
 
-        //public async Task<ShowDriverDetailsDto> GetDriverDetails(string driverId) // all details: id, identity, contactinfo, driverslicensetype, inservice (not fuelcards, vehicles and appeals)
-        //{
-        //    var readDriver = await _unitOfWork.Drivers.GetByIdWithIncludes(int.Parse(driverId), x => new { x.Identity, x.Contactinfo });
+        public async Task<DriverDetailsDto> GetDriverDetails(int driverId) 
+        {
+            var driver = await _unitOfWork.Drivers
+                .Include(x => x.Identity)
+                .Include(x => x.Contactinfo)
+                .Include(x => x.Contactinfo.Address)
+                .SingleAsync(x => x.Id == driverId);
 
-        //    var identity = new IdentityPersonDto(
-        //        readDriver.Identity.Id,
-        //        readDriver.Identity.Name,
-        //        readDriver.Identity.FirstName,
-        //        readDriver.Identity.NationalInsurancenumber,
-        //        readDriver.Identity.DateOfBirth);
+            var driverdetaillsDto = _mapper.Map<DriverDetailsDto>(driver); 
 
-        //    var contactInfo = new ContactInfoDto(
-        //        readDriver.Contactinfo.Id,
-        //        readDriver.Contactinfo.EmailAddress,
-        //        readDriver.Contactinfo.CellPhoneNumber,
-        //        readDriver.Contactinfo.TelephoneNumber,
-        //        new AddressDto(
-        //            readDriver.Contactinfo.Address.Id,
-        //            readDriver.Contactinfo.Address.Street,
-        //            readDriver.Contactinfo.Address.City,
-        //            readDriver.Contactinfo.Address.Postcode));
+            return driverdetaillsDto;
+        }
 
-        //    var driverDetailsDto = new ShowDriverDetailsDto(
-        //        driverId,
-        //        identity,
-        //        contactInfo,
-        //        readDriver.DriversLicenseType,
-        //        readDriver.InService);
-            
-        //    return driverDetailsDto;
-        //}
+        public async Task<List<VehicleInfoDto>> GetVehicleDetails(int driverId) //via driver of vehicle?
+        {
+            var vehicles = await _unitOfWork.Drivers
+                .Include(x => x.Vehicles)
+                .Include(x => x.Vehicles.Select(y => y.Vehicle))
+                .Include(x => x.Vehicles.Select(y => y.Vehicle.Identity))
+                .Include(x => x.Vehicles.Select(y => y.Vehicle.Maintenances.Where(z => z.Driver.Id.Equals(driverId))))
+                .Include(x => x.Vehicles.Select(y => y.Vehicle.Reparations.Where(z => z.Driver.Id.Equals(driverId))))
+                .Include(x => x.Vehicles.Select(y => y.Vehicle.Appeals.Where(z => z.Driver.Id.Equals(driverId))))
+                .Where(x => x.Id.Equals(driverId))
+                .ToListAsync();
 
-        //public async Task<List<ShowVehicleInfoDto>> GetAllVehicleInfoForDriver(string driverId) 
-        //{
+            var vehicleDetailsDto = _mapper.Map<List<VehicleInfoDto>>(vehicles);
 
-        //    var driverVehicles = await _unitOfWork.DriverVehicles.FindMultiple(x => x.Driver.Id == driverId);
-        //    var vehicleIds = driverVehicles.Select(x => x.Vehicle.Id).ToList();
+            return vehicleDetailsDto;
+        }
 
-        //    var vehicleInfoDtos = new List<ShowVehicleInfoDto>();
-        //    foreach (var vehicleId in vehicleIds)
-        //    {
-        //        var vehicleInfoDto = GetSingleVehicleInfoForDriver(vehicleId, driverId);
-        //    }
+        public async Task<List<FuelCardInfoDto>> GetFuelCardsDetails(int driverId)
+        {
+            var fuelCards = await _unitOfWork.Drivers
+                .Include(x => x.Fuelcards)
+                .Include(x => x.Fuelcards.Select(y => y.FuelCard))
+                .Include(x => x.Fuelcards.Select(y => y.FuelCard.FuelCardOptions))
+                .Where(x => x.Id.Equals(driverId))
+                .ToListAsync();
 
-        //    return vehicleInfoDtos;
-        //}
+            var fuelCardInfoDtos = _mapper.Map<List<FuelCardInfoDto>>(fuelCards);
 
-        //public async Task<ShowVehicleInfoDto> GetSingleVehicleInfoForDriver(string vehicleId, string driverId)
-        //{
-        //    //drivervehicle
-        //    var driverVehicle = await _unitOfWork.DriverVehicles.FindSingle(x => x.Driver.Id == driverId);
-        //    var driverVehicleDto = new DriverVehicleDto(
-        //        driverVehicle.Id,
-        //        driverVehicle.Active,
-        //        driverVehicle.CreationDate,
-        //        driverVehicle.ClosureDate);
+            return fuelCardInfoDtos;
+        }
 
-        //    //vehicle
-        //    var vehicle = (await _unitOfWork.Vehicles.FindWithIncludes(x => x.Id == vehicleId, x => x.Identity)).FirstOrDefault();
+        public async Task<List<AppealInfoDto>> GetAppealInfo(int driverId)
+        {
+            var appeals = await _unitOfWork.Drivers
+                .Include(x => x.Appeals)
+                .Include(x => x.Appeals.Select(y => y.Vehicle))
+                .Include(x => x.Appeals.Select(y => y.Vehicle.Identity))
+                .Where(x => x.Id.Equals(driverId))
+                .ToListAsync();
 
-        //    //identity
-        //    var vehicleIdentity = await _unitOfWork.IdentityVehicles.FindSingle(x => x.Id == vehicle.Identity.Id);
-        //    var vehicleIdentityDto = new VehicleIdentityDto(
-        //                vehicleIdentity.Id,
-        //                vehicleIdentity.FuelType,
-        //                vehicleIdentity.Brand,
-        //                vehicleIdentity.Model);
+            var appealInfoDtos = _mapper.Map<List<AppealInfoDto>>(appeals);
 
-        //    //reparations 
-        //    var reparationInfo = await _unitOfWork.Reparations.FindAndSelect(x => x.Id == vehicleId, x => new { x.Id, x.ReparationStatus, x.IncidentDate, x.InvoiceDate });
-        //    var reparationDtos = new List<VehicleReparationDto>();
-        //    foreach (var reparation in reparationInfo)
-        //    {
-        //        var reparationDto = new VehicleReparationDto(
-        //            reparation.Id, 
-        //            reparation.ReparationStatus, 
-        //            reparation.IncidentDate,
-        //            reparation.InvoiceDate);
-        //        reparationDtos.Add(reparationDto);
-        //    }
+            return appealInfoDtos;
 
-        //    //maintenance
-        //    var maintenanceInfo = await _unitOfWork.Maintenance.FindAndSelect(x => x.Id == vehicleId, x => new { x.Id, x.InvoiceDate }); ; ;
-        //    var maintenanceDtos = new List<VehicleMaintenanceDto>();
-        //    foreach (var maintenance in maintenanceInfo)
-        //    {
-        //        var maintenanceDto = new VehicleMaintenanceDto(
-        //            maintenance.Id, 
-        //            maintenance.InvoiceDate);
-        //        maintenanceDtos.Add(maintenanceDto);
-        //    }
-
-        //    //Appeals
-        //    var appealInfo = await _unitOfWork.Appeals.FindAndSelect(x => x.Id == vehicleId, x => new { x.Id, x.AppealType, x.Status, x.CreationDate });
-        //    var appealDtos = new List<VehicleAppealDto>();
-        //    foreach (var appeal in appealInfo)
-        //    {
-        //        var aanvraagDto = new VehicleAppealDto(
-        //            appeal.Id,
-        //            appeal.AppealType, 
-        //            appeal.Status, 
-        //            appeal.CreationDate);
-        //        appealDtos.Add(aanvraagDto);
-        //    }
-
-        //    //vehicleDto
-        //    var vehicleDto = new VehicleDto(
-        //           vehicle.Id,
-        //           vehicleIdentityDto,
-        //            vehicle.Mileage,
-        //            maintenanceDtos,
-        //            reparationDtos,
-        //            appealDtos);
-
-        //    var VehicleInfoDto = new ShowVehicleInfoDto(driverVehicleDto, vehicleDto);
-
-        //    return VehicleInfoDto;
-        //}
-
-        //    public async Task<ShowDriverDto> GetById(string id)
-        //{
-        //    var readChauffeur = await _unitOfWork.Drivers.GetById(int.Parse(id)); //!! validate the parse? + Does it include the classes in included entities?
-
-        //    if (readChauffeur != null)
-        //    {
-        //        var chauffeurDto = new DriverDtp(
-        //        readChauffeur.Id,
-        //        readChauffeur.Identity.ConvertIdentiteitPersoon(),
-        //        readChauffeur.Contactgegevens.ConvertContactgegevens(),
-        //        readChauffeur.RijbewijsType,
-        //        readChauffeur.InDienst,
-        //        readChauffeur.Tankkaarten.ConvertTankkaartChauffeurs(),
-        //        readChauffeur.Voertuigen.ConvertChauffeurVoertuigen(),
-        //        readChauffeur.Aanvragen.ConvertReadAanvragen());
-
-        //        return chauffeurDto;
-        //    }
-
-        //    return null;
-        //}
+        }
     }
 }

@@ -19,5 +19,7 @@ namespace FleetManagement.Domain.Models
         public Garage Garage { get; set; }
 
         public List<File> Documents { get; set; }
+
+        public Driver Driver { get; set; }
     }
 }

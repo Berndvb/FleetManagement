@@ -2,7 +2,7 @@
 using System;
 using System.Collections.Generic;
 
-namespace FleetManagement.Framework.Models.Dtos
+namespace FleetManagement.Framework.Models.Dtos.GeneralDtos
 {
     public class TankkaartDto
     {
@@ -14,7 +14,7 @@ namespace FleetManagement.Framework.Models.Dtos
 
         public string Pincode { get; set; }
 
-        public AuthenticatieType AuthenticatieType { get; set; }
+        public AuthenticatieTypes AuthenticatieType { get; set; }
 
         public TankkaartOptiesDto TankkaartOpties { get; set; }
 
@@ -27,7 +27,7 @@ namespace FleetManagement.Framework.Models.Dtos
             string kaartnummer,
             DateTime geldigheidsDatum,
             string pincode,
-            AuthenticatieType authenticatieType,
+            AuthenticatieTypes authenticatieType,
             TankkaartOptiesDto tankkaartOpties,
             bool geblokkeerd,
             List<TankkaartChauffeurDto> chauffeurs)

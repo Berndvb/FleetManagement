@@ -1,6 +1,6 @@
 ﻿using AutoMapper;
 using FleetManagement.Domain.Models;
-using FleetManagement.Framework.Models.Dtos;
+using FleetManagement.Framework.Models.Dtos.ShowDtos;
 
 namespace FleetManagement.BLL.Services
 {
@@ -8,7 +8,9 @@ namespace FleetManagement.BLL.Services
     {
         public MapperService()
         {
-            CreateMap<Driver, ShowDriverOverviewDto>();
+            CreateMap<Driver, DriverOverviewDto>();
+            CreateMap<Driver, DriverDetailsDto>();
+            CreateMap<Driver, VehicleInfoDto>();
         }
     }
 }

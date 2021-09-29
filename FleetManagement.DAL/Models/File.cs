@@ -8,7 +8,7 @@ namespace FleetManagement.Domain.Models
     {
         public int Id { get; set; }
 
-        public FileType FileType { get; set; }
+        public FileTypes FileType { get; set; }
 
         public string FileName { get; set; }
 

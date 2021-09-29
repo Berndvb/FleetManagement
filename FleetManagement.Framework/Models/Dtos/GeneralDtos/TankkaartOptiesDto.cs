@@ -2,19 +2,19 @@
 using FleetManagement.Framework.Models.Enums;
 using System.Collections.Generic;
 
-namespace FleetManagement.Framework.Models.Dtos
+namespace FleetManagement.Framework.Models.Dtos.GeneralDtos
 {
     public class TankkaartOptiesDto
     {
         public int Id { get; set; }
 
-        public FuelType BrandstofType { get; set; }
+        public FuelTypes BrandstofType { get; set; }
 
         public List<string> ExtraServices { get; private set; }
 
         public TankkaartOptiesDto(
             int id, 
-            FuelType brandstofType, 
+            FuelTypes brandstofType, 
             string extraServices)
         {
             Id = id;

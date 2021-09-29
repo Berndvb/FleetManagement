@@ -7,7 +7,7 @@ namespace FleetManagement.Domain.Models
     {
         public int Id { get; set; }
 
-        public FuelType Fueltype { get; set; }
+        public FuelTypes Fueltype { get; set; }
 
         public string ExtraServices { get; set; }
     }

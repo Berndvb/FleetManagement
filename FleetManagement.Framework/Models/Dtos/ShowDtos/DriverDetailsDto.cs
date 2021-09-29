@@ -3,7 +3,7 @@ using System;
 
 namespace FleetManagement.Framework.Models.Dtos.ShowDtos
 {
-    public class ShowDriverDetails
+    public class DriverDetailsDto
     {
         public int Id { get; set; }
 
@@ -11,15 +11,15 @@ namespace FleetManagement.Framework.Models.Dtos.ShowDtos
 
         public ContactInfoDto Contactinfo { get; set; }
 
-        public DriversLicenseType DriversLicenseType { get; set; }
+        public DriversLicenseTypes DriversLicenseType { get; set; }
 
         public bool InService { get; set; }
 
-        public ShowDriverDetails(
+        public DriverDetailsDto(
             int id,
             IdentityPersonDto identity,
             ContactInfoDto contactInfo,
-            DriversLicenseType driversLicenseType,
+            DriversLicenseTypes driversLicenseType,
             bool inService)
         {
             Id = id;
@@ -33,25 +33,25 @@ namespace FleetManagement.Framework.Models.Dtos.ShowDtos
         {
             public int Id { get; set; }
 
-            public string EmailAdres { get; set; }
+            public string EmailAddress { get; set; }
 
-            public string GsmNummer { get; set; }
+            public string CellPhoneNumber { get; set; }
 
-            public string Telefoonnummer { get; set; }
+            public string TelephoneNumber { get; set; }
 
             public AddressDto Address { get; set; }
 
             public ContactInfoDto(
                 int id,
-                string emailAdres,
-                string gsmNummer,
-                string telefoonnummer,
+                string emailAddress,
+                string cellPhoneNumber,
+                string telephoneNumber,
                 AddressDto address)
             {
                 Id = id;
-                EmailAdres = emailAdres;
-                GsmNummer = gsmNummer;
-                Telefoonnummer = telefoonnummer;
+                EmailAddress = emailAddress;
+                CellPhoneNumber = cellPhoneNumber;
+                TelephoneNumber = telephoneNumber;
                 Address = address;
             }
 

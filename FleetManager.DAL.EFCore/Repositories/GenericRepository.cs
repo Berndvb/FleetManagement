@@ -2,12 +2,10 @@
 using FleetManagement.EFCore.Infrastructure;
 using FleetManager.Domain.Interfaces;
 using Microsoft.EntityFrameworkCore;
-using Microsoft.EntityFrameworkCore.Query;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Linq.Expressions;
-using System.Threading.Tasks;
 
 namespace FleetManager.EFCore.Repositories
 {
@@ -66,6 +64,10 @@ namespace FleetManager.EFCore.Repositories
         public void RemoveRange(ICollection<TEntity> entities)
         {
             _dbSet.RemoveRange(entities);
+        }
+        public IQueryable<TEntity> Include(Expression<Func<TEntity, object>> include)
+        {
+            return _dbSet.Include(include);
         }
     }
 }

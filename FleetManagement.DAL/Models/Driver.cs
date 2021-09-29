@@ -12,7 +12,7 @@ namespace FleetManagement.Domain.Models
 
         public ContactInfo Contactinfo { get; set; }
 
-        public DriversLicenseType DriversLicenseType { get; set; }
+        public DriversLicenseTypes DriversLicenseType { get; set; }
 
         public bool InService { get; set; }
 

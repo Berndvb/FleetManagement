@@ -1,13 +1,13 @@
 ﻿using FleetManagement.Framework.Models.Enums;
 using System;
 
-namespace FleetManagement.Framework.Models.Dtos
+namespace FleetManagement.Framework.Models.Dtos.GeneralDtos
 {
     public class FileDto
     {
         public int Id { get; set; }
 
-        public FileType FileType { get; set; }
+        public FileTypes FileType { get; set; }
 
         public string FileName { get; set; }
 
@@ -17,7 +17,7 @@ namespace FleetManagement.Framework.Models.Dtos
 
         public FileDto(
             int id,
-            FileType fileType,
+            FileTypes fileType,
             string fileName,
             string contentType,
             Byte[] content)
