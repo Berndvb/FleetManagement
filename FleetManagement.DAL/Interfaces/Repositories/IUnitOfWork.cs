@@ -9,7 +9,7 @@ namespace FleetManagement.Domain.Interfaces
 
         IGenericRepository<Driver> Drivers { get; }
 
-        IGenericRepository<Repare> Reparations { get; }
+        IGenericRepository<Repare> Repares { get; }
 
         IGenericRepository<Maintenance> Maintenance { get; }
 

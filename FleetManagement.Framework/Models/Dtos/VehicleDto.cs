@@ -7,22 +7,22 @@ namespace FleetManagement.Framework.Models.Dtos
     {
         public int Id { get; set; }
 
-        public VehicleIdentityDto Identity { get; set; }
+        public IdentityVehicleDto Identity { get; set; }
 
         public List<int> Mileage { get; set; }
 
         public List<VehicleMaintenanceDto> Maintenance { get; set; }
 
-        public List<VehicleReparationDto> Reparations { get; set; }
+        public List<VehicleRepareDto> Reparations { get; set; }
 
         public List<VehicleAppealDto> Appeals { get; set; }
 
         public VehicleDto(
             int id,
-            VehicleIdentityDto identity,
+            IdentityVehicleDto identity,
             string mileage,
             List<VehicleMaintenanceDto> maintenance,
-            List<VehicleReparationDto> reparations,
+            List<VehicleRepareDto> reparations,
             List<VehicleAppealDto> appeals)
         {
             Id = id;

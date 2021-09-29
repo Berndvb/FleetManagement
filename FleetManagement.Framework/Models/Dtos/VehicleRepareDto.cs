@@ -4,7 +4,7 @@ using System;
 namespace FleetManagement.Framework.Models.Dtos
 {
 
-    public class VehicleReparationDto
+    public class VehicleRepareDto
     {
         public int Id { get; set; }
 
@@ -14,7 +14,7 @@ namespace FleetManagement.Framework.Models.Dtos
 
         public DateTime? InvoiceDate { get; set; }
 
-        public VehicleReparationDto(
+        public VehicleRepareDto(
             int id,
             ReparationStatus reparationStatus,
             DateTime incidentDate,
@@ -26,7 +26,7 @@ namespace FleetManagement.Framework.Models.Dtos
             InvoiceDate = billingDate;
         }
 
-        public VehicleReparationDto()
+        public VehicleRepareDto()
         {
         }
     }

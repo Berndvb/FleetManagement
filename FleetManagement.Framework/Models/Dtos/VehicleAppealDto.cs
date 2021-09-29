@@ -9,6 +9,10 @@ namespace FleetManagement.Framework.Models.Dtos
 
         public AppealTypes AppealType { get; set; }
 
+        public DateTime? FirstDatePlanning { get; set; }
+
+        public DateTime? SecondDatePlanning { get; set; }
+
         public AppealStatus Status { get; set; }
 
         public DateTime CreationDate { get; set; }
@@ -16,11 +20,15 @@ namespace FleetManagement.Framework.Models.Dtos
         public VehicleAppealDto(
             int id,
             AppealTypes appealType,
+            DateTime? firstDatePlanning,
+            DateTime? secondDatePlanning,
             AppealStatus status,
             DateTime creationDate)
         {
             Id = id;
             AppealType = appealType;
+            FirstDatePlanning = firstDatePlanning;
+            SecondDatePlanning = secondDatePlanning;
             Status = status;
             CreationDate = creationDate;
         }

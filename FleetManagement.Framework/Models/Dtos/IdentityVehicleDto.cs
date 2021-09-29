@@ -2,7 +2,7 @@
 
 namespace FleetManagement.Framework.Models.Dtos
 {
-    public class VehicleIdentityDto
+    public class IdentityVehicleDto
     {
         public int Id { get; set; }
 
@@ -12,7 +12,7 @@ namespace FleetManagement.Framework.Models.Dtos
 
         public string Model { get; set; }
 
-        public VehicleIdentityDto(
+        public IdentityVehicleDto(
             int id,
             FuelTypes fuelType,
             string merk,
@@ -24,7 +24,7 @@ namespace FleetManagement.Framework.Models.Dtos
             Model = model;
         }
 
-        public VehicleIdentityDto()
+        public IdentityVehicleDto()
         {
         }
     }

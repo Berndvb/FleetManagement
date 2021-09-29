@@ -5,14 +5,14 @@ namespace FleetManagement.Framework.Models.Dtos
 {
     public class VehicleDetailsDto
     {
-        public VehicleIdentityDto Identity { get; set; }
+        public IdentityVehicleDto Identity { get; set; }
 
         public DriverVehicleDto DriverVehicle { get; set; }
 
         public int Mileage { get; set; }
 
         public VehicleDetailsDto(
-            VehicleIdentityDto identity,
+            IdentityVehicleDto identity,
             DriverVehicleDto driverVehicle,
             string mileage)
         {

@@ -13,7 +13,7 @@ namespace FleetManager.EFCore.UnitOfWork
 
         public IGenericRepository<Driver> Drivers { get; private set; }
 
-        public IGenericRepository<Repare> Reparations { get; private set; }
+        public IGenericRepository<Repare> Repares { get; private set; }
 
         public IGenericRepository<Maintenance> Maintenance { get; private set; }
 
@@ -29,7 +29,7 @@ namespace FleetManager.EFCore.UnitOfWork
             DatabaseContext context,
             IGenericRepository<Appeal> appeals,
             IGenericRepository<Driver> drivers,
-            IGenericRepository<Repare> reparations,
+            IGenericRepository<Repare> repares,
             IGenericRepository<Maintenance> maintenance,
             IGenericRepository<FuelCard> fuelCards,
             IGenericRepository<Vehicle> vehicles,
@@ -39,7 +39,7 @@ namespace FleetManager.EFCore.UnitOfWork
             _context = context;
             Appeals = appeals;
             Drivers = drivers;
-            Reparations = reparations;
+            Repares = repares;
             Maintenance = maintenance;
             FuelCards = fuelCards;
             Vehicles = vehicles;
