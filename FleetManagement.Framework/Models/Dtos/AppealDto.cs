@@ -3,7 +3,7 @@ using System;
 
 namespace FleetManagement.Framework.Models.Dtos.ShowDtos
 {
-    public class AppealInfoDto
+    public class AppealDto
     {
         public int Id { get; set; }
 
@@ -19,9 +19,11 @@ namespace FleetManagement.Framework.Models.Dtos.ShowDtos
 
         public VehicleOverviewDto Vehicle { get; set; }
 
+        public DriverDetailsDto Driver { get; set; }
+
         public string Message { get; set; }
 
-        public AppealInfoDto(
+        public AppealDto(
             int id,
             DateTime creationDate,
             AppealTypes appealType,
@@ -39,6 +41,10 @@ namespace FleetManagement.Framework.Models.Dtos.ShowDtos
             Status = status;
             Vehicle = vehicle;
             Message = message;
+        }
+
+        public AppealDto()
+        {
         }
     }
 }

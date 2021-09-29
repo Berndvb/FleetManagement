@@ -8,9 +8,21 @@ namespace FleetManagement.BLL.Services
     {
         public MapperService()
         {
-            CreateMap<Driver, DriverOverviewDto>(); //driverbaseDto - shared properties
+            CreateMap<Driver, DriverOverviewDto>().ForMember(x => x.Name, y => y.MapFrom(z => z.Identity.Name)); 
+
             CreateMap<Driver, DriverDetailsDto>();
-            CreateMap<Driver, VehicleInfoDto>();
+
+
+            //Vehicle
+
+            //Vehicle Identity
+
+            //VehicleMaintenance
+
+            //VehicleRepares
+
+            //VehicleAppeals
+
         }
     }
 }

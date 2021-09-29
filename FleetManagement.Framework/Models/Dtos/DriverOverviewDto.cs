@@ -23,5 +23,9 @@ namespace FleetManagement.Framework.Models.Dtos.ShowDtos
             DriversLicenseType = driversLicenseType;
             InService = inService;
         }
+
+        public DriverOverviewDto()
+        {
+        }
     }
 }
