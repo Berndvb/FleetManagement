@@ -26,12 +26,7 @@ namespace FleetManagement.BLL.Services
                 .Where(x => x.Driver.Id.Equals(driverId) && x.Vehicle.Id.Equals(vehicleId))
                 .ToListAsync();
 
-            var reparationDtos = new List<VehicleRepareDto>();
-            foreach (var reparation in reparations)
-            {
-                var reparationDto = _mapper.Map<VehicleRepareDto>(reparation);
-                reparationDtos.Add(reparationDto);
-            }
+            var reparationDtos = _mapper.Map<List<VehicleRepareDto>>(reparations);
 
             return reparationDtos;
         }

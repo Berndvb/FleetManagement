@@ -20,19 +20,15 @@ namespace FleetManagement.BLL.Services
             _mapper = mapper;
         }
 
-        public async Task<IEnumerable<DriverOverviewDto>> GetAllDriverOverviews(bool onlyInService) 
+        public async Task<List<DriverOverviewDto>> GetAllDriverOverviews(bool onlyInService) 
         {
-            var driverQuery = _unitOfWork.Drivers
-                .Include(x => x.Identity.Name);
+            var driverQuery = _unitOfWork.Drivers.Include(x => x.Identity);
 
             var drivers = onlyInService ? 
                 await driverQuery.Where(x => x.InService).ToListAsync() : 
                 await driverQuery.ToListAsync();
 
             var driverOverviewDtos = _mapper.Map<List<DriverOverviewDto>>(drivers);
-
-            //var driverOverviewDtos = new List<DriverOverviewDto>();
-            //await secondDriverQuery.ForEachAsync(driver => driverOverviewDtos.Add(_mapper.Map<DriverOverviewDto>(driver)));
 
             return driverOverviewDtos;
         }
@@ -50,16 +46,16 @@ namespace FleetManagement.BLL.Services
             return driverdetaillsDto;
         }
 
-        public async Task<List<FuelCardDto>> GetFuelCardsDetailsForDriver(int driverId)
+        public async Task<List<FuelCardDto>> GetFuelCardsDetailsForDriver(int driverId)//!!Too hard to map - alternative in FuelCardService
         {
-            var fuelCards = await _unitOfWork.Drivers
+            var driversWithFuelCards = await _unitOfWork.Drivers
                 .Include(x => x.FuelCards)
                 .Include(x => x.FuelCards.Select(y => y.FuelCard))
                 .Include(x => x.FuelCards.Select(y => y.FuelCard.FuelCardOptions))
                 .Where(x => x.Id.Equals(driverId))
                 .ToListAsync();
 
-            var fuelCardInfoDtos = _mapper.Map<List<FuelCardDto>>(fuelCards);
+            var fuelCardInfoDtos = _mapper.Map<List<FuelCardDto>>(driversWithFuelCards);
 
             return fuelCardInfoDtos;
         }
@@ -78,14 +74,14 @@ namespace FleetManagement.BLL.Services
             return appealInfoDtos;
         }
 
-        public async Task<IEnumerable<VehicleAppealDto>> GetAppealsForDriverPerCar(int driverId, int vehicleId)//for lazy loading @ GetVehicleDetailsForDriver
+        public async Task<List<VehicleAppealDto>> GetAppealsForDriverPerCar(int driverId, int vehicleId)//for lazy loading @ GetVehicleDetailsForDriver
         {
-            var appeals = await _unitOfWork.Drivers
+            var driverWithAppeals = await _unitOfWork.Drivers
                 .Include(x => x.Appeals.Where(y => y.Vehicle.Id.Equals(vehicleId)))
                 .Where(x => x.Id.Equals(driverId))
                 .ToListAsync();
 
-            var vehicleAppealDtos = _mapper.Map<List<VehicleAppealDto>>(appeals);
+            var vehicleAppealDtos = _mapper.Map<List<VehicleAppealDto>>(driverWithAppeals);
 
             return vehicleAppealDtos;
         }

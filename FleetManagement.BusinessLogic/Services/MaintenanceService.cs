@@ -19,19 +19,15 @@ namespace FleetManagement.BLL.Services
             _mapper = mapper;
         }
 
-        public async Task<IEnumerable<VehicleMaintenanceDto>> GetMaintenancesForDriverPerCar(int driverId, int vehicleId)//for lazy loading @ GetVehicleDetailsForDriver
+        public async Task<List<VehicleMaintenanceDto>> GetMaintenancesForDriverPerCar(int driverId, int vehicleId)//for lazy loading @ GetVehicleDetailsForDriver
         {
             var maintenances = await _unitOfWork.Maintenance
                 .GetAll()
                 .Where(x => x.Driver.Id.Equals(driverId) && x.Vehicle.Id.Equals(vehicleId))
                 .ToListAsync();
 
-            var maintenanceDtos = new List<VehicleMaintenanceDto>();
-            foreach (var maintenance in maintenances)
-            {
-                var maintenanceDto = _mapper.Map<VehicleMaintenanceDto>(maintenance);
-                maintenanceDtos.Add(maintenanceDto);
-            }
+            var maintenanceDtos = _mapper.Map<List<VehicleMaintenanceDto>>(maintenances);
+
 
             return maintenanceDtos;
         }

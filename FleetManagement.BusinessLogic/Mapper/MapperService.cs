@@ -7,47 +7,48 @@ namespace FleetManagement.BLL.Services
 {
     public class MapperService : Profile
     {
-        public MapperService()
+        public MapperService() 
         {
-            //Driver
+            //GetAllDriverOverviews
             CreateMap<Driver, DriverOverviewDto>()
-                .IncludeMembers(x => x.Identity.Name)
-                .ForMember(x => x.Name, y => y.MapFrom(z => z.Identity.Name));
+                .IncludeMembers(x => x.Identity);
 
+            //GetDriverDetails
             CreateMap<Driver, DriverDetailsDto>()
-                .IncludeMembers(x => x.Identity)
-                .IncludeMembers(x => x.Contactinfo)
-                .IncludeMembers(x => x.Contactinfo.Address);
+                .IncludeMembers(x => x.Identity, y => y.Contactinfo, z => z.Contactinfo.Address);
 
-            //IdentityVehicle
-            CreateMap<IdentityVehicle, IdentityVehicleDto>();
-            // These two are combined into vehiceDetailsDto -> can be more efficient
-            //DriverVehicle
+            CreateMap<IdentityPerson, IdentityPersonDto>();
+            CreateMap<ContactInfo, ContactInfoDto>()
+             .IncludeMembers(x => x.Address);
+            CreateMap<Address, AddressDto>();
+
+            //GetAppealInfoForDriver - !!!
+            CreateMap<Driver, AppealDto>()// How to include proportie from a List<obj>
+                .IncludeMembers(x => x.Appeals, y => y.Vehicles, z => z.Vehicles.Identity);
+            CreateMap<Appeal, AppealDto>()
+                .IncludeMembers(x => x.Vehicle, y => y.Vehicle.Identity);
+            CreateMap<Vehicle, VehicleOverviewDto>()
+                .IncludeMembers(x => x.Identity);
+
+            //GetFuelCardsDetailsForDriver (via FuelCards DbSet and not Driver) - !!!
+            CreateMap<FuelCard, FuelCardDto>()
+                .IncludeMembers(x => x.FuelCardOptions, y => y.Drivers);
+
+            //GetAppealsForDriverPerCar
+            CreateMap<Driver, VehicleAppealDto>()
+                .IncludeMembers(x => x.Appeals);
+            CreateMap<Appeal, VehicleAppealDto>();
+
+            //GetVehicleDetailsForDriver - can this be simpler?
+            CreateMap<DriverVehicle, IdentityVehicleDto>()
+                .IncludeMembers(x => x.Vehicle, y => y.Vehicle.Identity);
             CreateMap<DriverVehicle, DriverVehicleDto>();
 
-            //Repare
-            CreateMap<Repare, VehicleRepareDto>()
-                .ForMember(x => x.Id, y => y.MapFrom(z => z.Id))
-                .ForMember(x => x.InvoiceDate, y => y.MapFrom(z => z.InvoiceDate));
+            //GetMaintenancesForDriverPerCar
+            CreateMap<Maintenance, VehicleMaintenanceDto>();
 
-            //Maintenance
-            CreateMap<Maintenance, VehicleMaintenanceDto>()
-                .ForMember(x => x.Id, y => y.MapFrom(z => z.Id))
-                .ForMember(x => x.InvoiceDate, y => y.MapFrom(z => z.InvoiceDate));
-
-            //Appeal
-            CreateMap<Driver, VehicleAppealDto>()
-                .IncludeMembers(x => x.Appeals); 
-
-            CreateMap<Appeal, AppealDto>()
-                .IncludeMembers(x => x.Vehicle)
-                .IncludeMembers(x => x.Vehicle.Identity);
-
-            //FuelCard
-            CreateMap<Driver, FuelCardDto>()
-                .IncludeMembers(x => x.FuelCards)
-                .IncludeMembers(x => x.FuelCards)
-                .IncludeMembers(x => x.Appeals); // still need FuelCard-class in fuelcards + fuelcardoptions
+            //GetReparationsForDriverPerCar
+            CreateMap<Repare, VehicleRepareDto>();
         }
     }
 }

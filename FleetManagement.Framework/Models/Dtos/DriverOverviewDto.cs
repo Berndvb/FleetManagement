@@ -8,6 +8,8 @@ namespace FleetManagement.Framework.Models.Dtos.ShowDtos
 
         public string Name { get; set; }
 
+        public string FirstName { get; set; }
+
         public DriversLicenseTypes DriversLicenseType { get; set; }
 
         public bool InService { get; set; }
