@@ -1,5 +1,6 @@
 ﻿using AutoMapper;
 using FleetManagement.Domain.Interfaces;
+using FleetManagement.Domain.Models;
 using FleetManagement.Framework.Models.Dtos;
 using Microsoft.EntityFrameworkCore;
 using System.Collections.Generic;
@@ -19,22 +20,15 @@ namespace FleetManagement.BLL.Services
             _mapper = mapper;
         }
 
-        public async Task<IEnumerable<VehicleDetailsDto>> GetVehicleDetailsForDriver(int driverId)
+        public async Task<List<VehicleDetailsDto>> GetVehicleDetailsForDriver(int driverId)
         {
-            var vehicles = await _unitOfWork.DriverVehicles
+            var driverVehicles = await _unitOfWork.DriverVehicles
                 .Include(x => x.Vehicle)
                 .Include(x => x.Vehicle.Identity)
                 .Where(x => x.Driver.Id.Equals(driverId))
                 .ToListAsync();
 
-            var vehicleDetailsDtos = new List<VehicleDetailsDto>();
-            foreach (var vehicle in vehicles)
-            {
-                var vehicleIdentityDto = _mapper.Map<IdentityVehicleDto>(vehicle);
-                var driverVehicleDto = _mapper.Map<DriverVehicleDto>(vehicle);
-                var vehicleDetailsDto = new VehicleDetailsDto(vehicleIdentityDto, driverVehicleDto, vehicle.Vehicle.Mileage);
-                vehicleDetailsDtos.Add(vehicleDetailsDto);
-            }
+            var vehicleDetailsDtos = _mapper.Map<List<VehicleDetailsDto>>(driverVehicles);
 
             return vehicleDetailsDtos;
         }

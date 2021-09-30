@@ -4,7 +4,7 @@ using System.Collections.Generic;
 
 namespace FleetManagement.BLL.Mapper.Converters
 {
-    public class StringToIntsConvert : ITypeConverter<string, List<int>>
+    public class StringToIntsConverter : ITypeConverter<string, List<int>>
     {
         public List<int> Convert(string source, List<int> destination, ResolutionContext context)
         {
