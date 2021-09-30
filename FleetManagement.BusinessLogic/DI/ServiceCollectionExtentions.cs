@@ -46,7 +46,7 @@ namespace FleetManagement.BLL.DependencyInjection
         {
             var mapperConfig = new MapperConfiguration(mc =>
             {
-                mc.AddProfile(new MapperService());
+                mc.AddProfile(new MapperProfile());
             });
 
             IMapper mapper = mapperConfig.CreateMapper();

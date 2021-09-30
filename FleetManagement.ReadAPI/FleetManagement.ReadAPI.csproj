@@ -25,16 +25,21 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="Features\ChauffeurBeheer\GetChauffeurDetails\" />
-    <Folder Include="Features\ChauffeurBeheer\GetChauffeurVoertuigen\" />
-    <Folder Include="Features\ChauffeurBeheer\GetChauffeurTankkaarten\" />
-    <Folder Include="Features\ChauffeurBeheer\GetChauffeurAanvragen\" />
-    <Folder Include="Features\ChauffeurBeheer\AddChauffeurVoertuig\" />
-    <Folder Include="Features\ChauffeurBeheer\GetChauffeurSynopsis\" />
-    <Folder Include="Features\ChauffeurBeheer\UpdateChauffeurAanvragen\" />
-    <Folder Include="Features\ChauffeurBeheer\UpdateChauffeurTankkaart\" />
-    <Folder Include="Features\ChauffeurBeheer\UpdateChauffeurVoertuig\" />
-    <Folder Include="Features\ChauffeurBeheer\UpdateChauffeur\" />
+    <Folder Include="Features\DriverVehicle\UpdateDriverVehicle\" />
+    <Folder Include="Features\Driver\GetAllDriverOverviews\" />
+    <Folder Include="Features\Driver\GetDriverDetails\" />
+    <Folder Include="Features\FuelCard\GetFuelCardDetails\" />
+    <Folder Include="Features\Appeal\GetTotalAppeals\" />
+    <Folder Include="Features\Appeal\GetAppealsPerCar\" />
+    <Folder Include="Features\DriverVehicle\GetVehicleDetails\" />
+    <Folder Include="Features\FuelCardDriver\" />
+    <Folder Include="Features\Maintenance\GetMaintenancesPerCar\" />
+    <Folder Include="Features\Repare\GetReparationsPerCar\" />
+    <Folder Include="Features\Driver\AddDriver\" />
+    <Folder Include="Features\Driver\RemoveDriver\" />
+    <Folder Include="Features\Driver\UpdateDriver\" />
+    <Folder Include="Features\FuelCard\UpdateFuelCard\" />
+    <Folder Include="Features\Vehicle\UpdateVehicle\" />
   </ItemGroup>
 
 </Project>

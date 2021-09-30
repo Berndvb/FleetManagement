@@ -1,5 +1,6 @@
 ﻿using AutoMapper;
 using FleetManagement.Domain.Interfaces;
+using FleetManagement.Domain.Models;
 using FleetManagement.Framework.Models.Dtos;
 using FleetManagement.Framework.Models.Dtos.ShowDtos;
 using Microsoft.EntityFrameworkCore;
@@ -46,7 +47,7 @@ namespace FleetManagement.BLL.Services
             return driverdetaillsDto;
         }
 
-        public async Task<List<FuelCardDto>> GetFuelCardsDetailsForDriver(int driverId)//!!Too hard to map - alternative in FuelCardService
+        public async Task<List<FuelCardDto>> GetFuelCardDetailsForDriver(int driverId)//!!Too hard to map - alternative in FuelCardService
         {
             var driversWithFuelCards = await _unitOfWork.Drivers
                 .Include(x => x.FuelCards)
@@ -60,7 +61,7 @@ namespace FleetManagement.BLL.Services
             return fuelCardInfoDtos;
         }
 
-        public async Task<List<AppealDto>> GetAppealInfoForDriver(int driverId)
+        public async Task<List<AppealDto>> GetAllAppealsForDriver(int driverId)
         {
             var appeals = await _unitOfWork.Drivers
                 .Include(x => x.Appeals)
@@ -84,6 +85,40 @@ namespace FleetManagement.BLL.Services
             var vehicleAppealDtos = _mapper.Map<List<VehicleAppealDto>>(driverWithAppeals);
 
             return vehicleAppealDtos;
+        }
+
+        public void UpdateDriver(DriverDetailsDto driverDto)
+        {
+            var driver = _mapper.Map<Driver>(driverDto);
+
+            _unitOfWork.Drivers.UpdateWithExclusion(driver, x => x.Appeals, y => y.Vehicles, z => z.FuelCards);
+
+            _unitOfWork.Complete();
+        }
+
+        public void AddDriver(DriverDto driverDto)
+        {
+            var driver = _mapper.Map<Driver>(driverDto);
+
+            _unitOfWork.Drivers.Insert(driver);
+
+            _unitOfWork.Complete();
+        }
+
+        public void RemoveDriver(DriverDto driverDto)
+        {
+            var driver = _mapper.Map<Driver>(driverDto);
+
+            _unitOfWork.Drivers.Remove(driver);
+
+            _unitOfWork.Complete();
+        }
+
+        public void RemoveDriver(int driverId)
+        {
+            _unitOfWork.Drivers.RemoveById(driverId);
+
+            _unitOfWork.Complete();
         }
     }
 }

@@ -6,6 +6,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Linq.Expressions;
+using System.Threading.Tasks;
 
 namespace FleetManager.EFCore.Repositories
 {
@@ -68,6 +69,26 @@ namespace FleetManager.EFCore.Repositories
         public IQueryable<TEntity> Include(Expression<Func<TEntity, object>> include)
         {
             return _dbSet.Include(include);
+        }
+
+        public void UpdateWithExclusion(TEntity entitie, params Expression<Func<TEntity, object>>[] exclusions)
+        {
+            _dbSet.Update(entitie);
+
+            foreach (var exclusion in exclusions)
+            {
+                _context.Entry(entitie).Property(exclusion).IsModified = false;
+            }
+        }
+
+        public void Update(TEntity entitie)
+        {
+            _dbSet.Update(entitie);
+        }
+
+        public void UpdateRange(IEnumerable<TEntity> entities)
+        {
+            _dbSet.UpdateRange(entities);
         }
     }
 }

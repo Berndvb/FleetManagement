@@ -18,5 +18,8 @@ namespace FleetManager.Domain.Interfaces
         void RemoveById(int id);
         void RemoveRange(ICollection<TEntity> entities);
         IQueryable<TEntity> Include(Expression<Func<TEntity, object>> include);
+        void Update(TEntity entitie);
+        void UpdateWithExclusion(TEntity entitie, params Expression<Func<TEntity, object>>[] exclusions);
+        void UpdateRange(IEnumerable<TEntity> entities);
     }
 }

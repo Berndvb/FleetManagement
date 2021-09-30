@@ -32,5 +32,14 @@ namespace FleetManagement.BLL.Services
 
             return vehicleDetailsDtos;
         }
+
+        public void UpdateDriverVehicle(DriverVehicleDto driverVehicleDto)
+        {
+            var driverVehicle = _mapper.Map<DriverVehicle>(driverVehicleDto);
+
+            _unitOfWork.DriverVehicles.UpdateWithExclusion(driverVehicle, x => x.Driver, y => y.Vehicle);
+
+            _unitOfWork.Complete();
+        }
     }
 }

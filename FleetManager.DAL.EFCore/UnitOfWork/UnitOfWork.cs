@@ -25,6 +25,8 @@ namespace FleetManager.EFCore.UnitOfWork
 
         public IGenericRepository<IdentityVehicle> IdentityVehicles { get; private set; }
 
+        public IGenericRepository<FuelCardDriver> FuelCardDrivers { get; private set; }
+
         public UnitOfWork(
             DatabaseContext context,
             IGenericRepository<Appeal> appeals,
@@ -34,7 +36,8 @@ namespace FleetManager.EFCore.UnitOfWork
             IGenericRepository<FuelCard> fuelCards,
             IGenericRepository<Vehicle> vehicles,
             IGenericRepository<DriverVehicle> driverVehicles,
-            IGenericRepository<IdentityVehicle> identityVehicles)
+            IGenericRepository<IdentityVehicle> identityVehicles,
+            IGenericRepository<FuelCardDriver> fuelCardDrivers)
         {
             _context = context;
             Appeals = appeals;
@@ -45,6 +48,7 @@ namespace FleetManager.EFCore.UnitOfWork
             Vehicles = vehicles;
             DriverVehicles = driverVehicles;
             IdentityVehicles = identityVehicles;
+            FuelCardDrivers = fuelCardDrivers;
         }
 
         public int Complete()

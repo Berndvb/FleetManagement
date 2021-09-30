@@ -7,9 +7,9 @@ using System.Collections.Generic;
 
 namespace FleetManagement.BLL.Services
 {
-    public class MapperService : Profile
+    public class MapperProfile : Profile
     {
-        public MapperService() 
+        public MapperProfile() 
         {
             //GetAllDriverOverviews
             CreateMap<Driver, DriverOverviewDto>()
@@ -17,7 +17,14 @@ namespace FleetManagement.BLL.Services
 
             //GetDriverDetails
             CreateMap<Driver, DriverDetailsDto>()
-                .IncludeMembers(x => x.Identity, y => y.Contactinfo, z => z.Contactinfo.Address);
+                .IncludeMembers(x => x.Identity, y => y.Contactinfo, z => z.Contactinfo.Address)
+                .ReverseMap();
+
+            CreateMap<Driver, DriverDto>()
+              .IncludeMembers(x => x.Identity, y => y.Contactinfo, z => z.FuelCards)
+              .IncludeMembers(x => x.Vehicles, y => y.Appeals)
+              .ReverseMap();
+
 
             CreateMap<IdentityPerson, IdentityPersonDto>();
             CreateMap<ContactInfo, ContactInfoDto>()
@@ -26,7 +33,7 @@ namespace FleetManagement.BLL.Services
 
             // !!! -  GetAppealInfoForDriver 
             CreateMap<Driver, AppealDto>()// but how to include proportie from a List<obj>
-                .IncludeMembers(x => x.Appeals, y => y.Vehicles, z => z.Vehicles.Identity);
+                .IncludeMembers(x => x.Appeals, y => y.Vehicles/*, z => z.Vehicles.Identity*/);
             CreateMap<Appeal, AppealDto>()
                 .IncludeMembers(x => x.Vehicle, y => y.Vehicle.Identity); //we exclude the Driver-property
             CreateMap<Vehicle, VehicleOverviewDto>()
@@ -40,7 +47,7 @@ namespace FleetManagement.BLL.Services
 
             // !!! -  GetFuelCardsDetailsForDriver
             CreateMap<Driver, FuelCardDto>() //via Driver: but how to include proportie from a List<obj>
-                .IncludeMembers(x => x.FuelCards, y => y.FuelCards.FuelCard, z => z.FuelCards.FuelCard.FuelCardOptions);
+                .IncludeMembers(x => x.FuelCards/*, y => y.FuelCards.FuelCard, z => z.FuelCards.FuelCard.FuelCardOptions*/);
 
             CreateMap<FuelCard, FuelCardDto>() // Alternatively  via FuelCards itself and not Driver (bigger query though...)
            .IncludeMembers(x => x.FuelCardOptions);
@@ -53,7 +60,8 @@ namespace FleetManagement.BLL.Services
 
             //GetVehicleDetailsForDriver
             CreateMap<DriverVehicle, VehicleDetailsDto>()
-                .IncludeMembers(x => x.Vehicle, y => y.Vehicle.Identity);
+                .IncludeMembers(x => x.Vehicle, y => y.Vehicle.Identity)
+                .ReverseMap();
             CreateMap<IdentityVehicle, IdentityVehicleDto>();
             CreateMap<DriverVehicle, DriverVehicleDto>();
 
@@ -63,10 +71,18 @@ namespace FleetManagement.BLL.Services
             //GetReparationsForDriverPerCar
             CreateMap<Repare, VehicleRepareDto>();
 
+            //UpdateVehicle
+            CreateMap<Vehicle, VehicleDto>() // tot het uiterste gaan met die includes?
+                .IncludeMembers(x => x.Identity, y => y.Drivers)
+                .IncludeMembers(x => x.Appeals, y => y.Maintenances, z => z.Reparations)
+                .ReverseMap();
+            CreateMap<Vehicle, VehicleDetailsDto>()
+                .IncludeMembers(x => x.Identity, y => y.Drivers)
+                .ReverseMap();
+
             //Extra convertingmaps
             CreateMap<string, List<string>>().ConvertUsing<StringToStringsConverter>();
             CreateMap<string, List<int>>().ConvertUsing<StringToIntsConverter>();
-
         }
     }
 }

@@ -15,6 +15,8 @@ namespace FleetManagement.Framework.Models.Dtos
 
         public List<VehicleRepareDto> Reparations { get; set; }
 
+        public List<DriverDto> Drivers { get; set; }
+
         public List<VehicleAppealDto> Appeals { get; set; }
 
         public VehicleDto(

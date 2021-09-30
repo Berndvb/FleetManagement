@@ -20,7 +20,7 @@ namespace FleetManagement.BLL.Services
             _mapper = mapper;
         }
 
-        public async Task<List<AppealDto>> GetAppealInfoForDriver(int driverId, int vehicleId)
+        public async Task<List<AppealDto>> GetAppealsForDriver(int driverId, int vehicleId)
         {
             var appeals = await _unitOfWork.Appeals
                 .Include(x => x.Vehicle)

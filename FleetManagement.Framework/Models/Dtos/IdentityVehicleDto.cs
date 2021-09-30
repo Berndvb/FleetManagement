@@ -1,4 +1,5 @@
 ﻿using FleetManagement.Framework.Models.Enums;
+using System.Collections.Generic;
 
 namespace FleetManagement.Framework.Models.Dtos
 {
@@ -11,6 +12,8 @@ namespace FleetManagement.Framework.Models.Dtos
         public string Brand { get; set; }
 
         public string Model { get; set; }
+
+        public List<string> LicensePlates { get; set; }
 
         public IdentityVehicleDto(
             int id,

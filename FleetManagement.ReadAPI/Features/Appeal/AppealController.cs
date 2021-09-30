@@ -4,9 +4,9 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace FleetManagement.ReadAPI.Features.ChauffeurBeheer
+namespace FleetManagement.ReadAPI.Features.Appeal
 {
-    public class ChauffeurBeheerController : Controller
+    public class AppealController : Controller
     {
         public IActionResult Index()
         {

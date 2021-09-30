@@ -20,6 +20,8 @@ namespace FleetManagement.Domain.Interfaces
         IGenericRepository<DriverVehicle> DriverVehicles { get; }
 
         IGenericRepository<IdentityVehicle> IdentityVehicles { get; }
+
+        IGenericRepository<FuelCardDriver> FuelCardDrivers { get; }
         int Complete();
     }
 }

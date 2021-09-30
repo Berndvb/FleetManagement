@@ -1,5 +1,6 @@
 ﻿using AutoMapper;
 using FleetManagement.Domain.Interfaces;
+using FleetManagement.Domain.Models;
 using FleetManagement.Framework.Models.Dtos;
 using Microsoft.EntityFrameworkCore;
 using System.Collections.Generic;
@@ -19,7 +20,7 @@ namespace FleetManagement.BLL.Services
             _mapper = mapper;
         }
 
-        public async Task<List<FuelCardDto>> GetFuelCardsDetailsForDriver(int driverId)
+        public async Task<List<FuelCardDto>> GetFuelCardsDetailForDriver(int driverId)
         {
             var fuelCards = await _unitOfWork.FuelCards
                 .Include(x => x.FuelCardOptions)
@@ -29,6 +30,15 @@ namespace FleetManagement.BLL.Services
             var fuelCardInfoDtos = _mapper.Map<List<FuelCardDto>>(fuelCards);
 
             return fuelCardInfoDtos;
+        }
+
+        public void UpdateFuelCard(FuelCardDto fuelCardDto)
+        {
+            var fuelCard = _mapper.Map<FuelCard>(fuelCardDto);
+
+            _unitOfWork.FuelCards.UpdateWithExclusion(fuelCard, x => x.Pincode, y => y.Drivers);
+
+            _unitOfWork.Complete();
         }
     }
 }
