@@ -16,14 +16,14 @@ namespace FleetManager.EFCore.Repositories
         private readonly DatabaseContext _context;
         private readonly DbSet<TEntity> _dbSet;
 
-        public GenericRepository(DatabaseContext context) 
+        public GenericRepository(DatabaseContext context)
         {
             _context = context;
             _dbSet = _context.Set<TEntity>();
         }
 
         public Task<TEntity> GetBy(
-            Expression<Func<TEntity, bool>> filter = null, 
+            Expression<Func<TEntity, bool>> filter = null,
             params Func<IQueryable<TEntity>, IIncludableQueryable<TEntity, object>>[] including)
         {
             var query = filter == null ? _dbSet.AsQueryable() : _dbSet.Where(filter);
@@ -35,7 +35,7 @@ namespace FleetManager.EFCore.Repositories
                     inclusion(query);
                 }
             }
-      
+
             return query.SingleOrDefaultAsync();
         }
 
@@ -43,7 +43,7 @@ namespace FleetManager.EFCore.Repositories
             Expression<Func<TEntity, bool>> filter = null,
             params Func<IQueryable<TEntity>, IIncludableQueryable<TEntity, object>>[] including)
         {
-            var query = filter == null ?_dbSet.AsQueryable() : _dbSet.Where(filter);
+            var query = filter == null ? _dbSet.AsQueryable() : _dbSet.Where(filter);
 
             if (including.Length > 0)
             {
@@ -67,7 +67,7 @@ namespace FleetManager.EFCore.Repositories
         }
 
         public void Remove(TEntity entity)
-        { 
+        {
             _dbSet.Remove(entity);
         }
 
@@ -95,6 +95,16 @@ namespace FleetManager.EFCore.Repositories
         public void UpdateRange(IEnumerable<TEntity> entities)
         {
             _dbSet.UpdateRange(entities);
+        }
+
+        public async Task<List<int>> GetIds(int id) 
+        {
+            var ids = await _dbSet
+                .Where(x => x.Id.Equals(id))
+                .Select(x => x.Id)
+                .ToListAsync();
+
+            return ids;
         }
     }
 }

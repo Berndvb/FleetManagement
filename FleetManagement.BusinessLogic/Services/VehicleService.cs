@@ -10,7 +10,9 @@ namespace FleetManagement.BLL.Services.DI
         private readonly IUnitOfWork _unitOfWork;
         private readonly IMapper _mapper;
 
-        public VehicleService(IUnitOfWork unitOfWork, IMapper mapper)
+        public VehicleService(
+            IUnitOfWork unitOfWork, 
+            IMapper mapper)
         {
             _unitOfWork = unitOfWork;
             _mapper = mapper;
@@ -30,11 +32,11 @@ namespace FleetManagement.BLL.Services.DI
             var vehicle = _mapper.Map<Vehicle>(vehicleDetailsDto);
 
             _unitOfWork.Vehicles
-                .Update(vehicle, 
-                x => x.Id, 
-                x => x.Maintenances, 
-                x => x.Reparations, 
-                x => x.Drivers, 
+                .Update(vehicle,
+                x => x.Id,
+                x => x.Maintenances,
+                x => x.Reparations,
+                x => x.Drivers,
                 x => x.Appeals);
 
             _unitOfWork.Complete();

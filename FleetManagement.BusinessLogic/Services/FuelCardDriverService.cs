@@ -10,7 +10,9 @@ namespace FleetManagement.BLL.Services
         private readonly IUnitOfWork _unitOfWork;
         private readonly IMapper _mapper;
 
-        public FuelCardDriverService(IUnitOfWork unitOfWork, IMapper mapper)
+        public FuelCardDriverService(
+            IUnitOfWork unitOfWork, 
+            IMapper mapper)
         {
             _unitOfWork = unitOfWork;
             _mapper = mapper;
@@ -20,8 +22,8 @@ namespace FleetManagement.BLL.Services
         {
             var fuelCardDriver = _mapper.Map<FuelCardDriver>(fuelCardDriverDto);
 
-            _unitOfWork.FuelCardDrivers.Update(fuelCardDriver, 
-                x => x.Driver, 
+            _unitOfWork.FuelCardDrivers.Update(fuelCardDriver,
+                x => x.Driver,
                 x => x.FuelCard);
 
             _unitOfWork.Complete();

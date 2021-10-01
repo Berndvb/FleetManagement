@@ -14,16 +14,18 @@ namespace FleetManagement.BLL.Services
         private readonly IUnitOfWork _unitOfWork;
         private readonly IMapper _mapper;
 
-        public VehicleService(IUnitOfWork unitOfWork, IMapper mapper)
+        public VehicleService(
+            IUnitOfWork unitOfWork, 
+            IMapper mapper)
         {
             _unitOfWork = unitOfWork;
             _mapper = mapper;
         }
 
-        public async Task<List<FuelCardDto>> GetFuelCardsDetailForDriver(int driverId)
+        public async Task<List<FuelCardDto>> GetFuelCardDetailsForDriver(int driverId)
         {
             var fuelCards = await _unitOfWork.FuelCards.GetListBy(
-                filter: x => x.Drivers.Last().Id.Equals(driverId), 
+                filter: x => x.Drivers.Last().Id.Equals(driverId),
                 x => x.Include(y => y.FuelCardOptions),
                 x => x.Include(y => y.Drivers));
 
@@ -36,8 +38,8 @@ namespace FleetManagement.BLL.Services
         {
             var fuelCard = _mapper.Map<FuelCard>(fuelCardDto);
 
-            _unitOfWork.FuelCards.Update(fuelCard, 
-                x => x.Pincode, 
+            _unitOfWork.FuelCards.Update(fuelCard,
+                x => x.Pincode,
                 x => x.Drivers);
 
             _unitOfWork.Complete();

@@ -56,7 +56,7 @@ namespace FleetManager.EFCore.UnitOfWork
             return _context.SaveChanges();
         }
 
-        public void Dispose() 
+        public void Dispose()
         {
             _context.Dispose();
         }

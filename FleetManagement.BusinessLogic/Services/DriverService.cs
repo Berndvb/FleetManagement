@@ -10,18 +10,20 @@ using System.Threading.Tasks;
 
 namespace FleetManagement.BLL.Services
 {
-    public class DriverService 
+    public class DriverService
     {
         private readonly IUnitOfWork _unitOfWork;
         private readonly IMapper _mapper;
 
-        public DriverService(IUnitOfWork unitOfWork, IMapper mapper)
+        public DriverService(
+            IUnitOfWork unitOfWork, 
+            IMapper mapper)
         {
             _unitOfWork = unitOfWork;
             _mapper = mapper;
         }
 
-        public async Task<List<DriverOverviewDto>> GetAllDriverOverviews(bool onlyInService) 
+        public async Task<List<DriverOverviewDto>> GetAllDriverOverviews(bool onlyInService)
         {
 
             var drivers = onlyInService ?
@@ -33,7 +35,7 @@ namespace FleetManagement.BLL.Services
             return driverOverviewDtos;
         }
 
-        public async Task<DriverDetailsDto> GetDriverDetails(int driverId) 
+        public async Task<DriverDetailsDto> GetDriverDetails(int driverId)
         {
             var driver = await _unitOfWork.Drivers.GetBy(
                 filter: x => x.Id.Equals(driverId),
@@ -41,12 +43,12 @@ namespace FleetManagement.BLL.Services
                 x => x.Include(y => y.Contactinfo),
                 x => x.Include(y => y.Contactinfo.Address));
 
-            var driverdetaillsDto = _mapper.Map<DriverDetailsDto>(driver); 
+            var driverdetaillsDto = _mapper.Map<DriverDetailsDto>(driver);
 
             return driverdetaillsDto;
         }
 
-        public async Task<List<FuelCardDto>> GetFuelCardDetailsForDriver(int driverId)//!!Too hard to map - alternative in FuelCardService
+        public async Task<List<FuelCardDto>> GetFuelCardDetailsForDriver(int driverId)//!!Too hard to map? - alternative in FuelCardService
         {
             var driversWithFuelCards = await _unitOfWork.Drivers.GetListBy(
                 filter: x => x.Id.Equals(driverId),
@@ -87,9 +89,9 @@ namespace FleetManagement.BLL.Services
         {
             var driver = _mapper.Map<Driver>(driverDto);
 
-            _unitOfWork.Drivers.Update(driver, 
-                x => x.Appeals, 
-                x => x.Vehicles, 
+            _unitOfWork.Drivers.Update(driver,
+                x => x.Appeals,
+                x => x.Vehicles,
                 x => x.FuelCards);
 
             _unitOfWork.Complete();

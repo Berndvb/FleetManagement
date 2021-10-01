@@ -4,9 +4,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace FleetManager.Dapper.Repositories
+namespace MediatR.Cqs.Execution
 {
-    class VoertuigRepository
+    public class ExecutionError
     {
     }
 }

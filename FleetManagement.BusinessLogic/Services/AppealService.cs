@@ -12,13 +12,15 @@ namespace FleetManagement.BLL.Services
         private readonly IUnitOfWork _unitOfWork;
         private readonly IMapper _mapper;
 
-        public AppealService(IUnitOfWork unitOfWork, IMapper mapper)
+        public AppealService(
+            IUnitOfWork unitOfWork, 
+            IMapper mapper)
         {
             _unitOfWork = unitOfWork;
             _mapper = mapper;
         }
 
-        public async Task<List<AppealDto>> GetAppealsForDriver(int driverId, int vehicleId)
+        public async Task<List<AppealDto>> GetAppealsForDriver(int driverId)
         {
             var appeals = await _unitOfWork.Appeals.GetListBy(
                 filter: x => x.Driver.Id.Equals(driverId),

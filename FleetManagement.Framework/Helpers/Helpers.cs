@@ -7,7 +7,7 @@ namespace FleetManagement.Framework.Helpers
     public static class Helpers
     {
         public const char SPLITTER = ',';
-        
+
         public static List<string> SplitToText(this string input)
         {
             return input.Trim().Split(SPLITTER).ToList();

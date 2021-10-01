@@ -1,6 +1,5 @@
 ﻿using FleetManagement.EFCore.Infrastructure;
 using Microsoft.EntityFrameworkCore;
-using Microsoft.EntityFrameworkCore.Design;
 using Microsoft.Extensions.Configuration;
 using System.IO;
 
@@ -8,7 +7,7 @@ namespace FleetManagement.Data.Infrastructure
 {
     public class DatabaseContextFactory /*: IDesignTimeDbContextFactory<DatabaseContext>*/
     {
-        public DatabaseContext CreateDbContext(string[] args) 
+        public DatabaseContext CreateDbContext(string[] args)
         {
             IConfigurationRoot configuration = new ConfigurationBuilder()
                 .SetBasePath(Directory.GetCurrentDirectory())

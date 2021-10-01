@@ -1,10 +1,9 @@
 ﻿using AutoMapper;
 using FleetManagement.BLL.Services;
 using FleetManagement.Domain.Interfaces;
-using FleetManagement.Domain.Models;
 using FleetManagement.EFCore.Infrastructure;
-using FleetManager.Dapper.Repositories;
 using FleetManager.Domain.Interfaces;
+using FleetManager.EFCore.Repositories;
 using FleetManager.EFCore.UnitOfWork;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
@@ -22,17 +21,10 @@ namespace FleetManagement.BLL.DependencyInjection
 
         public static void AddRepositories(this IServiceCollection services)
         {
-            services.AddScoped(typeof(IGenericRepository<Appeal>), typeof(GenericRepository<Appeal>));
-            services.AddScoped(typeof(IGenericRepository<Driver>), typeof(GenericRepository<Driver>));
-            services.AddScoped(typeof(IGenericRepository<Repare>), typeof(GenericRepository<Repare>));
-            services.AddScoped(typeof(IGenericRepository<Maintenance>), typeof(GenericRepository<Maintenance>));
-            services.AddScoped(typeof(IGenericRepository<FuelCard>), typeof(GenericRepository<FuelCard>));
-            services.AddScoped(typeof(IGenericRepository<Vehicle>), typeof(GenericRepository<Vehicle>));
-            services.AddScoped(typeof(IGenericRepository<DriverVehicle>), typeof(GenericRepository<DriverVehicle>));
-            services.AddScoped(typeof(IGenericRepository<IdentityVehicle>), typeof(GenericRepository<IdentityVehicle>));
+            services.AddScoped(typeof(IGenericRepository<>), typeof(GenericRepository<>));
         }
 
-        public static void AddDatabaseContext(this IServiceCollection services) 
+        public static void AddDatabaseContext(this IServiceCollection services)
         {
             var builder = new ConfigurationBuilder();
             builder.AddJsonFile("appsettings.json", optional: false);

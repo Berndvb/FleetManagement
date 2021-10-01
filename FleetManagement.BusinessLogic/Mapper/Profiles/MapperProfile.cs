@@ -9,80 +9,79 @@ namespace FleetManagement.BLL.Services
 {
     public class MapperProfile : Profile
     {
-        public MapperProfile() 
+        public MapperProfile()
         {
-            //GetAllDriverOverviews
             CreateMap<Driver, DriverOverviewDto>()
-                .IncludeMembers(x => x.Identity);
+                .ReverseMap();
 
-            //GetDriverDetails
             CreateMap<Driver, DriverDetailsDto>()
-                .IncludeMembers(x => x.Identity, y => y.Contactinfo, z => z.Contactinfo.Address)
                 .ReverseMap();
 
             CreateMap<Driver, DriverDto>()
-              .IncludeMembers(x => x.Identity, y => y.Contactinfo, z => z.FuelCards)
-              .IncludeMembers(x => x.Vehicles, y => y.Appeals)
-              .ReverseMap();
+                .ReverseMap();
 
-            CreateMap<IdentityPerson, IdentityPersonDto>();
+            CreateMap<IdentityPerson, IdentityPersonDto>()
+                .ReverseMap();
+
             CreateMap<ContactInfo, ContactInfoDto>()
-             .IncludeMembers(x => x.Address);
-            CreateMap<Address, AddressDto>();
+                .ReverseMap();
 
-            // !!! -  GetAppealsForDriver 
-            CreateMap<Driver, AppealDto>()// but how to include proportie from a List<obj>
-                .IncludeMembers(x => x.Appeals, y => y.Vehicles/*, z => z.Vehicles.Identity*/);
+            CreateMap<Address, AddressDto>()
+                .ReverseMap();
+
+            CreateMap<Driver, AppealDto>()
+                .ReverseMap();
+
             CreateMap<Appeal, AppealDto>()
-                .IncludeMembers(x => x.Vehicle, y => y.Vehicle.Identity); //we exclude the Driver-property
+                .ReverseMap();
+
             CreateMap<Vehicle, VehicleOverviewDto>()
-                .IncludeMembers(x => x.Identity);
+                .ReverseMap();
 
-            CreateMap<Appeal, AppealDto>() // Alternatively  via Appeals itself and not Driver (bigger query though...)
-                .IncludeMembers(x => x.Vehicle, y => y.Vehicle.Identity);
-            CreateMap<FuelCardOptions, FuelCardOptionsDto>();
+            CreateMap<Appeal, AppealDto>()
+                .ReverseMap();
+
+            CreateMap<FuelCardOptions, FuelCardOptionsDto>()
+                .ReverseMap();
+
             CreateMap<Vehicle, VehicleOverviewDto>()
-                .IncludeMembers(x => x.Identity);
+                .ReverseMap();
 
-            // !!! -  GetFuelCardsDetailsForDriver
-            CreateMap<Driver, FuelCardDto>() //via Driver: but how to include proportie from a List<obj>
-                .IncludeMembers(x => x.FuelCards/*, y => y.FuelCards.FuelCard, z => z.FuelCards.FuelCard.FuelCardOptions*/);
+            CreateMap<Driver, FuelCardDto>()
+                .ReverseMap();
 
-            CreateMap<FuelCard, FuelCardDto>() // Alternatively  via FuelCards itself and not Driver (bigger query though...)
-           .IncludeMembers(x => x.FuelCardOptions);
-            CreateMap<FuelCardOptions, FuelCardOptionsDto>();
+            CreateMap<FuelCard, FuelCardDto>()
+                .ReverseMap();
 
-            //GetAppealsForDriverPerCar
+            CreateMap<FuelCardOptions, FuelCardOptionsDto>()
+                .ReverseMap();
+
             CreateMap<Driver, VehicleAppealDto>()
-                .IncludeMembers(x => x.Appeals);
-            CreateMap<Appeal, VehicleAppealDto>();
+                .ReverseMap();
 
-            //GetVehicleDetailsForDriver
+            CreateMap<Appeal, VehicleAppealDto>()
+                .ReverseMap();
+
             CreateMap<DriverVehicle, VehicleDetailsDto>()
-                .IncludeMembers(x => x.Vehicle, y => y.Vehicle.Identity)
                 .ReverseMap();
-            CreateMap<IdentityVehicle, IdentityVehicleDto>();
-            CreateMap<DriverVehicle, DriverVehicleDto>();
 
-            //GetMaintenancesForDriverPerCar
-            CreateMap<Maintenance, VehicleMaintenanceDto>();
-
-            //GetReparationsForDriverPerCar
-            CreateMap<Repare, VehicleRepareDto>();
-
-            //UpdateVehicle
-            CreateMap<Vehicle, VehicleDto>() // tot het uiterste gaan met die includes?
-                .IncludeMembers(x => x.Identity, y => y.Drivers)
-                .IncludeMembers(x => x.Appeals, y => y.Maintenances, z => z.Reparations)
+            CreateMap<IdentityVehicle, IdentityVehicleDto>()
                 .ReverseMap();
+
+            CreateMap<DriverVehicle, DriverVehicleDto>()
+                .ReverseMap();
+
+            CreateMap<Maintenance, VehicleMaintenanceDto>()
+                .ReverseMap();
+
+            CreateMap<Repare, VehicleRepareDto>()
+                .ReverseMap();
+
+            CreateMap<Vehicle, VehicleDto>()
+                .ReverseMap();
+
             CreateMap<Vehicle, VehicleDetailsDto>()
-                .IncludeMembers(x => x.Identity, y => y.Drivers)
                 .ReverseMap();
-
-            CreateMap<IdentityPerson, DriverOverviewDto>();
-            CreateMap<IdentityPerson, DriverDetailsDto>();
-            CreateMap<ContactInfo, DriverDetailsDto>();
-            CreateMap<Address, DriverDetailsDto>();
 
             //Extra convertingmaps
             CreateMap<string, List<string>>().ConvertUsing<StringToStringsConverter>();

@@ -6,7 +6,7 @@ namespace FleetManagement.Domain.Models
 {
     public class Driver : IBaseClass
     {
-        public int Id { get; set; } 
+        public int Id { get; set; }
 
         public IdentityPerson Identity { get; set; }
 

@@ -11,7 +11,9 @@ namespace FleetManagement.BLL.Services
         private readonly IUnitOfWork _unitOfWork;
         private readonly IMapper _mapper;
 
-        public MaintenanceService(IUnitOfWork unitOfWork, IMapper mapper)
+        public MaintenanceService(
+            IUnitOfWork unitOfWork, 
+            IMapper mapper)
         {
             _unitOfWork = unitOfWork;
             _mapper = mapper;
