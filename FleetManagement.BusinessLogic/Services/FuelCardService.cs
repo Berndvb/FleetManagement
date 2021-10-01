@@ -22,11 +22,11 @@ namespace FleetManagement.BLL.Services
 
         public async Task<List<FuelCardDto>> GetFuelCardsDetailForDriver(int driverId)
         {
-            var fuelCards = await _unitOfWork.FuelCards
-                .Include(x => x.FuelCardOptions)
-                .Include(x => x.Drivers)
-                .Where(x => x.Drivers.Last().Id.Equals(driverId))
-                .ToListAsync();
+            var fuelCards = await _unitOfWork.FuelCards.GetListBy(
+                filter: x => x.Drivers.Last().Id.Equals(driverId), 
+                x => x.Include(y => y.FuelCardOptions),
+                x => x.Include(y => y.Drivers));
+
             var fuelCardInfoDtos = _mapper.Map<List<FuelCardDto>>(fuelCards);
 
             return fuelCardInfoDtos;
@@ -36,7 +36,9 @@ namespace FleetManagement.BLL.Services
         {
             var fuelCard = _mapper.Map<FuelCard>(fuelCardDto);
 
-            _unitOfWork.FuelCards.UpdateWithExclusion(fuelCard, x => x.Pincode, y => y.Drivers);
+            _unitOfWork.FuelCards.Update(fuelCard, 
+                x => x.Pincode, 
+                x => x.Drivers);
 
             _unitOfWork.Complete();
         }

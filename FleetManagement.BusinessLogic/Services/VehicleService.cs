@@ -30,7 +30,12 @@ namespace FleetManagement.BLL.Services.DI
             var vehicle = _mapper.Map<Vehicle>(vehicleDetailsDto);
 
             _unitOfWork.Vehicles
-                .UpdateWithExclusion(vehicle, x => x.Id, y => y.Maintenances, z => z.Reparations, a => a.Drivers, b => b.Appeals);
+                .Update(vehicle, 
+                x => x.Id, 
+                x => x.Maintenances, 
+                x => x.Reparations, 
+                x => x.Drivers, 
+                x => x.Appeals);
 
             _unitOfWork.Complete();
         }

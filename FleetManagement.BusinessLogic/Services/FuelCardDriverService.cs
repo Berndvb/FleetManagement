@@ -20,7 +20,9 @@ namespace FleetManagement.BLL.Services
         {
             var fuelCardDriver = _mapper.Map<FuelCardDriver>(fuelCardDriverDto);
 
-            _unitOfWork.FuelCardDrivers.UpdateWithExclusion(fuelCardDriver, x => x.Driver, y => y.FuelCard);
+            _unitOfWork.FuelCardDrivers.Update(fuelCardDriver, 
+                x => x.Driver, 
+                x => x.FuelCard);
 
             _unitOfWork.Complete();
         }

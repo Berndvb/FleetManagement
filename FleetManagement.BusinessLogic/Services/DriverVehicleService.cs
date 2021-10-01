@@ -22,11 +22,10 @@ namespace FleetManagement.BLL.Services
 
         public async Task<List<VehicleDetailsDto>> GetVehicleDetailsForDriver(int driverId)
         {
-            var driverVehicles = await _unitOfWork.DriverVehicles
-                .Include(x => x.Vehicle)
-                .Include(x => x.Vehicle.Identity)
-                .Where(x => x.Driver.Id.Equals(driverId))
-                .ToListAsync();
+            var driverVehicles = await _unitOfWork.DriverVehicles.GetListBy(
+                filter: x => x.Driver.Id.Equals(driverId),
+                x => x.Include(y => y.Vehicle),
+                x => x.Include(y => y.Vehicle.Identity));
 
             var vehicleDetailsDtos = _mapper.Map<List<VehicleDetailsDto>>(driverVehicles);
 
@@ -37,7 +36,9 @@ namespace FleetManagement.BLL.Services
         {
             var driverVehicle = _mapper.Map<DriverVehicle>(driverVehicleDto);
 
-            _unitOfWork.DriverVehicles.UpdateWithExclusion(driverVehicle, x => x.Driver, y => y.Vehicle);
+            _unitOfWork.DriverVehicles.Update(driverVehicle, 
+                x => x.Driver, 
+                x => x.Vehicle);
 
             _unitOfWork.Complete();
         }

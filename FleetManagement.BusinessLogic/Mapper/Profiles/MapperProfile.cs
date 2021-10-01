@@ -25,13 +25,12 @@ namespace FleetManagement.BLL.Services
               .IncludeMembers(x => x.Vehicles, y => y.Appeals)
               .ReverseMap();
 
-
             CreateMap<IdentityPerson, IdentityPersonDto>();
             CreateMap<ContactInfo, ContactInfoDto>()
              .IncludeMembers(x => x.Address);
             CreateMap<Address, AddressDto>();
 
-            // !!! -  GetAppealInfoForDriver 
+            // !!! -  GetAppealsForDriver 
             CreateMap<Driver, AppealDto>()// but how to include proportie from a List<obj>
                 .IncludeMembers(x => x.Appeals, y => y.Vehicles/*, z => z.Vehicles.Identity*/);
             CreateMap<Appeal, AppealDto>()
@@ -79,6 +78,11 @@ namespace FleetManagement.BLL.Services
             CreateMap<Vehicle, VehicleDetailsDto>()
                 .IncludeMembers(x => x.Identity, y => y.Drivers)
                 .ReverseMap();
+
+            CreateMap<IdentityPerson, DriverOverviewDto>();
+            CreateMap<IdentityPerson, DriverDetailsDto>();
+            CreateMap<ContactInfo, DriverDetailsDto>();
+            CreateMap<Address, DriverDetailsDto>();
 
             //Extra convertingmaps
             CreateMap<string, List<string>>().ConvertUsing<StringToStringsConverter>();

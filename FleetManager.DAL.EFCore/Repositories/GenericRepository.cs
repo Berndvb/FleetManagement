@@ -2,6 +2,7 @@
 using FleetManagement.EFCore.Infrastructure;
 using FleetManager.Domain.Interfaces;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore.Query;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -21,44 +22,58 @@ namespace FleetManager.EFCore.Repositories
             _dbSet = _context.Set<TEntity>();
         }
 
-        public void Insert(TEntity entity)
+        public Task<TEntity> GetBy(
+            Expression<Func<TEntity, bool>> filter = null, 
+            params Func<IQueryable<TEntity>, IIncludableQueryable<TEntity, object>>[] including)
         {
-            _dbSet.Add(entity);
+            var query = filter == null ? _dbSet.AsQueryable() : _dbSet.Where(filter);
+
+            if (including.Length > 0)
+            {
+                foreach (var inclusion in including)
+                {
+                    inclusion(query);
+                }
+            }
+      
+            return query.SingleOrDefaultAsync();
         }
 
-        public void InsertRange(ICollection<TEntity> entities)
+        public Task<List<TEntity>> GetListBy(
+            Expression<Func<TEntity, bool>> filter = null,
+            params Func<IQueryable<TEntity>, IIncludableQueryable<TEntity, object>>[] including)
         {
-            _dbSet.AddRange(entities);
+            var query = filter == null ?_dbSet.AsQueryable() : _dbSet.Where(filter);
+
+            if (including.Length > 0)
+            {
+                foreach (var inclusion in including)
+                {
+                    inclusion(query);
+                }
+            }
+
+            return query.ToListAsync();
         }
 
-        public TEntity FindSingle(Expression<Func<TEntity, bool>> where)
+        public async Task Insert(TEntity entity)
         {
-            return _dbSet.SingleOrDefault(where);
+            await _dbSet.AddAsync(entity);
         }
 
-        public IQueryable<TEntity> FindMultiple(Expression<Func<TEntity, bool>> where)
+        public async Task InsertRange(ICollection<TEntity> entities)
         {
-            return _dbSet.Where(where);
-        }
-
-        public IQueryable<TEntity> GetAll()
-        {
-            return  _dbSet; 
-        }
-
-        public TEntity GetById(int id)
-        {
-            return _dbSet.Find(id);
+            await _dbSet.AddRangeAsync(entities);
         }
 
         public void Remove(TEntity entity)
-        {
+        { 
             _dbSet.Remove(entity);
         }
 
-        public void RemoveById(int id)
+        public async Task RemoveById(int id)
         {
-            var toBeRemoved = GetById(id);
+            var toBeRemoved = await GetBy(x => x.Id.Equals(id));
             Remove(toBeRemoved);
         }
 
@@ -66,12 +81,8 @@ namespace FleetManager.EFCore.Repositories
         {
             _dbSet.RemoveRange(entities);
         }
-        public IQueryable<TEntity> Include(Expression<Func<TEntity, object>> include)
-        {
-            return _dbSet.Include(include);
-        }
 
-        public void UpdateWithExclusion(TEntity entitie, params Expression<Func<TEntity, object>>[] exclusions)
+        public void Update(TEntity entitie, params Expression<Func<TEntity, object>>[] exclusions)
         {
             _dbSet.Update(entitie);
 
@@ -79,11 +90,6 @@ namespace FleetManager.EFCore.Repositories
             {
                 _context.Entry(entitie).Property(exclusion).IsModified = false;
             }
-        }
-
-        public void Update(TEntity entitie)
-        {
-            _dbSet.Update(entitie);
         }
 
         public void UpdateRange(IEnumerable<TEntity> entities)

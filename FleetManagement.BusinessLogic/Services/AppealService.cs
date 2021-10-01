@@ -1,10 +1,8 @@
 ﻿using AutoMapper;
 using FleetManagement.Domain.Interfaces;
-using FleetManagement.Framework.Models.Dtos;
 using FleetManagement.Framework.Models.Dtos.ShowDtos;
 using Microsoft.EntityFrameworkCore;
 using System.Collections.Generic;
-using System.Linq;
 using System.Threading.Tasks;
 
 namespace FleetManagement.BLL.Services
@@ -22,11 +20,10 @@ namespace FleetManagement.BLL.Services
 
         public async Task<List<AppealDto>> GetAppealsForDriver(int driverId, int vehicleId)
         {
-            var appeals = await _unitOfWork.Appeals
-                .Include(x => x.Vehicle)
-                .Include(x => x.Vehicle.Identity)
-                .Where(x => x.Driver.Id.Equals(driverId) && x.Vehicle.Id.Equals(vehicleId))
-                .ToListAsync();
+            var appeals = await _unitOfWork.Appeals.GetListBy(
+                filter: x => x.Driver.Id.Equals(driverId),
+                x => x.Include(y => y.Vehicle),
+                x => x.Include(y => y.Vehicle.Identity));
 
             var appealDtos = _mapper.Map<List<AppealDto>>(appeals);
 

@@ -23,11 +23,10 @@ namespace FleetManagement.BLL.Services
 
         public async Task<List<DriverOverviewDto>> GetAllDriverOverviews(bool onlyInService) 
         {
-            var driverQuery = _unitOfWork.Drivers.Include(x => x.Identity);
 
-            var drivers = onlyInService ? 
-                await driverQuery.Where(x => x.InService).ToListAsync() : 
-                await driverQuery.ToListAsync();
+            var drivers = onlyInService ?
+                await _unitOfWork.Drivers.GetListBy(including: x => x.Include(y => y.Identity)) :
+                await _unitOfWork.Drivers.GetListBy(filter: x => x.InService.Equals(true), including: x => x.Include(y => y.Identity));
 
             var driverOverviewDtos = _mapper.Map<List<DriverOverviewDto>>(drivers);
 
@@ -36,11 +35,11 @@ namespace FleetManagement.BLL.Services
 
         public async Task<DriverDetailsDto> GetDriverDetails(int driverId) 
         {
-            var driver = await _unitOfWork.Drivers
-                .Include(x => x.Identity)
-                .Include(x => x.Contactinfo)
-                .Include(x => x.Contactinfo.Address)
-                .SingleAsync(x => x.Id == driverId);
+            var driver = await _unitOfWork.Drivers.GetBy(
+                filter: x => x.Id.Equals(driverId),
+                x => x.Include(y => y.Identity),
+                x => x.Include(y => y.Contactinfo),
+                x => x.Include(y => y.Contactinfo.Address));
 
             var driverdetaillsDto = _mapper.Map<DriverDetailsDto>(driver); 
 
@@ -49,12 +48,11 @@ namespace FleetManagement.BLL.Services
 
         public async Task<List<FuelCardDto>> GetFuelCardDetailsForDriver(int driverId)//!!Too hard to map - alternative in FuelCardService
         {
-            var driversWithFuelCards = await _unitOfWork.Drivers
-                .Include(x => x.FuelCards)
-                .Include(x => x.FuelCards.Select(y => y.FuelCard))
-                .Include(x => x.FuelCards.Select(y => y.FuelCard.FuelCardOptions))
-                .Where(x => x.Id.Equals(driverId))
-                .ToListAsync();
+            var driversWithFuelCards = await _unitOfWork.Drivers.GetListBy(
+                filter: x => x.Id.Equals(driverId),
+                x => x.Include(y => y.FuelCards),
+                x => x.Include(y => y.FuelCards.Select(z => z.FuelCard)),
+                x => x.Include(y => y.FuelCards.Select(z => z.FuelCard.FuelCardOptions)));
 
             var fuelCardInfoDtos = _mapper.Map<List<FuelCardDto>>(driversWithFuelCards);
 
@@ -63,12 +61,11 @@ namespace FleetManagement.BLL.Services
 
         public async Task<List<AppealDto>> GetAllAppealsForDriver(int driverId)
         {
-            var appeals = await _unitOfWork.Drivers
-                .Include(x => x.Appeals)
-                .Include(x => x.Appeals.Select(y => y.Vehicle))
-                .Include(x => x.Appeals.Select(y => y.Vehicle.Identity))
-                .Where(x => x.Id.Equals(driverId))
-                .ToListAsync();
+            var appeals = await _unitOfWork.Drivers.GetListBy(
+                filter: x => x.Id.Equals(driverId),
+                x => x.Include(y => y.Appeals),
+                x => x.Include(y => y.Appeals.Select(z => z.Vehicle)),
+                x => x.Include(y => y.Appeals.Select(z => z.Vehicle.Identity)));
 
             var appealInfoDtos = _mapper.Map<List<AppealDto>>(appeals);
 
@@ -77,10 +74,9 @@ namespace FleetManagement.BLL.Services
 
         public async Task<List<VehicleAppealDto>> GetAppealsForDriverPerCar(int driverId, int vehicleId)//for lazy loading @ GetVehicleDetailsForDriver
         {
-            var driverWithAppeals = await _unitOfWork.Drivers
-                .Include(x => x.Appeals.Where(y => y.Vehicle.Id.Equals(vehicleId)))
-                .Where(x => x.Id.Equals(driverId))
-                .ToListAsync();
+            var driverWithAppeals = await _unitOfWork.Drivers.GetListBy(
+                filter: x => x.Id.Equals(driverId),
+                x => x.Include(y => y.Appeals.Where(z => z.Vehicle.Id.Equals(vehicleId))));
 
             var vehicleAppealDtos = _mapper.Map<List<VehicleAppealDto>>(driverWithAppeals);
 
@@ -91,7 +87,10 @@ namespace FleetManagement.BLL.Services
         {
             var driver = _mapper.Map<Driver>(driverDto);
 
-            _unitOfWork.Drivers.UpdateWithExclusion(driver, x => x.Appeals, y => y.Vehicles, z => z.FuelCards);
+            _unitOfWork.Drivers.Update(driver, 
+                x => x.Appeals, 
+                x => x.Vehicles, 
+                x => x.FuelCards);
 
             _unitOfWork.Complete();
         }

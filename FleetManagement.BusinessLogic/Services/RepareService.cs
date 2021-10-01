@@ -21,10 +21,8 @@ namespace FleetManagement.BLL.Services
 
         public async Task<List<VehicleRepareDto>> GetReparationsForDriverPerCar(int driverId, int vehicleId)//for lazy loading @ GetVehicleDetailsForDriver
         {
-            var reparations = await _unitOfWork.Repares
-                .GetAll()
-                .Where(x => x.Driver.Id.Equals(driverId) && x.Vehicle.Id.Equals(vehicleId))
-                .ToListAsync();
+            var reparations = await _unitOfWork.Repares.GetListBy(
+                filter: x => x.Driver.Id.Equals(driverId) && x.Vehicle.Id.Equals(vehicleId));
 
             var reparationDtos = _mapper.Map<List<VehicleRepareDto>>(reparations);
 
