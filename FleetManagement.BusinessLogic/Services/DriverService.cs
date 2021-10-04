@@ -26,9 +26,9 @@ namespace FleetManagement.BLL.Services
         public async Task<List<DriverOverviewDto>> GetAllDriverOverviews(bool onlyInService)
         {
 
-            var drivers = onlyInService ?
-                await _unitOfWork.Drivers.GetListBy(including: x => x.Include(y => y.Identity)) :
-                await _unitOfWork.Drivers.GetListBy(filter: x => x.InService.Equals(true), including: x => x.Include(y => y.Identity));
+            var drivers = onlyInService 
+                ? await _unitOfWork.Drivers.GetListBy(including: x => x.Include(y => y.Identity)) 
+                : await _unitOfWork.Drivers.GetListBy(filter: x => x.InService.Equals(true), including: x => x.Include(y => y.Identity));
 
             var driverOverviewDtos = _mapper.Map<List<DriverOverviewDto>>(drivers);
 

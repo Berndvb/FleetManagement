@@ -44,5 +44,10 @@ namespace FleetManagement.BLL.DependencyInjection
             IMapper mapper = mapperConfig.CreateMapper();
             services.AddSingleton(mapper);
         }
+
+        public static void addMediatR(this ServiceCollection services)
+        { 
+            
+        }
     }
 }

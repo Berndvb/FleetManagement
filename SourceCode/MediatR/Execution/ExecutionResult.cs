@@ -1,8 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace MediatR.Cqs.Execution
 {
@@ -24,7 +22,6 @@ namespace MediatR.Cqs.Execution
             Errors = errors;
             ErrorType = errorType;
         }
-
 
         public static ExecutionResult Succeeded() => new ExecutionResult();
 
@@ -72,6 +69,17 @@ namespace MediatR.Cqs.Execution
             };
 
             result.Errors.AddRange(executionErrors);
+
+            return result;
+        }
+
+        public List<ExecutionError> GetErrors() => Errors;
+
+        public TResult As<TResult>() where TResult : ExecutionResult
+        {
+            var result = (TResult)Activator.CreateInstance(typeof(TResult), true);
+            result.Errors = GetErrors();
+            result.ErrorType = ErrorType;
 
             return result;
         }

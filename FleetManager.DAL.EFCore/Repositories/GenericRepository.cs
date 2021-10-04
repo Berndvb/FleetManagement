@@ -26,7 +26,9 @@ namespace FleetManager.EFCore.Repositories
             Expression<Func<TEntity, bool>> filter = null,
             params Func<IQueryable<TEntity>, IIncludableQueryable<TEntity, object>>[] including)
         {
-            var query = filter == null ? _dbSet.AsQueryable() : _dbSet.Where(filter);
+            var query = filter == null 
+                ? _dbSet.AsQueryable() 
+                : _dbSet.Where(filter);
 
             if (including.Length > 0)
             {
@@ -43,7 +45,9 @@ namespace FleetManager.EFCore.Repositories
             Expression<Func<TEntity, bool>> filter = null,
             params Func<IQueryable<TEntity>, IIncludableQueryable<TEntity, object>>[] including)
         {
-            var query = filter == null ? _dbSet.AsQueryable() : _dbSet.Where(filter);
+            var query = filter == null 
+                ? _dbSet.AsQueryable() 
+                : _dbSet.Where(filter);
 
             if (including.Length > 0)
             {

@@ -15,7 +15,7 @@ namespace FleetManagement.BLL.Services
 
         public async Task<InputValidationCodes> ValidateId(int id)
         {
-            var ids = await _unitOfWork.Drivers.GetIds(id); //find a way to avoid access via a specific repo (looks weird)
+            var ids = await _unitOfWork.Drivers.GetIds(id); //find a way to avoid access via a specific repo (looks weird) + add it to DI
 
             return ids.Count switch
             {
