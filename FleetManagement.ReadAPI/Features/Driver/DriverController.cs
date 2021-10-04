@@ -5,6 +5,7 @@ using System.Net;
 using System.Threading;
 using System.Threading.Tasks;
 using MediatR.Cqs.Execution;
+using MediatR.Cqs;
 
 namespace FleetManagement.ReadAPI.Features.Driver
 {
@@ -25,7 +26,7 @@ namespace FleetManagement.ReadAPI.Features.Driver
         [ProducesResponseType((int)HttpStatusCode.BadRequest)]
         [ProducesResponseType((int)HttpStatusCode.NotFound)]
         public async Task<IActionResult> GetAllDriverOverviews(
-            GetAllDriverOverviewsQuery getAllDriverOverviewsQuery, 
+            [FromModel] GetAllDriverOverviewsQuery getAllDriverOverviewsQuery,
             CancellationToken cancellationToken)
         {
             var getAllDriverOverviewsQueryResult = await _mediator.Send(getAllDriverOverviewsQuery, cancellationToken);

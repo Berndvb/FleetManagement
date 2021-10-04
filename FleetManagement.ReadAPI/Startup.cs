@@ -5,6 +5,8 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.OpenApi.Models;
+using MediatR.Cqs;
+using MediatR;
 
 namespace FleetManagement.ReadAPI
 {
@@ -30,8 +32,10 @@ namespace FleetManagement.ReadAPI
             services.AddRepositories();
             services.AddDatabaseContext();
             services.AddMapper();
-            services.AddMediatRCqs();
             services.AddEntityServices();
+            services.AddMediatR(typeof(Startup));
+
+            //services.ConfigureMediatR();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

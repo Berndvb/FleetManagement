@@ -15,5 +15,9 @@ namespace FleetManagement.ReadAPI.Features.Driver.GetAllDriverOverviews
         {
             DriverOverviews = driverOverviews;
         }
+
+        private GetAllDriverOverviewsQueryResult()
+        {
+        }
     }
 }

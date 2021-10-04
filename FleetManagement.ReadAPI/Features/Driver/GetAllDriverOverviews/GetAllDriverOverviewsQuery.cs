@@ -4,6 +4,6 @@ namespace FleetManagement.ReadAPI.Features.Driver.GetAllDriverOverviews
 {
     public class GetAllDriverOverviewsQuery : IQuery<GetAllDriverOverviewsQueryResult>
     {
-        public bool OnlyInService { get; set; }
+        public bool InService { get; set; }
     }
 }

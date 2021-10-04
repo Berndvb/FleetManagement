@@ -46,9 +46,9 @@ namespace FleetManagement.BLL.DependencyInjection
             services.AddSingleton(mapper);
         }
 
-        public static void AddMediatRCqs(this IServiceCollection services)
+        public static void AddMediatRCqs(this IServiceCollection services, params Assembly[] assemblies)
         {
-            services.AddMediatR(Assembly.GetExecutingAssembly());
+            services.AddMediatR(assemblies);
         }
 
         public static void AddEntityServices(this IServiceCollection services)
