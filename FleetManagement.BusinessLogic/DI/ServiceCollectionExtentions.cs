@@ -8,7 +8,8 @@ using FleetManager.EFCore.UnitOfWork;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
-
+using System.Reflection;
+using MediatR;
 
 namespace FleetManagement.BLL.DependencyInjection
 {
@@ -45,9 +46,21 @@ namespace FleetManagement.BLL.DependencyInjection
             services.AddSingleton(mapper);
         }
 
-        public static void addMediatR(this ServiceCollection services)
-        { 
-            
+        public static void AddMediatRCqs(this IServiceCollection services)
+        {
+            services.AddMediatR(Assembly.GetExecutingAssembly());
+        }
+
+        public static void AddEntityServices(this IServiceCollection services)
+        {
+            services.AddScoped<IDriverService, DriverService>();
+            services.AddScoped<IAppealService, AppealService>();
+            services.AddScoped<IDriverVehicleService, DriverVehicleService>();
+            services.AddScoped<IFuelCardDriverService, FuelCardDriverService>();
+            services.AddScoped<IFuelCardService, FuelCardService>();
+            services.AddScoped<IMaintenanceService, MaintenanceService>();
+            services.AddScoped<IRepareService, RepareService>();
+            services.AddScoped<IVehicleService, VehicleService>();
         }
     }
 }

@@ -30,6 +30,8 @@ namespace FleetManagement.ReadAPI
             services.AddRepositories();
             services.AddDatabaseContext();
             services.AddMapper();
+            services.AddMediatRCqs();
+            services.AddEntityServices();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

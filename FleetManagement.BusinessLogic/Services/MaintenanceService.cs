@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace FleetManagement.BLL.Services
 {
-    public class MaintenanceService
+    public class MaintenanceService : IMaintenanceService
     {
         private readonly IUnitOfWork _unitOfWork;
         private readonly IMapper _mapper;

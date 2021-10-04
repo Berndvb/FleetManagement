@@ -5,7 +5,7 @@ using FleetManagement.Framework.Models.Dtos;
 
 namespace FleetManagement.BLL.Services
 {
-    public class FuelCardDriverService
+    public class FuelCardDriverService : IFuelCardDriverService
     {
         private readonly IUnitOfWork _unitOfWork;
         private readonly IMapper _mapper;

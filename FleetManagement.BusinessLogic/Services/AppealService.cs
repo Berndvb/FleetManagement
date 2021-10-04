@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace FleetManagement.BLL.Services
 {
-    public class AppealService
+    public class AppealService : IAppealService
     {
         private readonly IUnitOfWork _unitOfWork;
         private readonly IMapper _mapper;

@@ -9,12 +9,12 @@ using System.Threading.Tasks;
 
 namespace FleetManagement.BLL.Services
 {
-    public class VehicleService
+    public class FuelCardService : IFuelCardService
     {
         private readonly IUnitOfWork _unitOfWork;
         private readonly IMapper _mapper;
 
-        public VehicleService(
+        public FuelCardService(
             IUnitOfWork unitOfWork, 
             IMapper mapper)
         {

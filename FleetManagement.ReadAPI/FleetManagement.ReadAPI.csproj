@@ -16,6 +16,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\FleetManagement.BusinessLogic\FleetManagement.BLL.csproj" />
+    <ProjectReference Include="..\SourceCode\MediatR\MediatR.Cqs.csproj" />
   </ItemGroup>
 
   <ItemGroup>
@@ -26,7 +27,6 @@
 
   <ItemGroup>
     <Folder Include="Features\DriverVehicle\UpdateDriverVehicle\" />
-    <Folder Include="Features\Driver\GetAllDriverOverviews\" />
     <Folder Include="Features\Driver\GetDriverDetails\" />
     <Folder Include="Features\FuelCard\GetFuelCardDetails\" />
     <Folder Include="Features\Appeal\GetTotalAppeals\" />

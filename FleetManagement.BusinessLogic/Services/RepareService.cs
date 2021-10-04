@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace FleetManagement.BLL.Services
 {
-    public class RepareService
+    public class RepareService : IRepareService
     {
         private readonly IUnitOfWork _unitOfWork;
         private readonly IMapper _mapper;

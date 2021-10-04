@@ -3,9 +3,9 @@ using FleetManagement.Domain.Interfaces;
 using FleetManagement.Domain.Models;
 using FleetManagement.Framework.Models.Dtos;
 
-namespace FleetManagement.BLL.Services.DI
+namespace FleetManagement.BLL.Services
 {
-    public class VehicleService
+    public class VehicleService : IVehicleService
     {
         private readonly IUnitOfWork _unitOfWork;
         private readonly IMapper _mapper;

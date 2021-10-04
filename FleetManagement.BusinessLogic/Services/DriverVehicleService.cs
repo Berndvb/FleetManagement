@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace FleetManagement.BLL.Services
 {
-    public class DriverVehicleService
+    public class DriverVehicleService : IDriverVehicleService
     {
         private readonly IUnitOfWork _unitOfWork;
         private readonly IMapper _mapper;

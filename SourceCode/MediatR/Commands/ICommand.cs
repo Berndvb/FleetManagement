@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace MediatR.Commands
 {
-    public  interface ICommand<out IRes> : IRequest<IRes>
+    public  interface ICommand<out TRes> : IRequest<TRes>
     {
     }
 
