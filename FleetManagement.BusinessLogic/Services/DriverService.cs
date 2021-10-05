@@ -1,5 +1,6 @@
 ﻿using AutoMapper;
-using FleetManagement.Domain.Interfaces;
+using FleetManagement.BLL.Services.Model;
+using FleetManagement.Domain.Interfaces.Repositories;
 using FleetManagement.Domain.Models;
 using FleetManagement.Framework.Models.Dtos;
 using FleetManagement.Framework.Models.Dtos.ShowDtos;
@@ -48,51 +49,76 @@ namespace FleetManagement.BLL.Services
             return driverdetaillsDto;
         }
 
-        public async Task<List<FuelCardDto>> GetFuelCardDetailsForDriver(int driverId)//!!Too hard to map? - alternative in FuelCardService
+        public async Task<List<FuelCardDto>> GetFuelCardsForDriver(int driverId)
         {
-            var driversWithFuelCards = await _unitOfWork.Drivers.GetListBy(
-                filter: x => x.Id.Equals(driverId),
-                x => x.Include(y => y.FuelCards),
-                x => x.Include(y => y.FuelCards.Select(z => z.FuelCard)),
-                x => x.Include(y => y.FuelCards.Select(z => z.FuelCard.FuelCardOptions)));
+            var fuelCards = await _unitOfWork.FuelCards.GetListBy(
+                filter: x => x.Drivers.Any(y => y.Driver.Id.Equals(driverId)),
+                x => x.Include(y => y.FuelCardOptions));
 
-            var fuelCardInfoDtos = _mapper.Map<List<FuelCardDto>>(driversWithFuelCards);
+            var fuelCardInfoDtos = _mapper.Map<List<FuelCardDto>>(fuelCards);
 
             return fuelCardInfoDtos;
         }
 
-        public async Task<List<AppealDto>> GetAllAppealsForDriver(int driverId)
+        public async Task<List<VehicleDetailsDto>> GetVehiclesForDriver(int driverId)
         {
-            var appeals = await _unitOfWork.Drivers.GetListBy(
-                filter: x => x.Id.Equals(driverId),
-                x => x.Include(y => y.Appeals),
-                x => x.Include(y => y.Appeals.Select(z => z.Vehicle)),
-                x => x.Include(y => y.Appeals.Select(z => z.Vehicle.Identity)));
+            var driverVehicles = await _unitOfWork.DriverVehicles.GetListBy(
+                filter: x => x.Driver.Id.Equals(driverId),
+                x => x.Include(y => y.Vehicle),
+                x => x.Include(y => y.Vehicle.Identity));
 
-            var appealInfoDtos = _mapper.Map<List<AppealDto>>(appeals);
+            var vehicleDetailsDtos = _mapper.Map<List<VehicleDetailsDto>>(driverVehicles);
 
-            return appealInfoDtos;
+            return vehicleDetailsDtos;
+        }
+
+        public async Task<List<AppealDto>> GetAppealsForDriver(int driverId)
+        {
+            var appeals = await _unitOfWork.Appeals.GetListBy(
+                filter: x => x.Driver.Id.Equals(driverId),
+                x => x.Include(y => y.Vehicle),
+                x => x.Include(y => y.Vehicle.Identity));
+
+            var appealDtos = _mapper.Map<List<AppealDto>>(appeals);
+
+            return appealDtos;
         }
 
         public async Task<List<VehicleAppealDto>> GetAppealsForDriverPerCar(int driverId, int vehicleId)//for lazy loading @ GetVehicleDetailsForDriver
         {
-            var driverWithAppeals = await _unitOfWork.Drivers.GetListBy(
-                filter: x => x.Id.Equals(driverId),
-                x => x.Include(y => y.Appeals.Where(z => z.Vehicle.Id.Equals(vehicleId))));
+            var vehicleAppeals = await _unitOfWork.Appeals.GetListBy(
+                filter: x => x.Driver.Id.Equals(driverId) && x.Vehicle.Id.Equals(vehicleId));
 
-            var vehicleAppealDtos = _mapper.Map<List<VehicleAppealDto>>(driverWithAppeals);
+            var vehicleAppealDtos = _mapper.Map<List<VehicleAppealDto>>(vehicleAppeals);
 
             return vehicleAppealDtos;
+        }
+
+        public async Task<List<VehicleMaintenanceDto>> GetMaintenancesForDriverPerCar(int driverId, int vehicleId)//for lazy loading @ GetVehicleDetailsForDriver
+        {
+            var maintenances = await _unitOfWork.Maintenance.GetListBy(
+                filter: x => x.Driver.Id.Equals(driverId) && x.Vehicle.Id.Equals(vehicleId));
+
+            var maintenanceDtos = _mapper.Map<List<VehicleMaintenanceDto>>(maintenances);
+
+            return maintenanceDtos;
+        }
+
+        public async Task<List<VehicleRepareDto>> GetReparationsForDriverPerCar(int driverId, int vehicleId)//for lazy loading @ GetVehicleDetailsForDriver
+        {
+            var reparations = await _unitOfWork.Repares.GetListBy(
+                filter: x => x.Driver.Id.Equals(driverId) && x.Vehicle.Id.Equals(vehicleId));
+
+            var reparationDtos = _mapper.Map<List<VehicleRepareDto>>(reparations);
+
+            return reparationDtos;
         }
 
         public void UpdateDriver(DriverDetailsDto driverDto)
         {
             var driver = _mapper.Map<Driver>(driverDto);
 
-            _unitOfWork.Drivers.Update(driver,
-                x => x.Appeals,
-                x => x.Vehicles,
-                x => x.FuelCards);
+            _unitOfWork.Drivers.Update(driver);
 
             _unitOfWork.Complete();
         }
@@ -120,6 +146,18 @@ namespace FleetManagement.BLL.Services
             _unitOfWork.Drivers.RemoveById(driverId);
 
             _unitOfWork.Complete();
+        }
+
+        public async Task<InputValidationCodes> DriverIdIsUnique(int id)
+        {
+            var ids = await _unitOfWork.Drivers.GetIds(id);
+
+            return ids.Count switch
+            {
+                0 => InputValidationCodes.IdNotFound,
+                > 1 => InputValidationCodes.IdNotUnique,
+                _ => InputValidationCodes.OK,
+            };
         }
     }
 }

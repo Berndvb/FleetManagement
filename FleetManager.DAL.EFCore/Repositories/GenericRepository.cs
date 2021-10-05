@@ -1,6 +1,6 @@
-﻿using FleetManagement.Domain.Interfaces;
+﻿using FleetManagement.Domain.Interfaces.Models;
 using FleetManagement.EFCore.Infrastructure;
-using FleetManager.Domain.Interfaces;
+using FleetManager.Domain.Interfaces.Repositories;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Query;
 using System;
@@ -11,7 +11,8 @@ using System.Threading.Tasks;
 
 namespace FleetManager.EFCore.Repositories
 {
-    public class GenericRepository<TEntity> : IGenericRepository<TEntity> where TEntity : class, IBaseClass
+    public class GenericRepository<TEntity> : IGenericRepository<TEntity> 
+        where TEntity : class, IBaseClass
     {
         private readonly DatabaseContext _context;
         private readonly DbSet<TEntity> _dbSet;
@@ -86,14 +87,14 @@ namespace FleetManager.EFCore.Repositories
             _dbSet.RemoveRange(entities);
         }
 
-        public void Update(TEntity entitie, params Expression<Func<TEntity, object>>[] exclusions)
+        public void Update(TEntity entitie/*, params Expression<Func<TEntity, object>>[] exclusions*/)
         {
             _dbSet.Update(entitie);
 
-            foreach (var exclusion in exclusions)
-            {
-                _context.Entry(entitie).Property(exclusion).IsModified = false;
-            }
+            //foreach (var exclusion in exclusions)
+            //{
+            //    _context.Entry(entitie).Property(exclusion).IsModified = false; 
+            //}
         }
 
         public void UpdateRange(IEnumerable<TEntity> entities)

@@ -1,5 +1,4 @@
-﻿using FleetManagement.Domain.Interfaces;
-
+﻿using FleetManagement.Domain.Interfaces.Models;
 namespace FleetManagement.Domain.Models
 {
     public class Garage : IBaseClass

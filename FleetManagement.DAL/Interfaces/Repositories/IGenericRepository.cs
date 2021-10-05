@@ -1,4 +1,4 @@
-﻿using FleetManagement.Domain.Interfaces;
+﻿using FleetManagement.Domain.Interfaces.Models;
 using Microsoft.EntityFrameworkCore.Query;
 using System;
 using System.Collections.Generic;
@@ -6,9 +6,10 @@ using System.Linq;
 using System.Linq.Expressions;
 using System.Threading.Tasks;
 
-namespace FleetManager.Domain.Interfaces
+namespace FleetManager.Domain.Interfaces.Repositories
 {
-    public interface IGenericRepository<TEntity> where TEntity : class, IBaseClass
+    public interface IGenericRepository<TEntity> 
+        where TEntity : class, IBaseClass
     {
         Task<TEntity> GetBy(
             Expression<Func<TEntity, bool>> filter = null,
@@ -21,7 +22,7 @@ namespace FleetManager.Domain.Interfaces
         void Remove(TEntity entity);
         Task RemoveById(int id);
         void RemoveRange(ICollection<TEntity> entities);
-        void Update(TEntity entitie, params Expression<Func<TEntity, object>>[] exclusions);
+        void Update(TEntity entitie/*, params Expression<Func<TEntity, object>>[] exclusions*/);
         void UpdateRange(IEnumerable<TEntity> entities);
         Task<List<int>> GetIds(int id);
     }

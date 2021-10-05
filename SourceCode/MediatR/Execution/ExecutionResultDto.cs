@@ -1,6 +1,6 @@
 ﻿using System.Collections.Generic;
 
-namespace MediatR.Cqs.Execution
+namespace MediatR.Cqrs.Execution
 {
     public class ExecutionResultDto
     {

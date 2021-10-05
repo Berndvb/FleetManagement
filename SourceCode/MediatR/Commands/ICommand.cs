@@ -1,11 +1,6 @@
-﻿using MediatR.Cqs.Execution;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using MediatR.Cqrs.Execution;
 
-namespace MediatR.Commands
+namespace MediatR.Cqrs.Commands
 {
     public  interface ICommand<out TRes> : IRequest<TRes>
     {

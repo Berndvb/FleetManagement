@@ -1,7 +1,6 @@
-﻿using MediatR.Commands;
-using MediatR.Cqs.Execution;
+﻿using MediatR.Cqrs.Execution;
 
-namespace MediatR.Cqs.Commands
+namespace MediatR.Cqrs.Commands
 {
     //public interface ICommandHandler<in TCommand> : IRequestHandler<TCommand, ExecutionResult> 
     //    where TCommand : ICommand

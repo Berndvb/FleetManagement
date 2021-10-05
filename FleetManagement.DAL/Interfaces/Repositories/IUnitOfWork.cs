@@ -1,7 +1,8 @@
 ﻿using FleetManagement.Domain.Models;
 using FleetManager.Domain.Interfaces;
+using FleetManager.Domain.Interfaces.Repositories;
 
-namespace FleetManagement.Domain.Interfaces
+namespace FleetManagement.Domain.Interfaces.Repositories
 {
     public interface IUnitOfWork
     {

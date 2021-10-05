@@ -17,7 +17,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\FleetManagement.BusinessLogic\FleetManagement.BLL.csproj" />
-    <ProjectReference Include="..\SourceCode\MediatR\MediatR.Cqs.csproj" />
+    <ProjectReference Include="..\SourceCode\MediatR\MediatR.Cqrs.csproj" />
   </ItemGroup>
 
   <ItemGroup>
@@ -27,19 +27,12 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="Features\DriverVehicle\UpdateDriverVehicle\" />
-    <Folder Include="Features\FuelCard\GetFuelCardDetails\" />
-    <Folder Include="Features\Appeal\GetTotalAppeals\" />
-    <Folder Include="Features\Appeal\GetAppealsPerCar\" />
-    <Folder Include="Features\DriverVehicle\GetVehicleDetails\" />
-    <Folder Include="Features\FuelCardDriver\" />
-    <Folder Include="Features\Maintenance\GetMaintenancesPerCar\" />
-    <Folder Include="Features\Repare\GetReparationsPerCar\" />
-    <Folder Include="Features\Driver\AddDriver\" />
-    <Folder Include="Features\Driver\RemoveDriver\" />
-    <Folder Include="Features\Driver\UpdateDriver\" />
-    <Folder Include="Features\FuelCard\UpdateFuelCard\" />
-    <Folder Include="Features\Vehicle\UpdateVehicle\" />
+    <Folder Include="Features\DriverManagement\GetFuelCardDetails\" />
+    <Folder Include="Features\DriverManagement\GetTotalAppeals\" />
+    <Folder Include="Features\DriverManagement\GetAppealsPerCar\" />
+    <Folder Include="Features\DriverManagement\GetVehicleDetails\" />
+    <Folder Include="Features\DriverManagement\GetMaintenancesPerCar\" />
+    <Folder Include="Features\DriverManagement\GetReparationsPerCar\" />
   </ItemGroup>
 
 </Project>

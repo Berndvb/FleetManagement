@@ -1,14 +1,9 @@
-﻿using MediatR.Queries;
-using Microsoft.AspNetCore.Mvc;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
+﻿using MediatR.Cqrs.Queries;
 
 namespace FleetManagement.ReadAPI.Features.Driver.GetDriverDetails
 {
     public class GetDriverDetailsQuery : IQuery<GetDriverDetailsQueryResult>
     {
-
+        public int DriverId { get; set; }
     }
 }

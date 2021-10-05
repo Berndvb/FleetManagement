@@ -1,9 +1,8 @@
-﻿using MediatR.Cqs.Execution;
-using MediatR.Queries;
+﻿using MediatR.Cqrs.Execution;
 using System.Threading;
 using System.Threading.Tasks;
 
-namespace MediatR.Cqs.Queries
+namespace MediatR.Cqrs.Queries
 {
     public abstract class QueryHandler<TReq, TRes> : IQueryHandler<TReq, TRes>
       where TRes : ExecutionResult

@@ -1,4 +1,4 @@
-﻿using FleetManagement.Domain.Interfaces;
+﻿using FleetManagement.Domain.Interfaces.Models;
 using FleetManagement.Framework.Models.Enums;
 using System.Collections.Generic;
 

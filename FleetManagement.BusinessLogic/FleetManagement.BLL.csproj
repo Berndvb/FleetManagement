@@ -14,6 +14,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\FleetManager.DAL.EFCore\FleetManager.EFCore.csproj" />
+    <ProjectReference Include="..\SourceCode\MediatR\MediatR.Cqrs.csproj" />
   </ItemGroup>
 
 </Project>

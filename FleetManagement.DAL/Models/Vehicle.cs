@@ -1,4 +1,4 @@
-﻿using FleetManagement.Domain.Interfaces;
+﻿using FleetManagement.Domain.Interfaces.Models;
 using System.Collections.Generic;
 
 namespace FleetManagement.Domain.Models

@@ -1,13 +1,8 @@
-﻿using MediatR.Commands;
-using MediatR.Cqs.Execution;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
+﻿using MediatR.Cqrs.Execution;
 using System.Threading;
 using System.Threading.Tasks;
 
-namespace MediatR.Cqs.Commands
+namespace MediatR.Cqrs.Commands
 {
     public abstract class CommandHandler<TReq, TRes> : ICommandHandler<TReq, TRes>
         where TRes : ExecutionResult

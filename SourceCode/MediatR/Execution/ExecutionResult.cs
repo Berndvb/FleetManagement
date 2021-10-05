@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 
-namespace MediatR.Cqs.Execution
+namespace MediatR.Cqrs.Execution
 {
     public class ExecutionResult
     {

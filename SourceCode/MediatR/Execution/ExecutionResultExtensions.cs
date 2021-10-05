@@ -2,7 +2,7 @@
 using System.Linq;
 using System.Net;
 
-namespace MediatR.Cqs.Execution
+namespace MediatR.Cqrs.Execution
 {
     public static class ExecutionResultExtensions
     {

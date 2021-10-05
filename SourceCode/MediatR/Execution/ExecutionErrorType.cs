@@ -1,4 +1,4 @@
-﻿namespace MediatR.Cqs.Execution
+﻿namespace MediatR.Cqrs.Execution
 {
     public enum ExecutionErrorType
     {

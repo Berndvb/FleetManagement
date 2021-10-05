@@ -1,5 +1,5 @@
 ﻿using AutoMapper;
-using FleetManagement.Domain.Interfaces;
+using FleetManagement.Domain.Interfaces.Repositories;
 using FleetManagement.Domain.Models;
 using FleetManagement.Framework.Models.Dtos;
 
@@ -31,13 +31,7 @@ namespace FleetManagement.BLL.Services
         {
             var vehicle = _mapper.Map<Vehicle>(vehicleDetailsDto);
 
-            _unitOfWork.Vehicles
-                .Update(vehicle,
-                x => x.Id,
-                x => x.Maintenances,
-                x => x.Reparations,
-                x => x.Drivers,
-                x => x.Appeals);
+            _unitOfWork.Vehicles.Update(vehicle);
 
             _unitOfWork.Complete();
         }

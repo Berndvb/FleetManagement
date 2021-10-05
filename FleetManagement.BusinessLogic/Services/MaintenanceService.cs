@@ -1,8 +1,5 @@
 ﻿using AutoMapper;
-using FleetManagement.Domain.Interfaces;
-using FleetManagement.Framework.Models.Dtos;
-using System.Collections.Generic;
-using System.Threading.Tasks;
+using FleetManagement.Domain.Interfaces.Repositories;
 
 namespace FleetManagement.BLL.Services
 {
@@ -17,16 +14,6 @@ namespace FleetManagement.BLL.Services
         {
             _unitOfWork = unitOfWork;
             _mapper = mapper;
-        }
-
-        public async Task<List<VehicleMaintenanceDto>> GetMaintenancesForDriverPerCar(int driverId, int vehicleId)//for lazy loading @ GetVehicleDetailsForDriver
-        {
-            var maintenances = await _unitOfWork.Maintenance.GetListBy(
-                filter: x => x.Driver.Id.Equals(driverId) && x.Vehicle.Id.Equals(vehicleId));
-
-            var maintenanceDtos = _mapper.Map<List<VehicleMaintenanceDto>>(maintenances);
-
-            return maintenanceDtos;
         }
     }
 }

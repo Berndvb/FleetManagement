@@ -16,5 +16,7 @@ namespace FleetManagement.EFCore.Infrastructure
         public DatabaseContext(DbContextOptions<DatabaseContext> options) : base(options)
         {
         }
+
+        //onmodelcreating - tpt, tph, tpc
     }
 }

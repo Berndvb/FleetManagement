@@ -1,12 +1,11 @@
-using FleetManagement.BLL.DependencyInjection;
+using FleetManagement.BLL.DI;
+using MediatR;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.OpenApi.Models;
-using MediatR.Cqs;
-using MediatR;
 
 namespace FleetManagement.ReadAPI
 {
@@ -22,20 +21,16 @@ namespace FleetManagement.ReadAPI
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
+            var connectionString = Configuration.GetConnectionString("DefaultConnection");
+
             services.AddControllers();
             services.AddSwaggerGen(c =>
             {
                 c.SwaggerDoc("v1", new OpenApiInfo { Title = "FleetManagement.ReadAPI", Version = "v1" });
             });
 
-            services.AddUnitOfWork();
-            services.AddRepositories();
-            services.AddDatabaseContext();
-            services.AddMapper();
-            services.AddEntityServices();
-            services.AddMediatR(typeof(Startup));
-
-            //services.ConfigureMediatR();
+            services.AddDALServices(connectionString);
+            services.AddBLLServices();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
