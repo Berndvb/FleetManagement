@@ -26,13 +26,4 @@
     </Content>
   </ItemGroup>
 
-  <ItemGroup>
-    <Folder Include="Features\DriverManagement\GetFuelCardDetails\" />
-    <Folder Include="Features\DriverManagement\GetTotalAppeals\" />
-    <Folder Include="Features\DriverManagement\GetAppealsPerCar\" />
-    <Folder Include="Features\DriverManagement\GetVehicleDetails\" />
-    <Folder Include="Features\DriverManagement\GetMaintenancesPerCar\" />
-    <Folder Include="Features\DriverManagement\GetReparationsPerCar\" />
-  </ItemGroup>
-
 </Project>

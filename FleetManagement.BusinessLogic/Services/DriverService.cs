@@ -24,7 +24,7 @@ namespace FleetManagement.BLL.Services
             _mapper = mapper;
         }
 
-        public async Task<List<DriverOverviewDto>> GetAllDriverOverviews(bool onlyInService)
+        public async Task<List<DriverOverviewDto>> GetDriverOverviews(bool onlyInService)
         {
 
             var drivers = onlyInService 
@@ -104,7 +104,7 @@ namespace FleetManagement.BLL.Services
             return maintenanceDtos;
         }
 
-        public async Task<List<VehicleRepareDto>> GetReparationsForDriverPerCar(int driverId, int vehicleId)//for lazy loading @ GetVehicleDetailsForDriver
+        public async Task<List<VehicleRepareDto>> GetRepairsForDriverPerCar(int driverId, int vehicleId)//for lazy loading @ GetVehicleDetailsForDriver
         {
             var reparations = await _unitOfWork.Repares.GetListBy(
                 filter: x => x.Driver.Id.Equals(driverId) && x.Vehicle.Id.Equals(vehicleId));

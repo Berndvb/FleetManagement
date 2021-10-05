@@ -31,6 +31,7 @@ namespace FleetManagement.ReadAPI
 
             services.AddDALServices(connectionString);
             services.AddBLLServices();
+            services.AddMediatRCqrsServices(typeof(Startup));
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

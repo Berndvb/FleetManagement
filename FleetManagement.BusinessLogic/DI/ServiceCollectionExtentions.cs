@@ -3,6 +3,8 @@ using FleetManagement.BLL.Services;
 using FleetManager.EFCore.DI;
 using MediatR.Cqrs.DI;
 using Microsoft.Extensions.DependencyInjection;
+using System;
+using System.Reflection;
 
 namespace FleetManagement.BLL.DI
 {
@@ -12,7 +14,11 @@ namespace FleetManagement.BLL.DI
         {
             services.AddMapper();
             services.AddEntityServices();
-            services.AddMediatRCqrs();
+        }
+
+        public static void AddMediatRCqrsServices(this IServiceCollection services, Type type)
+        {
+            services.AddMediatRCqrs(type);
         }
 
         public static void AddDALServices(this IServiceCollection services, string connectionString)

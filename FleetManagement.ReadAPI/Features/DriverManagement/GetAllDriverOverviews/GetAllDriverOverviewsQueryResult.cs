@@ -1,11 +1,8 @@
 ﻿using FleetManagement.Framework.Models.Dtos.ShowDtos;
 using MediatR.Cqrs.Execution;
-using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 
-namespace FleetManagement.ReadAPI.Features.Driver.GetAllDriverOverviews
+namespace FleetManagement.ReadAPI.Features.DriverManagement.GetAllDriverOverviews
 {
     public class GetAllDriverOverviewsQueryResult : ExecutionResult
     {

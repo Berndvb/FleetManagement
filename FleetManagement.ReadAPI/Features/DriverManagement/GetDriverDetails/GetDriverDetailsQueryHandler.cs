@@ -1,15 +1,11 @@
 ﻿using FleetManagement.BLL.Services;
-using FleetManagement.BLL.Services.Model;
-using Microsoft.AspNetCore.Mvc;
-using System;
-using System.Collections.Generic;
-using System.Linq;
+using MediatR.Cqrs.Queries;
 using System.Threading;
 using System.Threading.Tasks;
 
-namespace FleetManagement.ReadAPI.Features.Driver.GetDriverDetails
+namespace FleetManagement.ReadAPI.Features.DriverManagement.GetDriverDetails
 {
-    public class GetDriverDetailsQueryHandler
+    public class GetDriverDetailsQueryHandler : QueryHandler<GetDriverDetailsQuery, GetDriverDetailsQueryResult>
     {
         private readonly IDriverService _driverService;
 
@@ -19,23 +15,13 @@ namespace FleetManagement.ReadAPI.Features.Driver.GetDriverDetails
             _driverService = driverService;
         }
 
-        //public  override Task<GetDriverDetailsQueryResult> Handle(
-        //    GetDriverDetailsQuery request,
-        //    CancellationToken cancellationToken)
-        //{
-        //    //switch (await _driverService.DriverIdIsUnique(request.DriverId))
-        //    //{
-        //    //    case InputValidationCodes.IdNotFound:
-        //    //        return 
-        //    //    default:
-        //    //        break;
-        //    //}
+        public async override Task<GetDriverDetailsQueryResult> Handle(
+            GetDriverDetailsQuery request,
+            CancellationToken cancellationToken)
+        {
+            var driverDetails = await _driverService.GetDriverDetails(int.Parse(request.DriverId));
 
-        //    throw new NotImplementedException();
-
-        //    var driverDetails = _driverService.GetDriverDetails(request.DriverId);
-
-        //    return new GetDriverDetailsQueryResult();
-        //}
+            return new GetDriverDetailsQueryResult(driverDetails);
+        }
     }
 }

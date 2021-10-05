@@ -1,9 +1,9 @@
 ﻿using MediatR.Cqrs.Queries;
 
-namespace FleetManagement.ReadAPI.Features.Driver.GetDriverDetails
+namespace FleetManagement.ReadAPI.Features.DriverManagement.GetDriverDetails
 {
     public class GetDriverDetailsQuery : IQuery<GetDriverDetailsQueryResult>
     {
-        public int DriverId { get; set; }
+        public string DriverId { get; set; }
     }
 }

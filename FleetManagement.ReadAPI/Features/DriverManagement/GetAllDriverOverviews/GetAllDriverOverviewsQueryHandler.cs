@@ -1,9 +1,11 @@
 ﻿using FleetManagement.BLL.Services;
+using FleetManagement.Framework.Constants;
+using MediatR.Cqrs.Execution;
 using MediatR.Cqrs.Queries;
 using System.Threading;
 using System.Threading.Tasks;
 
-namespace FleetManagement.ReadAPI.Features.Driver.GetAllDriverOverviews
+namespace FleetManagement.ReadAPI.Features.DriverManagement.GetAllDriverOverviews
 {
     public class GetAllDriverOverviewsQueryHandler : QueryHandler<GetAllDriverOverviewsQuery, GetAllDriverOverviewsQueryResult>
     {
@@ -19,7 +21,7 @@ namespace FleetManagement.ReadAPI.Features.Driver.GetAllDriverOverviews
             GetAllDriverOverviewsQuery request,
             CancellationToken cancellationToken)
         {
-            var driverOverviews = await _driverService.GetAllDriverOverviews(request.FetchAll);
+            var driverOverviews = await _driverService.GetDriverOverviews(onlyInService: false);
 
             return new GetAllDriverOverviewsQueryResult(driverOverviews);
         }
