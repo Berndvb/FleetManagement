@@ -8,13 +8,13 @@ namespace FleetManagement.Framework.Models.Dtos
     {
         public int Id { get; set; }
 
-        public FuelTypes Fueltype { get; set; }
+        public FuelType Fueltype { get; set; }
 
         public List<string> ExtraServices { get; set; }
 
         public FuelCardOptionsDto(
             int id,
-            FuelTypes fuelType,
+            FuelType fuelType,
             string extraServices)
         {
             Id = id;

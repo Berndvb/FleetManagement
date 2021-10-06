@@ -9,9 +9,9 @@ namespace FleetManagement.Domain.Models
 
         public string Chassisnumber { get; set; }
 
-        public FuelTypes FuelType { get; set; }
+        public FuelType FuelType { get; set; }
 
-        public CarTypes CarType { get; set; }
+        public CarType CarType { get; set; }
 
         public string Brand { get; set; }
 

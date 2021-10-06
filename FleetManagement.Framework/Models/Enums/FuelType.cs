@@ -1,6 +1,6 @@
 ﻿namespace FleetManagement.Framework.Models.Enums
 {
-    public enum FuelTypes
+    public enum FuelType
     {
         Diesel,
         Gasoline,

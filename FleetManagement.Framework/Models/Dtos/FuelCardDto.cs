@@ -11,7 +11,7 @@ namespace FleetManagement.Framework.Models.Dtos
 
         public DateTime ExpirationDate { get; set; }
 
-        public AuthenticatieTypes AuthenticationType { get; set; }
+        public AuthenticatieType AuthenticationType { get; set; }
 
         public FuelCardOptionsDto FuelCardOptions { get; set; }
 
@@ -21,7 +21,7 @@ namespace FleetManagement.Framework.Models.Dtos
             int id,
             string cardNumber,
             DateTime expirationDate,
-            AuthenticatieTypes authenticationType,
+            AuthenticatieType authenticationType,
             FuelCardOptionsDto fuelCardOptions,
             bool blocked)
         {

@@ -148,15 +148,15 @@ namespace FleetManagement.BLL.Services
             _unitOfWork.Complete();
         }
 
-        public async Task<InputValidationCodes> DriverIdIsUnique(int id)
+        public async Task<IdValidationCodes> ValidateId(int id)
         {
             var ids = await _unitOfWork.Drivers.GetIds(id);
 
             return ids.Count switch
             {
-                0 => InputValidationCodes.IdNotFound,
-                > 1 => InputValidationCodes.IdNotUnique,
-                _ => InputValidationCodes.OK,
+                0 => IdValidationCodes.IdNotFound,
+                > 1 => IdValidationCodes.IdNotUnique,
+                _ => IdValidationCodes.OK,
             };
         }
     }

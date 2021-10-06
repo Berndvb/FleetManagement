@@ -11,5 +11,9 @@
             Message = message;
             Code = code;
         }
+
+        public ExecutionError()
+        {
+        }
     }
 }

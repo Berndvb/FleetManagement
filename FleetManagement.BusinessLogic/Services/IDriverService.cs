@@ -20,6 +20,6 @@ namespace FleetManagement.BLL.Services
         void AddDriver(DriverDto driverDto);
         void RemoveDriver(DriverDto driverDto);
         void RemoveDriver(int driverId);
-        Task<InputValidationCodes> DriverIdIsUnique(int id);
+        Task<IdValidationCodes> ValidateId(int id);
     }
 }

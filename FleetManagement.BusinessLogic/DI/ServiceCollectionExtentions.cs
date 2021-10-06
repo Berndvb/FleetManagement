@@ -4,7 +4,6 @@ using FleetManager.EFCore.DI;
 using MediatR.Cqrs.DI;
 using Microsoft.Extensions.DependencyInjection;
 using System;
-using System.Reflection;
 
 namespace FleetManagement.BLL.DI
 {

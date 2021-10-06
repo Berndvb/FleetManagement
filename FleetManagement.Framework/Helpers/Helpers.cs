@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Globalization;
 using System.Linq;
 
 namespace FleetManagement.Framework.Helpers
@@ -34,6 +35,24 @@ namespace FleetManagement.Framework.Helpers
         public static string Unify<TDatatype>(this List<TDatatype> input)
         {
             return String.Join(SPLITTER, input);
+        }
+
+        public static bool AfterAllphiStartdate(this DateTime date)
+        { 
+            var allphiStartdate = DateTime.ParseExact(Constants.Constants.Info.StartAllPhi, "yyyyMMdd", CultureInfo.InvariantCulture);
+            switch (DateTime.Compare(date, allphiStartdate))
+            {
+                case > 0:
+                    return true;
+                default:
+                    return false;
+            }
+        }
+
+        public static DateTime AllphiStartdate()
+        {
+            var allphiStartdate = DateTime.ParseExact(Constants.Constants.Info.StartAllPhi, "yyyyMMdd", CultureInfo.InvariantCulture);
+            return allphiStartdate;
         }
     }
 }

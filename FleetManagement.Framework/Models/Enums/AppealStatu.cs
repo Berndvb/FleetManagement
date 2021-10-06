@@ -1,6 +1,6 @@
 ﻿namespace FleetManagement.Framework.Models.Enums
 {
-    public enum AppealStatus
+    public enum AppealStatu
     {
         New,
         Open,

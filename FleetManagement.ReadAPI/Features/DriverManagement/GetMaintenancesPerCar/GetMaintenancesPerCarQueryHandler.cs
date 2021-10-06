@@ -1,8 +1,5 @@
 ﻿using FleetManagement.BLL.Services;
 using MediatR.Cqrs.Queries;
-using System;
-using System.Collections.Generic;
-using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
 

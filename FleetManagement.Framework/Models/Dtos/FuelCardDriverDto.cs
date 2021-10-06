@@ -10,7 +10,7 @@ namespace FleetManagement.Framework.Models.Dtos
 
         public DateTime CreationDate { get; set; }
 
-        public DateTime ClosureDate { get; set; }
+        public DateTime? ClosureDate { get; set; }
 
         public FuelCardDriverDto(
             int id,

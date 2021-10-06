@@ -15,7 +15,7 @@ namespace FleetManagement.Domain.Models
 
         public string Pincode { get; set; }
 
-        public AuthenticatieTypes AuthenticationType { get; set; }
+        public AuthenticatieType AuthenticationType { get; set; }
 
         public FuelCardOptions FuelCardOptions { get; set; }
 

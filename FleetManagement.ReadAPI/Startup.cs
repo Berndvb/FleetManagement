@@ -1,5 +1,6 @@
 using FleetManagement.BLL.DI;
-using MediatR;
+using FleetManagement.ReadAPI.Features.DriverManagement.GetAllAppeals;
+using FluentValidation.AspNetCore;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
@@ -28,6 +29,8 @@ namespace FleetManagement.ReadAPI
             {
                 c.SwaggerDoc("v1", new OpenApiInfo { Title = "FleetManagement.ReadAPI", Version = "v1" });
             });
+            services.AddMvc()
+                 .AddFluentValidation(fv => fv.RegisterValidatorsFromAssemblyContaining<GetAllAppealsQueryValidator>());
 
             services.AddDALServices(connectionString);
             services.AddBLLServices();

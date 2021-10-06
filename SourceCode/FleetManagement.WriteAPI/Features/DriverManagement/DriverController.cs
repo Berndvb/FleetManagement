@@ -21,7 +21,7 @@ namespace FleetManagement.WriteAPI.Features.DriverManagement
             _mediator = mediator;
         }
 
-        [HttpPost]
+        [HttpPost("add-driver")]
         public async Task<IActionResult> AddDriver(
            AddDriverCommand addDriverCommand,
            CancellationToken cancellationToken)
@@ -51,7 +51,7 @@ namespace FleetManagement.WriteAPI.Features.DriverManagement
             return removeDriverCommandResult.ToActionResult();
         }
 
-        [HttpPost("update-driver")]
+        [HttpPut("update-driver/{driverId}")]
         public async Task<IActionResult> UpdateDriver(
            UpdateDriverCommand updateDriverCommand,
            CancellationToken cancellationToken)

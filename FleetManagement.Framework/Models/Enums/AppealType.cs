@@ -1,6 +1,6 @@
 ﻿namespace FleetManagement.Framework.Models.Enums
 {
-    public enum AppealTypes
+    public enum AppealType
     {
         FuelCard,
         RequestVehicle,

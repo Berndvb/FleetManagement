@@ -5,6 +5,8 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.OpenApi.Models;
+using FluentValidation.AspNetCore;
+using FleetManagement.WriteAPI.Features.DriverManagement.AddDriver;
 
 namespace FleetManagement.WriteAPI
 {
@@ -27,6 +29,8 @@ namespace FleetManagement.WriteAPI
             {
                 c.SwaggerDoc("v1", new OpenApiInfo { Title = "FleetManagement.WriteAPI", Version = "v1" });
             });
+            services.AddMvc()
+                    .AddFluentValidation(fv => fv.RegisterValidatorsFromAssemblyContaining<AddDriverCommandValidator>());
 
             services.AddDALServices(connectionString);
             services.AddBLLServices();

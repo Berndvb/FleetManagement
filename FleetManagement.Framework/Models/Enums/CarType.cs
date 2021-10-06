@@ -1,6 +1,6 @@
 ﻿namespace FleetManagement.Framework.Models.Enums
 {
-    public enum CarTypes
+    public enum CarType
     {
         Persoonswagen,
         LichteVracht
