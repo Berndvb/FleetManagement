@@ -10,12 +10,6 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="Features\FuelCardManagement\UpdateFuelCardDriver\" />
-    <Folder Include="Features\VehicleManagement\UpdateDriverVehicle\" />
-    <Folder Include="Features\VehicleManagement\UpdateVehicle\" />
-  </ItemGroup>
-
-  <ItemGroup>
     <ProjectReference Include="..\..\FleetManagement.BusinessLogic\FleetManagement.BLL.csproj" />
   </ItemGroup>
 

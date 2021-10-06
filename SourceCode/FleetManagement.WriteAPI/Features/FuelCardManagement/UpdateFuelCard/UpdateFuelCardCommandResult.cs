@@ -1,11 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
+﻿using MediatR.Cqrs.Execution;
 
 namespace FleetManagement.WriteAPI.Features.FuelCardManagement.UpdateFuelCard
 {
-    public class UpdateFuelCardCommandResult
+    public class UpdateFuelCardCommandResult : ExecutionResult
     {
     }
 }
