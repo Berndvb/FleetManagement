@@ -10,11 +10,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="Features\DriverManagement\AddDriver\" />
-    <Folder Include="Features\DriverManagement\RemoveDriver\" />
-    <Folder Include="Features\DriverManagement\UpdateDriver\" />
     <Folder Include="Features\FuelCardManagement\UpdateFuelCardDriver\" />
-    <Folder Include="Features\FuelCardManagement\UpdateFuelCard\" />
     <Folder Include="Features\VehicleManagement\UpdateDriverVehicle\" />
     <Folder Include="Features\VehicleManagement\UpdateVehicle\" />
   </ItemGroup>

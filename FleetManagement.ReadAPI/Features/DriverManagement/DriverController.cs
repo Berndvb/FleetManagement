@@ -18,7 +18,7 @@ using System.Threading.Tasks;
 namespace FleetManagement.ReadAPI.Features.Driver
 {
     [ApiController]
-    [Route("api/[controller]")]
+    [Route("readapi/[controller]")]
     public class DriverController : Controller
     {
         private readonly IMediator _mediator;
