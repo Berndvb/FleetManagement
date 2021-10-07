@@ -20,7 +20,7 @@ namespace FleetManagement.WriteAPI.Features.FuelCardManagement
             _mediator = mediator;
         }
 
-        [HttpPut("update-fuelcard/{fuelCardId}")]
+        [HttpPost("update-fuelcard")]
         public async Task<IActionResult> UpdateFuelCard(
             [FromModel]UpdateFuelCardCommand updateFuelCardCommand,
             CancellationToken cancellationToken)
@@ -30,7 +30,7 @@ namespace FleetManagement.WriteAPI.Features.FuelCardManagement
             return updateFuelCardCommandResult.ToActionResult();
         }
 
-        [HttpPut("update-fuelcarddriver/{fuelCardDriverId}")]
+        [HttpPost("update-fuelcarddriver")]
         public async Task<IActionResult> UpdateFuelCardDriver(
              [FromModel] UpdateFuelCardDriverCommand updateFuelCardDriverCommand,
              CancellationToken cancellationToken)

@@ -24,7 +24,7 @@ namespace FleetManagement.ReadAPI.Features.DriverManagement.GetActiveDriverOverv
             var driverOverviews = await _driverService.GetDriverOverviews(onlyInService: true);
             if (driverOverviews.Count == 0)
             {
-                var dataError = new ExecutionError("We couldn't find and retrieve any data for that specifiek query.", Constants.ErrorCodes.DataNotFound);
+                var dataError = new ExecutionError("We couldn't find and retrieve any driver-overview data.", Constants.ErrorCodes.DataNotFound);
                 return NotFound(dataError);
             }
 

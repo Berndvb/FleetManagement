@@ -6,29 +6,26 @@ using MediatR.Cqrs.Queries;
 using System.Threading;
 using System.Threading.Tasks;
 
-namespace FleetManagement.ReadAPI.Features.DriverManagement.GetAppealsPerCar
+namespace FleetManagement.ReadAPI.Features.DriverManagement.GetVehicleDetails
 {
-    public class GetAppealsPerCarQueryHandler : QueryHandler<GetAppealsPerCarQuery, GetAppealsPerCarQueryResult>
+    public class GetVehiclesQueryHandler : QueryHandler<GetVehiclesQuery, GetVehiclesQueryResult>
     {
         private readonly IDriverService _driverService;
         private readonly IGeneralService _generalService;
-        private readonly IVehicleService _vehicleService;
-        private readonly IValidator<GetAppealsPerCarQuery> _validator;
+        private readonly IValidator<GetVehiclesQuery> _validator;
 
-        public GetAppealsPerCarQueryHandler(
+        public GetVehiclesQueryHandler(
             IDriverService driverService,
             IGeneralService generalService,
-            IValidator<GetAppealsPerCarQuery> validator,
-            IVehicleService vehicleService)
+            IValidator<GetVehiclesQuery> validator)
         {
             _driverService = driverService;
             _generalService = generalService;
             _validator = validator;
-            _vehicleService = vehicleService;
         }
 
-        public async override Task<GetAppealsPerCarQueryResult> Handle(
-            GetAppealsPerCarQuery request,
+        public async override Task<GetVehiclesQueryResult> Handle(
+            GetVehiclesQuery request,
             CancellationToken cancellationToken)
         {
             var validationResult = _validator.Validate(request);
@@ -42,18 +39,14 @@ namespace FleetManagement.ReadAPI.Features.DriverManagement.GetAppealsPerCar
             if (driverIdError != null)
                 return BadRequest(driverIdError);
 
-            var vehicleIdError = await _vehicleService.CheckforIdError(request.VehicleId);
-            if (vehicleIdError != null)
-                return BadRequest(vehicleIdError);
-
-            var vehicleAppeals = await _driverService.GetAppealsForDriverPerCar(request.DriverId, request.VehicleId);
-            if (vehicleAppeals.Count == 0)
+            var vehicles = await _driverService.GetVehiclesForDriver(request.DriverId);
+            if (vehicles.Count == 0)
             {
-                var dataError = new ExecutionError("We couldn't find and retrieve any vehicle-appeal data.", Constants.ErrorCodes.DataNotFound);
+                var dataError = new ExecutionError("We couldn't find and retrieve any driver-vehicle data.", Constants.ErrorCodes.DataNotFound);
                 return NotFound(dataError);
             }
 
-            return new GetAppealsPerCarQueryResult(vehicleAppeals);
+            return new GetVehiclesQueryResult(vehicles);
         }
     }
 }

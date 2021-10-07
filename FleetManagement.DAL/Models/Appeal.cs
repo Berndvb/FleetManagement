@@ -10,13 +10,13 @@ namespace FleetManagement.Domain.Models
 
         public DateTime CreationDate { get; set; }
 
-        public AppealType AppealType { get; set; }
+        public AppealsType AppealType { get; set; }
 
         public DateTime? FirstDatePlanning { get; set; }
 
         public DateTime? SecondDatePlanning { get; set; }
 
-        public AppealStatu Status { get; set; }
+        public AppealStatus Status { get; set; }
 
         public Vehicle Vehicle { get; set; }
 

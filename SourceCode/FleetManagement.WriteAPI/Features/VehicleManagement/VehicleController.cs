@@ -20,7 +20,7 @@ namespace FleetManagement.WriteAPI.Features.VehicleManagement
             _mediator = mediator;
         }
 
-        [HttpPut("update-drivervehicle/{driverVehicleId}")]
+        [HttpPost("update-drivervehicle")]
         public async Task<IActionResult> UpdateDriverVehicle(
            [FromModel] UpdateDriverVehicleCommand updateDriverVehicleCommand,
            CancellationToken cancellationToken)
@@ -30,7 +30,7 @@ namespace FleetManagement.WriteAPI.Features.VehicleManagement
             return updateDriverVehicleCommandResult.ToActionResult();
         }
 
-        [HttpPut("update-driver/{driverId}")]
+        [HttpPost("update-driver")]
         public async Task<IActionResult> UpdateFuelCardDriver(
             [FromModel] UpdateVehicleCommand updateVehicleCommand,
             CancellationToken cancellationToken)

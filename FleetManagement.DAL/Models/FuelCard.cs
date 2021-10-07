@@ -21,6 +21,6 @@ namespace FleetManagement.Domain.Models
 
         public bool Blocked { get; set; }
 
-        public List<FuelCardDriver> Drivers { get; set; }
+        public List<FuelCardDriver> FuelCardDrivers { get; set; }
     }
 }

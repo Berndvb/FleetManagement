@@ -2,7 +2,7 @@
 
 namespace FleetManagement.ReadAPI.Features.DriverManagement.GetVehicleDetails
 {
-    public class GetVehicleDetailsQuery : IQuery<GetVehicleDetailsQueryResult>
+    public class GetVehiclesQuery : IQuery<GetVehiclesQueryResult>
     {
         public string DriverId { get; set; }
     }

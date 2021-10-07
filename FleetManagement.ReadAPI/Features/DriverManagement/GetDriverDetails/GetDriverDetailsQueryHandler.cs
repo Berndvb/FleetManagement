@@ -1,5 +1,5 @@
 ﻿using FleetManagement.BLL.Services;
-using FleetManagement.ReadAPI.Features.DriverManagement.GetAppealsPerCar;
+using FleetManagement.Framework.Constants;
 using FluentValidation;
 using MediatR.Cqrs.Execution;
 using MediatR.Cqrs.Queries;
@@ -40,13 +40,6 @@ namespace FleetManagement.ReadAPI.Features.DriverManagement.GetDriverDetails
                 return BadRequest(idError);
 
             var driverDetails = await _driverService.GetDriverDetails(request.DriverId);
-            if (driverDetails.Count == 0)
-            {
-                var dataError = new ExecutionError("We couldn't find and retrieve any data for that specifiek query.", Constants.ErrorCodes.DataNotFound);
-                return NotFound(dataError);
-            }
-
-            var driverDetails = await _driverService.GetDriverDetails(int.Parse(request.DriverId));
 
             return new GetDriverDetailsQueryResult(driverDetails);
         }

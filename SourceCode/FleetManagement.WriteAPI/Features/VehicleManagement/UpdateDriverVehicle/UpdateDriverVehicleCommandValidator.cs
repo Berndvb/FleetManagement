@@ -7,10 +7,6 @@ namespace FleetManagement.WriteAPI.Features.VehicleManagement.UpdateDriverVehicl
     {
         public UpdateDriverVehicleCommandValidator()
         {
-            RuleFor(x => x.DriverVehicleId)
-                .Must(y => int.TryParse(y, out _))
-                .Must(y => int.Parse(y) > 0);
-
             RuleFor(x => x.DriverVehicle.Id)
                 .Must(y => y > 0);
 

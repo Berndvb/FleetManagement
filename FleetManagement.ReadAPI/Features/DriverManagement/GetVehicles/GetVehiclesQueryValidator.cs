@@ -2,9 +2,9 @@
 
 namespace FleetManagement.ReadAPI.Features.DriverManagement.GetVehicleDetails
 {
-    public class GetVehicleDetailsQueryValidator : AbstractValidator<GetVehicleDetailsQuery>
+    public class GetVehiclesQueryValidator : AbstractValidator<GetVehiclesQuery>
     {
-        public GetVehicleDetailsQueryValidator()
+        public GetVehiclesQueryValidator()
         {
             RuleFor(x => x.DriverId)
                 .Must(y => int.TryParse(y, out _))

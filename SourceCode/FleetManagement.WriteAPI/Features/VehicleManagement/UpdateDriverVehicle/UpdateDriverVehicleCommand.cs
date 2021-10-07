@@ -5,8 +5,6 @@ namespace FleetManagement.WriteAPI.Features.VehicleManagement.UpdateDriverVehicl
 {
     public class UpdateDriverVehicleCommand : ICommand<UpdateDriverVehicleCommandResult>
     {
-        public string DriverVehicleId { get; set; }
-
         public DriverVehicleDto DriverVehicle { get; set; }
     }
 }

@@ -57,8 +57,9 @@ namespace FleetManagement.BLL.Services
         public async Task<List<FuelCardDto>> GetFuelCardsForDriver(string driverId)
         {
             var fuelCards = await _unitOfWork.FuelCards.GetListBy(
-                filter: x => x.Drivers.Any(y => y.Driver.Id.Equals(driverId.IdToInt())),
-                x => x.Include(y => y.FuelCardOptions));
+                filter: x => x.FuelCardDrivers.Any(y => y.Driver.Id.Equals(driverId.IdToInt())),
+                x => x.Include(y => y.FuelCardOptions),
+                x => x.Include(y => y.FuelCardDrivers.Where(y => y.Driver.Id.Equals(driverId.IdToInt()))));
 
             var fuelCardInfoDtos = _mapper.Map<List<FuelCardDto>>(fuelCards);
 
@@ -102,7 +103,9 @@ namespace FleetManagement.BLL.Services
         public async Task<List<VehicleMaintenanceDto>> GetMaintenancesForDriverPerCar(string driverId, string vehicleId)//for lazy loading @ GetVehicleDetailsForDriver
         {
             var maintenances = await _unitOfWork.Maintenance.GetListBy(
-                filter: x => x.Driver.Id.Equals(driverId) && x.Vehicle.Id.Equals(vehicleId.IdToInt()));
+                filter: x => x.Driver.Id.Equals(driverId) && x.Vehicle.Id.Equals(vehicleId.IdToInt()),
+                x => x.Include(y => y.Documents),
+                x => x.Include(y => y.Garage));
 
             var maintenanceDtos = _mapper.Map<List<VehicleMaintenanceDto>>(maintenances);
 
@@ -112,7 +115,9 @@ namespace FleetManagement.BLL.Services
         public async Task<List<VehicleRepareDto>> GetRepairsForDriverPerCar(string driverId, string vehicleId)//for lazy loading @ GetVehicleDetailsForDriver
         {
             var reparations = await _unitOfWork.Repairs.GetListBy(
-                filter: x => x.Driver.Id.Equals(driverId) && x.Vehicle.Id.Equals(vehicleId.IdToInt()));
+                filter: x => x.Driver.Id.Equals(driverId) && x.Vehicle.Id.Equals(vehicleId.IdToInt()),
+                x => x.Include(y => y.Documents),
+                x => x.Include(y => y.Garage));
 
             var reparationDtos = _mapper.Map<List<VehicleRepareDto>>(reparations);
 

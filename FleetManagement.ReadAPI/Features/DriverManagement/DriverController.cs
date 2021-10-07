@@ -33,15 +33,15 @@ namespace FleetManagement.ReadAPI.Features.Driver
         [ProducesResponseType((int)HttpStatusCode.NotFound)]
         [ProducesResponseType((int)HttpStatusCode.BadRequest)]
         public async Task<IActionResult> GetActiveDriverOverviews(
-            [FromModel] GetActiveDriverOverviewsQuery getActiveDriverOverviewsQuery,
-            CancellationToken cancellationToken)
+         [FromModel] GetActiveDriverOverviewsQuery getActiveDriverOverviewsQuery,
+         CancellationToken cancellationToken)
         {
             var GetActiveDriverOverviewsQueryResult = await _mediator.Send(getActiveDriverOverviewsQuery, cancellationToken);
 
             return GetActiveDriverOverviewsQueryResult.ToActionResult();
         }
 
-        [HttpGet("all-driveroverviews/")]
+        [HttpGet("all-driveroverviews")]
         public async Task<IActionResult> GetAllDriverOverviews(
           [FromModel] GetAllDriverOverviewsQuery getAllDriverOverviewsQuery,
           CancellationToken cancellationToken)
@@ -113,7 +113,7 @@ namespace FleetManagement.ReadAPI.Features.Driver
 
         [HttpGet("vehicledetails/{driverId}")]
         public async Task<IActionResult> GetVehicleDetails(
-         [FromModel] GetVehicleDetailsQuery getVehicleDetailsQuery,
+         [FromModel] GetVehiclesQuery getVehicleDetailsQuery,
          CancellationToken cancellationToken)
         {
             var getVehicleDetailsQueryResult = await _mediator.Send(getVehicleDetailsQuery, cancellationToken);

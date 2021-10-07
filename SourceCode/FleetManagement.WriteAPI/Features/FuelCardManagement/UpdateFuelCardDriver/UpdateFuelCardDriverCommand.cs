@@ -5,8 +5,6 @@ namespace FleetManagement.WriteAPI.Features.FuelCardManagement.UpdateFuelCardDri
 {
     public class UpdateFuelCardDriverCommand : ICommand<UpdateFuelCardDriverCommandResult>
     {
-        public string FuelCardDriverId { get; set; }
-
         public FuelCardDriverDto FuelCardDriver { get; set; }
     }
 }
