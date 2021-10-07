@@ -7,8 +7,7 @@ namespace FleetManagement.WriteAPI.Features.FuelCardManagement.UpdateFuelCardDri
     {
         public UpdateFuelCardDriverCommandValidation()
         {
-            RuleFor(x => x.FuelCardDriver.Id)
-                .Must(y => y > 0);
+            RuleFor(x => x.FuelCardDriver.Id).Must(y => y > 0);
 
             RuleFor(x => x.FuelCardDriver.CreationDate)
                 .NotNull()

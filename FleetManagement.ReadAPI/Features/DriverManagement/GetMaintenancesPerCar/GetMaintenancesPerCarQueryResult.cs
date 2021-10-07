@@ -6,9 +6,9 @@ namespace FleetManagement.ReadAPI.Features.DriverManagement.GetMaintenancesPerCa
 {
     public class GetMaintenancesPerCarQueryResult : ExecutionResult
     {
-        public List<VehicleMaintenanceDto> VehicleMaintenances { get; }
+        public List<MaintenanceDto> VehicleMaintenances { get; }
 
-        public GetMaintenancesPerCarQueryResult(List<VehicleMaintenanceDto> vehicleMaintenances)
+        public GetMaintenancesPerCarQueryResult(List<MaintenanceDto> vehicleMaintenances)
         {
             VehicleMaintenances = vehicleMaintenances;
         }

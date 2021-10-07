@@ -7,7 +7,6 @@ namespace FleetManagement.BLL.Services
 {
     public interface IVehicleService
     {
-        void UpdateVehicle(VehicleDto vehicleDto);
         void UpdateVehicle(VehicleDetailsDto vehicleDetailsDto);
         Task<IdValidationCodes> ValidateId(int id);
         Task<ExecutionError> CheckforIdError(string id);

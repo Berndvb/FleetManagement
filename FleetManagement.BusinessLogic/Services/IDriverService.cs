@@ -14,12 +14,12 @@ namespace FleetManagement.BLL.Services
         Task<List<FuelCardDto>> GetFuelCardsForDriver(string driverId);
         Task<List<VehicleDetailsDto>> GetVehiclesForDriver(string driverId);
         Task<List<AppealDto>> GetAppealsForDriver(string driverId);
-        Task<List<VehicleAppealDto>> GetAppealsForDriverPerCar(string driverId, string vehicleId);
-        Task<List<VehicleMaintenanceDto>> GetMaintenancesForDriverPerCar(string driverId, string vehicleId);
-        Task<List<VehicleRepareDto>> GetRepairsForDriverPerCar(string driverId, string vehicleId);
+        Task<List<AppealDto>> GetAppealsForDriverPerCar(string driverId, string vehicleId);
+        Task<List<MaintenanceDto>> GetMaintenancesForDriverPerCar(string driverId, string vehicleId);
+        Task<List<RepareDto>> GetRepairsForDriverPerCar(string driverId, string vehicleId);
         void UpdateDriver(DriverDetailsDto driverDto);
-        void AddDriver(DriverDto driverDto);
-        void RemoveDriver(DriverDto driverDto);
+        void AddDriver(DriverDetailsDto driverDto);
+        void RemoveDriver(DriverDetailsDto driverDto);
         void RemoveDriver(string driverId);
         Task<IdValidationCodes> ValidateId(int id);
         Task<ExecutionError> CheckforIdError(string driverId);

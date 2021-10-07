@@ -7,18 +7,15 @@ namespace FleetManagement.WriteAPI.Features.FuelCardManagement.UpdateFuelCard
     {
         public UpdateFuelCardCommandValidator()
         {
-            RuleFor(x => x.FuelCard.Id)
-                .Must(y => y > 0);
+            RuleFor(x => x.FuelCard.Id).Must(y => y > 0);
 
-            RuleFor(x => x.FuelCard.AuthenticationType)
-                .IsInEnum();
+            RuleFor(x => x.FuelCard.AuthenticationType).IsInEnum();
 
             RuleFor(x => x.FuelCard.ExpirationDate)
                 .NotNull()
-                .Must(y => y.AfterAllphiStartdate());
+                .Must(y => y.IsAfterAllphiStartdate());
 
-            RuleFor(x => x.FuelCard.CardNumber)
-                .NotNull();
+            RuleFor(x => x.FuelCard.CardNumber).NotNull();
         }
     }
 }

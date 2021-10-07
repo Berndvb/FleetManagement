@@ -1,10 +1,14 @@
-﻿using System;
+﻿using FleetManagement.Framework.Models.Dtos.ShowDtos;
+using System;
 
 namespace FleetManagement.Framework.Models.Dtos
 {
     public class DriverVehicleDto
     {
         public int Id { get; set; }
+        public VehicleDetailsDto Vehicle { get; set; }
+
+        public DriverDetailsDto Driver { get; set; }
 
         public bool Active { get; set; }
 
@@ -16,12 +20,16 @@ namespace FleetManagement.Framework.Models.Dtos
             int id,
             bool active,
             DateTime creationDate,
-            DateTime? closureDate)
+            DateTime? closureDate,
+            VehicleDetailsDto vehicle,
+            DriverDetailsDto driver)
         {
             Id = id;
             Active = active;
             CreationDate = creationDate;
             ClosureDate = closureDate;
+            Vehicle = vehicle;
+            Driver = driver;
         }
 
         public DriverVehicleDto()

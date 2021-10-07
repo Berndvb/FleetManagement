@@ -1,9 +1,12 @@
-﻿namespace FleetManagement.Framework.Models.Dtos
+﻿using System.ComponentModel.DataAnnotations;
+
+namespace FleetManagement.Framework.Models.Dtos
 {
     public class ContactInfoDto
     {
         public int Id { get; set; }
 
+        [EmailAddress]
         public string EmailAddress { get; set; }
 
         public string CellPhoneNumber { get; set; }

@@ -90,36 +90,36 @@ namespace FleetManagement.BLL.Services
             return appealDtos;
         }
 
-        public async Task<List<VehicleAppealDto>> GetAppealsForDriverPerCar(string driverId, string vehicleId)//for lazy loading @ GetVehicleDetailsForDriver
+        public async Task<List<AppealDto>> GetAppealsForDriverPerCar(string driverId, string vehicleId)//for lazy loading @ GetVehicleDetailsForDriver
         {
             var vehicleAppeals = await _unitOfWork.Appeals.GetListBy(
                 filter: x => x.Driver.Id.Equals(driverId.IdToInt()) && x.Vehicle.Id.Equals(vehicleId.IdToInt()));
 
-            var vehicleAppealDtos = _mapper.Map<List<VehicleAppealDto>>(vehicleAppeals);
+            var vehicleAppealDtos = _mapper.Map<List<AppealDto>>(vehicleAppeals);
 
             return vehicleAppealDtos;
         }
 
-        public async Task<List<VehicleMaintenanceDto>> GetMaintenancesForDriverPerCar(string driverId, string vehicleId)//for lazy loading @ GetVehicleDetailsForDriver
+        public async Task<List<MaintenanceDto>> GetMaintenancesForDriverPerCar(string driverId, string vehicleId)//for lazy loading @ GetVehicleDetailsForDriver
         {
             var maintenances = await _unitOfWork.Maintenance.GetListBy(
                 filter: x => x.Driver.Id.Equals(driverId) && x.Vehicle.Id.Equals(vehicleId.IdToInt()),
                 x => x.Include(y => y.Documents),
                 x => x.Include(y => y.Garage));
 
-            var maintenanceDtos = _mapper.Map<List<VehicleMaintenanceDto>>(maintenances);
+            var maintenanceDtos = _mapper.Map<List<MaintenanceDto>>(maintenances);
 
             return maintenanceDtos;
         }
 
-        public async Task<List<VehicleRepareDto>> GetRepairsForDriverPerCar(string driverId, string vehicleId)//for lazy loading @ GetVehicleDetailsForDriver
+        public async Task<List<RepareDto>> GetRepairsForDriverPerCar(string driverId, string vehicleId)//for lazy loading @ GetVehicleDetailsForDriver
         {
             var reparations = await _unitOfWork.Repairs.GetListBy(
                 filter: x => x.Driver.Id.Equals(driverId) && x.Vehicle.Id.Equals(vehicleId.IdToInt()),
                 x => x.Include(y => y.Documents),
                 x => x.Include(y => y.Garage));
 
-            var reparationDtos = _mapper.Map<List<VehicleRepareDto>>(reparations);
+            var reparationDtos = _mapper.Map<List<RepareDto>>(reparations);
 
             return reparationDtos;
         }
@@ -133,7 +133,7 @@ namespace FleetManagement.BLL.Services
             _unitOfWork.Complete();
         }
 
-        public void AddDriver(DriverDto driverDto)
+        public void AddDriver(DriverDetailsDto driverDto)
         {
             var driver = _mapper.Map<Driver>(driverDto);
 
@@ -142,7 +142,7 @@ namespace FleetManagement.BLL.Services
             _unitOfWork.Complete();
         }
 
-        public void RemoveDriver(DriverDto driverDto)
+        public void RemoveDriver(DriverDetailsDto driverDto)
         {
             var driver = _mapper.Map<Driver>(driverDto);
 

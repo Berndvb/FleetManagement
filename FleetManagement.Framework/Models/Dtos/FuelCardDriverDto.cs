@@ -1,4 +1,5 @@
-﻿using System;
+﻿using FleetManagement.Framework.Models.Dtos.ShowDtos;
+using System;
 
 namespace FleetManagement.Framework.Models.Dtos
 {
@@ -14,7 +15,7 @@ namespace FleetManagement.Framework.Models.Dtos
 
         public FuelCardDto FuelCard { get; set; }
 
-        public DriverDto Driver { get; set; }
+        public DriverDetailsDto Driver { get; set; }
 
         public FuelCardDriverDto(
             int id,
@@ -22,7 +23,7 @@ namespace FleetManagement.Framework.Models.Dtos
             DateTime creationDate,
             DateTime closureDate,
             FuelCardDto fuelCard,
-            DriverDto driver)
+            DriverDetailsDto driver)
         {
             Id = id;
             Active = active;

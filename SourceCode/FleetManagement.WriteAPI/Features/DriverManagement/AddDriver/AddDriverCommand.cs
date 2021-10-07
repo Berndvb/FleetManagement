@@ -1,10 +1,10 @@
-﻿using FleetManagement.Framework.Models.Dtos;
+﻿using FleetManagement.Framework.Models.Dtos.ShowDtos;
 using MediatR.Cqrs.Commands;
 
 namespace FleetManagement.WriteAPI.Features.DriverManagement.AddDriver
 {
     public class AddDriverCommand : ICommand<AddDriverCommandResult>
     {
-        public DriverDto Driver { get; set; }
+        public DriverDetailsDto Driver { get; set; }
     }
 }

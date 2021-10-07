@@ -5,37 +5,41 @@ using System.Collections.Generic;
 namespace FleetManagement.Framework.Models.Dtos
 {
 
-    public class VehicleRepareDto
+    public class RepareDto : AdministrationDto
     {
-        public int Id { get; set; }
-
         public ReparationStatus ReparationStatus { get; set; }
 
         public DateTime IncidentDate { get; set; }
 
-        public DateTime? InvoiceDate { get; set; }
+        public string DamageDescription { get; set; }
 
-        public GarageDto Garage { get; set; }
+        public string InsuranceCompany { get; set; }
 
-        public List<FileDto> Documents { get; set; }
+        public string ReferenceNumber { get; set; }
 
-        public VehicleRepareDto(
+        public RepareDto(
             int id,
             ReparationStatus reparationStatus,
             DateTime incidentDate,
-            DateTime? billingDate,
+            DateTime? invoiceDate,
             GarageDto garage,
-            List<FileDto> documents)
+            List<FileDto> documents,
+            string damageDescription,
+            string insuranceCompany,
+            string referenceNumber)
         {
             Id = id;
             ReparationStatus = reparationStatus;
             IncidentDate = incidentDate;
-            InvoiceDate = billingDate;
+            InvoiceDate = invoiceDate;
             Garage = garage;
             Documents = documents;
+            DamageDescription = damageDescription;
+            InsuranceCompany = insuranceCompany;
+            ReferenceNumber = referenceNumber;
         }
 
-        public VehicleRepareDto()
+        public RepareDto()
         {
         }
     }

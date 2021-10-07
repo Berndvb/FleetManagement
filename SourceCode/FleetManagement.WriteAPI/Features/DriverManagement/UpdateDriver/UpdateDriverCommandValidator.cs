@@ -7,8 +7,7 @@ namespace FleetManagement.WriteAPI.Features.DriverManagement.UpdateDriver
     {
         public UpdateDriverCommandValidator()
         {
-            RuleFor(x => x.Driver.DriversLicenseType)
-                .IsInEnum();
+            RuleFor(x => x.Driver.DriversLicenseType).IsInEnum();
         }
     }
 }

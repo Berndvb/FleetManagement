@@ -24,18 +24,9 @@ namespace FleetManagement.BLL.Services
             _generalService = generalService;
         }
 
-        public void UpdateVehicle(VehicleDto vehicleDto)
+        public void UpdateVehicle(VehicleDetailsDto vehicleDto)
         {
             var vehicle = _mapper.Map<Vehicle>(vehicleDto);
-
-            _unitOfWork.Vehicles.Update(vehicle);
-
-            _unitOfWork.Complete();
-        }
-
-        public void UpdateVehicle(VehicleDetailsDto vehicleDetailsDto)
-        {
-            var vehicle = _mapper.Map<Vehicle>(vehicleDetailsDto);
 
             _unitOfWork.Vehicles.Update(vehicle);
 

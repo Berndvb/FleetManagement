@@ -19,12 +19,14 @@ namespace FleetManagement.Framework.Models.Dtos
             int id,
             FuelType fuelType,
             string merk,
-            string model)
+            string model,
+            List<string> licensePlates)
         {
             Id = id;
             FuelType = fuelType;
             Brand = merk;
             Model = model;
+            LicensePlates = licensePlates;
         }
 
         public IdentityVehicleDto()

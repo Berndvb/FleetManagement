@@ -17,7 +17,7 @@ namespace FleetManagement.Framework.Models.Dtos.ShowDtos
 
         public AppealStatus Status { get; set; }
 
-        public VehicleOverviewDto Vehicle { get; set; }
+        public VehicleDetailsDto Vehicle { get; set; }
 
         public DriverDetailsDto Driver { get; set; }
 
@@ -30,7 +30,7 @@ namespace FleetManagement.Framework.Models.Dtos.ShowDtos
             DateTime firstDatePlanning,
             DateTime? secondDatePlanning,
             AppealStatus status,
-            VehicleOverviewDto vehicle,
+            VehicleDetailsDto vehicle,
             string message)
         {
             Id = id;

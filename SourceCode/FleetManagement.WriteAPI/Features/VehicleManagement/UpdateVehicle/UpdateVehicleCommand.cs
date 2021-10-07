@@ -5,6 +5,6 @@ namespace FleetManagement.WriteAPI.Features.VehicleManagement.UpdateVehicle
 {
     public class UpdateVehicleCommand : ICommand<UpdateVehicleCommandResult>
     {
-        public VehicleDto Vehicle { get; set; }
+        public VehicleDetailsDto Vehicle { get; set; }
     }
 }

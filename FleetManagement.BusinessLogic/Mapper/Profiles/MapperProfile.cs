@@ -71,13 +71,13 @@ namespace FleetManagement.BLL.Services
             CreateMap<DriverVehicle, DriverVehicleDto>()
                 .ReverseMap();
 
-            CreateMap<Maintenance, VehicleMaintenanceDto>()
+            CreateMap<Maintenance, MaintenanceDto>()
                 .ReverseMap();
 
-            CreateMap<Repare, VehicleRepareDto>()
+            CreateMap<Repare, RepareDto>()
                 .ReverseMap();
 
-            CreateMap<Vehicle, VehicleDto>()
+            CreateMap<Vehicle, VehicleDetailsDto>()
                 .ReverseMap();
 
             CreateMap<Vehicle, VehicleDetailsDto>()

@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 using System.Globalization;
 using System.Linq;
 
@@ -37,7 +38,7 @@ namespace FleetManagement.Framework.Helpers
             return String.Join(SPLITTER, input);
         }
 
-        public static bool AfterAllphiStartdate(this DateTime date)
+        public static bool IsAfterAllphiStartdate(this DateTime date)
         { 
             var allphiStartdate = DateTime.ParseExact(Constants.Constants.Info.StartAllPhi, "yyyyMMdd", CultureInfo.InvariantCulture);
             switch (DateTime.Compare(date, allphiStartdate))
@@ -58,6 +59,16 @@ namespace FleetManagement.Framework.Helpers
         public static int IdToInt(this string id)
         {
             return int.Parse(id);
+        }
+
+        public static bool IsValidEmail(this string source)
+        {
+            return new EmailAddressAttribute().IsValid(source);
+        }
+
+        public static bool IsValidNationalInsuranceNumber(this string source)
+        { 
+            
         }
     }
 }

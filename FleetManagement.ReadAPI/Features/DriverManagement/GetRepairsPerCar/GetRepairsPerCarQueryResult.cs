@@ -6,9 +6,9 @@ namespace FleetManagement.ReadAPI.Features.DriverManagement.GetReparationsPerCar
 {
     public class GetRepairsPerCarQueryResult : ExecutionResult
     {
-        public List<VehicleRepareDto> VehicleVehicleRepairs { get; }
+        public List<RepareDto> VehicleVehicleRepairs { get; }
 
-        public GetRepairsPerCarQueryResult(List<VehicleRepareDto> vehicleVehicleRepairs)
+        public GetRepairsPerCarQueryResult(List<RepareDto> vehicleVehicleRepairs)
         {
             VehicleVehicleRepairs = vehicleVehicleRepairs;
         }

@@ -12,7 +12,7 @@ namespace FleetManagement.Domain.Models
 
         public DateTime CreationDate { get; set; }
 
-        public DateTime InvoiceDate { get; set; }
+        public DateTime? InvoiceDate { get; set; }
 
         public float Price { get; set; }
 
