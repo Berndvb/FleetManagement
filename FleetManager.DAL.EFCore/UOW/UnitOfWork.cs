@@ -13,7 +13,7 @@ namespace FleetManager.EFCore.UOW
 
         public IGenericRepository<Driver> Drivers { get; private set; }
 
-        public IGenericRepository<Repare> Repares { get; private set; }
+        public IGenericRepository<Repare> Repairs { get; private set; }
 
         public IGenericRepository<Maintenance> Maintenance { get; private set; }
 
@@ -27,28 +27,32 @@ namespace FleetManager.EFCore.UOW
 
         public IGenericRepository<FuelCardDriver> FuelCardDrivers { get; private set; }
 
+        public IGenericRepository<IdentityPerson> IdentityPersons { get; private set; }
+
         public UnitOfWork(
             DatabaseContext context,
             IGenericRepository<Appeal> appeals,
             IGenericRepository<Driver> drivers,
-            IGenericRepository<Repare> repares,
+            IGenericRepository<Repare> repairs,
             IGenericRepository<Maintenance> maintenance,
             IGenericRepository<FuelCard> fuelCards,
             IGenericRepository<Vehicle> vehicles,
             IGenericRepository<DriverVehicle> driverVehicles,
             IGenericRepository<IdentityVehicle> identityVehicles,
-            IGenericRepository<FuelCardDriver> fuelCardDrivers)
+            IGenericRepository<FuelCardDriver> fuelCardDrivers,
+            IGenericRepository<IdentityPerson> identityPersons)
         {
             _context = context;
             Appeals = appeals;
             Drivers = drivers;
-            Repares = repares;
+            Repairs = repairs;
             Maintenance = maintenance;
             FuelCards = fuelCards;
             Vehicles = vehicles;
             DriverVehicles = driverVehicles;
             IdentityVehicles = identityVehicles;
             FuelCardDrivers = fuelCardDrivers;
+            IdentityPersons = identityPersons;
         }
 
         public int Complete()

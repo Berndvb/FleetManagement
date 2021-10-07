@@ -7,8 +7,6 @@ namespace FleetManagement.WriteAPI.Features.FuelCardManagement.UpdateFuelCardDri
     {
         public UpdateFuelCardDriverCommandValidation()
         {
-            CascadeMode = CascadeMode.Stop;
-
             RuleFor(x => x.FuelCardDriverId)
                 .Must(y => int.TryParse(y, out _))
                 .Must(y => int.Parse(y) > 0);

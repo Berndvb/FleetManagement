@@ -7,8 +7,6 @@ namespace FleetManagement.WriteAPI.Features.FuelCardManagement.UpdateFuelCard
     {
         public UpdateFuelCardCommandValidator()
         {
-            CascadeMode = CascadeMode.Stop;
-
             RuleFor(x => x.FuelCardId)
                 .Must(y => int.TryParse(y, out _))
                 .Must(y => int.Parse(y) > 0);
@@ -17,7 +15,7 @@ namespace FleetManagement.WriteAPI.Features.FuelCardManagement.UpdateFuelCard
                 .Must(y => y > 0);
 
             RuleFor(x => x.FuelCard.AuthenticationType)
-                .Must(y => y > 0 && (int)y < 3);
+                .IsInEnum();
 
             RuleFor(x => x.FuelCard.ExpirationDate)
                 .NotNull()

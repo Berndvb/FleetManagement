@@ -1,5 +1,4 @@
 ﻿using FleetManagement.BLL.Services;
-using FleetManagement.BLL.Services.Model;
 using FleetManagement.Framework.Constants;
 using FluentValidation;
 using MediatR.Cqrs.Execution;
@@ -12,65 +11,42 @@ namespace FleetManagement.ReadAPI.Features.DriverManagement.GetTotalAppeals
     public class GetAllAppealsQueryHandler : QueryHandler<GetAllAppealsQuery, GetAllAppealsQueryResult>
     {
         private readonly IDriverService _driverService;
+        private readonly IGeneralService _generalService;
         private readonly IValidator<GetAllAppealsQuery> _validator;
 
         public GetAllAppealsQueryHandler(
             IDriverService driverService,
-            IValidator<GetAllAppealsQuery> validator)
+            IValidator<GetAllAppealsQuery> validator,
+            IGeneralService generalService)
         {
             _driverService = driverService;
             _validator = validator;
+            _generalService = generalService;
         }
 
         public async override Task<GetAllAppealsQueryResult> Handle(
             GetAllAppealsQuery request,
             CancellationToken cancellationToken)
         {
-            //gefoefel..
-
-            var checkedForError = await CheckForError(request);
-            if (checkedForError != null)
+            var validationResult = _validator.Validate(request);
+            if (!validationResult.IsValid)
             {
-                ProcessError(checkedForError, nameof(request.));
+                var validationError = _generalService.ProcessValidationError(validationResult);
+                return BadRequest(validationError);
             }
-            var driverOverviews = await _driverService.GetAppealsForDriver(int.Parse(request.DriverId));
 
-            return new GetAllAppealsQueryResult(driverOverviews);
-        }
+            var idError = await _driverService.CheckforIdError(request.DriverId);
+            if (idError != null)
+                return BadRequest(idError);
 
-        public async Task<string> CheckForError(GetAllAppealsQuery request, params )
-        {
-            var requestValidated = _validator.Validate(request).IsValid;
-            if (!requestValidated)
-                return Constants.ErrorCodes.InvalidRequestInput;
-
-            var idValidationCode = await _driverService.ValidateId(int.Parse(request.DriverId));
-            if (idValidationCode == IdValidationCodes.IdNotUnique)
-                return Constants.ErrorCodes.IdNotUnique;
-            else if(idValidationCode == IdValidationCodes.IdNotFound)
-                return Constants.ErrorCodes.IdNotFound;
-
-            return null;
-        }
-
-        public void ProcessError(string errorCode, string idName)
-        {
-            var error = new ExecutionError { Code = errorCode };
-            switch (errorCode)
+            var driverAppeals = await _driverService.GetAppealsForDriver(request.DriverId);
+            if (driverAppeals.Count == 0)
             {
-                case Constants.ErrorCodes.InvalidRequestInput:
-                    error.Message = "Request-parameters are invalid.";
-                    break;
-                case Constants.ErrorCodes.IdNotFound:
-                    error.Message = $"Id {idName} wasn't found.";
-                    break;
-                case Constants.ErrorCodes.IdNotUnique:
-                    error.Message = $"Id {idName} isn't unique.";
-                    break;
-                default:
-                    break;
+                var dataError = new ExecutionError("We couldn't find and retrieve any data for that specifiek query.", Constants.ErrorCodes.DataNotFound);
+                return NotFound(dataError);
             }
-            BadRequest(error);
+
+            return new GetAllAppealsQueryResult(driverAppeals);
         }
     }
 }

@@ -7,14 +7,12 @@ namespace FleetManagement.WriteAPI.Features.DriverManagement.UpdateDriver
     {
         public UpdateDriverCommandValidator()
         {
-            CascadeMode = CascadeMode.Stop;
-
             RuleFor(x => x.DriverId)
                 .Must(y => int.TryParse(y, out _))
                 .Must(y => int.Parse(y) > 0);
 
             RuleFor(x => x.Driver.DriversLicenseType)
-                .Must(y => (y & DriversLicenseTypes.All) == DriversLicenseTypes.All);
+                .IsInEnum();
         }
     }
 }

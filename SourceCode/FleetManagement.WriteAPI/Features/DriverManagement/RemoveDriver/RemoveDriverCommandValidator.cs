@@ -8,8 +8,6 @@ namespace FleetManagement.WriteAPI.Features.DriverManagement.RemoveDriver
     {
         public RemoveDriverCommandValidator()
         {
-            CascadeMode = CascadeMode.Stop;
-
             RuleFor(x => x.Driver.Id)
                 .Must(y => y > 0);
         }

@@ -54,5 +54,10 @@ namespace FleetManagement.Framework.Helpers
             var allphiStartdate = DateTime.ParseExact(Constants.Constants.Info.StartAllPhi, "yyyyMMdd", CultureInfo.InvariantCulture);
             return allphiStartdate;
         }
+
+        public static int IdToInt(this string id)
+        {
+            return int.Parse(id);
+        }
     }
 }

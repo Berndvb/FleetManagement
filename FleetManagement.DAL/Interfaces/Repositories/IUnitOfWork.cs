@@ -1,5 +1,4 @@
 ﻿using FleetManagement.Domain.Models;
-using FleetManager.Domain.Interfaces;
 using FleetManager.Domain.Interfaces.Repositories;
 
 namespace FleetManagement.Domain.Interfaces.Repositories
@@ -10,7 +9,7 @@ namespace FleetManagement.Domain.Interfaces.Repositories
 
         IGenericRepository<Driver> Drivers { get; }
 
-        IGenericRepository<Repare> Repares { get; }
+        IGenericRepository<Repare> Repairs { get; }
 
         IGenericRepository<Maintenance> Maintenance { get; }
 
@@ -23,6 +22,8 @@ namespace FleetManagement.Domain.Interfaces.Repositories
         IGenericRepository<IdentityVehicle> IdentityVehicles { get; }
 
         IGenericRepository<FuelCardDriver> FuelCardDrivers { get; }
+
+        IGenericRepository<IdentityPerson> IdentityPersons { get; }
         int Complete();
     }
 }

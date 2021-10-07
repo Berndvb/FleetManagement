@@ -49,6 +49,7 @@ namespace FleetManagement.BLL.DI
             services.AddScoped<IMaintenanceService, MaintenanceService>();
             services.AddScoped<IRepareService, RepareService>();
             services.AddScoped<IVehicleService, VehicleService>();
+            services.AddScoped<IGeneralService, GeneralService>();
         }
         #endregion
     }

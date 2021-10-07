@@ -6,8 +6,6 @@ namespace FleetManagement.WriteAPI.Features.VehicleManagement.UpdateVehicle
     {
         public UpdateVehicleCommandValidator()
         {
-            CascadeMode = CascadeMode.Stop;
-
             RuleFor(x => x.Vehicle.Id)
                 .Must(y => y > 0);
 
