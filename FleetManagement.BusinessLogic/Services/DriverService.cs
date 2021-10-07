@@ -44,7 +44,7 @@ namespace FleetManagement.BLL.Services
         public async Task<DriverDetailsDto> GetDriverDetails(string driverId)
         {
             var driver = await _unitOfWork.Drivers.GetBy(
-                filter: x => x.Id.Equals(driverId.IdToInt()),
+                filter: x => x.Id.Equals(driverId.StringToInt()),
                 x => x.Include(y => y.Identity),
                 x => x.Include(y => y.Contactinfo),
                 x => x.Include(y => y.Contactinfo.Address));
@@ -57,9 +57,9 @@ namespace FleetManagement.BLL.Services
         public async Task<List<FuelCardDto>> GetFuelCardsForDriver(string driverId)
         {
             var fuelCards = await _unitOfWork.FuelCards.GetListBy(
-                filter: x => x.FuelCardDrivers.Any(y => y.Driver.Id.Equals(driverId.IdToInt())),
+                filter: x => x.FuelCardDrivers.Any(y => y.Driver.Id.Equals(driverId.StringToInt())),
                 x => x.Include(y => y.FuelCardOptions),
-                x => x.Include(y => y.FuelCardDrivers.Where(y => y.Driver.Id.Equals(driverId.IdToInt()))));
+                x => x.Include(y => y.FuelCardDrivers.Where(y => y.Driver.Id.Equals(driverId.StringToInt()))));
 
             var fuelCardInfoDtos = _mapper.Map<List<FuelCardDto>>(fuelCards);
 
@@ -69,7 +69,7 @@ namespace FleetManagement.BLL.Services
         public async Task<List<VehicleDetailsDto>> GetVehiclesForDriver(string driverId)
         {
             var driverVehicles = await _unitOfWork.DriverVehicles.GetListBy(
-                filter: x => x.Driver.Id.Equals(driverId.IdToInt()),
+                filter: x => x.Driver.Id.Equals(driverId.StringToInt()),
                 x => x.Include(y => y.Vehicle),
                 x => x.Include(y => y.Vehicle.Identity));
 
@@ -81,7 +81,7 @@ namespace FleetManagement.BLL.Services
         public async Task<List<AppealDto>> GetAppealsForDriver(string driverId)
         {
             var appeals = await _unitOfWork.Appeals.GetListBy(
-                filter: x => x.Driver.Id.Equals(driverId.IdToInt()),
+                filter: x => x.Driver.Id.Equals(driverId.StringToInt()),
                 x => x.Include(y => y.Vehicle),
                 x => x.Include(y => y.Vehicle.Identity));
 
@@ -93,7 +93,7 @@ namespace FleetManagement.BLL.Services
         public async Task<List<AppealDto>> GetAppealsForDriverPerCar(string driverId, string vehicleId)//for lazy loading @ GetVehicleDetailsForDriver
         {
             var vehicleAppeals = await _unitOfWork.Appeals.GetListBy(
-                filter: x => x.Driver.Id.Equals(driverId.IdToInt()) && x.Vehicle.Id.Equals(vehicleId.IdToInt()));
+                filter: x => x.Driver.Id.Equals(driverId.StringToInt()) && x.Vehicle.Id.Equals(vehicleId.StringToInt()));
 
             var vehicleAppealDtos = _mapper.Map<List<AppealDto>>(vehicleAppeals);
 
@@ -103,7 +103,7 @@ namespace FleetManagement.BLL.Services
         public async Task<List<MaintenanceDto>> GetMaintenancesForDriverPerCar(string driverId, string vehicleId)//for lazy loading @ GetVehicleDetailsForDriver
         {
             var maintenances = await _unitOfWork.Maintenance.GetListBy(
-                filter: x => x.Driver.Id.Equals(driverId) && x.Vehicle.Id.Equals(vehicleId.IdToInt()),
+                filter: x => x.Driver.Id.Equals(driverId) && x.Vehicle.Id.Equals(vehicleId.StringToInt()),
                 x => x.Include(y => y.Documents),
                 x => x.Include(y => y.Garage));
 
@@ -115,7 +115,7 @@ namespace FleetManagement.BLL.Services
         public async Task<List<RepareDto>> GetRepairsForDriverPerCar(string driverId, string vehicleId)//for lazy loading @ GetVehicleDetailsForDriver
         {
             var reparations = await _unitOfWork.Repairs.GetListBy(
-                filter: x => x.Driver.Id.Equals(driverId) && x.Vehicle.Id.Equals(vehicleId.IdToInt()),
+                filter: x => x.Driver.Id.Equals(driverId) && x.Vehicle.Id.Equals(vehicleId.StringToInt()),
                 x => x.Include(y => y.Documents),
                 x => x.Include(y => y.Garage));
 
@@ -153,7 +153,7 @@ namespace FleetManagement.BLL.Services
 
         public void RemoveDriver(string driverId)
         {
-            _unitOfWork.Drivers.RemoveById(driverId.IdToInt());
+            _unitOfWork.Drivers.RemoveById(driverId.StringToInt());
 
             _unitOfWork.Complete();
         }
@@ -172,7 +172,7 @@ namespace FleetManagement.BLL.Services
 
         public async Task<ExecutionError> CheckforIdError(string driverId)
         {
-            var idValidationCode = await ValidateId(driverId.IdToInt());
+            var idValidationCode = await ValidateId(driverId.StringToInt());
             if (idValidationCode != IdValidationCodes.OK)
                 return _generalService.ProcessIdError(idValidationCode, nameof(driverId));
 
