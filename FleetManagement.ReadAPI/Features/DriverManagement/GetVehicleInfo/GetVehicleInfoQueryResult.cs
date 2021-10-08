@@ -4,16 +4,16 @@ using System.Collections.Generic;
 
 namespace FleetManagement.ReadAPI.Features.DriverManagement.GetVehicleDetails
 {
-    public class GetVehiclesQueryResult : ExecutionResult
+    public class GetVehicleInfoQueryResult : ExecutionResult
     {
         public List<VehicleDetailsDto> VehicleDetails { get; }
 
-        public GetVehiclesQueryResult(List<VehicleDetailsDto> vehicleDetails)
+        public GetVehicleInfoQueryResult(List<VehicleDetailsDto> vehicleDetails)
         {
             VehicleDetails = vehicleDetails;
         }
 
-        private GetVehiclesQueryResult()
+        private GetVehicleInfoQueryResult()
         {
         }
     }

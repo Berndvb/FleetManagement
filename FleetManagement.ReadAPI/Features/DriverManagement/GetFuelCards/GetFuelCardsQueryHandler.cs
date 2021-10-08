@@ -23,7 +23,7 @@ namespace FleetManagement.ReadAPI.Features.DriverManagement.GetFuelCardDetails
             _generalService = generalService;
             _validator = validator;
         }
-        // YO I still need the fuelcarddriver info added to this call - we need both!
+
         public async override Task<GetFuelCardsQueryResult> Handle(
             GetFuelCardsQuery request,
             CancellationToken cancellationToken)

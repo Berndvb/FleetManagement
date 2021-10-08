@@ -1,6 +1,4 @@
-﻿using FleetManagement.Framework.Models.Enums;
-using FleetManagement.WriteAPI.Features.DriverManagement.RemoveDriver;
-using FluentValidation;
+﻿using FluentValidation;
 
 namespace FleetManagement.WriteAPI.Features.DriverManagement.RemoveDriver
 {

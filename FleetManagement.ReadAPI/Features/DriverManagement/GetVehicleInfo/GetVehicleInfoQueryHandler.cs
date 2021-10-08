@@ -8,24 +8,24 @@ using System.Threading.Tasks;
 
 namespace FleetManagement.ReadAPI.Features.DriverManagement.GetVehicleDetails
 {
-    public class GetVehiclesQueryHandler : QueryHandler<GetVehiclesQuery, GetVehiclesQueryResult>
+    public class GetVehicleInfoQueryHandler : QueryHandler<GetVehicleInfoQuery, GetVehicleInfoQueryResult>
     {
         private readonly IDriverService _driverService;
         private readonly IGeneralService _generalService;
-        private readonly IValidator<GetVehiclesQuery> _validator;
+        private readonly IValidator<GetVehicleInfoQuery> _validator;
 
-        public GetVehiclesQueryHandler(
+        public GetVehicleInfoQueryHandler(
             IDriverService driverService,
             IGeneralService generalService,
-            IValidator<GetVehiclesQuery> validator)
+            IValidator<GetVehicleInfoQuery> validator)
         {
             _driverService = driverService;
             _generalService = generalService;
             _validator = validator;
         }
 
-        public async override Task<GetVehiclesQueryResult> Handle(
-            GetVehiclesQuery request,
+        public async override Task<GetVehicleInfoQueryResult> Handle(
+            GetVehicleInfoQuery request,
             CancellationToken cancellationToken)
         {
             var validationResult = _validator.Validate(request);
@@ -39,14 +39,14 @@ namespace FleetManagement.ReadAPI.Features.DriverManagement.GetVehicleDetails
             if (driverIdError != null)
                 return BadRequest(driverIdError);
 
-            var vehicles = await _driverService.GetVehiclesForDriver(request.DriverId);
+            var vehicles = await _driverService.GetVehicleInfoForDriver(request.DriverId);
             if (vehicles.Count == 0)
             {
                 var dataError = new ExecutionError("We couldn't find and retrieve any driver-vehicle data.", Constants.ErrorCodes.DataNotFound);
                 return NotFound(dataError);
             }
 
-            return new GetVehiclesQueryResult(vehicles);
+            return new GetVehicleInfoQueryResult(vehicles);
         }
     }
 }

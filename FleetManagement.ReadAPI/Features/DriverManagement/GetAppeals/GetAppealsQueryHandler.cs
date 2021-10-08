@@ -8,15 +8,15 @@ using System.Threading.Tasks;
 
 namespace FleetManagement.ReadAPI.Features.DriverManagement.GetTotalAppeals
 {
-    public class GetAllAppealsQueryHandler : QueryHandler<GetAllAppealsQuery, GetAllAppealsQueryResult>
+    public class GetAppealsQueryHandler : QueryHandler<GetAppealsQuery, GetAppealsQueryResult>
     {
         private readonly IDriverService _driverService;
         private readonly IGeneralService _generalService;
-        private readonly IValidator<GetAllAppealsQuery> _validator;
+        private readonly IValidator<GetAppealsQuery> _validator;
 
-        public GetAllAppealsQueryHandler(
+        public GetAppealsQueryHandler(
             IDriverService driverService,
-            IValidator<GetAllAppealsQuery> validator,
+            IValidator<GetAppealsQuery> validator,
             IGeneralService generalService)
         {
             _driverService = driverService;
@@ -24,8 +24,8 @@ namespace FleetManagement.ReadAPI.Features.DriverManagement.GetTotalAppeals
             _generalService = generalService;
         }
 
-        public async override Task<GetAllAppealsQueryResult> Handle(
-            GetAllAppealsQuery request,
+        public async override Task<GetAppealsQueryResult> Handle(
+            GetAppealsQuery request,
             CancellationToken cancellationToken)
         {
             var validationResult = _validator.Validate(request);
@@ -46,7 +46,7 @@ namespace FleetManagement.ReadAPI.Features.DriverManagement.GetTotalAppeals
                 return NotFound(dataError);
             }
 
-            return new GetAllAppealsQueryResult(driverAppeals);
+            return new GetAppealsQueryResult(driverAppeals);
         }
     }
 }

@@ -12,7 +12,7 @@ namespace FleetManagement.BLL.Services
         Task<List<DriverOverviewDto>> GetDriverOverviews(bool onlyInService);
         Task<DriverDetailsDto> GetDriverDetails(string driverId);
         Task<List<FuelCardDto>> GetFuelCardsForDriver(string driverId);
-        Task<List<VehicleDetailsDto>> GetVehiclesForDriver(string driverId);
+        Task<List<VehicleDetailsDto>> GetVehicleInfoForDriver(string driverId);
         Task<List<AppealDto>> GetAppealsForDriver(string driverId);
         Task<List<AppealDto>> GetAppealsForDriverPerCar(string driverId, string vehicleId);
         Task<List<MaintenanceDto>> GetMaintenancesForDriverPerCar(string driverId, string vehicleId);

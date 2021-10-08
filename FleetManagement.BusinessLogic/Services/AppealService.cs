@@ -1,5 +1,9 @@
 ﻿using AutoMapper;
 using FleetManagement.Domain.Interfaces.Repositories;
+using FleetManagement.Framework.Models.Dtos.ShowDtos;
+using Microsoft.EntityFrameworkCore;
+using System.Collections.Generic;
+using System.Threading.Tasks;
 
 namespace FleetManagement.BLL.Services
 {
@@ -14,6 +18,18 @@ namespace FleetManagement.BLL.Services
         {
             _unitOfWork = unitOfWork;
             _mapper = mapper;
+        }
+
+        public async Task<List<AppealDto>> GetAllAppeals()
+        {
+            var appeals = await _unitOfWork.Appeals.GetListBy(
+                filter: null,
+                x => x.Include(y => y.Vehicle),
+                x => x.Include(y => y.Driver));
+
+            var appealDtos = _mapper.Map<List<AppealDto>>(appeals);
+
+            return appealDtos;
         }
     }
 }

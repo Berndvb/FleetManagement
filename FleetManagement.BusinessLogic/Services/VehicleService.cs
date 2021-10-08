@@ -4,6 +4,8 @@ using FleetManagement.Domain.Interfaces.Repositories;
 using FleetManagement.Domain.Models;
 using FleetManagement.Framework.Models.Dtos;
 using MediatR.Cqrs.Execution;
+using Microsoft.EntityFrameworkCore;
+using System.Collections.Generic;
 using System.Threading.Tasks;
 
 namespace FleetManagement.BLL.Services
@@ -22,6 +24,21 @@ namespace FleetManagement.BLL.Services
             _unitOfWork = unitOfWork;
             _mapper = mapper;
             _generalService = generalService;
+        }
+
+        public async Task<List<VehicleDetailsDto>> GetAllVehicles()
+        {
+            var vehicles = await _unitOfWork.Vehicles.GetListBy(
+                filter: null,
+                x => x.Include(y => y.Identity),
+                x => x.Include(y => y.Maintenances),
+                x => x.Include(y => y.Reparations),
+                x => x.Include(y => y.Drivers),
+                x => x.Include(y => y.Appeals));
+
+            var vehicleDtos = _mapper.Map<List<VehicleDetailsDto>>(vehicles);
+
+            return vehicleDtos;
         }
 
         public void UpdateVehicle(VehicleDetailsDto vehicleDto)

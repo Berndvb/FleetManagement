@@ -66,12 +66,12 @@ namespace FleetManagement.BLL.Services
             return fuelCardInfoDtos;
         }
 
-        public async Task<List<VehicleDetailsDto>> GetVehiclesForDriver(string driverId)
+        public async Task<List<VehicleDetailsDto>> GetVehicleInfoForDriver(string driverId)
         {
-            var driverVehicles = await _unitOfWork.DriverVehicles.GetListBy(
-                filter: x => x.Driver.Id.Equals(driverId.StringToInt()),
-                x => x.Include(y => y.Vehicle),
-                x => x.Include(y => y.Vehicle.Identity));
+            var driverVehicles = await _unitOfWork.Vehicles.GetListBy(
+                filter: x => x.Drivers.Any(y => y.Driver.Id.Equals(driverId)),
+                x => x.Include(y => y.Identity),
+                x => x.Include(y => y.Drivers.Where(z => z.Driver.Id.Equals(driverId))));
 
             var vehicleDetailsDtos = _mapper.Map<List<VehicleDetailsDto>>(driverVehicles);
 

@@ -2,7 +2,7 @@
 
 namespace FleetManagement.ReadAPI.Features.DriverManagement.GetTotalAppeals
 {
-    public class GetAllAppealsQuery : IQuery<GetAllAppealsQueryResult>
+    public class GetAppealsQuery : IQuery<GetAppealsQueryResult>
     {
         public string DriverId { get; set; }
     }

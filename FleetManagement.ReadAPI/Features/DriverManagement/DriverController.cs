@@ -53,7 +53,7 @@ namespace FleetManagement.ReadAPI.Features.Driver
 
         [HttpGet("appeals/{driverId}")]
         public async Task<IActionResult> GetAllAppeals(
-         [FromModel] GetAllAppealsQuery getAllAppealsQuery,
+         [FromModel] GetAppealsQuery getAllAppealsQuery,
          CancellationToken cancellationToken)
         {
             var getAllAppealsQueryResult = await _mediator.Send(getAllAppealsQuery, cancellationToken);
@@ -113,7 +113,7 @@ namespace FleetManagement.ReadAPI.Features.Driver
 
         [HttpGet("vehicledetails/{driverId}")]
         public async Task<IActionResult> GetVehicleDetails(
-         [FromModel] GetVehiclesQuery getVehicleDetailsQuery,
+         [FromModel] GetVehicleInfoQuery getVehicleDetailsQuery,
          CancellationToken cancellationToken)
         {
             var getVehicleDetailsQueryResult = await _mediator.Send(getVehicleDetailsQuery, cancellationToken);

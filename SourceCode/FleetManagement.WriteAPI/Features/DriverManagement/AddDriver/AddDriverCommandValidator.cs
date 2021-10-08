@@ -36,7 +36,7 @@ namespace FleetManagement.WriteAPI.Features.DriverManagement.AddDriver
             RuleFor(x => x.Driver.Identity.NationalInsuranceNumber)
                 .NotNull()
                 .Must(y => y.IsValidNationalInsuranceNumber())
-                .WithMessage("Insurance number should consist out of 11 digits.");
+                .WithMessage("Insurance number is invalid.");
         }
     }
 }

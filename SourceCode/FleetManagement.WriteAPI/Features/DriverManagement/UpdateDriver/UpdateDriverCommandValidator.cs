@@ -1,5 +1,4 @@
-﻿using FleetManagement.Framework.Models.Enums;
-using FluentValidation;
+﻿using FluentValidation;
 
 namespace FleetManagement.WriteAPI.Features.DriverManagement.UpdateDriver
 {

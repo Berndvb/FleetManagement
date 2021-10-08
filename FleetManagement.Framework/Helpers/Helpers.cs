@@ -68,19 +68,14 @@ namespace FleetManagement.Framework.Helpers
 
         public static bool IsValidNationalInsuranceNumber(this string source)
         {
-            //Algemeen: 11 cijfers
             if (source.Length != 11 || 
-                !int.TryParse(source, out _))
+                !long.TryParse(source, out _))
             {
                 return false;
             }
 
-            //Groep 1: 6cijfers
-            //yyMMdd (m en dag mag null 00) - indien niet exact bekend
-            //bisnummer: m + 20 of 40 (indien geslacht bekend)  -> ongeldig  stuk tussen 32 en 41
-            //voortvluchtig: m en d op 00
-            var mm = source.Substring(2, 2).StringToInt();
-            var dd = source.Substring(4, 2).StringToInt();
+            var mm = source.Substring(2,2).StringToInt();
+            var dd = source.Substring(4,2).StringToInt();
             if (mm < 0 ||
                 (mm > 32 && mm < 41) || 
                 mm > 52 ||
@@ -90,30 +85,22 @@ namespace FleetManagement.Framework.Helpers
                 return false;
             }
 
-            //Groep 2: 3 cijfers
-            // even voor vrouw, oneven voor man
-            // dagteller geboortes, van man 1-997, vrouw 2-998
-            var secondGroup = source.Substring(6, 3).StringToInt();
+            var secondGroup = source.Substring(6,3).StringToInt();
             if (secondGroup < 1 ||
                 secondGroup > 998)
             {
                 return false;
             }
 
-            //Groep 3: 2 cijfers
-            //controlegetal op basis van 9 voorgaande cijfers: alle 9 opeenvolgend delen door 97.
-            //De rest wordt van 97 afgetrokken. Dat is het controlenummer
-            //geboren na 2000: een 2 voor de 9 cijfers
-            var thirdGroup = source.Substring(9, 2).StringToInt();
-            var totalNumbersAfter2000 = ("2" + source).StringToInt();
-            var totalNumbers = source.StringToInt();
-            int remainder;
-            int remainderAfter2000;
-            Math.DivRem(totalNumbers, 97, out remainder);
-            Math.DivRem(totalNumbersAfter2000, 97, out remainderAfter2000);
-
+            var thirdGroup = long.Parse(source.Substring(9, 2));
+            var firstTwoGroups2000 = long.Parse("2" + source.Substring(0, 9));
+            var firstTwoGroups = long.Parse(source.Substring(0, 9));
+            long remainder;
+            long remainder2000;
+            Math.DivRem(firstTwoGroups, 97, out remainder);
+            Math.DivRem(firstTwoGroups2000, 97, out remainder2000);
             if (thirdGroup != (97 - remainder) &&
-                thirdGroup != (97 - remainderAfter2000))
+                thirdGroup != (97 - remainder2000))
             {
                 return false;
             }

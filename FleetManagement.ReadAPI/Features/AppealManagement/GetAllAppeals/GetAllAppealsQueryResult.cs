@@ -2,7 +2,7 @@
 using MediatR.Cqrs.Execution;
 using System.Collections.Generic;
 
-namespace FleetManagement.ReadAPI.Features.DriverManagement.GetTotalAppeals
+namespace FleetManagement.ReadAPI.Features.AppealManagement.GetAllAppeals
 {
     public class GetAllAppealsQueryResult : ExecutionResult
     {

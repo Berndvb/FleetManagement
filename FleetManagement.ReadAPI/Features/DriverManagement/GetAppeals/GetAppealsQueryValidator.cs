@@ -3,9 +3,9 @@ using FluentValidation;
 
 namespace FleetManagement.ReadAPI.Features.DriverManagement.GetAllAppeals
 {
-    public class GetAllAppealsQueryValidator : AbstractValidator<GetAllAppealsQuery>
+    public class GetAppealsQueryValidator : AbstractValidator<GetAppealsQuery>
     {
-        public GetAllAppealsQueryValidator()
+        public GetAppealsQueryValidator()
         {
             RuleFor(x => x.DriverId)
                 .Must(y => int.TryParse(y, out _))

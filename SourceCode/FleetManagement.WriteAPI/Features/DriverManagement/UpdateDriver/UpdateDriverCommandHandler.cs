@@ -23,7 +23,7 @@ namespace FleetManagement.WriteAPI.Features.DriverManagement.UpdateDriver
         }
 
         public async override Task<UpdateDriverCommandResult> Handle(
-             UpdateDriverCommand request,
+            UpdateDriverCommand request,
             CancellationToken cancellationToken)
         {
             var validationResult = _validator.Validate(request);

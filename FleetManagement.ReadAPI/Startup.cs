@@ -30,7 +30,7 @@ namespace FleetManagement.ReadAPI
                 c.SwaggerDoc("v1", new OpenApiInfo { Title = "FleetManagement.ReadAPI", Version = "v1" });
             });
             services.AddMvc()
-                 .AddFluentValidation(fv => fv.RegisterValidatorsFromAssemblyContaining<GetAllAppealsQueryValidator>());
+                 .AddFluentValidation(fv => fv.RegisterValidatorsFromAssemblyContaining<GetAppealsQueryValidator>());
 
             services.AddDALServices(connectionString);
             services.AddBLLServices();

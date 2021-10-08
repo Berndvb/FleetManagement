@@ -2,6 +2,9 @@
 using FleetManagement.Domain.Interfaces.Repositories;
 using FleetManagement.Domain.Models;
 using FleetManagement.Framework.Models.Dtos;
+using Microsoft.EntityFrameworkCore;
+using System.Collections.Generic;
+using System.Threading.Tasks;
 
 namespace FleetManagement.BLL.Services
 {
@@ -11,7 +14,7 @@ namespace FleetManagement.BLL.Services
         private readonly IMapper _mapper;
 
         public FuelCardService(
-            IUnitOfWork unitOfWork, 
+            IUnitOfWork unitOfWork,
             IMapper mapper)
         {
             _unitOfWork = unitOfWork;
@@ -26,5 +29,17 @@ namespace FleetManagement.BLL.Services
 
             _unitOfWork.Complete();
         }
+
+        public async Task<List<FuelCardDto>> GetAllFuelCards()
+        {
+            var fuelCards = await _unitOfWork.FuelCards.GetListBy(
+                filter: null,
+                x => x.Include(y => y.FuelCardOptions),
+                x => x.Include(y => y.FuelCardDrivers));
+
+            var fuelCardDtos = _mapper.Map<List<FuelCardDto>>(fuelCards);
+
+            return fuelCardDtos;
+        } 
     }
 }
