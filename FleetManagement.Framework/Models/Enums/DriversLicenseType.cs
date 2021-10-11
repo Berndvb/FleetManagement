@@ -3,7 +3,7 @@
 namespace FleetManagement.Framework.Models.Enums
 {
     [Flags]
-    public enum DriversLicenseTypes
+    public enum DriversLicenseType
     {
         AM = 1,
         A = 2,

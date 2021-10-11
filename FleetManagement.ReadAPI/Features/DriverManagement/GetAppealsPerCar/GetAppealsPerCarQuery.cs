@@ -5,9 +5,9 @@ namespace FleetManagement.ReadAPI.Features.DriverManagement.GetAppealsPerCar
 {
     public class GetAppealsPerCarQuery : IQuery<GetAppealsPerCarQueryResult>
     {
-        public string DriverId { get; set; }
+        public int DriverId { get; set; }
 
-        public string VehicleId { get; set; }
+        public int VehicleId { get; set; }
 
         public PagingParameters PagingParameters { get; set; }
     }

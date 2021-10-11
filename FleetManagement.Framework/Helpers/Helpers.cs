@@ -1,4 +1,5 @@
-﻿using System;
+﻿using FleetManagement.Framework.Models.Enums;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.Globalization;
@@ -64,6 +65,34 @@ namespace FleetManagement.Framework.Helpers
         public static bool IsValidEmail(this string source)
         {
             return new EmailAddressAttribute().IsValid(source);
+        }
+
+        public static AppealStatus StringToAppealStatus(this string source)
+        {
+            if (!String.IsNullOrEmpty(source))
+            {
+                var sourceCorrected = System.Globalization.CultureInfo.CurrentCulture.TextInfo.ToTitleCase(source.ToLower());
+                var appealStatus = Enum.Parse(typeof(AppealStatus), sourceCorrected);
+                return (AppealStatus)appealStatus;
+            }
+            return 0;
+        }
+
+        public static DriversLicenseType StringToDriversLicense(this string source)
+        {
+            if (!String.IsNullOrEmpty(source))
+            {
+                var sourceCorrected = System.Globalization.CultureInfo.CurrentCulture.TextInfo.ToTitleCase(source.ToLower());
+                var driversLicense = Enum.Parse(typeof(DriversLicenseType), sourceCorrected);
+                return (DriversLicenseType)driversLicense;
+            }
+            return 0;
+        }
+
+        public static string CorrectStringInput(this string source)
+        {
+            var sourceCorrected = CultureInfo.CurrentCulture.TextInfo.ToTitleCase(source.ToLower());
+            return sourceCorrected;
         }
 
         public static bool IsValidNationalInsuranceNumber(this string source)

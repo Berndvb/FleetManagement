@@ -5,7 +5,7 @@ namespace FleetManagement.ReadAPI.Features.DriverManagement.GetFuelCardDetails
 {
     public class GetFuelCardsQuery : IQuery<GetFuelCardsQueryResult>
     {
-        public string DriverId { get; set; }
+        public int DriverId { get; set; }
 
         public PagingParameters PagingParameters { get; set; }
     }

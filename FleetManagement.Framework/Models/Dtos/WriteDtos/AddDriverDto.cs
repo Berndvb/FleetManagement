@@ -9,14 +9,14 @@ namespace FleetManagement.Framework.Models.Dtos.WriteDtos
 
         public ContactInfoDto Contactinfo { get; set; }
 
-        public DriversLicenseTypes DriversLicenseType { get; set; }
+        public DriversLicenseType DriversLicenseType { get; set; }
 
         public bool InService { get; set; }
 
         public AddDriverDto(
             IdentityPersonDto identity,
             ContactInfoDto contactInfo,
-            DriversLicenseTypes driversLicenseType,
+            DriversLicenseType driversLicenseType,
             bool inService)
         {
             Identity = identity;

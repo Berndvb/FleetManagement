@@ -64,11 +64,9 @@ namespace FleetManagement.BLL.Services
             };
         }
 
-        public async Task<ExecutionError> CheckforIdError(string id)
+        public async Task<ExecutionError> CheckforIdError(int id)
         {
-            var idParsed = int.Parse(id);
-
-            var idValidationCode = await ValidateId(idParsed);
+            var idValidationCode = await ValidateId(id);
             if (idValidationCode != IdValidationCodes.OK)
                 return _generalService.ProcessIdError(idValidationCode, nameof(id));
 

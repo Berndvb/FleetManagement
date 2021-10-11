@@ -8,6 +8,6 @@ namespace FleetManagement.ReadAPI.Features.AppealManagement.GetAllAppeals
     {
         public PagingParameters PagingParameters { get; set; }
 
-        public  AppealStatus AppealStatus { get; set; }
+        public  string AppealStatus { get; set; }
     }
 }

@@ -11,7 +11,7 @@ namespace FleetManagement.Framework.Models.Dtos.ReadDtos
 
         public ContactInfoDto Contactinfo { get; set; }
 
-        public DriversLicenseTypes DriversLicenseType { get; set; }
+        public string DriversLicenseType { get; set; }
 
         public bool InService { get; set; }
 
@@ -25,7 +25,7 @@ namespace FleetManagement.Framework.Models.Dtos.ReadDtos
             int id,
             IdentityPersonDto identity,
             ContactInfoDto contactInfo,
-            DriversLicenseTypes driversLicenseType,
+            string driversLicenseType,
             bool inService,
             List<FuelCardDriverDto> fuelCards,
             List<DriverVehicleDto> vehicles,

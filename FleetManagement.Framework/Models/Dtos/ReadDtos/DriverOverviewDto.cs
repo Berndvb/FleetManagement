@@ -10,14 +10,14 @@ namespace FleetManagement.Framework.Models.Dtos.ReadDtos
 
         public string FirstName { get; set; }
 
-        public DriversLicenseTypes DriversLicenseType { get; set; }
+        public string DriversLicenseType { get; set; }
 
         public bool InService { get; set; }
 
         public DriverOverviewDto(
             int id,
             string name,
-            DriversLicenseTypes driversLicenseType,
+            string driversLicenseType,
             bool inService)
         {
             Id = id;

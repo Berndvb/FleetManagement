@@ -3,6 +3,7 @@ using FleetManagement.BLL.Mapper.Converters;
 using FleetManagement.Domain.Models;
 using FleetManagement.Framework.Models.Dtos.ReadDtos;
 using FleetManagement.Framework.Models.Dtos.WriteDtos;
+using FleetManagement.Framework.Models.Enums;
 using FleetManagement.Framework.Models.WriteDtos;
 using System.Collections.Generic;
 
@@ -98,6 +99,8 @@ namespace FleetManagement.BLL.Services
             //Extra convertingmaps
             CreateMap<string, List<string>>().ConvertUsing<StringToStringsConverter>();
             CreateMap<string, List<int>>().ConvertUsing<StringToIntsConverter>();
+            CreateMap<string, AppealStatus>().ConvertUsing<StringToAppealStatus>();
+            CreateMap<string, DriversLicenseType>().ConvertUsing<StringToDriversLicense>();
         }
     }
 }

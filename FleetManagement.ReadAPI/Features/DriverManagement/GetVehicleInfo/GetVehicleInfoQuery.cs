@@ -5,7 +5,7 @@ namespace FleetManagement.ReadAPI.Features.DriverManagement.GetVehicleDetails
 {
     public class GetVehicleInfoQuery : IQuery<GetVehicleInfoQueryResult>
     {
-        public string DriverId { get; set; }
+        public int DriverId { get; set; }
 
         public PagingParameters PagingParameters { get; set; }
     }

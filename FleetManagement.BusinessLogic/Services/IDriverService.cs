@@ -11,19 +11,19 @@ namespace FleetManagement.BLL.Services
     public interface IDriverService
     {
         Task<List<DriverOverviewDto>> GetDriverOverviews(bool onlyInService, PagingParameters pagingParameter = null);
-        Task<DriverDetailsDto> GetDriverDetails(string driverId);
-        Task<List<FuelCardDto>> GetFuelCardsForDriver(string driverId, PagingParameters pagingParameter = null);
-        Task<List<VehicleDetailsDto>> GetVehicleInfoForDriver(string driverId, PagingParameters pagingParameter = null);
-        Task<List<AppealDto>> GetAppealsForDriver(string driverId, PagingParameters pagingParameter = null);
-        Task<List<AppealDto>> GetAppealsForDriverPerCar(string driverId, string vehicleId, PagingParameters pagingParameter = null);
-        Task<List<MaintenanceDto>> GetMaintenancesForDriverPerCar(string driverId, string vehicleId, PagingParameters pagingParameter = null);
-        Task<List<RepareDto>> GetRepairsForDriverPerCar(string driverId, string vehicleId, PagingParameters pagingParameter = null);
+        Task<DriverDetailsDto> GetDriverDetails(int driverId);
+        Task<List<FuelCardDto>> GetFuelCardsForDriver(int driverId, PagingParameters pagingParameter = null);
+        Task<List<VehicleDetailsDto>> GetVehicleInfoForDriver(int driverId, PagingParameters pagingParameter = null);
+        Task<List<AppealDto>> GetAppealsForDriver(int driverId, PagingParameters pagingParameter = null);
+        Task<List<AppealDto>> GetAppealsForDriverPerCar(int driverId, int vehicleId, PagingParameters pagingParameter = null);
+        Task<List<MaintenanceDto>> GetMaintenancesForDriverPerCar(int driverId, int vehicleId, PagingParameters pagingParameter = null);
+        Task<List<RepareDto>> GetRepairsForDriverPerCar(int driverId, int vehicleId, PagingParameters pagingParameter = null);
         void UpdateDriver(DriverDetailsDto driverDto);
         void AddDriver(AddDriverDto driverDto);
         void RemoveDriver(DriverDetailsDto driverDto);
-        void RemoveDriver(string driverId);
+        void RemoveDriver(int driverId);
         Task<IdValidationCodes> ValidateId(int id);
-        Task<ExecutionError> CheckforIdError(string driverId);
+        Task<ExecutionError> CheckforIdError(int driverId);
 
     }
 }

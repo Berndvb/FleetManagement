@@ -6,13 +6,13 @@ namespace FleetManagement.ReadAPI.Features.DriverManagement.GetAppealsPerCar
     {
         public GetAppealsPerCarQueryValidator()
         {
-            RuleFor(x => x.DriverId)
-                .Must(y => int.TryParse(y, out _))
-                .Must(y => int.Parse(y) > 0);
+            RuleFor(x => x.DriverId).GreaterThan(0);
 
-            RuleFor(x => x.VehicleId)
-                .Must(y => int.TryParse(y, out _))
-                .Must(y => int.Parse(y) > 0);
+            RuleFor(x => x.VehicleId).GreaterThan(0);
+
+            RuleFor(x => x.PagingParameters.PageSize).GreaterThan(0);
+
+            RuleFor(x => x.PagingParameters.PageNumber).GreaterThan(0);
         }
     }
 }

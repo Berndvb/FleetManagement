@@ -5,6 +5,6 @@ namespace FleetManagement.ReadAPI.Features.DriverManagement.GetDriverDetails
 {
     public class GetDriverDetailsQuery : IQuery<GetDriverDetailsQueryResult>
     {
-        public string DriverId { get; set; }
+        public int DriverId { get; set; }
     }
 }

@@ -37,13 +37,13 @@ namespace FleetManagement.ReadAPI.Features.Driver
         }
 
         [HttpGet("appeals/{driverId}")]
-        public async Task<IActionResult> GetAllAppeals(
-         [FromModel] GetAppealsQuery getAllAppealsQuery,
+        public async Task<IActionResult> GetAppeals(
+         [FromModel] GetAppealsQuery getAppealsQuery,
          CancellationToken cancellationToken)
         {
-            var getAllAppealsQueryResult = await _mediator.Send(getAllAppealsQuery, cancellationToken);
+            var getAppealsQueryResult = await _mediator.Send(getAppealsQuery, cancellationToken);
 
-            return getAllAppealsQueryResult.ToActionResult();
+            return getAppealsQueryResult.ToActionResult();
         }
 
         [HttpGet("appeals-per-car/{driverId}/{vehicleId}")]

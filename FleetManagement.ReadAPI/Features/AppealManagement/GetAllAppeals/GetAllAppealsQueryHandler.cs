@@ -1,5 +1,6 @@
 ﻿using FleetManagement.BLL.Services;
 using FleetManagement.Framework.Constants;
+using FleetManagement.Framework.Helpers;
 using FluentValidation;
 using MediatR.Cqrs.Execution;
 using MediatR.Cqrs.Queries;
@@ -35,10 +36,10 @@ namespace FleetManagement.ReadAPI.Features.AppealManagement.GetAllAppeals
                 return BadRequest(validationError);
             }
 
-            var appeals = await _appealService.GetAllAppeals(request.PagingParameters, request.AppealStatus);
+            var appeals = await _appealService.GetAllAppeals(request.PagingParameters, request.AppealStatus.StringToAppealStatus());
             if (appeals.Count == 0)
             {
-                var dataError = new ExecutionError("We couldn't find and retrieve any fuelcard data.", Constants.ErrorCodes.DataNotFound);
+                var dataError = new ExecutionError("We couldn't find and retrieve any appeal data.", Constants.ErrorCodes.DataNotFound);
                 return NotFound(dataError);
             }
 

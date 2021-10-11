@@ -13,6 +13,6 @@ namespace FleetManagement.BLL.Services
         Task<List<VehicleDetailsDto>> GetAllVehicles(PagingParameters pagingParameter = null);
         void UpdateVehicle(VehicleDetailsDto vehicleDetailsDto);
         Task<IdValidationCodes> ValidateId(int id);
-        Task<ExecutionError> CheckforIdError(string id);
+        Task<ExecutionError> CheckforIdError(int id);
     }
 }
