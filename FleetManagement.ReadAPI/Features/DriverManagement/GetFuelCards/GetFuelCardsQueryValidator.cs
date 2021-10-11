@@ -7,6 +7,11 @@ namespace FleetManagement.ReadAPI.Features.DriverManagement.GetFuelCards
     {
         public GetFuelCardsQueryValidator()
         {
+            RuleFor(x => x.DriverId).GreaterThan(0);
+
+            RuleFor(x => x.PagingParameters.PageSize).GreaterThan(0);
+
+            RuleFor(x => x.PagingParameters.PageNumber).GreaterThan(0);
         }
     }
 }

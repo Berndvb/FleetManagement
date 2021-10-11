@@ -87,7 +87,7 @@ namespace FleetManagement.ReadAPI.Features.Driver
         }
 
         [HttpGet("repairs-per-car/{driverId}/{vehicleId}")]
-        public async Task<IActionResult> GetRepairssPerCar(
+        public async Task<IActionResult> GetRepairsPerCar(
          [FromModel] GetRepairsPerCarQuery getRepairsPerCarQuery,
          CancellationToken cancellationToken)
         {

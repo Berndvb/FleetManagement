@@ -1,4 +1,5 @@
 ﻿using FleetManagement.Framework.Models.Dtos.ReadDtos;
+using FleetManagement.Framework.Models.Dtos.WriteDtos;
 using System;
 
 namespace FleetManagement.Framework.Models.WriteDtos
@@ -12,25 +13,9 @@ namespace FleetManagement.Framework.Models.WriteDtos
 
         public DateTime? ClosureDate { get; set; }
 
-        public FuelCardDto FuelCard { get; set; }
+        public AddFuelCardDto FuelCard { get; set; }
 
-        public DriverDetailsDto Driver { get; set; }
+        public AddDriverDetailsDto Driver { get; set; }
 
-        public AddFuelCardDriverDto(
-            bool active,
-            DateTime creationDate,
-            DateTime closureDate,
-            FuelCardDto fuelCard,
-            DriverDetailsDto driver)
-        {
-            Active = active;
-            CreationDate = creationDate;
-            ClosureDate = closureDate;
-            FuelCard = fuelCard;
-            Driver = driver;
-        }
-        public AddFuelCardDriverDto()
-        {
-        }
     }
 }

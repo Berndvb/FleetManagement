@@ -6,6 +6,7 @@ namespace FleetManagement.ReadAPI.Features.DriverManagement.GetDriverDetails
     {
         public GetDriverDetailsQueryValidator()
         {
+            RuleFor(x => x.DriverId).GreaterThan(0);
         }
     }
 }
