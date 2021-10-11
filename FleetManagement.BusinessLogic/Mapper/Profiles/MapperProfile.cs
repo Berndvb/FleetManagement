@@ -13,6 +13,8 @@ namespace FleetManagement.BLL.Services
         public MapperProfile()
         {
             CreateMap<Driver, DriverOverviewDto>()
+                .ForMember(x => x.FirstName, y => y.MapFrom(z => z.Identity.FirstName))
+                .ForMember(x => x.Name, y => y.MapFrom(z => z.Identity.Name))
                 .ReverseMap();
 
             CreateMap<Driver, DriverDetailsDto>()

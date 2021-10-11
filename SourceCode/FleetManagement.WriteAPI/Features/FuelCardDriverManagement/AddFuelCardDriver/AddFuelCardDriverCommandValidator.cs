@@ -7,8 +7,6 @@ namespace FleetManagement.WriteAPI.Features.FuelCardDriverManagement.AddFuelCard
     {
         public AddFuelCardDriverCommandValidator()
         {
-            RuleFor(x => x.FuelCardDriver.Id).Must(y => y > 0);
-
             RuleFor(x => x.FuelCardDriver.CreationDate)
                 .NotNull()
                 .GreaterThan(Helpers.AllphiStartdate());

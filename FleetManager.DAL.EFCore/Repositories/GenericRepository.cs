@@ -26,39 +26,29 @@ namespace FleetManager.EFCore.Repositories
 
         public Task<TEntity> GetBy(
             Expression<Func<TEntity, bool>> filter = null,
-            params Func<IQueryable<TEntity>, IIncludableQueryable<TEntity, object>>[] including)
+            Func<IQueryable<TEntity>, IIncludableQueryable<TEntity, object>> including = null)
         {
             var query = filter == null 
                 ? _dbSet.AsQueryable() 
                 : _dbSet.Where(filter);
 
-            if (including.Length > 0)
-            {
-                foreach (var inclusion in including)
-                {
-                    inclusion(query);
-                }
-            }
+            if (including != null)
+                query = including(query);
 
             return query.SingleOrDefaultAsync();
         }
 
         public Task<List<TEntity>> GetListBy(
+            PagingParameters pagingParameters,
             Expression<Func<TEntity, bool>> filter = null,
-            PagingParameters pagingParameters = null,
-            params Func<IQueryable<TEntity>, IIncludableQueryable<TEntity, object>>[] including)
+            Func<IQueryable<TEntity>, IIncludableQueryable<TEntity, object>> including = null)
         {
             var query = filter == null 
                 ? _dbSet.AsQueryable() 
                 : _dbSet.Where(filter);
 
-            if (including.Length > 0)
-            {
-                foreach (var inclusion in including)
-                {
-                    inclusion(query);
-                }
-            }
+            if (including != null)
+                query = including(query);
 
             query = pagingParameters == null 
                 ? query

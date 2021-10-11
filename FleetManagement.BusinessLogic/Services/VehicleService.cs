@@ -2,7 +2,6 @@
 using FleetManagement.BLL.Services.Models;
 using FleetManagement.Domain.Interfaces.Repositories;
 using FleetManagement.Domain.Models;
-using FleetManagement.Framework.Models.Dtos;
 using FleetManagement.Framework.Models.Dtos.ReadDtos;
 using FleetManagement.Framework.Paging;
 using MediatR.Cqrs.Execution;
@@ -28,16 +27,16 @@ namespace FleetManagement.BLL.Services
             _generalService = generalService;
         }
 
-        public async Task<List<VehicleDetailsDto>> GetAllVehicles(PagingParameters pagingParameter = null)
+        public async Task<List<VehicleDetailsDto>> GetAllVehicles(PagingParameters pagingParameter)
         {
             var vehicles = await _unitOfWork.Vehicles.GetListBy(
-                filter: null,
                 pagingParameter,
-                x => x.Include(y => y.Identity),
-                x => x.Include(y => y.Maintenances),
-                x => x.Include(y => y.Reparations),
-                x => x.Include(y => y.Drivers),
-                x => x.Include(y => y.Appeals));
+                including: x => x
+                 .Include(y => y.Identity)
+                 .Include(y => y.Maintenances)
+                 .Include(y => y.Reparations)
+                 .Include(y => y.Drivers)
+                 .Include(y => y.Appeals));
 
             var vehicleDtos = _mapper.Map<List<VehicleDetailsDto>>(vehicles);
 

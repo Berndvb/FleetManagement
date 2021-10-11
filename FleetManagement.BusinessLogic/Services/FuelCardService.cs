@@ -34,10 +34,8 @@ namespace FleetManagement.BLL.Services
         public async Task<List<FuelCardDto>> GetAllFuelCards(PagingParameters pagingParameter = null)
         {
             var fuelCards = await _unitOfWork.FuelCards.GetListBy(
-                filter: null,
                 pagingParameter,
-                x => x.Include(y => y.FuelCardOptions),
-                x => x.Include(y => y.FuelCardDrivers));
+                including: x => x.Include(y => y.FuelCardOptions).Include(y => y.FuelCardDrivers));
 
             var fuelCardDtos = _mapper.Map<List<FuelCardDto>>(fuelCards);
 

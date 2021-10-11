@@ -9,7 +9,7 @@ using System.Threading.Tasks;
 namespace FleetManagement.ReadAPI.Features.AppealManagement
 {
     [ApiController]
-    [Route("api/[controller]")]
+    [Route("readapi/[controller]")]
     public class AppealController : Controller
     {
         private readonly IMediator _mediator;

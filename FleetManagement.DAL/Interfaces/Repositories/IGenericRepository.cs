@@ -14,11 +14,11 @@ namespace FleetManager.Domain.Interfaces.Repositories
     {
         Task<TEntity> GetBy(
             Expression<Func<TEntity, bool>> filter = null,
-            params Func<IQueryable<TEntity>, IIncludableQueryable<TEntity, object>>[] including);
+            Func<IQueryable<TEntity>, IIncludableQueryable<TEntity, object>> including = null);
         Task<List<TEntity>> GetListBy(
-            Expression<Func<TEntity, bool>> filter = null,
-            PagingParameters pagingParameter = null,
-            params Func<IQueryable<TEntity>, IIncludableQueryable<TEntity, object>>[] including);
+           PagingParameters pagingParameters,
+           Expression<Func<TEntity, bool>> filter = null,
+           Func<IQueryable<TEntity>, IIncludableQueryable<TEntity, object>> including = null);
         Task Insert(TEntity entity);
         Task InsertRange(ICollection<TEntity> entities);
         void Remove(TEntity entity);

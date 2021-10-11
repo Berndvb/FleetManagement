@@ -32,10 +32,11 @@ namespace FleetManagement.BLL.Services
                 : x => x.Status.Equals(appealstatus);
 
             var appeals = await _unitOfWork.Appeals.GetListBy(
-                filter: getSpecificStatus,
                 pagingParameter,
-                x => x.Include(y => y.Vehicle),
-                x => x.Include(y => y.Driver));
+                filter: getSpecificStatus,
+                including: x => x
+                    .Include(y => y.Vehicle)
+                    .Include(y => y.Driver));
 
             var appealDtos = _mapper.Map<List<AppealDto>>(appeals);
 
