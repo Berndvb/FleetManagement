@@ -1,7 +1,8 @@
 ﻿using AutoMapper;
 using FleetManagement.Domain.Interfaces.Repositories;
 using FleetManagement.Domain.Models;
-using FleetManagement.Framework.Models.Dtos;
+using FleetManagement.Framework.Models.Dtos.ReadDtos;
+using FleetManagement.Framework.Models.WriteDtos;
 
 namespace FleetManagement.BLL.Services
 {
@@ -26,5 +27,15 @@ namespace FleetManagement.BLL.Services
 
             _unitOfWork.Complete();
         }
+
+        public void AddFuelCardDriver(AddFuelCardDriverDto fuelCardDriverDto)
+        {
+            var fuelCardDriver = _mapper.Map<FuelCardDriver>(fuelCardDriverDto);
+
+            _unitOfWork.FuelCardDrivers.Insert(fuelCardDriver);
+
+            _unitOfWork.Complete();
+        }
+
     }
 }

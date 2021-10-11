@@ -2,8 +2,8 @@
 {
     public enum AppealStatus
     {
-        New,
-        Open,
-        Closed
+        New = 1,
+        Open = 2,
+        Closed = 3
     }
 }

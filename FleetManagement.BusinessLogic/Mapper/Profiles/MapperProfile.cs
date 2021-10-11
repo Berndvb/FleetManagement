@@ -1,8 +1,9 @@
 ﻿using AutoMapper;
 using FleetManagement.BLL.Mapper.Converters;
 using FleetManagement.Domain.Models;
-using FleetManagement.Framework.Models.Dtos;
-using FleetManagement.Framework.Models.Dtos.ShowDtos;
+using FleetManagement.Framework.Models.Dtos.ReadDtos;
+using FleetManagement.Framework.Models.Dtos.WriteDtos;
+using FleetManagement.Framework.Models.WriteDtos;
 using System.Collections.Generic;
 
 namespace FleetManagement.BLL.Services
@@ -17,7 +18,7 @@ namespace FleetManagement.BLL.Services
             CreateMap<Driver, DriverDetailsDto>()
                 .ReverseMap();
 
-            CreateMap<Driver, DriverDto>()
+            CreateMap<Driver, DriverDetailsDto>()
                 .ReverseMap();
 
             CreateMap<IdentityPerson, IdentityPersonDto>()
@@ -56,10 +57,10 @@ namespace FleetManagement.BLL.Services
             CreateMap<FuelCardOptions, FuelCardOptionsDto>()
                 .ReverseMap();
 
-            CreateMap<Driver, VehicleAppealDto>()
+            CreateMap<Driver, AppealDto>()
                 .ReverseMap();
 
-            CreateMap<Appeal, VehicleAppealDto>()
+            CreateMap<Appeal, AppealDto>()
                 .ReverseMap();
 
             CreateMap<DriverVehicle, VehicleDetailsDto>()
@@ -81,6 +82,15 @@ namespace FleetManagement.BLL.Services
                 .ReverseMap();
 
             CreateMap<Vehicle, VehicleDetailsDto>()
+                .ReverseMap();
+
+            CreateMap<Driver, AddDriverDto>()
+                .ReverseMap();
+
+            CreateMap<DriverVehicle, AddDriverVehicleDto>()
+                .ReverseMap();
+
+            CreateMap<FuelCardDriver, AddFuelCardDriverDto>()
                 .ReverseMap();
 
             //Extra convertingmaps

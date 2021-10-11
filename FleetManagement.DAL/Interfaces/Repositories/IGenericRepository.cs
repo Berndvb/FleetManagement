@@ -1,4 +1,5 @@
 ﻿using FleetManagement.Domain.Interfaces.Models;
+using FleetManagement.Framework.Paging;
 using Microsoft.EntityFrameworkCore.Query;
 using System;
 using System.Collections.Generic;
@@ -16,6 +17,7 @@ namespace FleetManager.Domain.Interfaces.Repositories
             params Func<IQueryable<TEntity>, IIncludableQueryable<TEntity, object>>[] including);
         Task<List<TEntity>> GetListBy(
             Expression<Func<TEntity, bool>> filter = null,
+            PagingParameters pagingParameter = null,
             params Func<IQueryable<TEntity>, IIncludableQueryable<TEntity, object>>[] including);
         Task Insert(TEntity entity);
         Task InsertRange(ICollection<TEntity> entities);

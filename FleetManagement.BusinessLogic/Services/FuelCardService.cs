@@ -1,7 +1,8 @@
 ﻿using AutoMapper;
 using FleetManagement.Domain.Interfaces.Repositories;
 using FleetManagement.Domain.Models;
-using FleetManagement.Framework.Models.Dtos;
+using FleetManagement.Framework.Models.Dtos.ReadDtos;
+using FleetManagement.Framework.Paging;
 using Microsoft.EntityFrameworkCore;
 using System.Collections.Generic;
 using System.Threading.Tasks;
@@ -30,10 +31,11 @@ namespace FleetManagement.BLL.Services
             _unitOfWork.Complete();
         }
 
-        public async Task<List<FuelCardDto>> GetAllFuelCards()
+        public async Task<List<FuelCardDto>> GetAllFuelCards(PagingParameters pagingParameter = null)
         {
             var fuelCards = await _unitOfWork.FuelCards.GetListBy(
                 filter: null,
+                pagingParameter,
                 x => x.Include(y => y.FuelCardOptions),
                 x => x.Include(y => y.FuelCardDrivers));
 

@@ -21,7 +21,7 @@ namespace FleetManagement.ReadAPI.Features.DriverManagement.GetAllDriverOverview
             GetAllDriverOverviewsQuery request,
             CancellationToken cancellationToken)
         {
-            var driverOverviews = await _driverService.GetDriverOverviews(onlyInService: false);
+            var driverOverviews = await _driverService.GetDriverOverviews(onlyInService: request.OnlyInService, request.PagingParameters);
             if (driverOverviews.Count == 0)
             {
                 var dataError = new ExecutionError("We couldn't find and retrieve any driver-overview data.", Constants.ErrorCodes.DataNotFound);

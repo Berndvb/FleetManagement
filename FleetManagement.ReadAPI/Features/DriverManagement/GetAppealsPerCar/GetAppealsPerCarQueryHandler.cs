@@ -46,7 +46,7 @@ namespace FleetManagement.ReadAPI.Features.DriverManagement.GetAppealsPerCar
             if (vehicleIdError != null)
                 return BadRequest(vehicleIdError);
 
-            var vehicleAppeals = await _driverService.GetAppealsForDriverPerCar(request.DriverId, request.VehicleId);
+            var vehicleAppeals = await _driverService.GetAppealsForDriverPerCar(request.DriverId, request.VehicleId, request.PagingParameters);
             if (vehicleAppeals.Count == 0)
             {
                 var dataError = new ExecutionError("We couldn't find and retrieve any vehicle-appeal data.", Constants.ErrorCodes.DataNotFound);

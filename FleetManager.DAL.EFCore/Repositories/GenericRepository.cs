@@ -1,5 +1,6 @@
 ﻿using FleetManagement.Domain.Interfaces.Models;
 using FleetManagement.EFCore.Infrastructure;
+using FleetManagement.Framework.Paging;
 using FleetManager.Domain.Interfaces.Repositories;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Query;
@@ -44,6 +45,7 @@ namespace FleetManager.EFCore.Repositories
 
         public Task<List<TEntity>> GetListBy(
             Expression<Func<TEntity, bool>> filter = null,
+            PagingParameters pagingParameters = null,
             params Func<IQueryable<TEntity>, IIncludableQueryable<TEntity, object>>[] including)
         {
             var query = filter == null 
@@ -57,6 +59,13 @@ namespace FleetManager.EFCore.Repositories
                     inclusion(query);
                 }
             }
+
+            query = pagingParameters == null 
+                ? query
+                : query
+                    .OrderBy(x => x.Id)
+                    .Skip((pagingParameters.PageNumber - 1) * pagingParameters.PageSize)
+                    .Take(pagingParameters.PageSize);
 
             return query.ToListAsync();
         }

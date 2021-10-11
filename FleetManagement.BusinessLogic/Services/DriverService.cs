@@ -3,8 +3,9 @@ using FleetManagement.BLL.Services.Models;
 using FleetManagement.Domain.Interfaces.Repositories;
 using FleetManagement.Domain.Models;
 using FleetManagement.Framework.Helpers;
-using FleetManagement.Framework.Models.Dtos;
-using FleetManagement.Framework.Models.Dtos.ShowDtos;
+using FleetManagement.Framework.Models.Dtos.ReadDtos;
+using FleetManagement.Framework.Models.Dtos.WriteDtos;
+using FleetManagement.Framework.Paging;
 using MediatR.Cqrs.Execution;
 using Microsoft.EntityFrameworkCore;
 using System.Collections.Generic;
@@ -29,12 +30,12 @@ namespace FleetManagement.BLL.Services
             _generalService = generalService;
         }
 
-        public async Task<List<DriverOverviewDto>> GetDriverOverviews(bool onlyInService)
+        public async Task<List<DriverOverviewDto>> GetDriverOverviews(bool onlyInService, PagingParameters pagingParameter = null)
         {
 
             var drivers = onlyInService 
-                ? await _unitOfWork.Drivers.GetListBy(including: x => x.Include(y => y.Identity)) 
-                : await _unitOfWork.Drivers.GetListBy(filter: x => x.InService.Equals(true), including: x => x.Include(y => y.Identity));
+                ? await _unitOfWork.Drivers.GetListBy(filter: null, pagingParameter, including: x => x.Include(y => y.Identity)) 
+                : await _unitOfWork.Drivers.GetListBy(filter: x => x.InService.Equals(true), pagingParameter, including: x => x.Include(y => y.Identity));
 
             var driverOverviewDtos = _mapper.Map<List<DriverOverviewDto>>(drivers);
 
@@ -54,10 +55,11 @@ namespace FleetManagement.BLL.Services
             return driverdetaillsDto;
         }
 
-        public async Task<List<FuelCardDto>> GetFuelCardsForDriver(string driverId)
+        public async Task<List<FuelCardDto>> GetFuelCardsForDriver(string driverId, PagingParameters pagingParameter = null)
         {
             var fuelCards = await _unitOfWork.FuelCards.GetListBy(
                 filter: x => x.FuelCardDrivers.Any(y => y.Driver.Id.Equals(driverId.StringToInt())),
+                pagingParameter,
                 x => x.Include(y => y.FuelCardOptions),
                 x => x.Include(y => y.FuelCardDrivers.Where(y => y.Driver.Id.Equals(driverId.StringToInt()))));
 
@@ -66,10 +68,11 @@ namespace FleetManagement.BLL.Services
             return fuelCardInfoDtos;
         }
 
-        public async Task<List<VehicleDetailsDto>> GetVehicleInfoForDriver(string driverId)
+        public async Task<List<VehicleDetailsDto>> GetVehicleInfoForDriver(string driverId, PagingParameters pagingParameter = null)
         {
             var driverVehicles = await _unitOfWork.Vehicles.GetListBy(
                 filter: x => x.Drivers.Any(y => y.Driver.Id.Equals(driverId)),
+                pagingParameter,
                 x => x.Include(y => y.Identity),
                 x => x.Include(y => y.Drivers.Where(z => z.Driver.Id.Equals(driverId))));
 
@@ -78,10 +81,11 @@ namespace FleetManagement.BLL.Services
             return vehicleDetailsDtos;
         }
 
-        public async Task<List<AppealDto>> GetAppealsForDriver(string driverId)
+        public async Task<List<AppealDto>> GetAppealsForDriver(string driverId, PagingParameters pagingParameter = null)
         {
             var appeals = await _unitOfWork.Appeals.GetListBy(
                 filter: x => x.Driver.Id.Equals(driverId.StringToInt()),
+                pagingParameter,
                 x => x.Include(y => y.Vehicle),
                 x => x.Include(y => y.Vehicle.Identity));
 
@@ -90,20 +94,22 @@ namespace FleetManagement.BLL.Services
             return appealDtos;
         }
 
-        public async Task<List<AppealDto>> GetAppealsForDriverPerCar(string driverId, string vehicleId)//for lazy loading @ GetVehicleDetailsForDriver
+        public async Task<List<AppealDto>> GetAppealsForDriverPerCar(string driverId, string vehicleId, PagingParameters pagingParameter = null)//for lazy loading @ GetVehicleDetailsForDriver
         {
             var vehicleAppeals = await _unitOfWork.Appeals.GetListBy(
-                filter: x => x.Driver.Id.Equals(driverId.StringToInt()) && x.Vehicle.Id.Equals(vehicleId.StringToInt()));
+                filter: x => x.Driver.Id.Equals(driverId.StringToInt()) && x.Vehicle.Id.Equals(vehicleId.StringToInt()),
+                pagingParameter);
 
             var vehicleAppealDtos = _mapper.Map<List<AppealDto>>(vehicleAppeals);
 
             return vehicleAppealDtos;
         }
 
-        public async Task<List<MaintenanceDto>> GetMaintenancesForDriverPerCar(string driverId, string vehicleId)//for lazy loading @ GetVehicleDetailsForDriver
+        public async Task<List<MaintenanceDto>> GetMaintenancesForDriverPerCar(string driverId, string vehicleId, PagingParameters pagingParameter = null)//for lazy loading @ GetVehicleDetailsForDriver
         {
             var maintenances = await _unitOfWork.Maintenance.GetListBy(
                 filter: x => x.Driver.Id.Equals(driverId) && x.Vehicle.Id.Equals(vehicleId.StringToInt()),
+                pagingParameter,
                 x => x.Include(y => y.Documents),
                 x => x.Include(y => y.Garage));
 
@@ -112,10 +118,11 @@ namespace FleetManagement.BLL.Services
             return maintenanceDtos;
         }
 
-        public async Task<List<RepareDto>> GetRepairsForDriverPerCar(string driverId, string vehicleId)//for lazy loading @ GetVehicleDetailsForDriver
+        public async Task<List<RepareDto>> GetRepairsForDriverPerCar(string driverId, string vehicleId, PagingParameters pagingParameter = null)//for lazy loading @ GetVehicleDetailsForDriver
         {
             var reparations = await _unitOfWork.Repairs.GetListBy(
                 filter: x => x.Driver.Id.Equals(driverId) && x.Vehicle.Id.Equals(vehicleId.StringToInt()),
+                pagingParameter,
                 x => x.Include(y => y.Documents),
                 x => x.Include(y => y.Garage));
 
@@ -133,7 +140,7 @@ namespace FleetManagement.BLL.Services
             _unitOfWork.Complete();
         }
 
-        public void AddDriver(DriverDetailsDto driverDto)
+        public void AddDriver(AddDriverDto driverDto)
         {
             var driver = _mapper.Map<Driver>(driverDto);
 

@@ -1,4 +1,4 @@
-﻿using FleetManagement.Framework.Models.Dtos.ShowDtos;
+﻿using FleetManagement.Framework.Models.Dtos.ReadDtos;
 using MediatR.Cqrs.Execution;
 
 namespace FleetManagement.ReadAPI.Features.DriverManagement.GetDriverDetails

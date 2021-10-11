@@ -1,4 +1,5 @@
-﻿using MediatR.Cqrs.Queries;
+﻿using FleetManagement.Framework.Paging;
+using MediatR.Cqrs.Queries;
 
 namespace FleetManagement.ReadAPI.Features.DriverManagement.GetAppealsPerCar
 {
@@ -7,5 +8,7 @@ namespace FleetManagement.ReadAPI.Features.DriverManagement.GetAppealsPerCar
         public string DriverId { get; set; }
 
         public string VehicleId { get; set; }
+
+        public PagingParameters PagingParameters { get; set; }
     }
 }

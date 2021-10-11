@@ -17,6 +17,19 @@ namespace FleetManagement.EFCore.Infrastructure
         {
         }
 
-        //onmodelcreating - tpt, tph, tpc
+        //protected override void OnModelCreating(DBModelBuilder modelBuilder)
+        //{
+        //    modelBuilder.Entity<Repare>().Map(m =>
+        //    {
+        //        m.MapInheritedProperties();
+        //        m.ToTable("Reparations");
+        //    });
+
+        //    modelBuilder.Entity<Maintenance>().Map(m =>
+        //    {
+        //        m.MapInheritedProperties();
+        //        m.ToTable("CreditCards");
+        //    });
+        //}
     }
 }

@@ -46,7 +46,7 @@ namespace FleetManagement.ReadAPI.Features.DriverManagement.GetMaintenancesPerCa
             if (vehicleIdError != null)
                 return BadRequest(vehicleIdError);
 
-            var vehicleMaintenances = await _driverService.GetMaintenancesForDriverPerCar(request.DriverId, request.VehicleId);
+            var vehicleMaintenances = await _driverService.GetMaintenancesForDriverPerCar(request.DriverId, request.VehicleId, request.PagingParameters);
             if (vehicleMaintenances.Count == 0)
             {
                 var dataError = new ExecutionError("We couldn't find and retrieve any driver-maintenance data.", Constants.ErrorCodes.DataNotFound);

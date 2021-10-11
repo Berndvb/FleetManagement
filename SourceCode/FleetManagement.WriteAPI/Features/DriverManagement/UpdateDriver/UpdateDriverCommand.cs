@@ -1,4 +1,4 @@
-﻿using FleetManagement.Framework.Models.Dtos.ShowDtos;
+﻿using FleetManagement.Framework.Models.Dtos.ReadDtos;
 using MediatR.Cqrs.Commands;
 
 namespace FleetManagement.WriteAPI.Features.DriverManagement.UpdateDriver

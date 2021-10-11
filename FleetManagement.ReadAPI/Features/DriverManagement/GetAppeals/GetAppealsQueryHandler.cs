@@ -39,7 +39,7 @@ namespace FleetManagement.ReadAPI.Features.DriverManagement.GetTotalAppeals
             if (idError != null)
                 return BadRequest(idError);
 
-            var driverAppeals = await _driverService.GetAppealsForDriver(request.DriverId);
+            var driverAppeals = await _driverService.GetAppealsForDriver(request.DriverId, request.PagingParameters);
             if (driverAppeals.Count == 0)
             {
                 var dataError = new ExecutionError("We couldn't find and retrieve any driver-appeal data.", Constants.ErrorCodes.DataNotFound);

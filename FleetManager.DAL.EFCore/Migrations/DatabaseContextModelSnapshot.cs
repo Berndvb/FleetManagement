@@ -35,6 +35,9 @@ namespace FleetManager.EFCore.Migrations
                     b.Property<string>("Street")
                         .HasColumnType("nvarchar(max)");
 
+                    b.Property<string>("StreetNumber")
+                        .HasColumnType("nvarchar(max)");
+
                     b.HasKey("Id");
 
                     b.ToTable("Address");
@@ -60,7 +63,7 @@ namespace FleetManager.EFCore.Migrations
                     b.Property<int?>("GarageId")
                         .HasColumnType("int");
 
-                    b.Property<DateTime>("InvoiceDate")
+                    b.Property<DateTime?>("InvoiceDate")
                         .HasColumnType("datetime2");
 
                     b.Property<float>("Price")
@@ -561,7 +564,7 @@ namespace FleetManager.EFCore.Migrations
                         .HasForeignKey("DriverId");
 
                     b.HasOne("FleetManagement.Domain.Models.FuelCard", "FuelCard")
-                        .WithMany("Drivers")
+                        .WithMany("FuelCardDrivers")
                         .HasForeignKey("FuelCardId");
 
                     b.Navigation("Driver");
@@ -621,7 +624,7 @@ namespace FleetManager.EFCore.Migrations
 
             modelBuilder.Entity("FleetManagement.Domain.Models.FuelCard", b =>
                 {
-                    b.Navigation("Drivers");
+                    b.Navigation("FuelCardDrivers");
                 });
 
             modelBuilder.Entity("FleetManagement.Domain.Models.Vehicle", b =>

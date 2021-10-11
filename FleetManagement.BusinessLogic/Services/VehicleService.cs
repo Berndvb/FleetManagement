@@ -3,6 +3,8 @@ using FleetManagement.BLL.Services.Models;
 using FleetManagement.Domain.Interfaces.Repositories;
 using FleetManagement.Domain.Models;
 using FleetManagement.Framework.Models.Dtos;
+using FleetManagement.Framework.Models.Dtos.ReadDtos;
+using FleetManagement.Framework.Paging;
 using MediatR.Cqrs.Execution;
 using Microsoft.EntityFrameworkCore;
 using System.Collections.Generic;
@@ -26,10 +28,11 @@ namespace FleetManagement.BLL.Services
             _generalService = generalService;
         }
 
-        public async Task<List<VehicleDetailsDto>> GetAllVehicles()
+        public async Task<List<VehicleDetailsDto>> GetAllVehicles(PagingParameters pagingParameter = null)
         {
             var vehicles = await _unitOfWork.Vehicles.GetListBy(
                 filter: null,
+                pagingParameter,
                 x => x.Include(y => y.Identity),
                 x => x.Include(y => y.Maintenances),
                 x => x.Include(y => y.Reparations),

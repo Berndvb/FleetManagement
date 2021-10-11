@@ -1,4 +1,5 @@
 ﻿using FleetManagement.Framework.Models.Dtos;
+using FleetManagement.Framework.Models.Dtos.ReadDtos;
 using MediatR.Cqrs.Execution;
 using System.Collections.Generic;
 

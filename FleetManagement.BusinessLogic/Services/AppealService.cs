@@ -1,8 +1,13 @@
 ﻿using AutoMapper;
 using FleetManagement.Domain.Interfaces.Repositories;
-using FleetManagement.Framework.Models.Dtos.ShowDtos;
+using FleetManagement.Domain.Models;
+using FleetManagement.Framework.Models.Dtos.ReadDtos;
+using FleetManagement.Framework.Models.Enums;
+using FleetManagement.Framework.Paging;
 using Microsoft.EntityFrameworkCore;
+using System;
 using System.Collections.Generic;
+using System.Linq.Expressions;
 using System.Threading.Tasks;
 
 namespace FleetManagement.BLL.Services
@@ -20,10 +25,15 @@ namespace FleetManagement.BLL.Services
             _mapper = mapper;
         }
 
-        public async Task<List<AppealDto>> GetAllAppeals()
+        public async Task<List<AppealDto>> GetAllAppeals(PagingParameters pagingParameter = null, AppealStatus appealstatus = 0)
         {
+            Expression<Func<Appeal, bool>> getSpecificStatus = appealstatus == 0 
+                ? null
+                : x => x.Status.Equals(appealstatus);
+
             var appeals = await _unitOfWork.Appeals.GetListBy(
-                filter: null,
+                filter: getSpecificStatus,
+                pagingParameter,
                 x => x.Include(y => y.Vehicle),
                 x => x.Include(y => y.Driver));
 

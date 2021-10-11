@@ -39,7 +39,7 @@ namespace FleetManagement.ReadAPI.Features.DriverManagement.GetVehicleDetails
             if (driverIdError != null)
                 return BadRequest(driverIdError);
 
-            var vehicles = await _driverService.GetVehicleInfoForDriver(request.DriverId);
+            var vehicles = await _driverService.GetVehicleInfoForDriver(request.DriverId, request.PagingParameters);
             if (vehicles.Count == 0)
             {
                 var dataError = new ExecutionError("We couldn't find and retrieve any driver-vehicle data.", Constants.ErrorCodes.DataNotFound);

@@ -1,7 +1,5 @@
 ﻿using FleetManagement.BLL.Services;
-using FleetManagement.Framework.Constants;
 using FluentValidation;
-using MediatR.Cqrs.Execution;
 using MediatR.Cqrs.Queries;
 using System.Threading;
 using System.Threading.Tasks;

@@ -7,8 +7,6 @@ namespace FleetManagement.WriteAPI.Features.DriverManagement.AddDriver
     {
         public AddDriverCommandValidator()
         {
-            RuleFor(x => x.Driver.Id).Must(y => y > 0);
-
             RuleFor(x => x.Driver.DriversLicenseType).IsInEnum();
 
             RuleFor(x => x.Driver.Contactinfo).NotNull();

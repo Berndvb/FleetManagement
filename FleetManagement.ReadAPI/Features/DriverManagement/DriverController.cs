@@ -1,5 +1,4 @@
-﻿using FleetManagement.ReadAPI.Features.DriverManagement.GetActiveDriverOverviews;
-using FleetManagement.ReadAPI.Features.DriverManagement.GetAllDriverOverviews;
+﻿using FleetManagement.ReadAPI.Features.DriverManagement.GetAllDriverOverviews;
 using FleetManagement.ReadAPI.Features.DriverManagement.GetAppealsPerCar;
 using FleetManagement.ReadAPI.Features.DriverManagement.GetDriverDetails;
 using FleetManagement.ReadAPI.Features.DriverManagement.GetFuelCardDetails;
@@ -11,7 +10,6 @@ using MediatR;
 using MediatR.Cqrs;
 using MediatR.Cqrs.Execution;
 using Microsoft.AspNetCore.Mvc;
-using System.Net;
 using System.Threading;
 using System.Threading.Tasks;
 
@@ -26,19 +24,6 @@ namespace FleetManagement.ReadAPI.Features.Driver
         public DriverController(IMediator mediator)
         {
             _mediator = mediator;
-        }
-
-        [HttpGet("active-driveroverviews")]
-        [ProducesResponseType(typeof(GetActiveDriverOverviewsQuery), (int)HttpStatusCode.OK)]
-        [ProducesResponseType((int)HttpStatusCode.NotFound)]
-        [ProducesResponseType((int)HttpStatusCode.BadRequest)]
-        public async Task<IActionResult> GetActiveDriverOverviews(
-         [FromModel] GetActiveDriverOverviewsQuery getActiveDriverOverviewsQuery,
-         CancellationToken cancellationToken)
-        {
-            var GetActiveDriverOverviewsQueryResult = await _mediator.Send(getActiveDriverOverviewsQuery, cancellationToken);
-
-            return GetActiveDriverOverviewsQueryResult.ToActionResult();
         }
 
         [HttpGet("all-driveroverviews")]
