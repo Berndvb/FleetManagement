@@ -31,7 +31,6 @@ namespace FleetManagement.ReadAPI.Features.FuelcardManagement.GetAllFuelCards
             }
 
             var result = new GetAllFuelCardsQueryResult(fuelCards);
-
             if (request.PagingParameters != null)
                 result.FillPagingInfo((PaginatedList<FuelCardDto>)fuelCards);
 

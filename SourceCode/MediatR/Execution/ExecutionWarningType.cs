@@ -2,6 +2,6 @@
 {
     public enum ExecutionWarningType
     {
-        NoData
+        NoData = 1
     }
 }

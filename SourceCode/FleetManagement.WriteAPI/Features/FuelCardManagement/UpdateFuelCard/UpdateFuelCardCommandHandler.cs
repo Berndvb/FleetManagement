@@ -34,7 +34,7 @@ namespace FleetManagement.WriteAPI.Features.DriverManagement.UpdateDriver
                 return BadRequest(validationError);
             }
 
-            _fuelCardService.UpdateFuelCard(request.FuelCard);
+            _fuelCardService.UpdateFuelCard(cancellationToken, request.FuelCard);
 
             return new UpdateFuelCardCommandResult();
         }

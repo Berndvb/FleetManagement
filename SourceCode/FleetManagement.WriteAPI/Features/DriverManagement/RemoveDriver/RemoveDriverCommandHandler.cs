@@ -33,7 +33,7 @@ namespace FleetManagement.WriteAPI.Features.DriverManagement.RemoveDriver
                 return BadRequest(validationError);
             }
 
-            _driverService.RemoveDriver(request.Driver);
+            _driverService.RemoveDriver(cancellationToken, request.Driver);
 
             return new RemoveDriverCommandResult();
         }

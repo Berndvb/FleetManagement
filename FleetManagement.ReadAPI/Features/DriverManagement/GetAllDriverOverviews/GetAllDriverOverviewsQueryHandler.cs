@@ -13,8 +13,7 @@ namespace FleetManagement.ReadAPI.Features.DriverManagement.GetAllDriverOverview
     {
         private readonly IDriverService _driverService;
 
-        public GetAllDriverOverviewsQueryHandler(
-            IDriverService driverService)
+        public GetAllDriverOverviewsQueryHandler(IDriverService driverService)
         {
             _driverService = driverService;
         }
@@ -31,7 +30,6 @@ namespace FleetManagement.ReadAPI.Features.DriverManagement.GetAllDriverOverview
             }
 
             var result = new GetAllDriverOverviewsQueryResult(driverOverviews);
-
             if (request.PagingParameters != null)
                 result.FillPagingInfo((PaginatedList<DriverOverviewDto>)driverOverviews);
 

@@ -19,7 +19,7 @@ namespace MediatR.Cqrs.Execution
 
         public bool HasSucceeded => !Errors.Any() && ErrorType == null;
 
-        public bool HasWarnings => !Warnings.Any() && WarningType == null;
+        public bool HasWarnings => Warnings.Any() && WarningType != null;
 
         public bool HasPaging => ExecutionPaging != null;
 
@@ -117,11 +117,16 @@ namespace MediatR.Cqrs.Execution
 
         public List<ExecutionError> GetErrors() => Errors;
 
+        public List<ExecutionWarning> GetWarnings() => Warnings;
+
         public TResult As<TResult>() where TResult : ExecutionResult
         {
             var result = (TResult)Activator.CreateInstance(typeof(TResult), true);
             result.Errors = GetErrors();
             result.ErrorType = ErrorType;
+            result.Warnings = GetWarnings();
+            result.WarningType = WarningType;
+            result.ExecutionPaging = ExecutionPaging;
 
             return result;
         }

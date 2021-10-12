@@ -2,9 +2,9 @@
 {
     public enum ExecutionErrorType
     {
-        InternalServerError,
-        BadRequest,
-        NotFound,
-        Forbidden
+        InternalServerError = 1,
+        BadRequest = 2,
+        NotFound = 3,
+        Forbidden = 4
     }
 }

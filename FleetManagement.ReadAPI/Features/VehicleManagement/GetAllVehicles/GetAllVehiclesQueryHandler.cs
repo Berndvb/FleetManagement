@@ -31,7 +31,6 @@ namespace FleetManagement.ReadAPI.Features.VehicleManagement.GetAllVehicles
             }
 
             var result = new GetAllVehiclesQueryResult(vehicles);
-
             if (request.PagingParameters != null)
                 result.FillPagingInfo((PaginatedList<VehicleDetailsDto>)vehicles);
 

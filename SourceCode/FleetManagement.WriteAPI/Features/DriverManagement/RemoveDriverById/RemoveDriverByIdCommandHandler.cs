@@ -33,11 +33,11 @@ namespace FleetManagement.WriteAPI.Features.DriverManagement.RemoveDriver
                 return BadRequest(validationError);
             }
 
-            var driverIdError = await _driverService.CheckforIdError(request.DriverId);
+            var driverIdError = await _driverService.CheckforIdError(cancellationToken, request.DriverId);
             if (driverIdError != null)
                 return BadRequest(driverIdError);
 
-            _driverService.RemoveDriver(request.DriverId);
+            _driverService.RemoveDriver(cancellationToken, request.DriverId);
 
             return new RemoveDriverByIdCommandResult();
         }

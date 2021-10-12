@@ -1,4 +1,5 @@
 ﻿using AutoMapper;
+using FleetManagement.BLL.Mapper.MapperSercice;
 using FleetManagement.BLL.Services.Models;
 using FleetManagement.Domain.Interfaces.Repositories;
 using FleetManagement.Domain.Models;
@@ -16,15 +17,19 @@ namespace FleetManagement.BLL.Services
     {
         private readonly IUnitOfWork _unitOfWork;
         private readonly IMapper _mapper;
+        private readonly IMapperService _mapperService;
+
         private readonly IGeneralService _generalService;
 
         public VehicleService(
             IUnitOfWork unitOfWork, 
             IMapper mapper,
+            IMapperService mapperService,
             IGeneralService generalService)
         {
             _unitOfWork = unitOfWork;
             _mapper = mapper;
+            _mapperService = mapperService;
             _generalService = generalService;
         }
 
@@ -41,6 +46,8 @@ namespace FleetManagement.BLL.Services
                  .Include(y => y.Appeals));
 
             var vehicleDtos = _mapper.Map<List<VehicleDetailsDto>>(vehicles);
+            if (pagingParameter != null)
+                return _mapperService.GetPaginatedData(vehicleDtos, vehicles);
 
             return vehicleDtos;
         }

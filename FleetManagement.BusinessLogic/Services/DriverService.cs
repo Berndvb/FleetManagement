@@ -1,4 +1,5 @@
 ﻿using AutoMapper;
+using FleetManagement.BLL.Mapper.MapperSercice;
 using FleetManagement.BLL.Services.Models;
 using FleetManagement.Domain.Interfaces.Repositories;
 using FleetManagement.Domain.Models;
@@ -18,15 +19,18 @@ namespace FleetManagement.BLL.Services
     {
         private readonly IUnitOfWork _unitOfWork;
         private readonly IMapper _mapper;
+        private readonly IMapperService _mapperService;
         private readonly IGeneralService _generalService;
 
         public DriverService(
             IUnitOfWork unitOfWork,
             IMapper mapper,
+            IMapperService mapperService,
             IGeneralService generalService)
         {
             _unitOfWork = unitOfWork;
             _mapper = mapper;
+            _mapperService = mapperService;
             _generalService = generalService;
         }
 
@@ -35,7 +39,6 @@ namespace FleetManagement.BLL.Services
             bool onlyInService, 
             PagingParameters pagingParameter)
         {
-
             var drivers = onlyInService
                 ? await _unitOfWork.Drivers.GetListBy(
                     cancellationToken,
@@ -48,6 +51,8 @@ namespace FleetManagement.BLL.Services
                     including: x => x.Include(y => y.Identity));
 
             var driverOverviewDtos = _mapper.Map<List<DriverOverviewDto>>(drivers);
+            if (pagingParameter != null)
+                return _mapperService.GetPaginatedData(driverOverviewDtos, drivers); 
 
             return driverOverviewDtos;
         }
@@ -80,6 +85,8 @@ namespace FleetManagement.BLL.Services
                     .Include(y => y.FuelCardDrivers.Where(z => z.Driver.Id.Equals(driverId)))); 
 
             var fuelCardInfoDtos = _mapper.Map<List<FuelCardDto>>(fuelCards);
+            if (pagingParameter != null)
+                return _mapperService.GetPaginatedData(fuelCardInfoDtos, fuelCards);
 
             return fuelCardInfoDtos;
         }
@@ -98,6 +105,8 @@ namespace FleetManagement.BLL.Services
                     .Include(y => y.Drivers.Where(z => z.Driver.Id.Equals(driverId))));
 
             var vehicleDetailsDtos = _mapper.Map<List<VehicleDetailsDto>>(driverVehicles);
+            if (pagingParameter != null)
+                return _mapperService.GetPaginatedData(vehicleDetailsDtos, driverVehicles);
 
             return vehicleDetailsDtos;
         }
@@ -114,6 +123,8 @@ namespace FleetManagement.BLL.Services
                 including: x => x.Include(y => y.Vehicle).ThenInclude(z => z.Identity));
 
             var appealDtos = _mapper.Map<List<AppealDto>>(appeals);
+            if (pagingParameter != null)
+                return _mapperService.GetPaginatedData(appealDtos, appeals);
 
             return appealDtos;
         }
@@ -130,6 +141,8 @@ namespace FleetManagement.BLL.Services
                 filter: x => x.Driver.Id.Equals(driverId) && x.Vehicle.Id.Equals(vehicleId));
 
             var vehicleAppealDtos = _mapper.Map<List<AppealDto>>(vehicleAppeals);
+            if (pagingParameter != null)
+                return _mapperService.GetPaginatedData(vehicleAppealDtos, vehicleAppeals);
 
             return vehicleAppealDtos;
         }
@@ -149,6 +162,8 @@ namespace FleetManagement.BLL.Services
                     .Include(y => y.Garage));
 
             var maintenanceDtos = _mapper.Map<List<MaintenanceDto>>(maintenances);
+            if (pagingParameter != null)
+                return _mapperService.GetPaginatedData(maintenanceDtos, maintenances);
 
             return maintenanceDtos;
         }
@@ -168,6 +183,8 @@ namespace FleetManagement.BLL.Services
                     .Include(y => y.Garage));
 
             var reparationDtos = _mapper.Map<List<RepareDto>>(reparations);
+            if (pagingParameter != null)
+                return _mapperService.GetPaginatedData(reparationDtos, reparations);
 
             return reparationDtos;
         }

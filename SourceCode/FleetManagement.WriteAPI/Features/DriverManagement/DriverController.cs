@@ -11,7 +11,7 @@ using FleetManagement.WriteAPI.Features.DriverManagement.UpdateDriver;
 namespace FleetManagement.WriteAPI.Features.DriverManagement
 {
     [ApiController]
-    [Route("writeapi/[controller]")]
+    [Route("writeapi/[controller]")] // change sequence in routing!!!
     public class DriverController : Controller
     {
         private readonly IMediator _mediator;

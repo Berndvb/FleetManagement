@@ -13,33 +13,20 @@ namespace FleetManagement.ReadAPI.Features.DriverManagement.GetMaintenancesPerCa
     public class GetMaintenancesPerCarQueryHandler : QueryHandler<GetMaintenancesPerCarQuery, GetMaintenancesPerCarQueryResult>
     {
         private readonly IDriverService _driverService;
-        private readonly IGeneralService _generalService;
         private readonly IVehicleService _vehicleService;
-        private readonly IValidator<GetMaintenancesPerCarQuery> _validator;
 
         public GetMaintenancesPerCarQueryHandler(
             IDriverService driverService,
-            IGeneralService generalService,
-            IVehicleService vehicleService,
-            IValidator<GetMaintenancesPerCarQuery> validator)
+            IVehicleService vehicleService)
         {
             _driverService = driverService;
-            _generalService = generalService;
             _vehicleService = vehicleService;
-            _validator = validator;
         }
 
         public async override Task<GetMaintenancesPerCarQueryResult> Handle(
             GetMaintenancesPerCarQuery request,
             CancellationToken cancellationToken)
         {
-            var validationResult = _validator.Validate(request);
-            if (!validationResult.IsValid)
-            {
-                var validationError = _generalService.ProcessValidationError(validationResult);
-                return BadRequest(validationError);
-            }
-
             var driverIdError = await _driverService.CheckforIdError(cancellationToken, request.DriverId);
             if (driverIdError != null)
                 return BadRequest(driverIdError);
@@ -56,7 +43,6 @@ namespace FleetManagement.ReadAPI.Features.DriverManagement.GetMaintenancesPerCa
             }
 
             var result = new GetMaintenancesPerCarQueryResult(vehicleMaintenances);
-
             if (request.PagingParameters != null)
                 result.FillPagingInfo((PaginatedList<MaintenanceDto>)vehicleMaintenances);
 

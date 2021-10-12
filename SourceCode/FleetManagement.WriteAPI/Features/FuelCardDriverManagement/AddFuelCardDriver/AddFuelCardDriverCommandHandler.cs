@@ -33,7 +33,7 @@ namespace FleetManagement.WriteAPI.Features.FuelCardDriverManagement.AddFuelCard
                 return BadRequest(validationError);
             }
 
-            _fuelCardDriver.AddFuelCardDriver(request.FuelCardDriver);
+            _fuelCardDriver.AddFuelCardDriver(cancellationToken, request.FuelCardDriver);
 
             return new AddFuelCardDriverCommandResult();
         }

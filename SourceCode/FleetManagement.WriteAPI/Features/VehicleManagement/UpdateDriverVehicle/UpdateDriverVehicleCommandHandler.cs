@@ -33,7 +33,7 @@ namespace FleetManagement.WriteAPI.Features.VehicleManagement.UpdateDriverVehicl
                 return BadRequest(validationError);
             }
 
-            _driverVehicleService.UpdateDriverVehicle(request.DriverVehicle);
+            _driverVehicleService.UpdateDriverVehicle(cancellationToken, request.DriverVehicle);
 
             return new UpdateDriverVehicleCommandResult();
         }

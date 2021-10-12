@@ -19,7 +19,7 @@ namespace FleetManagement.ReadAPI.Features.FuelcardManagement
             _mediator = mediator;
         }
 
-        [HttpGet("all-fuelcards")]
+        [HttpGet("fuelcards")]
         public async Task<IActionResult> GetAllFuelCards(
          [FromModel] GetAllFuelCardsQuery getAllFuelCardsQuery,
          CancellationToken cancellationToken)

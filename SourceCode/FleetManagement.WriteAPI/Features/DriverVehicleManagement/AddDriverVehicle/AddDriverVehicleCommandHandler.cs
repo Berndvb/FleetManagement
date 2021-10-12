@@ -33,7 +33,7 @@ namespace FleetManagement.WriteAPI.Features.DriverVehicleManagement.AddDriverVeh
                 return BadRequest(validationError);
             }
 
-            _driverVehicleService.AddDriverVehicle(request.DriverVehicle);
+            _driverVehicleService.AddDriverVehicle(cancellationToken, request.DriverVehicle);
 
             return new AddDriverVehicleCommandResult();
         }

@@ -31,6 +31,7 @@ namespace FleetManagement.ReadAPI
             });
             services.AddMvc()
                  .AddFluentValidation(fv => fv.RegisterValidatorsFromAssemblyContaining<GetAppealsQueryValidator>());
+            //services.AddValidatorsFromAssembly(typeof(Startup).Assembly);
 
             services.AddDALServices(connectionString);
             services.AddBLLServices();

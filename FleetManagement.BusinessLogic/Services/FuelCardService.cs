@@ -1,4 +1,5 @@
 ﻿using AutoMapper;
+using FleetManagement.BLL.Mapper.MapperSercice;
 using FleetManagement.Domain.Interfaces.Repositories;
 using FleetManagement.Domain.Models;
 using FleetManagement.Framework.Models.Dtos.ReadDtos;
@@ -14,13 +15,16 @@ namespace FleetManagement.BLL.Services
     {
         private readonly IUnitOfWork _unitOfWork;
         private readonly IMapper _mapper;
+        private readonly IMapperService _mapperService;
 
         public FuelCardService(
             IUnitOfWork unitOfWork,
-            IMapper mapper)
+            IMapper mapper,
+            IMapperService mapperService)
         {
             _unitOfWork = unitOfWork;
             _mapper = mapper;
+            _mapperService = mapperService;
         }
 
         public void UpdateFuelCard(CancellationToken cancellationToken, FuelCardDto fuelCardDto)
@@ -40,6 +44,8 @@ namespace FleetManagement.BLL.Services
                 including: x => x.Include(y => y.FuelCardOptions).Include(y => y.FuelCardDrivers));
 
             var fuelCardDtos = _mapper.Map<List<FuelCardDto>>(fuelCards);
+            if (pagingParameter != null)
+                return _mapperService.GetPaginatedData(fuelCardDtos, fuelCards);
 
             return fuelCardDtos;
         } 

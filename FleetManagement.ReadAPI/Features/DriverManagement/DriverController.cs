@@ -26,7 +26,7 @@ namespace FleetManagement.ReadAPI.Features.Driver
             _mediator = mediator;
         }
 
-        [HttpGet("all-driveroverviews")]
+        [HttpGet("driveroverviews")]
         public async Task<IActionResult> GetAllDriverOverviews(
           [FromModel] GetAllDriverOverviewsQuery getAllDriverOverviewsQuery,
           CancellationToken cancellationToken)
@@ -36,7 +36,7 @@ namespace FleetManagement.ReadAPI.Features.Driver
             return getAllDriverOverviewsQueryResult.ToActionResult();
         }
 
-        [HttpGet("appeals/{driverId}")]
+        [HttpGet("{driverId}/appeals")]
         public async Task<IActionResult> GetAppeals(
          [FromModel] GetAppealsQuery getAppealsQuery,
          CancellationToken cancellationToken)
@@ -46,7 +46,7 @@ namespace FleetManagement.ReadAPI.Features.Driver
             return getAppealsQueryResult.ToActionResult();
         }
 
-        [HttpGet("appeals-per-car/{driverId}/{vehicleId}")]
+        [HttpGet("{driverId}/appeals-per-car/{vehicleId}")]
         public async Task<IActionResult> GetAppealsPerCar(
          [FromModel] GetAppealsPerCarQuery getAppealsPerCarQuery,
          CancellationToken cancellationToken)
@@ -56,7 +56,7 @@ namespace FleetManagement.ReadAPI.Features.Driver
             return getAppealsPerCarQueryResult.ToActionResult();
         }
 
-        [HttpGet("driverdetails/{driverId}")]
+        [HttpGet("{driverId}/driverdetails")]
         public async Task<IActionResult> GetDriverDetails(
          [FromModel] GetDriverDetailsQuery getDriverDetailsQuery,
          CancellationToken cancellationToken)
@@ -66,7 +66,7 @@ namespace FleetManagement.ReadAPI.Features.Driver
             return getDriverDetailsQueryResult.ToActionResult();
         }
 
-        [HttpGet("fuelcards/{driverId}")]
+        [HttpGet("{driverId}/fuelcards")]
         public async Task<IActionResult> GetFuelCards(
          [FromModel] GetFuelCardsQuery getFuelCardsQuery,
          CancellationToken cancellationToken)
@@ -76,7 +76,7 @@ namespace FleetManagement.ReadAPI.Features.Driver
             return getAllDriverOverviewsQueryResult.ToActionResult();
         }
 
-        [HttpGet("maintenances-per-car/{driverId}/{vehicleId}")]
+        [HttpGet("{driverId}/maintenances-per-car/{vehicleId}")]
         public async Task<IActionResult> GetMaintenancesPerCar(
          [FromModel] GetMaintenancesPerCarQuery getMaintenancesPerCarQuery,
          CancellationToken cancellationToken)
@@ -86,7 +86,7 @@ namespace FleetManagement.ReadAPI.Features.Driver
             return getMaintenancesPerCarQueryResult.ToActionResult();
         }
 
-        [HttpGet("repairs-per-car/{driverId}/{vehicleId}")]
+        [HttpGet("{driverId}/repairs-per-car/{vehicleId}")]
         public async Task<IActionResult> GetRepairsPerCar(
          [FromModel] GetRepairsPerCarQuery getRepairsPerCarQuery,
          CancellationToken cancellationToken)
@@ -96,7 +96,7 @@ namespace FleetManagement.ReadAPI.Features.Driver
             return getRepairsPerCarQueryResult.ToActionResult();
         }
 
-        [HttpGet("vehicledetails/{driverId}")]
+        [HttpGet("{driverId}/vehicledetails")]
         public async Task<IActionResult> GetVehicleDetails(
          [FromModel] GetVehicleInfoQuery getVehicleDetailsQuery,
          CancellationToken cancellationToken)

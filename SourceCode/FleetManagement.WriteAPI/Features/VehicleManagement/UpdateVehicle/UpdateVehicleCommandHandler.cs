@@ -33,7 +33,7 @@ namespace FleetManagement.WriteAPI.Features.VehicleManagement.UpdateVehicle
                 return BadRequest(validationError);
             }
 
-            _vehicleService.UpdateVehicle(request.Vehicle);
+            _vehicleService.UpdateVehicle(cancellationToken, request.Vehicle);
 
             return new UpdateVehicleCommandResult();
         }
