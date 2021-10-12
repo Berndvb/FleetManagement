@@ -1,5 +1,7 @@
 ﻿using FleetManagement.BLL.Services;
+using FleetManagement.Domain.Infrastructure.Pagination;
 using FleetManagement.Framework.Constants;
+using FleetManagement.Framework.Models.Dtos.ReadDtos;
 using MediatR.Cqrs.Execution;
 using MediatR.Cqrs.Queries;
 using System.Threading;
@@ -21,14 +23,19 @@ namespace FleetManagement.ReadAPI.Features.DriverManagement.GetAllDriverOverview
             GetAllDriverOverviewsQuery request,
             CancellationToken cancellationToken)
         {
-            var driverOverviews = await _driverService.GetDriverOverviews(onlyInService: request.OnlyInService, request.PagingParameters);
+            var driverOverviews = await _driverService.GetDriverOverviews(cancellationToken, onlyInService: request.OnlyInService, request.PagingParameters);
             if (driverOverviews.Count == 0)
             {
                 var warning = new ExecutionWarning("We couldn't find and retrieve any driver-overview data.", Constants.WarningCodes.NoData);
-                return SuccesWithNoData(warning);
+                return SucceededWithNoData(warning);
             }
 
-            return new GetAllDriverOverviewsQueryResult(driverOverviews);
+            var result = new GetAllDriverOverviewsQueryResult(driverOverviews);
+
+            if (request.PagingParameters != null)
+                result.FillPagingInfo((PaginatedList<DriverOverviewDto>)driverOverviews);
+
+            return result;
         }
     }
 }

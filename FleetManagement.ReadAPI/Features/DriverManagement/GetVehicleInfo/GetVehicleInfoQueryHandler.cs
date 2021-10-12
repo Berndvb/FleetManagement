@@ -1,5 +1,7 @@
 ﻿using FleetManagement.BLL.Services;
+using FleetManagement.Domain.Infrastructure.Pagination;
 using FleetManagement.Framework.Constants;
+using FleetManagement.Framework.Models.Dtos.ReadDtos;
 using FluentValidation;
 using MediatR.Cqrs.Execution;
 using MediatR.Cqrs.Queries;
@@ -35,18 +37,23 @@ namespace FleetManagement.ReadAPI.Features.DriverManagement.GetVehicleDetails
                 return BadRequest(validationError);
             }
 
-            var driverIdError = await _driverService.CheckforIdError(request.DriverId);
+            var driverIdError = await _driverService.CheckforIdError(cancellationToken, request.DriverId);
             if (driverIdError != null)
                 return BadRequest(driverIdError);
 
-            var vehicles = await _driverService.GetVehicleInfoForDriver(request.DriverId, request.PagingParameters);
+            var vehicles = await _driverService.GetVehicleInfoForDriver(cancellationToken, request.DriverId, request.PagingParameters);
             if (vehicles.Count == 0)
             {
                 var warning = new ExecutionWarning("We couldn't find and retrieve any vehicle data.", Constants.WarningCodes.NoData);
-                return SuccesWithNoData(warning);
+                return SucceededWithNoData(warning);
             }
 
-            return new GetVehicleInfoQueryResult(vehicles);
+            var result = new GetVehicleInfoQueryResult(vehicles);
+
+            if (request.PagingParameters != null)
+                result.FillPagingInfo((PaginatedList<VehicleDetailsDto>)vehicles);
+
+            return result;
         }
     }
 }

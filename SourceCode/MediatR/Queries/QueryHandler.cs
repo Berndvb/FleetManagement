@@ -1,4 +1,5 @@
-﻿using MediatR.Cqrs.Execution;
+﻿using FleetManagement.Domain.Infrastructure.Pagination;
+using MediatR.Cqrs.Execution;
 using System.Threading;
 using System.Threading.Tasks;
 
@@ -30,9 +31,9 @@ namespace MediatR.Cqrs.Queries
             return ExecutionResult.InternalServerError(error).As<TRes>();
         }
 
-        protected TRes SuccesWithNoData(ExecutionWarning warning = null)
+        protected TRes SucceededWithNoData(ExecutionWarning warning = null)
         {
-            return ExecutionResult.SuccesWithNoData(warning).As<TRes>();
+            return ExecutionResult.SucceededWithNoData(warning).As<TRes>();
         }
     }
 }

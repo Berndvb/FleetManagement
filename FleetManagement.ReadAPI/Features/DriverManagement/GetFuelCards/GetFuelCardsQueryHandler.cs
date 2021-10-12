@@ -1,5 +1,7 @@
 ﻿using FleetManagement.BLL.Services;
+using FleetManagement.Domain.Infrastructure.Pagination;
 using FleetManagement.Framework.Constants;
+using FleetManagement.Framework.Models.Dtos.ReadDtos;
 using FluentValidation;
 using MediatR.Cqrs.Execution;
 using MediatR.Cqrs.Queries;
@@ -35,18 +37,24 @@ namespace FleetManagement.ReadAPI.Features.DriverManagement.GetFuelCardDetails
                 return BadRequest(validationError);
             }
 
-            var idError = await _driverService.CheckforIdError(request.DriverId);
+            var idError = await _driverService.CheckforIdError(cancellationToken, request.DriverId);
             if (idError != null)
                 return BadRequest(idError);
 
-            var fuelCardDtos = await _driverService.GetFuelCardsForDriver(request.DriverId, request.PagingParameters);
+            var fuelCardDtos = await _driverService.GetFuelCardsForDriver(cancellationToken, request.DriverId, request.PagingParameters);
             if (fuelCardDtos.Count == 0)
             {
                 var warning = new ExecutionWarning("We couldn't find and retrieve any fuelcard data.", Constants.WarningCodes.NoData);
-                return SuccesWithNoData(warning);
+                return SucceededWithNoData(warning);
             }
-            
-            return new GetFuelCardsQueryResult(fuelCardDtos);
+
+            var result = new GetFuelCardsQueryResult(fuelCardDtos);
+
+            if (request.PagingParameters != null)
+                result.FillPagingInfo((PaginatedList<FuelCardDto>)fuelCardDtos);
+
+            return result;
         }
+    }
     }
 }

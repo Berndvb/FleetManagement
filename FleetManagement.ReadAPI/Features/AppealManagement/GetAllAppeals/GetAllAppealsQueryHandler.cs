@@ -1,6 +1,8 @@
 ﻿using FleetManagement.BLL.Services;
+using FleetManagement.Domain.Infrastructure.Pagination;
 using FleetManagement.Framework.Constants;
 using FleetManagement.Framework.Helpers;
+using FleetManagement.Framework.Models.Dtos.ReadDtos;
 using FluentValidation;
 using MediatR.Cqrs.Execution;
 using MediatR.Cqrs.Queries;
@@ -40,10 +42,15 @@ namespace FleetManagement.ReadAPI.Features.AppealManagement.GetAllAppeals
             if (appeals.Count == 0)
             {
                 var warning = new ExecutionWarning("We couldn't find and retrieve any appeal data.", Constants.WarningCodes.NoData);
-                return SuccesWithNoData(warning);
+                return SucceededWithNoData(warning);
             }
 
-            return new GetAllAppealsQueryResult(appeals);
+            var result = new GetAllAppealsQueryResult(appeals);
+
+            if (request.PagingParameters != null)
+                result.FillPagingInfo((PaginatedList<AppealDto>)appeals);
+
+            return result;
         }
     }
 }

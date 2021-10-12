@@ -1,4 +1,5 @@
-﻿using System;
+﻿using FleetManagement.Domain.Infrastructure.Pagination;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 
@@ -10,6 +11,8 @@ namespace MediatR.Cqrs.Execution
 
         private List<ExecutionWarning> Warnings { get; set; }
 
+        public ExecutionPaging ExecutionPaging { get; set; }
+
         public ExecutionErrorType? ErrorType { get; set; }
 
         public ExecutionWarningType? WarningType { get; set; }
@@ -18,9 +21,12 @@ namespace MediatR.Cqrs.Execution
 
         public bool HasWarnings => !Warnings.Any() && WarningType == null;
 
+        public bool HasPaging => ExecutionPaging != null;
+
         protected ExecutionResult()
         {
             Errors = new List<ExecutionError>();
+            Warnings = new List<ExecutionWarning>();
         }
 
         protected ExecutionResult(List<ExecutionError> errors, ExecutionErrorType? errorType) : this()
@@ -36,6 +42,19 @@ namespace MediatR.Cqrs.Execution
         }
 
         public static ExecutionResult Succeeded() => new ExecutionResult();
+
+
+        public static ExecutionResult SucceededWithNoData(params ExecutionWarning[] executionWarnings)
+        {
+            var result = new ExecutionResult
+            {
+                WarningType = ExecutionWarningType.NoData
+            };
+
+            result.Warnings.AddRange(executionWarnings);
+
+            return result;
+        }
 
         public static ExecutionResult NotFound(params ExecutionError[] executionErrors)
         {
@@ -85,16 +104,15 @@ namespace MediatR.Cqrs.Execution
             return result;
         }
 
-        public static ExecutionResult SuccesWithNoData(params ExecutionWarning[] executionWarnings)
+        public void FillPagingInfo<T>(PaginatedList<T> list)
         {
-            var result = new ExecutionResult
+            ExecutionPaging = new ExecutionPaging
             {
-                WarningType = ExecutionWarningType.NoData
+                TotalCount = list.Count,
+                PageSize = list.PageSize,
+                CurrentPage = list.PageNumber,
+                TotalPages = list.TotalPages
             };
-
-            result.Warnings.AddRange(executionWarnings);
-
-            return result;
         }
 
         public List<ExecutionError> GetErrors() => Errors;

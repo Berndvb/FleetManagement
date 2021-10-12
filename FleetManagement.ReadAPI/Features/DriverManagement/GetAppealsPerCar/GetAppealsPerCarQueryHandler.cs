@@ -1,5 +1,7 @@
 ﻿using FleetManagement.BLL.Services;
+using FleetManagement.Domain.Infrastructure.Pagination;
 using FleetManagement.Framework.Constants;
+using FleetManagement.Framework.Models.Dtos.ReadDtos;
 using FluentValidation;
 using MediatR.Cqrs.Execution;
 using MediatR.Cqrs.Queries;
@@ -38,22 +40,27 @@ namespace FleetManagement.ReadAPI.Features.DriverManagement.GetAppealsPerCar
                 return BadRequest(validationError);
             }
 
-            var driverIdError = await _driverService.CheckforIdError(request.DriverId);
+            var driverIdError = await _driverService.CheckforIdError(cancellationToken, request.DriverId);
             if (driverIdError != null)
                 return BadRequest(driverIdError);
 
-            var vehicleIdError = await _vehicleService.CheckforIdError(request.VehicleId);
+            var vehicleIdError = await _vehicleService.CheckforIdError(cancellationToken, request.VehicleId);
             if (vehicleIdError != null)
                 return BadRequest(vehicleIdError);
 
-            var vehicleAppeals = await _driverService.GetAppealsForDriverPerCar(request.DriverId, request.VehicleId, request.PagingParameters);
+            var vehicleAppeals = await _driverService.GetAppealsForDriverPerCar(cancellationToken, request.DriverId, request.VehicleId, request.PagingParameters);
             if (vehicleAppeals.Count == 0)
             {
                 var warning = new ExecutionWarning("We couldn't find and retrieve any appeal data.", Constants.WarningCodes.NoData);
-                return SuccesWithNoData(warning);
+                return SucceededWithNoData(warning);
             }
 
-            return new GetAppealsPerCarQueryResult(vehicleAppeals);
+            var result = new GetAppealsPerCarQueryResult(vehicleAppeals);
+
+            if (request.PagingParameters != null)
+                result.FillPagingInfo((PaginatedList<AppealDto>)vehicleAppeals);
+
+            return result;
         }
     }
 }
