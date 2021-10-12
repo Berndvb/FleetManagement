@@ -5,6 +5,7 @@ using FleetManagement.Framework.Models.Dtos.ReadDtos;
 using FleetManagement.Framework.Paging;
 using Microsoft.EntityFrameworkCore;
 using System.Collections.Generic;
+using System.Threading;
 using System.Threading.Tasks;
 
 namespace FleetManagement.BLL.Services
@@ -22,18 +23,19 @@ namespace FleetManagement.BLL.Services
             _mapper = mapper;
         }
 
-        public void UpdateFuelCard(FuelCardDto fuelCardDto)
+        public void UpdateFuelCard(CancellationToken cancellationToken, FuelCardDto fuelCardDto)
         {
             var fuelCard = _mapper.Map<FuelCard>(fuelCardDto);
 
-            _unitOfWork.FuelCards.Update(fuelCard);
+            _unitOfWork.FuelCards.Update(cancellationToken, fuelCard);
 
             _unitOfWork.Complete();
         }
 
-        public async Task<List<FuelCardDto>> GetAllFuelCards(PagingParameters pagingParameter = null)
+        public async Task<List<FuelCardDto>> GetAllFuelCards(CancellationToken cancellationToken, PagingParameters pagingParameter = null)
         {
             var fuelCards = await _unitOfWork.FuelCards.GetListBy(
+                cancellationToken,
                 pagingParameter,
                 including: x => x.Include(y => y.FuelCardOptions).Include(y => y.FuelCardDrivers));
 

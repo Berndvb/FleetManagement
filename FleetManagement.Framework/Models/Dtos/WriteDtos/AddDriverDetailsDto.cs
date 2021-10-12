@@ -1,5 +1,4 @@
-﻿using FleetManagement.Framework.Models.WriteDtos;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 
 namespace FleetManagement.Framework.Models.Dtos.WriteDtos
 {
@@ -13,10 +12,10 @@ namespace FleetManagement.Framework.Models.Dtos.WriteDtos
 
         public bool InService { get; set; }
 
-        public List<AddFuelCardDriverDto> FuelCards { get; set; }
+        public int FuelCardId { get; set; }
 
-        public List<AddDriverVehicleDto> Vehicles { get; set; }
+        public int VehicleId { get; set; }
 
-        public List<AddAppealDto> Appeals { get; set; }
+        public List<int> AppealIds { get; set; }
     }
 }

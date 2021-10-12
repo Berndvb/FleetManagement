@@ -7,6 +7,7 @@ using FleetManagement.Framework.Paging;
 using MediatR.Cqrs.Execution;
 using Microsoft.EntityFrameworkCore;
 using System.Collections.Generic;
+using System.Threading;
 using System.Threading.Tasks;
 
 namespace FleetManagement.BLL.Services
@@ -27,9 +28,10 @@ namespace FleetManagement.BLL.Services
             _generalService = generalService;
         }
 
-        public async Task<List<VehicleDetailsDto>> GetAllVehicles(PagingParameters pagingParameter)
+        public async Task<List<VehicleDetailsDto>> GetAllVehicles(CancellationToken cancellationToken, PagingParameters pagingParameter)
         {
             var vehicles = await _unitOfWork.Vehicles.GetListBy(
+                cancellationToken,
                 pagingParameter,
                 including: x => x
                  .Include(y => y.Identity)
@@ -43,18 +45,18 @@ namespace FleetManagement.BLL.Services
             return vehicleDtos;
         }
 
-        public void UpdateVehicle(VehicleDetailsDto vehicleDto)
+        public void UpdateVehicle(CancellationToken cancellationToken, VehicleDetailsDto vehicleDto)
         {
             var vehicle = _mapper.Map<Vehicle>(vehicleDto);
 
-            _unitOfWork.Vehicles.Update(vehicle);
+            _unitOfWork.Vehicles.Update(cancellationToken, vehicle);
 
             _unitOfWork.Complete();
         }
 
-        public async Task<IdValidationCodes> ValidateId(int id)
+        public async Task<IdValidationCodes> ValidateId(CancellationToken cancellationToken, int id)
         {
-            var ids = await _unitOfWork.Vehicles.GetIds(id);
+            var ids = await _unitOfWork.Vehicles.GetIds(cancellationToken, id);
 
             return ids.Count switch
             {
@@ -64,9 +66,9 @@ namespace FleetManagement.BLL.Services
             };
         }
 
-        public async Task<ExecutionError> CheckforIdError(int id)
+        public async Task<ExecutionError> CheckforIdError(CancellationToken cancellationToken, int id)
         {
-            var idValidationCode = await ValidateId(id);
+            var idValidationCode = await ValidateId(cancellationToken, id);
             if (idValidationCode != IdValidationCodes.OK)
                 return _generalService.ProcessIdError(idValidationCode, nameof(id));
 

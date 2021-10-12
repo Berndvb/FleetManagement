@@ -1,10 +1,9 @@
 ﻿using AutoMapper;
 using FleetManagement.Domain.Interfaces.Repositories;
 using FleetManagement.Domain.Models;
-using FleetManagement.Framework.Models.Dtos;
 using FleetManagement.Framework.Models.Dtos.ReadDtos;
 using FleetManagement.Framework.Models.Dtos.WriteDtos;
-using FleetManagement.Framework.Models.WriteDtos;
+using System.Threading;
 
 namespace FleetManagement.BLL.Services
 {
@@ -21,20 +20,20 @@ namespace FleetManagement.BLL.Services
             _mapper = mapper;
         }
 
-        public void UpdateDriverVehicle(DriverVehicleDto driverVehicleDto)
+        public void UpdateDriverVehicle(CancellationToken cancellationToken, DriverVehicleDto driverVehicleDto)
         {
             var driverVehicle = _mapper.Map<DriverVehicle>(driverVehicleDto);
 
-            _unitOfWork.DriverVehicles.Update(driverVehicle);
+            _unitOfWork.DriverVehicles.Update(cancellationToken, driverVehicle);
 
             _unitOfWork.Complete();
         }
 
-        public void AddDriverVehicle(AddDriverVehicleDto driverVehicleDto)
+        public void AddDriverVehicle(CancellationToken cancellationToken, AddDriverVehicleDto driverVehicleDto)
         {
             var driverVehicle = _mapper.Map<DriverVehicle>(driverVehicleDto);
 
-            _unitOfWork.DriverVehicles.Insert(driverVehicle);
+            _unitOfWork.DriverVehicles.Insert(cancellationToken, driverVehicle);
 
             _unitOfWork.Complete();
         }

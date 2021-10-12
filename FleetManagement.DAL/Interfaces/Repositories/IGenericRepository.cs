@@ -5,6 +5,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Linq.Expressions;
+using System.Threading;
 using System.Threading.Tasks;
 
 namespace FleetManager.Domain.Interfaces.Repositories
@@ -13,19 +14,21 @@ namespace FleetManager.Domain.Interfaces.Repositories
         where TEntity : class, IBaseClass
     {
         Task<TEntity> GetBy(
+            CancellationToken cancellationToken,
             Expression<Func<TEntity, bool>> filter = null,
             Func<IQueryable<TEntity>, IIncludableQueryable<TEntity, object>> including = null);
         Task<List<TEntity>> GetListBy(
-           PagingParameters pagingParameters,
-           Expression<Func<TEntity, bool>> filter = null,
-           Func<IQueryable<TEntity>, IIncludableQueryable<TEntity, object>> including = null);
-        Task Insert(TEntity entity);
-        Task InsertRange(ICollection<TEntity> entities);
-        void Remove(TEntity entity);
-        Task RemoveById(int id);
-        void RemoveRange(ICollection<TEntity> entities);
-        void Update(TEntity entitie/*, params Expression<Func<TEntity, object>>[] exclusions*/);
-        void UpdateRange(IEnumerable<TEntity> entities);
-        Task<List<int>> GetIds(int id);
+            CancellationToken cancellationToken,
+            PagingParameters pagingParameters,
+            Expression<Func<TEntity, bool>> filter = null,
+            Func<IQueryable<TEntity>, IIncludableQueryable<TEntity, object>> including = null);
+        Task Insert(CancellationToken cancellationToken, TEntity entity);
+        Task InsertRange(CancellationToken cancellationToken, ICollection<TEntity> entities);
+        void Remove(CancellationToken cancellationToken, TEntity entity);
+        Task RemoveById(CancellationToken cancellationToken, int id);
+        void RemoveRange(CancellationToken cancellationToken, ICollection<TEntity> entities);
+        void Update(CancellationToken cancellationToken, TEntity entitie);
+        void UpdateRange(CancellationToken cancellationToken, IEnumerable<TEntity> entities);
+        Task<List<int>> GetIds(CancellationToken cancellationToken, int id);
     }
 }

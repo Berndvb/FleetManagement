@@ -29,5 +29,10 @@ namespace MediatR.Cqrs.Queries
         {
             return ExecutionResult.InternalServerError(error).As<TRes>();
         }
+
+        protected TRes SuccesWithNoData(ExecutionWarning warning = null)
+        {
+            return ExecutionResult.SuccesWithNoData(warning).As<TRes>();
+        }
     }
 }

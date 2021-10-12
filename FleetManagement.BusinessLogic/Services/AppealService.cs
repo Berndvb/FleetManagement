@@ -8,6 +8,7 @@ using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 using System.Linq.Expressions;
+using System.Threading;
 using System.Threading.Tasks;
 
 namespace FleetManagement.BLL.Services
@@ -25,13 +26,14 @@ namespace FleetManagement.BLL.Services
             _mapper = mapper;
         }
 
-        public async Task<List<AppealDto>> GetAllAppeals(PagingParameters pagingParameter = null, AppealStatus appealstatus = 0)
+        public async Task<List<AppealDto>> GetAllAppeals(CancellationToken cancellationToken, PagingParameters pagingParameter = null, AppealStatus appealstatus = 0)
         {
             Expression<Func<Appeal, bool>> getSpecificStatus = appealstatus == 0 
                 ? null
                 : x => x.Status.Equals(appealstatus);
 
             var appeals = await _unitOfWork.Appeals.GetListBy(
+                cancellationToken,
                 pagingParameter,
                 filter: getSpecificStatus,
                 including: x => x

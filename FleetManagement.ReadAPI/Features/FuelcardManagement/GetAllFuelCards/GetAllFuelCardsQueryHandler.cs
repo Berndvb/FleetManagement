@@ -24,8 +24,8 @@ namespace FleetManagement.ReadAPI.Features.FuelcardManagement.GetAllFuelCards
             var fuelCards = await _fuelCardService.GetAllFuelCards(request.PagingParameters);
             if (fuelCards.Count == 0)
             {
-                var dataError = new ExecutionError("We couldn't find and retrieve any fuelcard data.", Constants.ErrorCodes.DataNotFound);
-                return NotFound(dataError);
+                var warning = new ExecutionWarning("We couldn't find and retrieve any fuelcard data.", Constants.WarningCodes.NoData);
+                return SuccesWithNoData(warning);
             }
 
             return new GetAllFuelCardsQueryResult(fuelCards);

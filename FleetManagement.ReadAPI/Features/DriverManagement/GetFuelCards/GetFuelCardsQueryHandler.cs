@@ -42,8 +42,8 @@ namespace FleetManagement.ReadAPI.Features.DriverManagement.GetFuelCardDetails
             var fuelCardDtos = await _driverService.GetFuelCardsForDriver(request.DriverId, request.PagingParameters);
             if (fuelCardDtos.Count == 0)
             {
-                var dataError = new ExecutionError("We couldn't find and retrieve any driver-fuelcard data.", Constants.ErrorCodes.DataNotFound);
-                return NotFound(dataError);
+                var warning = new ExecutionWarning("We couldn't find and retrieve any fuelcard data.", Constants.WarningCodes.NoData);
+                return SuccesWithNoData(warning);
             }
             
             return new GetFuelCardsQueryResult(fuelCardDtos);

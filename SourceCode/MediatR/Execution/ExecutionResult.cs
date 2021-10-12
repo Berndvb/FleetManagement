@@ -8,9 +8,15 @@ namespace MediatR.Cqrs.Execution
     {
         private List<ExecutionError> Errors { get; set; }
 
+        private List<ExecutionWarning> Warnings { get; set; }
+
         public ExecutionErrorType? ErrorType { get; set; }
 
-        public bool Succes => !Errors.Any() && ErrorType == null;
+        public ExecutionWarningType? WarningType { get; set; }
+
+        public bool HasSucceeded => !Errors.Any() && ErrorType == null;
+
+        public bool HasWarnings => !Warnings.Any() && WarningType == null;
 
         protected ExecutionResult()
         {
@@ -21,6 +27,12 @@ namespace MediatR.Cqrs.Execution
         {
             Errors = errors;
             ErrorType = errorType;
+        }
+
+        protected ExecutionResult(List<ExecutionWarning> warnings, ExecutionWarningType? warningType) : this()
+        {
+            Warnings = warnings;
+            WarningType = warningType;
         }
 
         public static ExecutionResult Succeeded() => new ExecutionResult();
@@ -69,6 +81,18 @@ namespace MediatR.Cqrs.Execution
             };
 
             result.Errors.AddRange(executionErrors);
+
+            return result;
+        }
+
+        public static ExecutionResult SuccesWithNoData(params ExecutionWarning[] executionWarnings)
+        {
+            var result = new ExecutionResult
+            {
+                WarningType = ExecutionWarningType.NoData
+            };
+
+            result.Warnings.AddRange(executionWarnings);
 
             return result;
         }

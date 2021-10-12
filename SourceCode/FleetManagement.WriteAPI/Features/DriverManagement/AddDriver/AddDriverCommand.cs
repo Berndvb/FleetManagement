@@ -5,6 +5,6 @@ namespace FleetManagement.WriteAPI.Features.DriverManagement.AddDriver
 {
     public class AddDriverCommand : ICommand<AddDriverCommandResult>
     {
-        public AddDriverDto Driver { get; set; }
+        public AddDriverDetailsDto Driver { get; set; }
     }
 }

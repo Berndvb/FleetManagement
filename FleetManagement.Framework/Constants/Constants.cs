@@ -12,6 +12,11 @@ namespace FleetManagement.Framework.Constants
             public const string IdNotFound = "E004";
         }
 
+        public static class WarningCodes
+        {
+            public const string NoData = "E001";
+        }
+
         public static class Info
         {
             public const string StartAllPhi = "20110812";

@@ -71,7 +71,7 @@ namespace MediatR.Cqrs.Execution
         private static IActionResult CreateOkResult<TResult>(TResult executionResult)
           where TResult : ExecutionResult
         {
-            return executionResult.Succes 
+            return executionResult.HasSucceeded 
                 ? new OkObjectResult(executionResult)
                 : new OkObjectResult(executionResult.ToErrorExecutionResultDto());
         }
@@ -83,6 +83,5 @@ namespace MediatR.Cqrs.Execution
                 Errors = executionResult.GetErrors()
             };
         }
-
     }
 }

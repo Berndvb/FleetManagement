@@ -11,11 +11,21 @@ namespace FleetManagement.Framework.Models.WriteDtos
 
         public DateTime CreationDate { get; set; }
 
-        public DateTime? ClosureDate { get; set; }
-
-        public AddFuelCardDto FuelCard { get; set; }
+        public FuelCardDto FuelCard { get; set; }
 
         public AddDriverDetailsDto Driver { get; set; }
+
+        public AddFuelCardDriverDto(
+            bool active,
+            DateTime  creationDate,
+            FuelCardDto fuelCard,
+            AddDriverDetailsDto driver)
+        {
+            Active = active;
+            CreationDate = creationDate;
+            FuelCard = fuelCard;
+            Driver = driver;
+        }
 
     }
 }

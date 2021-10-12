@@ -36,11 +36,11 @@ namespace FleetManagement.ReadAPI.Features.AppealManagement.GetAllAppeals
                 return BadRequest(validationError);
             }
 
-            var appeals = await _appealService.GetAllAppeals(request.PagingParameters, request.AppealStatus.StringToAppealStatus());
+            var appeals = await _appealService.GetAllAppeals(cancellationToken, request.PagingParameters, request.AppealStatus.StringToAppealStatus());
             if (appeals.Count == 0)
             {
-                var dataError = new ExecutionError("We couldn't find and retrieve any appeal data.", Constants.ErrorCodes.DataNotFound);
-                return NotFound(dataError);
+                var warning = new ExecutionWarning("We couldn't find and retrieve any appeal data.", Constants.WarningCodes.NoData);
+                return SuccesWithNoData(warning);
             }
 
             return new GetAllAppealsQueryResult(appeals);

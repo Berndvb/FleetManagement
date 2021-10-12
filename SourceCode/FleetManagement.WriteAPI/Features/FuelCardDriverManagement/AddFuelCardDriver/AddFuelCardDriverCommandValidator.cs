@@ -11,12 +11,12 @@ namespace FleetManagement.WriteAPI.Features.FuelCardDriverManagement.AddFuelCard
                 .NotNull()
                 .GreaterThan(Helpers.AllphiStartdate());
 
-            When(x => x.FuelCardDriver.ClosureDate != null, () =>
-            {
-                RuleFor(x => x.FuelCardDriver.ClosureDate)
-                .GreaterThan(Helpers.AllphiStartdate())
-                .GreaterThan(y => y.FuelCardDriver.CreationDate);
-            });
+            //When(x => x.FuelCardDriver.ClosureDate != null, () =>
+            //{
+            //    RuleFor(x => x.FuelCardDriver.ClosureDate)
+            //    .GreaterThan(Helpers.AllphiStartdate())
+            //    .GreaterThan(y => y.FuelCardDriver.CreationDate);
+            //});
 
             RuleFor(x => x.FuelCardDriver.FuelCard).NotNull();
 

@@ -24,8 +24,8 @@ namespace FleetManagement.ReadAPI.Features.VehicleManagement.GetAllVehicles
             var vehicles = await _vehicleService.GetAllVehicles(request.PagingParameters);
             if (vehicles.Count == 0)
             {
-                var dataError = new ExecutionError("We couldn't find and retrieve any vehicle data.", Constants.ErrorCodes.DataNotFound);
-                return NotFound(dataError);
+                var warning = new ExecutionWarning("We couldn't find and retrieve any vehicle data.", Constants.WarningCodes.NoData);
+                return SuccesWithNoData(warning);
             }
 
             return new GetAllVehiclesQueryResult(vehicles);

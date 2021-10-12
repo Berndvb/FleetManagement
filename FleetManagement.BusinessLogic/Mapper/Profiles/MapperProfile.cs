@@ -87,14 +87,22 @@ namespace FleetManagement.BLL.Services
             CreateMap<Vehicle, VehicleDetailsDto>()
                 .ReverseMap();
 
-            CreateMap<Driver, AddDriverDto>()
-                .ReverseMap();
+            CreateMap<AddDriverDetailsDto, Driver>();
 
             CreateMap<DriverVehicle, AddDriverVehicleDto>()
                 .ReverseMap();
 
             CreateMap<FuelCardDriver, AddFuelCardDriverDto>()
                 .ReverseMap();
+
+            CreateMap<IdentityPerson, AddIdentityPersonDto>()
+                .ReverseMap();
+
+            CreateMap<ContactInfo, AddContactInfoDto>()
+                .ReverseMap();
+
+            CreateMap<Address, AddAddressDto>()
+               .ReverseMap();
 
             //Extra convertingmaps
             CreateMap<string, List<string>>().ConvertUsing<StringToStringsConverter>();

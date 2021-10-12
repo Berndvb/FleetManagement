@@ -4,26 +4,26 @@ using FleetManagement.Framework.Models.Dtos.WriteDtos;
 using FleetManagement.Framework.Paging;
 using MediatR.Cqrs.Execution;
 using System.Collections.Generic;
+using System.Threading;
 using System.Threading.Tasks;
 
 namespace FleetManagement.BLL.Services
 {
     public interface IDriverService
     {
-        Task<List<DriverOverviewDto>> GetDriverOverviews(bool onlyInService, PagingParameters pagingParameter = null);
-        Task<DriverDetailsDto> GetDriverDetails(int driverId);
-        Task<List<FuelCardDto>> GetFuelCardsForDriver(int driverId, PagingParameters pagingParameter = null);
-        Task<List<VehicleDetailsDto>> GetVehicleInfoForDriver(int driverId, PagingParameters pagingParameter = null);
-        Task<List<AppealDto>> GetAppealsForDriver(int driverId, PagingParameters pagingParameter = null);
-        Task<List<AppealDto>> GetAppealsForDriverPerCar(int driverId, int vehicleId, PagingParameters pagingParameter = null);
-        Task<List<MaintenanceDto>> GetMaintenancesForDriverPerCar(int driverId, int vehicleId, PagingParameters pagingParameter = null);
-        Task<List<RepareDto>> GetRepairsForDriverPerCar(int driverId, int vehicleId, PagingParameters pagingParameter = null);
-        void UpdateDriver(DriverDetailsDto driverDto);
-        void AddDriver(AddDriverDto driverDto);
-        void RemoveDriver(DriverDetailsDto driverDto);
-        void RemoveDriver(int driverId);
-        Task<IdValidationCodes> ValidateId(int id);
-        Task<ExecutionError> CheckforIdError(int driverId);
-
+        Task<List<DriverOverviewDto>> GetDriverOverviews(CancellationToken cancellationToken, bool onlyInService, PagingParameters pagingParameter = null);
+        Task<DriverDetailsDto> GetDriverDetails(CancellationToken cancellationToken, int driverId);
+        Task<List<FuelCardDto>> GetFuelCardsForDriver(CancellationToken cancellationToken, int driverId, PagingParameters pagingParameter = null);
+        Task<List<VehicleDetailsDto>> GetVehicleInfoForDriver(CancellationToken cancellationToken, int driverId, PagingParameters pagingParameter = null);
+        Task<List<AppealDto>> GetAppealsForDriver(CancellationToken cancellationToken, int driverId, PagingParameters pagingParameter = null);
+        Task<List<AppealDto>> GetAppealsForDriverPerCar(CancellationToken cancellationToken, int driverId, int vehicleId, PagingParameters pagingParameter = null);
+        Task<List<MaintenanceDto>> GetMaintenancesForDriverPerCar(CancellationToken cancellationToken, int driverId, int vehicleId, PagingParameters pagingParameter = null);
+        Task<List<RepareDto>> GetRepairsForDriverPerCar(CancellationToken cancellationToken, int driverId, int vehicleId, PagingParameters pagingParameter = null);
+        void UpdateDriver(CancellationToken cancellationToken, DriverDetailsDto driverDto);
+        Task AddDriver(CancellationToken cancellationToken, AddDriverDetailsDto driverDto);
+        void RemoveDriver(CancellationToken cancellationToken, DriverDetailsDto driverDto);
+        void RemoveDriver(CancellationToken cancellationToken, int driverId);
+        Task<IdValidationCodes> ValidateId(CancellationToken cancellationToken, int id);
+        Task<ExecutionError> CheckforIdError(CancellationToken cancellationToken, int driverId);
     }
 }
