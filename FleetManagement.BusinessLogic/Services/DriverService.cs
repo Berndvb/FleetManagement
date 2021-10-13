@@ -44,11 +44,11 @@ namespace FleetManagement.BLL.Services
                 ? await _unitOfWork.Drivers.GetListBy(
                     cancellationToken,
                     pagingParameter,
+                    filter: x => x.InService,
                     including: x => x.Include(y => y.Identity))
                 : await _unitOfWork.Drivers.GetListBy(
                     cancellationToken,
                     pagingParameter,
-                    filter: x => x.InService.Equals(true),
                     including: x => x.Include(y => y.Identity));
 
             var driverOverviewDtos = _mapper.Map<List<DriverOverviewDto>>(drivers);
@@ -201,34 +201,39 @@ namespace FleetManagement.BLL.Services
 
         public async Task AddDriver(CancellationToken cancellationToken, AddDriverDetailsDto driverDto)
         {
-            //need to find propper objects via the ids:
             var fuelCard = await _unitOfWork.FuelCards.GetBy(cancellationToken, filter: x => x.Id.Equals(driverDto.FuelCardId));
             var vehicle = await _unitOfWork.Vehicles.GetBy(cancellationToken, filter: x => x.Id.Equals(driverDto.VehicleId));
-            var appeals = await _unitOfWork.Appeals.GetListBy(cancellationToken, pagingParameters: null, filter: x => x.Id.Equals(driverDto.AppealIds));
+            var appeals = await _unitOfWork.Appeals.GetListBy(
+                cancellationToken, 
+                pagingParameters: null, 
+                filter: x => x.Id.Equals(driverDto.AppealIds));
 
             var driver = _mapper.Map<Driver>(driverDto);
+            var fuelCardDriver = new FuelCardDriver
+            {
+                Active = true,
+                FuelCard = fuelCard,
+                Driver = driver,
+                CreationDate = DateTime.Now
+            };
+            var driverVehicle = new DriverVehicle
+            {
+                Active = true,
+                Vehicle = vehicle,
+                Driver = driver,
+                CreationDate = DateTime.Now
+            };
 
-            //in-between objects need to be created:
-            var fuelCardDriverDto = new AddFuelCardDriverDto(true, DateTime.Now, fuelCard, driver);
-
-            //driver.Appeals = appeals;
-            //driver.Vehicles.Add(vehicle);
+            driver.Appeals = appeals;
+            driver.FuelCards = new List<FuelCardDriver>{ fuelCardDriver };
+            driver.Vehicles = new List<DriverVehicle> { driverVehicle };
 
             await _unitOfWork.Drivers.Insert(cancellationToken, driver);
 
             _unitOfWork.Complete();
         }
 
-        public void RemoveDriver(CancellationToken cancellationToken, DriverDetailsDto driverDto)
-        {
-            var driver = _mapper.Map<Driver>(driverDto);
-
-            _unitOfWork.Drivers.Remove(cancellationToken, driver);
-
-            _unitOfWork.Complete();
-        }
-
-        public void RemoveDriver(CancellationToken cancellationToken,int driverId)
+        public void RemoveDriverById(CancellationToken cancellationToken,int driverId)
         {
             _unitOfWork.Drivers.RemoveById(cancellationToken, driverId);
 

@@ -1,6 +1,4 @@
 using FleetManagement.BLL.DI;
-using FleetManagement.BLL.Features.Read.DriverManagement.GetAppeals;
-using FluentValidation.AspNetCore;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
@@ -29,13 +27,10 @@ namespace FleetManagement.ReadAPI
             {
                 c.SwaggerDoc("v1", new OpenApiInfo { Title = "FleetManagement.ReadAPI", Version = "v1" });
             });
-            services.AddMvc()
-                 .AddFluentValidation(fv => fv.RegisterValidatorsFromAssemblyContaining<GetAppealsQueryValidator>());
-            //services.AddValidatorsFromAssembly(typeof(Startup).Assembly);
-
+          
             services.AddDALServices(connectionString);
             services.AddBLLServices();
-            services.AddMediatRCqrsServices(typeof(Startup));
+            services.AddMediatRCqrsServices();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

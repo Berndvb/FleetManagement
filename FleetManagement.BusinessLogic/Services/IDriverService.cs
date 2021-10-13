@@ -1,11 +1,11 @@
-﻿using FleetManagement.BLL.Services.Models;
+﻿using FleetManagement.BLL.Models.Dtos.ReadDtos;
+using FleetManagement.BLL.Models.Dtos.WriteDtos;
+using FleetManagement.BLL.Services.Models;
 using FleetManagement.Framework.Paging;
 using MediatR.Cqrs.Execution;
 using System.Collections.Generic;
 using System.Threading;
 using System.Threading.Tasks;
-using FleetManagement.BLL.Models.Dtos.ReadDtos;
-using FleetManagement.BLL.Models.Dtos.WriteDtos;
 
 namespace FleetManagement.BLL.Services
 {
@@ -21,8 +21,7 @@ namespace FleetManagement.BLL.Services
         Task<List<RepareDto>> GetRepairsForDriverPerCar(CancellationToken cancellationToken, int driverId, int vehicleId, PagingParameters pagingParameter = null);
         void UpdateDriver(CancellationToken cancellationToken, DriverDetailsDto driverDto);
         Task AddDriver(CancellationToken cancellationToken, AddDriverDetailsDto driverDto);
-        void RemoveDriver(CancellationToken cancellationToken, DriverDetailsDto driverDto);
-        void RemoveDriver(CancellationToken cancellationToken, int driverId);
+        void RemoveDriverById(CancellationToken cancellationToken, int driverId);
         Task<IdValidationCodes> ValidateId(CancellationToken cancellationToken, int id);
         Task<ExecutionError> CheckforIdError(CancellationToken cancellationToken, int driverId);
     }

@@ -18,9 +18,8 @@ namespace FleetManagement.BLL.Features.Write.DriverVehicleManagement.UpdateDrive
                 .GreaterThan(y => y.DriverVehicle.CreationDate);
             });
 
-            RuleFor(x => x.DriverVehicle.Vehicle).NotNull();
-
-            RuleFor(x => x.DriverVehicle.Driver).NotNull();
+            RuleFor(x => x.DriverVehicle.DriverId).GreaterThan(0);
+            RuleFor(x => x.DriverVehicle.VehicleId).GreaterThan(0);
         }
     }
 }

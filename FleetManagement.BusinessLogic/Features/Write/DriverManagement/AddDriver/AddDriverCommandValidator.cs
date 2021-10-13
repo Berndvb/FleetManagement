@@ -1,5 +1,7 @@
 ﻿using FleetManagement.Framework.Helpers;
+using FleetManagement.Framework.Models.Enums;
 using FluentValidation;
+using System;
 
 namespace FleetManagement.BLL.Features.Write.DriverManagement.AddDriver
 {
@@ -7,7 +9,7 @@ namespace FleetManagement.BLL.Features.Write.DriverManagement.AddDriver
     {
         public AddDriverCommandValidator()
         {
-            RuleFor(x => x.Driver.DriversLicenseType).IsInEnum();
+            RuleFor(x => x.Driver.DriversLicenseType).Must(y => Enum.IsDefined(typeof(DriversLicenseType), y));
 
             RuleFor(x => x.Driver.Contactinfo).NotNull();
 

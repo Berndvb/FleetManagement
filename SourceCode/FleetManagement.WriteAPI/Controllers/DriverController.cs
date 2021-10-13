@@ -1,12 +1,12 @@
-﻿using System.Threading;
-using System.Threading.Tasks;
-using FleetManagement.BLL.Features.Write.DriverManagement.AddDriver;
-using FleetManagement.BLL.Features.Write.DriverManagement.RemoveDrives;
+﻿using FleetManagement.BLL.Features.Write.DriverManagement.AddDriver;
+using FleetManagement.BLL.Features.Write.DriverManagement.RemoveDriverById;
 using FleetManagement.BLL.Features.Write.DriverManagement.UpdateDriver;
 using MediatR;
 using MediatR.Cqrs;
 using MediatR.Cqrs.Execution;
 using Microsoft.AspNetCore.Mvc;
+using System.Threading;
+using System.Threading.Tasks;
 
 namespace FleetManagement.WriteAPI.Controllers
 {
@@ -31,24 +31,14 @@ namespace FleetManagement.WriteAPI.Controllers
             return addDriverCommandResult.ToActionResult();
         }
 
-        [HttpPost("remove-drivers")]
-        public async Task<IActionResult> RemoveDriver(
-           RemoveDrivesCommand removeDriverCommand,
-           CancellationToken cancellationToken)
-        {
-            var removeDriverCommandResult = await _mediator.Send(removeDriverCommand, cancellationToken);
-
-            return removeDriverCommandResult.ToActionResult();
-        }
-
         [HttpDelete("{driverId}")]
         public async Task<IActionResult> RemoveDriverById(
-          [FromModel] RemoveDrivesCommand removeDriverCommand,
+          [FromModel] RemoveDriverByIdCommand removeDriverByIdCommand,
           CancellationToken cancellationToken)
         {
-            var removeDriverCommandResult = await _mediator.Send(removeDriverCommand, cancellationToken);
+            var removeDriverByIdCommandResult = await _mediator.Send(removeDriverByIdCommand, cancellationToken);
 
-            return removeDriverCommandResult.ToActionResult();
+            return removeDriverByIdCommandResult.ToActionResult();
         }
 
         [HttpPut("{driverId}")]

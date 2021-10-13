@@ -8,9 +8,10 @@ namespace FleetManagement.BLL.Features.Read.DriverManagement.GetVehicleInfo
         {
             RuleFor(x => x.DriverId).GreaterThan(0);
 
-            RuleFor(x => x.PagingParameters.PageSize).GreaterThan(0);
-
-            RuleFor(x => x.PagingParameters.PageNumber).GreaterThan(0);
+            When(x => x.PagingParameters != null, () => {
+                RuleFor(x => x.PagingParameters.PageSize).GreaterThan(0);
+                RuleFor(x => x.PagingParameters.PageNumber).GreaterThan(0);
+            });
         }
     }
 }

@@ -26,13 +26,6 @@ namespace FleetManagement.BLL.Features.Write.DriverManagement.UpdateDriver
             UpdateDriverCommand request,
             CancellationToken cancellationToken)
         {
-            var validationResult = _validator.Validate(request);
-            if (!validationResult.IsValid)
-            {
-                var validationError = _generalService.ProcessValidationError(validationResult);
-                return BadRequest(validationError);
-            }
-
             _driverService.UpdateDriver(cancellationToken, request.Driver);
 
             return new UpdateDriverCommandResult();

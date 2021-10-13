@@ -19,7 +19,7 @@ namespace FleetManagement.BLL.Features.Write.DriverManagement.AddDriver
             AddDriverCommand request,
             CancellationToken cancellationToken)
         {
-            await _driverService.AddDriver(cancellationToken, request.Driver);
+            await _driverService.AddDriver(cancellationToken, request.DriverId);
 
             return new AddDriverCommandResult();
         }

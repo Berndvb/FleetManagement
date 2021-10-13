@@ -1,11 +1,14 @@
 ﻿using AutoMapper;
+using FleetManagement.BLL.Features.Read.DriverManagement.GetAppeals;
 using FleetManagement.BLL.Mapper.MapperSercice;
+using FleetManagement.BLL.Mapper.Profiles;
 using FleetManagement.BLL.Services;
 using FleetManager.EFCore.DI;
-using MediatR.Cqrs.DI;
+using FluentValidation.AspNetCore;
+using MediatR;
+using MediatR.Cqrs;
 using Microsoft.Extensions.DependencyInjection;
-using System;
-using FleetManagement.BLL.Mapper.Profiles;
+using System.Reflection;
 
 namespace FleetManagement.BLL.DI
 {
@@ -17,9 +20,12 @@ namespace FleetManagement.BLL.DI
             services.AddEntityServices();
         }
 
-        public static void AddMediatRCqrsServices(this IServiceCollection services, Type type)
+        public static void AddMediatRCqrsServices(this IServiceCollection services)
         {
-            services.AddMediatRCqrs(type);
+            services.AddMvc()
+                .AddFluentValidation(fv => fv.RegisterValidatorsFromAssemblyContaining<GetAppealsQueryValidator>());
+            services.AddMediatR(typeof(GetAppealsQuery).GetTypeInfo().Assembly);
+            services.AddTransient(typeof(IPipelineBehavior<,>), typeof(ValidationBehaviour<,>));
         }
 
         public static void AddDALServices(this IServiceCollection services, string connectionString)

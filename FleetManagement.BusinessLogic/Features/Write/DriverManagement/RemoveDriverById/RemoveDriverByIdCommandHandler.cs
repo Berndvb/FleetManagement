@@ -26,13 +26,6 @@ namespace FleetManagement.BLL.Features.Write.DriverManagement.RemoveDriverById
             RemoveDriverByIdCommand request,
             CancellationToken cancellationToken)
         {
-            var validationResult = _validator.Validate(request);
-            if (!validationResult.IsValid)
-            {
-                var validationError = _generalService.ProcessValidationError(validationResult);
-                return BadRequest(validationError);
-            }
-
             var driverIdError = await _driverService.CheckforIdError(cancellationToken, request.DriverId);
             if (driverIdError != null)
                 return BadRequest(driverIdError);

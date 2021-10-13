@@ -17,6 +17,11 @@ namespace FleetManagement.BLL.Features.Read.AppealManagement.GetAllAppeals
                 .Must(y => Enum.IsDefined(typeof(AppealStatus), y.CorrectStringInput()))
                 .WithMessage("Please enter a valid appeal-status (new, open or closed).");
            });
+
+            When(x => x.PagingParameters != null, () => {
+                RuleFor(x => x.PagingParameters.PageSize).GreaterThan(0);
+                RuleFor(x => x.PagingParameters.PageNumber).GreaterThan(0);
+            });
         }
     }
 }

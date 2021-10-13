@@ -26,13 +26,6 @@ namespace FleetManagement.BLL.Features.Write.DriverVehicleManagement.AddDriverVe
             AddDriverVehicleCommand request,
             CancellationToken cancellationToken)
         {
-            var validationResult = _validator.Validate(request);
-            if (!validationResult.IsValid)
-            {
-                var validationError = _generalService.ProcessValidationError(validationResult);
-                return BadRequest(validationError);
-            }
-
             _driverVehicleService.AddDriverVehicle(cancellationToken, request.DriverVehicle);
 
             return new AddDriverVehicleCommandResult();

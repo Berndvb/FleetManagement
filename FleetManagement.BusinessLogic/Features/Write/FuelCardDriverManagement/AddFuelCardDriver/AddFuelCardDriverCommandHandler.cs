@@ -26,12 +26,6 @@ namespace FleetManagement.BLL.Features.Write.FuelCardDriverManagement.AddFuelCar
             AddFuelCardDriverCommand request,
             CancellationToken cancellationToken)
         {
-            var validationResult = _validator.Validate(request);
-            if (!validationResult.IsValid)
-            {
-                var validationError = _generalService.ProcessValidationError(validationResult);
-                return BadRequest(validationError);
-            }
 
             _fuelCardDriver.AddFuelCardDriver(cancellationToken, request.FuelCardDriver);
 

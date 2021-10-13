@@ -1,13 +1,11 @@
 ﻿using FluentValidation;
 
-namespace FleetManagement.BLL.Features.Read.DriverManagement.GetFuelCards
+namespace FleetManagement.BLL.Features.Read.VehicleManagement.GetAllVehicles
 {
-    public class GetFuelCardsQueryValidator : AbstractValidator<GetFuelCardsQuery>
+    public class GetAllVehiclesQueryValidator : AbstractValidator<GetAllVehiclesQuery>
     {
-        public GetFuelCardsQueryValidator()
+        public GetAllVehiclesQueryValidator()
         {
-            RuleFor(x => x.DriverId).GreaterThan(0);
-
             When(x => x.PagingParameters != null, () => {
                 RuleFor(x => x.PagingParameters.PageSize).GreaterThan(0);
                 RuleFor(x => x.PagingParameters.PageNumber).GreaterThan(0);

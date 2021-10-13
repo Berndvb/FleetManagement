@@ -6,7 +6,7 @@ namespace FleetManagement.BLL.Features.Write.DriverManagement.RemoveDriverById
     {
         public RemoveDriverByIdCommandValidator()
         {
-
+            RuleFor(x => x.DriverId).GreaterThan(0);
         }
     }
 }
