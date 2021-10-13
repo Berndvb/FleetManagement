@@ -1,10 +1,10 @@
-﻿using FleetManagement.BLL.Models.Dtos.WriteDtos;
+﻿using FleetManagement.BLL.Models.Dtos.ReadDtos;
 using MediatR.Cqrs.Commands;
 
 namespace FleetManagement.BLL.Features.Write.DriverVehicleManagement.UpdateDriverVehicle
 {
     public class UpdateDriverVehicleCommand : ICommand<UpdateDriverVehicleCommandResult>
     {
-        public AddDriverVehicleDto DriverVehicle { get; set; }
+        public DriverVehicleDto DriverVehicle { get; set; }
     }
 }

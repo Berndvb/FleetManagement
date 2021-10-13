@@ -43,7 +43,7 @@ namespace FleetManager.EFCore.Repositories
 
         public async Task<List<TEntity>> GetListBy(
             CancellationToken cancellationToken,
-            PagingParameters pagingParameters,
+            PagingParameters pagingParameters = null,
             Expression<Func<TEntity, bool>> filter = null,
             Func<IQueryable<TEntity>, IIncludableQueryable<TEntity, object>> including = null)
         {
@@ -86,14 +86,19 @@ namespace FleetManager.EFCore.Repositories
             _dbSet.RemoveRange(entities);
         }
 
-        public void Update(CancellationToken cancellationToken, TEntity entitie/*, params Expression<Func<TEntity, object>>[] exclusions*/)
+        public async Task Update(CancellationToken cancellationToken, TEntity entitie/*, params Expression<Func<TEntity, object>>[] exclusions*/)
         {
-            _dbSet.Update(entitie);
+            await Task.Run(() => _dbSet.Update(entitie));
+        }
 
-            //foreach (var exclusion in exclusions)
-            //{
-            //    _context.Entry(entitie).Property(exclusion).IsModified = false; 
-            //}
+        public async Task UpdateById(
+            CancellationToken cancellationToken,
+            int id,
+            TEntity updatedEntity,
+            Func<IQueryable<TEntity>, IIncludableQueryable<TEntity, object>> including = null)
+        {
+            var entity = await GetBy(cancellationToken, filter: x => x.Id.Equals(id), including);
+            entity = updatedEntity;
         }
 
         public void UpdateRange(CancellationToken cancellationToken, IEnumerable<TEntity> entities)

@@ -10,6 +10,7 @@ using System.Collections.Generic;
 using System.Threading;
 using System.Threading.Tasks;
 using FleetManagement.BLL.Models.Dtos.ReadDtos;
+using FleetManagement.BLL.Models.Dtos.WriteDtos;
 
 namespace FleetManagement.BLL.Services
 {
@@ -52,31 +53,40 @@ namespace FleetManagement.BLL.Services
             return vehicleDtos;
         }
 
-        public void UpdateVehicle(CancellationToken cancellationToken, VehicleDetailsDto vehicleDto)
+        public async Task UpdateVehicle(CancellationToken cancellationToken, VehicleDetailsDto vehicleDto)
         {
             var vehicle = _mapper.Map<Vehicle>(vehicleDto);
 
-            _unitOfWork.Vehicles.Update(cancellationToken, vehicle);
+            await _unitOfWork.Vehicles.Update(cancellationToken, vehicle);
 
             _unitOfWork.Complete();
         }
 
-        public async Task<IdValidationCodes> ValidateId(CancellationToken cancellationToken, int id)
+        public async Task AddVehicle(CancellationToken cancellationToken, AddVehicleDetailsDto addVehicleDto)
+        {
+            var vehicle = _mapper.Map<Vehicle>(addVehicleDto);
+
+            await _unitOfWork.Vehicles.Insert(cancellationToken, vehicle);
+
+            _unitOfWork.Complete();
+        }
+
+        public async Task<InputValidationCodes> ValidateId(CancellationToken cancellationToken, int id)
         {
             var ids = await _unitOfWork.Vehicles.GetIds(cancellationToken, id);
 
             return ids.Count switch
             {
-                0 => IdValidationCodes.IdNotFound,
-                > 1 => IdValidationCodes.IdNotUnique,
-                _ => IdValidationCodes.OK,
+                0 => InputValidationCodes.IdNotFound,
+                > 1 => InputValidationCodes.IdNotUnique,
+                _ => InputValidationCodes.OK,
             };
         }
 
         public async Task<ExecutionError> CheckforIdError(CancellationToken cancellationToken, int id)
         {
             var idValidationCode = await ValidateId(cancellationToken, id);
-            if (idValidationCode != IdValidationCodes.OK)
+            if (idValidationCode != InputValidationCodes.OK)
                 return _generalService.ProcessIdError(idValidationCode, nameof(id));
 
             return null;

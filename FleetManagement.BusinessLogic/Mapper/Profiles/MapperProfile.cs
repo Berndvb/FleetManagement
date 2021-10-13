@@ -86,26 +86,26 @@ namespace FleetManagement.BLL.Mapper.Profiles
             CreateMap<Vehicle, VehicleDetailsDto>()
                 .ReverseMap();
 
-            CreateMap<AddDriverDetailsDto, Driver>()
-                .ReverseMap();
+            CreateMap<Driver, AddDriverDetailsDto>();
 
-            CreateMap<DriverVehicle, AddDriverVehicleDto>()
-                .ReverseMap();
+            CreateMap<AddDriverVehicleDto, DriverVehicle>();
 
-            CreateMap<FuelCardDriver, AddFuelCardDriverDto>()
-                .ReverseMap();
+            CreateMap<AddFuelCardDriverDto, FuelCardDriver>();
 
-            CreateMap<Driver, AddDriverDetailsDto>()
-              .ReverseMap();
+            CreateMap<AddDriverDetailsDto, Driver>();
 
-            CreateMap<IdentityPerson, AddIdentityPersonDto>()
-                .ReverseMap();
+            CreateMap<AddIdentityPersonDto, IdentityPerson>();
 
-            CreateMap<ContactInfo, AddContactInfoDto>()
-                .ReverseMap();
+            CreateMap<AddContactInfoDto, ContactInfo>();
 
-            CreateMap<Address, AddAddressDto>()
-               .ReverseMap();
+            CreateMap<AddAddressDto, Address>();
+
+            CreateMap<AddFuelCardDto, FuelCard>();
+
+            CreateMap<AddVehicleDetailsDto, Vehicle>()
+                .ForMember(x => x.Mileage, y => y.MapFrom(z => z.Mileage.ToString()));
+
+            CreateMap<AddIdentityVehicleDto, IdentityVehicle>();
 
             //Extra convertingmaps
             CreateMap<string, List<string>>().ConvertUsing<StringToStringsConverter>();

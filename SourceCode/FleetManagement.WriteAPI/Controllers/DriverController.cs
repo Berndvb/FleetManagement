@@ -41,7 +41,7 @@ namespace FleetManagement.WriteAPI.Controllers
             return removeDriverByIdCommandResult.ToActionResult();
         }
 
-        [HttpPut("{driverId}")]
+        [HttpPut()]
         public async Task<IActionResult> UpdateDriver(
            UpdateDriverCommand updateDriverCommand,
            CancellationToken cancellationToken)

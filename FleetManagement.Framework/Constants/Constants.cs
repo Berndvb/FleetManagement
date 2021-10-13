@@ -10,6 +10,7 @@ namespace FleetManagement.Framework.Constants
             public const string DataNotFound = "E002";
             public const string IdNotUnique = "E003";
             public const string IdNotFound = "E004";
+            public const string MoreThanOneActiveRelation = "E005";
         }
 
         public static class WarningCodes

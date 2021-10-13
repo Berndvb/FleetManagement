@@ -8,6 +8,7 @@ using System.Collections.Generic;
 using System.Threading;
 using System.Threading.Tasks;
 using FleetManagement.BLL.Models.Dtos.ReadDtos;
+using FleetManagement.BLL.Models.Dtos.WriteDtos;
 
 namespace FleetManagement.BLL.Services
 {
@@ -27,11 +28,11 @@ namespace FleetManagement.BLL.Services
             _mapperService = mapperService;
         }
 
-        public void UpdateFuelCard(CancellationToken cancellationToken, FuelCardDto fuelCardDto)
+        public async Task UpdateFuelCard(CancellationToken cancellationToken, FuelCardDto fuelCardDto)
         {
             var fuelCard = _mapper.Map<FuelCard>(fuelCardDto);
 
-            _unitOfWork.FuelCards.Update(cancellationToken, fuelCard);
+            await Task.Run(() => _unitOfWork.FuelCards.Update(cancellationToken, fuelCard));
 
             _unitOfWork.Complete();
         }
@@ -48,6 +49,15 @@ namespace FleetManagement.BLL.Services
                 return _mapperService.GetPaginatedData(fuelCardDtos, fuelCards);
 
             return fuelCardDtos;
-        } 
+        }
+
+        public async Task AddFuelCard(CancellationToken cancellationToken, AddFuelCardDto fuelCardDto)
+        {
+            var fuelCard = _mapper.Map<FuelCard>(fuelCardDto);
+    
+            await _unitOfWork.FuelCards.Insert(cancellationToken, fuelCard);
+
+            _unitOfWork.Complete();
+        }
     }
 }

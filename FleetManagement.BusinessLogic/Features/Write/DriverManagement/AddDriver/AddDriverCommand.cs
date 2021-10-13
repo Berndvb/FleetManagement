@@ -1,10 +1,11 @@
 ﻿using FleetManagement.BLL.Models.Dtos.ReadDtos;
+using FleetManagement.BLL.Models.Dtos.WriteDtos;
 using MediatR.Cqrs.Commands;
 
 namespace FleetManagement.BLL.Features.Write.DriverManagement.AddDriver
 {
     public class AddDriverCommand : ICommand<AddDriverCommandResult>
     {
-        public DriverDetailsDto Driver { get; set; }
+        public AddDriverDetailsDto Driver { get; set; }
     }
 }

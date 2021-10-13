@@ -12,7 +12,7 @@ namespace FleetManagement.BLL.Models.Dtos.ReadDtos
 
         public DateTime ExpirationDate { get; set; }
 
-        public AuthenticatieType AuthenticationType { get; set; }
+        public AuthenticationType AuthenticationType { get; set; }
 
         public FuelCardOptionsDto FuelCardOptions { get; set; }
 
@@ -24,7 +24,7 @@ namespace FleetManagement.BLL.Models.Dtos.ReadDtos
             int id,
             string cardNumber,
             DateTime expirationDate,
-            AuthenticatieType authenticationType,
+            AuthenticationType authenticationType,
             FuelCardOptionsDto fuelCardOptions,
             List<FuelCardDriverDto> fuelCardDrivers,
             bool blocked)

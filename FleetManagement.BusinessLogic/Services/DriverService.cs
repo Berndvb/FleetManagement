@@ -190,11 +190,27 @@ namespace FleetManagement.BLL.Services
             return reparationDtos;
         }
 
-        public void UpdateDriver(CancellationToken cancellationToken,DriverDetailsDto driverDto)
+        public async Task UpdateDriver(CancellationToken cancellationToken,DriverDetailsDto driverDto)
         {
             var driver = _mapper.Map<Driver>(driverDto);
 
-            _unitOfWork.Drivers.Update(cancellationToken, driver);
+            await _unitOfWork.Drivers.Update(cancellationToken, driver);
+
+            _unitOfWork.Complete();
+        }
+
+        public async Task UpdateDriverById(CancellationToken cancellationToken, DriverDetailsDto driverDto, int driverId)
+        {
+            var driver = _mapper.Map<Driver>(driverDto);
+
+            await _unitOfWork.Drivers.UpdateById(
+                cancellationToken, 
+                driverId, 
+                driver, 
+                including: x => x
+                    .Include(y => y.Appeals)
+                    .Include(y => y.FuelCards)
+                    .Include(y => y.Vehicles));
 
             _unitOfWork.Complete();
         }
@@ -240,23 +256,19 @@ namespace FleetManagement.BLL.Services
             _unitOfWork.Complete();
         }
 
-        public async Task<IdValidationCodes> ValidateId(CancellationToken cancellationToken, int id)
+        public async Task<ExecutionError> ValidateId(CancellationToken cancellationToken, int id)
         {
             var ids = await _unitOfWork.Drivers.GetIds(cancellationToken, id);
 
-            return ids.Count switch
+            var validationCode =  ids.Count switch
             {
-                0 => IdValidationCodes.IdNotFound,
-                > 1 => IdValidationCodes.IdNotUnique,
-                _ => IdValidationCodes.OK,
+                0 => InputValidationCodes.IdNotFound,
+                > 1 => InputValidationCodes.IdNotUnique,
+                _ => InputValidationCodes.OK,
             };
-        }
 
-        public async Task<ExecutionError> CheckforIdError(CancellationToken cancellationToken, int driverId)
-        {
-            var idValidationCode = await ValidateId(cancellationToken, driverId);
-            if (idValidationCode != IdValidationCodes.OK)
-                return _generalService.ProcessIdError(idValidationCode, nameof(driverId));
+            if (validationCode != InputValidationCodes.OK)
+                return _generalService.ProcessValidationError(validationCode, nameof(id));
 
             return null;
         }

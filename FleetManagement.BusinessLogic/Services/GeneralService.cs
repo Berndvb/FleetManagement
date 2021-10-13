@@ -7,30 +7,24 @@ namespace FleetManagement.BLL.Services
 {
     public class GeneralService : IGeneralService
     {
-        public ExecutionError ProcessIdError(IdValidationCodes validationCode, string idName)
+        public ExecutionError ProcessValidationError(InputValidationCodes validationCode, string name = null)
         {
             var error = new ExecutionError();
             switch (validationCode)
             {
-                case IdValidationCodes.IdNotFound:
-                    error.Message = $"Id '{idName}' could not be found.";
+                case InputValidationCodes.IdNotFound:
+                    error.Message = $"Id '{name}' could not be found.";
                     error.Code = Constants.ErrorCodes.IdNotFound;
                     break;
-                case IdValidationCodes.IdNotUnique:
-                    error.Message = $"Id {idName} is not unique.";
+                case InputValidationCodes.IdNotUnique:
+                    error.Message = $"Id {name} is not unique.";
                     error.Code = Constants.ErrorCodes.IdNotUnique;
                     break;
+                case InputValidationCodes.MoreThanOneActiveRelation:
+                    error.Message = $"Other active relations have been found.";
+                    error.Code = Constants.ErrorCodes.MoreThanOneActiveRelation;
+                    break;
             }
-
-            return error;
-        }
-
-        public ExecutionError ProcessValidationError(FluentValidation.Results.ValidationResult validationResult)
-        {
-            StringBuilder errorMessages = new StringBuilder();
-            validationResult.Errors.ForEach(error => errorMessages.Append(error));
-
-            var error = new ExecutionError(errorMessages.ToString(), Constants.ErrorCodes.InvalidRequestInput);
 
             return error;
         }

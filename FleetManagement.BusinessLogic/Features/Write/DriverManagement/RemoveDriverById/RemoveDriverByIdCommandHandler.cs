@@ -30,7 +30,7 @@ namespace FleetManagement.BLL.Features.Write.DriverManagement.RemoveDriverById
             if (driverIdError != null)
                 return BadRequest(driverIdError);
 
-            _driverService.RemoveDriver(cancellationToken, request.DriverId);
+            _driverService.RemoveDriverById(cancellationToken, request.DriverId);
 
             return new RemoveDriverByIdCommandResult();
         }

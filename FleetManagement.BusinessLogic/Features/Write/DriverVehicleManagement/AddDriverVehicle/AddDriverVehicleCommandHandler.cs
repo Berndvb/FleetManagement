@@ -26,6 +26,10 @@ namespace FleetManagement.BLL.Features.Write.DriverVehicleManagement.AddDriverVe
             AddDriverVehicleCommand request,
             CancellationToken cancellationToken)
         {
+            var errorCode = await _driverVehicleService.HasOtherActiveDriverVehicles(cancellationToken, request.DriverVehicle.VehicleId, request.DriverVehicle.DriverId);
+            if (errorCode != null)
+                BadRequest(errorCode);
+
             _driverVehicleService.AddDriverVehicle(cancellationToken, request.DriverVehicle);
 
             return new AddDriverVehicleCommandResult();

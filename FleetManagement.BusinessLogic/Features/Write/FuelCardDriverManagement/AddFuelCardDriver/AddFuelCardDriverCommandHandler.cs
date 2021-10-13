@@ -8,16 +8,16 @@ namespace FleetManagement.BLL.Features.Write.FuelCardDriverManagement.AddFuelCar
 {
     public class AddFuelCardDriverCommandHandler : CommandHandler<AddFuelCardDriverCommand, AddFuelCardDriverCommandResult>
     {
-        private readonly IFuelCardDriverService _fuelCardDriver;
+        private readonly IFuelCardDriverService _fuelCardDriverService;
         private readonly IGeneralService _generalService;
         private readonly IValidator<AddFuelCardDriverCommand> _validator;
 
         public AddFuelCardDriverCommandHandler(
-            IFuelCardDriverService fuelCardDriver,
+            IFuelCardDriverService fuelCardDriverService,
             IGeneralService generalService,
             IValidator<AddFuelCardDriverCommand> validator)
         {
-            _fuelCardDriver = fuelCardDriver;
+            _fuelCardDriverService = fuelCardDriverService;
             _generalService = generalService;
             _validator = validator;
         }
@@ -27,7 +27,11 @@ namespace FleetManagement.BLL.Features.Write.FuelCardDriverManagement.AddFuelCar
             CancellationToken cancellationToken)
         {
 
-            _fuelCardDriver.AddFuelCardDriver(cancellationToken, request.FuelCardDriver);
+            var errorCode = await _fuelCardDriverService.HasOtherActiveFuelCardDrivers(cancellationToken, request.FuelCardDriver.FuelCardId, request.FuelCardDriver.DriverId);
+            if (errorCode != null)
+                BadRequest(errorCode);
+
+            _fuelCardDriverService.AddFuelCardDriver(cancellationToken, request.FuelCardDriver);
 
             return new AddFuelCardDriverCommandResult();
         }

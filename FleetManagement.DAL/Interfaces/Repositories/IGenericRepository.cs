@@ -19,7 +19,7 @@ namespace FleetManagement.Domain.Interfaces.Repositories
             Func<IQueryable<TEntity>, IIncludableQueryable<TEntity, object>> including = null);
         Task<List<TEntity>> GetListBy(
             CancellationToken cancellationToken,
-            PagingParameters pagingParameters,
+            PagingParameters pagingParameters = null,
             Expression<Func<TEntity, bool>> filter = null,
             Func<IQueryable<TEntity>, IIncludableQueryable<TEntity, object>> including = null);
         Task Insert(CancellationToken cancellationToken, TEntity entity);
@@ -27,7 +27,8 @@ namespace FleetManagement.Domain.Interfaces.Repositories
         void Remove(CancellationToken cancellationToken, TEntity entity);
         Task RemoveById(CancellationToken cancellationToken, int id);
         void RemoveRange(CancellationToken cancellationToken, ICollection<TEntity> entities);
-        void Update(CancellationToken cancellationToken, TEntity entitie);
+        Task Update(CancellationToken cancellationToken, TEntity entitie);
+        Task UpdateById(CancellationToken cancellationToken,int id,TEntity updatedEntity,Func<IQueryable<TEntity>, IIncludableQueryable<TEntity, object>> including = null);
         void UpdateRange(CancellationToken cancellationToken, IEnumerable<TEntity> entities);
         Task<List<int>> GetIds(CancellationToken cancellationToken, int id);
     }

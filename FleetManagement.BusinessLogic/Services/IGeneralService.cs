@@ -5,7 +5,6 @@ namespace FleetManagement.BLL.Services
 {
     public interface IGeneralService
     {
-        ExecutionError ProcessIdError(IdValidationCodes validationCode, string idName);
-        ExecutionError ProcessValidationError(FluentValidation.Results.ValidationResult validationResult);
+        ExecutionError ProcessValidationError(InputValidationCodes validationCode, string idName = null);
     }
 }

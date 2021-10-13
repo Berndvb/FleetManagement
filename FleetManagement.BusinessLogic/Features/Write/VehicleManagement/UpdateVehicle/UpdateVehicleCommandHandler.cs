@@ -26,13 +26,6 @@ namespace FleetManagement.BLL.Features.Write.VehicleManagement.UpdateVehicle
              UpdateVehicleCommand request,
             CancellationToken cancellationToken)
         {
-            var validationResult = _validator.Validate(request);
-            if (!validationResult.IsValid)
-            {
-                var validationError = _generalService.ProcessValidationError(validationResult);
-                return BadRequest(validationError);
-            }
-
             _vehicleService.UpdateVehicle(cancellationToken, request.Vehicle);
 
             return new UpdateVehicleCommandResult();

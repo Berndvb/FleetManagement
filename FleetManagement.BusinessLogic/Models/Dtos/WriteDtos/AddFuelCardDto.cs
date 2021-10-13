@@ -10,12 +10,16 @@ namespace FleetManagement.BLL.Models.Dtos.WriteDtos
 
         public DateTime ExpirationDate { get; set; }
 
-        public AuthenticatieType AuthenticationType { get; set; }
+        public string Pincode { get; set; }
+
+        public AuthenticationType AuthenticationType { get; set; }
+
+        public bool Blocked { get; set; }
 
         public AddFuelCardOptionsDto FuelCardOptions { get; set; }
 
         public List<AddFuelCardDriverDto> FuelCardDrivers { get; set; }
 
-        public bool Blocked { get; set; }
+        
     }
 }

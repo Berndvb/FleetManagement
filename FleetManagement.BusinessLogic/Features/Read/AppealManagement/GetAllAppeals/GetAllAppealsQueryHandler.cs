@@ -31,13 +31,6 @@ namespace FleetManagement.BLL.Features.Read.AppealManagement.GetAllAppeals
             GetAllAppealsQuery request,
             CancellationToken cancellationToken)
         {
-            var validationResult = _validator.Validate(request);
-            if (!validationResult.IsValid)
-            {
-                var validationError = _generalService.ProcessValidationError(validationResult);
-                return BadRequest(validationError);
-            }
-
             var appeals = await _appealService.GetAllAppeals(cancellationToken, request.PagingParameters, request.AppealStatus.StringToAppealStatus());
             if (appeals.Count == 0)
             {

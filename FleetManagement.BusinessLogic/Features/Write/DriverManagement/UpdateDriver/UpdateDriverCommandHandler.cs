@@ -1,32 +1,25 @@
-﻿using System.Threading;
-using System.Threading.Tasks;
-using FleetManagement.BLL.Services;
-using FluentValidation;
+﻿using FleetManagement.BLL.Services;
 using MediatR.Cqrs.Commands;
+using System.Threading;
+using System.Threading.Tasks;
 
 namespace FleetManagement.BLL.Features.Write.DriverManagement.UpdateDriver
 {
     public class UpdateDriverCommandHandler : CommandHandler<UpdateDriverCommand, UpdateDriverCommandResult>
     {
         private readonly IDriverService _driverService;
-        private readonly IGeneralService _generalService;
-        private readonly IValidator<UpdateDriverCommand> _validator;
 
         public UpdateDriverCommandHandler(
-            IDriverService driverService,
-            IGeneralService generalService,
-            IValidator<UpdateDriverCommand> validator)
+            IDriverService driverService)
         {
             _driverService = driverService;
-            _generalService = generalService;
-            _validator = validator;
         }
 
         public async override Task<UpdateDriverCommandResult> Handle(
             UpdateDriverCommand request,
             CancellationToken cancellationToken)
         {
-            _driverService.UpdateDriver(cancellationToken, request.Driver);
+            await _driverService.UpdateDriver(cancellationToken, request.Driver);
 
             return new UpdateDriverCommandResult();
         }

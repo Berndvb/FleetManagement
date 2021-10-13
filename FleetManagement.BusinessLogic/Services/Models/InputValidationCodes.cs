@@ -1,9 +1,10 @@
 ﻿namespace FleetManagement.BLL.Services.Models
 {
-    public enum IdValidationCodes
+    public enum InputValidationCodes
     {
         IdNotFound = 1,
         IdNotUnique = 2,
-        OK = 3
+        MoreThanOneActiveRelation = 3,
+        OK = 4
     }
 }
