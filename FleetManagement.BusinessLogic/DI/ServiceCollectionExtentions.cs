@@ -1,9 +1,11 @@
 ﻿using AutoMapper;
+using FleetManagement.BLL.Mapper.MapperSercice;
 using FleetManagement.BLL.Services;
 using FleetManager.EFCore.DI;
 using MediatR.Cqrs.DI;
 using Microsoft.Extensions.DependencyInjection;
 using System;
+using FleetManagement.BLL.Mapper.Profiles;
 
 namespace FleetManagement.BLL.DI
 {
@@ -37,6 +39,8 @@ namespace FleetManagement.BLL.DI
 
             IMapper mapper = mapperConfig.CreateMapper();
             services.AddSingleton(mapper);
+
+            services.AddScoped<IMapperService, MapperService>();
         }
 
         public static void AddEntityServices(this IServiceCollection services)

@@ -3,15 +3,16 @@ using FleetManagement.BLL.Mapper.MapperSercice;
 using FleetManagement.BLL.Services.Models;
 using FleetManagement.Domain.Interfaces.Repositories;
 using FleetManagement.Domain.Models;
-using FleetManagement.Framework.Models.Dtos.ReadDtos;
-using FleetManagement.Framework.Models.Dtos.WriteDtos;
 using FleetManagement.Framework.Paging;
 using MediatR.Cqrs.Execution;
 using Microsoft.EntityFrameworkCore;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
+using FleetManagement.BLL.Models.Dtos.ReadDtos;
+using FleetManagement.BLL.Models.Dtos.WriteDtos;
 
 namespace FleetManagement.BLL.Services
 {
@@ -208,7 +209,7 @@ namespace FleetManagement.BLL.Services
             var driver = _mapper.Map<Driver>(driverDto);
 
             //in-between objects need to be created:
-            //var fuelCardDriverDto = new AddFuelCardDriverDto(true, DateTime.Now, fuelCard, driver);
+            var fuelCardDriverDto = new AddFuelCardDriverDto(true, DateTime.Now, fuelCard, driver);
 
             //driver.Appeals = appeals;
             //driver.Vehicles.Add(vehicle);

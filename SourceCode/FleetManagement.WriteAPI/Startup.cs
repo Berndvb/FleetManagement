@@ -1,4 +1,5 @@
 using FleetManagement.BLL.DI;
+using FleetManagement.BLL.Features.Write.DriverManagement.AddDriver;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
@@ -6,7 +7,6 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.OpenApi.Models;
 using FluentValidation.AspNetCore;
-using FleetManagement.WriteAPI.Features.DriverManagement.AddDriver;
 
 namespace FleetManagement.WriteAPI
 {

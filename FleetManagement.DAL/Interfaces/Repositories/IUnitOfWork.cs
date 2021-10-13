@@ -1,5 +1,4 @@
 ﻿using FleetManagement.Domain.Models;
-using FleetManager.Domain.Interfaces.Repositories;
 
 namespace FleetManagement.Domain.Interfaces.Repositories
 {

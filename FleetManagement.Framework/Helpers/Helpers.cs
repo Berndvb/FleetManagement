@@ -136,5 +136,14 @@ namespace FleetManagement.Framework.Helpers
 
             return true;
         }
+
+        public static bool IsValidDateOfBirth(this DateTime dateOfBirth, int minAge, int maxAge)
+        {
+            if (dateOfBirth.AddYears(minAge) > DateTime.Now ||
+                dateOfBirth.AddYears(maxAge) < DateTime.Now)
+                return false;
+
+            return true;
+        }
     }
 }

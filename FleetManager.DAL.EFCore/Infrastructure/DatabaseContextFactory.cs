@@ -1,9 +1,8 @@
-﻿using FleetManagement.EFCore.Infrastructure;
+﻿using System.IO;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
-using System.IO;
 
-namespace FleetManagement.Data.Infrastructure
+namespace FleetManager.EFCore.Infrastructure
 {
     public class DatabaseContextFactory /*: IDesignTimeDbContextFactory<DatabaseContext>*/
     {

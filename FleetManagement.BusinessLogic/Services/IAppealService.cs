@@ -1,9 +1,9 @@
-﻿using FleetManagement.Framework.Models.Dtos.ReadDtos;
-using FleetManagement.Framework.Models.Enums;
+﻿using FleetManagement.Framework.Models.Enums;
 using FleetManagement.Framework.Paging;
 using System.Collections.Generic;
 using System.Threading;
 using System.Threading.Tasks;
+using FleetManagement.BLL.Models.Dtos.ReadDtos;
 
 namespace FleetManagement.BLL.Services
 {

@@ -1,7 +1,5 @@
-﻿using FleetManagement.Framework.Models.Dtos;
-using FleetManagement.Framework.Models.Dtos.ReadDtos;
-using FleetManagement.Framework.Models.Dtos.WriteDtos;
-using FleetManagement.Framework.Models.WriteDtos;
+﻿using FleetManagement.BLL.Models.Dtos.ReadDtos;
+using FleetManagement.BLL.Models.Dtos.WriteDtos;
 using System.Threading;
 
 namespace FleetManagement.BLL.Services

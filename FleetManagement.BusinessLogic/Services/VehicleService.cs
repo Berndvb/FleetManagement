@@ -3,13 +3,13 @@ using FleetManagement.BLL.Mapper.MapperSercice;
 using FleetManagement.BLL.Services.Models;
 using FleetManagement.Domain.Interfaces.Repositories;
 using FleetManagement.Domain.Models;
-using FleetManagement.Framework.Models.Dtos.ReadDtos;
 using FleetManagement.Framework.Paging;
 using MediatR.Cqrs.Execution;
 using Microsoft.EntityFrameworkCore;
 using System.Collections.Generic;
 using System.Threading;
 using System.Threading.Tasks;
+using FleetManagement.BLL.Models.Dtos.ReadDtos;
 
 namespace FleetManagement.BLL.Services
 {

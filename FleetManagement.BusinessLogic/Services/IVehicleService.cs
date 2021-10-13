@@ -1,6 +1,5 @@
-﻿using FleetManagement.BLL.Services.Models;
-using FleetManagement.Framework.Models.Dtos;
-using FleetManagement.Framework.Models.Dtos.ReadDtos;
+﻿using FleetManagement.BLL.Models.Dtos.ReadDtos;
+using FleetManagement.BLL.Services.Models;
 using FleetManagement.Framework.Paging;
 using MediatR.Cqrs.Execution;
 using System.Collections.Generic;

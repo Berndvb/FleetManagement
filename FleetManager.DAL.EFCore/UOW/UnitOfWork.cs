@@ -1,7 +1,6 @@
 ﻿using FleetManagement.Domain.Interfaces.Repositories;
 using FleetManagement.Domain.Models;
-using FleetManagement.EFCore.Infrastructure;
-using FleetManager.Domain.Interfaces.Repositories;
+using FleetManager.EFCore.Infrastructure;
 
 namespace FleetManager.EFCore.UOW
 {

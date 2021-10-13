@@ -1,8 +1,6 @@
 ﻿using FleetManagement.Domain.Infrastructure.Pagination;
 using FleetManagement.Domain.Interfaces.Models;
-using FleetManagement.EFCore.Infrastructure;
 using FleetManagement.Framework.Paging;
-using FleetManager.Domain.Interfaces.Repositories;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Query;
 using System;
@@ -11,6 +9,8 @@ using System.Linq;
 using System.Linq.Expressions;
 using System.Threading;
 using System.Threading.Tasks;
+using FleetManagement.Domain.Interfaces.Repositories;
+using FleetManager.EFCore.Infrastructure;
 
 namespace FleetManager.EFCore.Repositories
 {

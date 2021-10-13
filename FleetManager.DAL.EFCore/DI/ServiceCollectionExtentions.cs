@@ -1,6 +1,5 @@
 ﻿using FleetManagement.Domain.Interfaces.Repositories;
-using FleetManagement.EFCore.Infrastructure;
-using FleetManager.Domain.Interfaces.Repositories;
+using FleetManager.EFCore.Infrastructure;
 using FleetManager.EFCore.Repositories;
 using FleetManager.EFCore.UOW;
 using Microsoft.EntityFrameworkCore;

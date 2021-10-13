@@ -1,5 +1,4 @@
-﻿using FleetManagement.Framework.Models.Dtos;
-using FleetManagement.Framework.Models.Dtos.ReadDtos;
+﻿using FleetManagement.BLL.Models.Dtos.ReadDtos;
 using FleetManagement.Framework.Paging;
 using System.Collections.Generic;
 using System.Threading;

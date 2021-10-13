@@ -1,14 +1,12 @@
-﻿using AutoMapper;
+﻿using System.Collections.Generic;
+using AutoMapper;
 using FleetManagement.BLL.Mapper.Converters;
+using FleetManagement.BLL.Models.Dtos.ReadDtos;
+using FleetManagement.BLL.Models.Dtos.WriteDtos;
 using FleetManagement.Domain.Models;
-using FleetManagement.Framework.Models.Dtos.ReadDtos;
-using FleetManagement.Framework.Models.Dtos.WriteDtos;
 using FleetManagement.Framework.Models.Enums;
-using FleetManagement.Framework.Models.WriteDtos;
-using System.Collections.Generic;
-using FleetManagement.Domain.Infrastructure.Pagination;
 
-namespace FleetManagement.BLL.Services
+namespace FleetManagement.BLL.Mapper.Profiles
 {
     public class MapperProfile : Profile
     {
@@ -88,13 +86,17 @@ namespace FleetManagement.BLL.Services
             CreateMap<Vehicle, VehicleDetailsDto>()
                 .ReverseMap();
 
-            CreateMap<AddDriverDetailsDto, Driver>();
+            CreateMap<AddDriverDetailsDto, Driver>()
+                .ReverseMap();
 
             CreateMap<DriverVehicle, AddDriverVehicleDto>()
                 .ReverseMap();
 
             CreateMap<FuelCardDriver, AddFuelCardDriverDto>()
                 .ReverseMap();
+
+            CreateMap<Driver, AddDriverDetailsDto>()
+              .ReverseMap();
 
             CreateMap<IdentityPerson, AddIdentityPersonDto>()
                 .ReverseMap();

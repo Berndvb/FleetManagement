@@ -1,5 +1,5 @@
 using FleetManagement.BLL.DI;
-using FleetManagement.ReadAPI.Features.DriverManagement.GetAllAppeals;
+using FleetManagement.BLL.Features.Read.DriverManagement.GetAppeals;
 using FluentValidation.AspNetCore;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;

@@ -1,8 +1,5 @@
-﻿using FluentValidation;
-using FluentValidation.AspNetCore;
-using Microsoft.Extensions.DependencyInjection;
+﻿using Microsoft.Extensions.DependencyInjection;
 using System;
-using System.Reflection;
 
 namespace MediatR.Cqrs.DI
 {

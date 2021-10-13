@@ -1,7 +1,7 @@
 ﻿using FleetManagement.Domain.Models;
 using Microsoft.EntityFrameworkCore;
 
-namespace FleetManagement.EFCore.Infrastructure
+namespace FleetManager.EFCore.Infrastructure
 {
     public class DatabaseContext : DbContext
     {

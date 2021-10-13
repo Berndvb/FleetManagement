@@ -1,9 +1,9 @@
 ﻿using AutoMapper;
 using FleetManagement.Domain.Interfaces.Repositories;
 using FleetManagement.Domain.Models;
-using FleetManagement.Framework.Models.Dtos.ReadDtos;
-using FleetManagement.Framework.Models.Dtos.WriteDtos;
 using System.Threading;
+using FleetManagement.BLL.Models.Dtos.ReadDtos;
+using FleetManagement.BLL.Models.Dtos.WriteDtos;
 
 namespace FleetManagement.BLL.Services
 {
