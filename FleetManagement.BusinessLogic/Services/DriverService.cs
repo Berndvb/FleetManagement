@@ -190,7 +190,7 @@ namespace FleetManagement.BLL.Services
             return reparationDtos;
         }
 
-        public async Task UpdateDriver(CancellationToken cancellationToken,DriverDetailsDto driverDto)
+        public async Task UpdateDriver(CancellationToken cancellationToken, UpdateDriverDetailsDto driverDto)
         {
             var driver = _mapper.Map<Driver>(driverDto);
 

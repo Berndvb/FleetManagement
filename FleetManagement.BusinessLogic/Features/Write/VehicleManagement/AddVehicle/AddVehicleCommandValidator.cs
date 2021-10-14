@@ -13,6 +13,8 @@ namespace FleetManagement.BLL.Features.Write.VehicleManagement.AddVehicle
             RuleFor(x => x.Vehicle.Identity.FuelType).Must(y => Enum.IsDefined(typeof(FuelType), y));
 
             RuleFor(x => x.Vehicle.Mileage).GreaterThan(0);
+
+            RuleFor(x => x.Vehicle.Identity.LicensePlate).Must(y => y.Length <= 7);
         }
     }
 }

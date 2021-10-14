@@ -17,34 +17,10 @@ namespace FleetManagement.BLL.Models.Dtos.ReadDtos
 
         public AppealStatus Status { get; set; }
 
-        public VehicleDetailsDto Vehicle { get; set; }
+        public VehicleOverviewDto Vehicle { get; set; }
 
-        public DriverDetailsDto Driver { get; set; }
+        public DriverOverviewDto Driver { get; set; }
 
         public string Message { get; set; }
-
-        public AppealDto(
-            int id,
-            DateTime creationDate,
-            AppealType appealType,
-            DateTime firstDatePlanning,
-            DateTime? secondDatePlanning,
-            AppealStatus status,
-            VehicleDetailsDto vehicle,
-            string message)
-        {
-            Id = id;
-            CreationDate = creationDate;
-            AppealType = appealType;
-            FirstDatePlanning = firstDatePlanning;
-            SecondDatePlanning = secondDatePlanning;
-            Status = status;
-            Vehicle = vehicle;
-            Message = message;
-        }
-
-        public AppealDto()
-        {
-        }
     }
 }

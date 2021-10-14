@@ -10,6 +10,6 @@ namespace FleetManagement.BLL.Models.Dtos.WriteDtos
 
         public string Model { get; set; }
 
-        public string LicensePlates { get; set; }
+        public string LicensePlate { get; set; }
     }
 }

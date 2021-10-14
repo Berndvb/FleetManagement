@@ -7,7 +7,7 @@ namespace FleetManagement.BLL.Models.Dtos.ReadDtos
     {
         public int Id { get; set; }
 
-        public VehicleDetailsDto Vehicle { get; set; }
+        public VehicleOverviewDto Vehicle { get; set; }
 
         public DateTime CreationDate { get; set; }
 
@@ -19,6 +19,6 @@ namespace FleetManagement.BLL.Models.Dtos.ReadDtos
 
         public List<FileDto> Documents { get; set; }
 
-        public DriverDetailsDto Driver { get; set; }
+        public DriverOverviewDto Driver { get; set; }
     }
 }

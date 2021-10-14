@@ -21,7 +21,7 @@ namespace FleetManagement.ReadAPI.Controllers
 
         [HttpGet()]
         public async Task<IActionResult> GetAllAppeals(
-          [FromModel] GetAllAppealsQuery getAllAppealsQuery,
+          [FromModel] GetAppealsQuery getAllAppealsQuery,
           CancellationToken cancellationToken)
         {
             var getAllAppealsQueryResult = await _mediator.Send(getAllAppealsQuery, cancellationToken);

@@ -92,7 +92,11 @@ namespace FleetManagement.BLL.Mapper.Profiles
 
             CreateMap<AddFuelCardDriverDto, FuelCardDriver>();
 
+            CreateMap<AddFuelCardOptionsDto, FuelCardOptions>();
+
             CreateMap<AddDriverDetailsDto, Driver>();
+
+            CreateMap<UpdateDriverDetailsDto, Driver>();
 
             CreateMap<AddIdentityPersonDto, IdentityPerson>();
 

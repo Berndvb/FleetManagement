@@ -1,11 +1,10 @@
-﻿using System.Threading;
-using System.Threading.Tasks;
-using FleetManagement.BLL.Features.Write.DriverVehicleManagement.AddDriverVehicle;
+﻿using FleetManagement.BLL.Features.Write.DriverVehicleManagement.AddDriverVehicle;
 using FleetManagement.BLL.Features.Write.DriverVehicleManagement.UpdateDriverVehicle;
 using MediatR;
-using MediatR.Cqrs;
 using MediatR.Cqrs.Execution;
 using Microsoft.AspNetCore.Mvc;
+using System.Threading;
+using System.Threading.Tasks;
 
 namespace FleetManagement.WriteAPI.Controllers
 {
@@ -22,7 +21,7 @@ namespace FleetManagement.WriteAPI.Controllers
 
         [HttpPost()]
         public async Task<IActionResult> AddDriverVehicle(
-           [FromModel] AddDriverVehicleCommand addDriverVehicleCommand,
+           AddDriverVehicleCommand addDriverVehicleCommand,
            CancellationToken cancellationToken)
         {
             var addDriverVehicleCommandResult = await _mediator.Send(addDriverVehicleCommand, cancellationToken);
@@ -30,9 +29,9 @@ namespace FleetManagement.WriteAPI.Controllers
             return addDriverVehicleCommandResult.ToActionResult();
         }
 
-        [HttpPut("driverVehicle/{driverVehicleId}")]
+        [HttpPut()]
         public async Task<IActionResult> UpdateDriverVehicle(
-           [FromModel] UpdateDriverVehicleCommand updateDriverVehicleCommand,
+           UpdateDriverVehicleCommand updateDriverVehicleCommand,
            CancellationToken cancellationToken)
         {
             var updateDriverVehicleCommandResult = await _mediator.Send(updateDriverVehicleCommand, cancellationToken);

@@ -22,7 +22,7 @@ namespace FleetManagement.ReadAPI.Controllers
 
         [HttpGet()]
         public async Task<IActionResult> GetAllFuelCards(
-         [FromModel] GetAllFuelCardsQuery getAllFuelCardsQuery,
+         [FromModel] GetFuelCardsQuery getAllFuelCardsQuery,
          CancellationToken cancellationToken)
         {
             var getAllFuelCardsQueryResult = await _mediator.Send(getAllFuelCardsQuery, cancellationToken);

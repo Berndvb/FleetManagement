@@ -13,23 +13,5 @@ namespace FleetManagement.BLL.Models.Dtos.ReadDtos
         public string NationalInsuranceNumber { get; set; }
 
         public DateTime DateOfBirth { get; set; }
-
-        public IdentityPersonDto(
-            int id,
-            string name,
-            string firstName,
-            string nationalInsuranceNumber,
-            DateTime dateOfBirth)
-        {
-            Id = id;
-            Name = name;
-            FirstName = firstName;
-            NationalInsuranceNumber = nationalInsuranceNumber;
-            DateOfBirth = dateOfBirth;
-        }
-
-        public IdentityPersonDto()
-        {
-        }
     }
 }

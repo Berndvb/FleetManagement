@@ -19,7 +19,7 @@ namespace FleetManagement.BLL.Services
         Task<List<AppealDto>> GetAppealsForDriverPerCar(CancellationToken cancellationToken, int driverId, int vehicleId, PagingParameters pagingParameter = null);
         Task<List<MaintenanceDto>> GetMaintenancesForDriverPerCar(CancellationToken cancellationToken, int driverId, int vehicleId, PagingParameters pagingParameter = null);
         Task<List<RepareDto>> GetRepairsForDriverPerCar(CancellationToken cancellationToken, int driverId, int vehicleId, PagingParameters pagingParameter = null);
-        Task UpdateDriver(CancellationToken cancellationToken, DriverDetailsDto driverDto);
+        Task UpdateDriver(CancellationToken cancellationToken, UpdateDriverDetailsDto driverDto);
         Task UpdateDriverById(CancellationToken cancellationToken, DriverDetailsDto driverDto, int driverId);
         Task AddDriver(CancellationToken cancellationToken, AddDriverDetailsDto driverDto);
         void RemoveDriverById(CancellationToken cancellationToken, int driverId);

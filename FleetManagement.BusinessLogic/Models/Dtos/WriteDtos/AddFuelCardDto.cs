@@ -1,6 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
-using FleetManagement.Framework.Models.Enums;
+﻿using FleetManagement.Framework.Models.Enums;
+using System;
 
 namespace FleetManagement.BLL.Models.Dtos.WriteDtos
 {
@@ -17,9 +16,5 @@ namespace FleetManagement.BLL.Models.Dtos.WriteDtos
         public bool Blocked { get; set; }
 
         public AddFuelCardOptionsDto FuelCardOptions { get; set; }
-
-        public List<AddFuelCardDriverDto> FuelCardDrivers { get; set; }
-
-        
     }
 }

@@ -14,19 +14,5 @@ namespace FleetManagement.BLL.Models.Dtos.ReadDtos
         public string ContentType { get; set; }
 
         public Byte[] Content { get; set; }
-
-        public FileDto(
-            int id,
-            FileType fileType,
-            string fileName,
-            string contentType,
-            Byte[] content)
-        {
-            Id = id;
-            FileType = fileType;
-            FileName = fileName;
-            ContentType = contentType;
-            Content = content;
-        }
     }
 }

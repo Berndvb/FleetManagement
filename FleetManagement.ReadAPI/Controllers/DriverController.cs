@@ -38,7 +38,7 @@ namespace FleetManagement.ReadAPI.Controllers
 
         [HttpGet("{driverId}/appeals")]
         public async Task<IActionResult> GetAppeals(
-         [FromModel] GetAppealsQuery getAppealsQuery,
+         [FromModel] GetAppealsForDriverQuery getAppealsQuery,
          CancellationToken cancellationToken)
         {
             var getAppealsQueryResult = await _mediator.Send(getAppealsQuery, cancellationToken);
@@ -68,7 +68,7 @@ namespace FleetManagement.ReadAPI.Controllers
 
         [HttpGet("{driverId}/fuelcards")]
         public async Task<IActionResult> GetFuelCards(
-         [FromModel] GetFuelCardsQuery getFuelCardsQuery,
+         [FromModel] GetFuelCardsForDriverQuery getFuelCardsQuery,
          CancellationToken cancellationToken)
         {
             var getAllDriverOverviewsQueryResult = await _mediator.Send(getFuelCardsQuery, cancellationToken);
@@ -98,7 +98,7 @@ namespace FleetManagement.ReadAPI.Controllers
 
         [HttpGet("{driverId}/vehicledetails")]
         public async Task<IActionResult> GetVehicleDetails(
-         [FromModel] GetVehicleInfoQuery getVehicleDetailsQuery,
+         [FromModel] GetVehiclesForDriverQuery getVehicleDetailsQuery,
          CancellationToken cancellationToken)
         {
             var getVehicleDetailsQueryResult = await _mediator.Send(getVehicleDetailsQuery, cancellationToken);

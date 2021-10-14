@@ -11,20 +11,6 @@
         public string CompanyNumber { get; set; }
 
         public string BankaccountNumber { get; set; }
-
-        public GarageDto(
-            int id,
-            string name,
-            ContactInfoDto contactInfo,
-            string companyNumber,
-            string bankaccountNumber)
-        {
-            Id = id;
-            Name = name;
-            ContactInfo = contactInfo;
-            CompanyNumber = companyNumber;
-            BankaccountNumber = bankaccountNumber;
-        }
     }
 }
 

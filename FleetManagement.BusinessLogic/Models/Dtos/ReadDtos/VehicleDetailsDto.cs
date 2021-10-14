@@ -1,5 +1,4 @@
 ﻿using System.Collections.Generic;
-using FleetManagement.Framework.Helpers;
 
 namespace FleetManagement.BLL.Models.Dtos.ReadDtos
 {
@@ -18,25 +17,5 @@ namespace FleetManagement.BLL.Models.Dtos.ReadDtos
         public List<DriverVehicleDto> Drivers { get; set; }
 
         public List<AppealDto> Appeals { get; set; }
-
-        public VehicleDetailsDto(
-            int id,
-            IdentityVehicleDto identity,
-            string mileage,
-            List<MaintenanceDto> maintenance,
-            List<RepareDto> reparations,
-            List<AppealDto> appeals)
-        {
-            Id = id;
-            Identity = identity;
-            Mileage = mileage.SplitToNumbers();
-            Maintenance = maintenance;
-            Reparations = reparations;
-            Appeals = appeals;
-        }
-
-        public VehicleDetailsDto()
-        {
-        }
     }
 }

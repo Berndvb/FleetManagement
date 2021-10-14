@@ -1,6 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
-using FleetManagement.Framework.Models.Enums;
+﻿using FleetManagement.Framework.Models.Enums;
+using System;
 
 namespace FleetManagement.BLL.Models.Dtos.ReadDtos
 {
@@ -12,34 +11,14 @@ namespace FleetManagement.BLL.Models.Dtos.ReadDtos
 
         public DateTime ExpirationDate { get; set; }
 
+        public string Pincode { get; set; }
+
         public AuthenticationType AuthenticationType { get; set; }
-
-        public FuelCardOptionsDto FuelCardOptions { get; set; }
-
-        public List<FuelCardDriverDto> FuelCardDrivers { get; set; }
 
         public bool Blocked { get; set; }
 
-        public FuelCardDto(
-            int id,
-            string cardNumber,
-            DateTime expirationDate,
-            AuthenticationType authenticationType,
-            FuelCardOptionsDto fuelCardOptions,
-            List<FuelCardDriverDto> fuelCardDrivers,
-            bool blocked)
-        {
-            Id = id;
-            CardNumber = cardNumber;
-            ExpirationDate = expirationDate;
-            AuthenticationType = authenticationType;
-            FuelCardOptions = fuelCardOptions;
-            Blocked = blocked;
-            FuelCardDrivers = fuelCardDrivers;
-        }
+        public FuelCardOptionsDto FuelCardOptions { get; set; }
 
-        public FuelCardDto()
-        {
-        }
+        public FuelCardDriverDto CurrentFuelCardDriver { get; set; }
     }
 }

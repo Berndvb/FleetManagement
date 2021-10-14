@@ -19,6 +19,10 @@ namespace FleetManagement.BLL.Features.Write.FuelCardManagement.AddFuelCard
                 .Must(y => y.Length.Equals(4))
                 .Must(y => int.TryParse(y, out _));
 
+            RuleFor(x => x.FuelCard.CardNumber)
+                .Must(y => y.Length.Equals(8))
+                .Must(y => int.TryParse(y, out _));
+
             RuleFor(x => x.FuelCard.AuthenticationType).Must(y => Enum.IsDefined(typeof(AuthenticationType), y));
 
             RuleFor(x => x.FuelCard.FuelCardOptions.Fueltype).Must(y => Enum.IsDefined(typeof(FuelType), y));

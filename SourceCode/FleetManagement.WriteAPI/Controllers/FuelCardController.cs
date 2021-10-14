@@ -1,11 +1,10 @@
-﻿using System.Threading;
-using System.Threading.Tasks;
-using FleetManagement.BLL.Features.Write.FuelCardManagement.AddFuelCard;
+﻿using FleetManagement.BLL.Features.Write.FuelCardManagement.AddFuelCard;
 using FleetManagement.BLL.Features.Write.FuelCardManagement.UpdateFuelCard;
 using MediatR;
-using MediatR.Cqrs;
 using MediatR.Cqrs.Execution;
 using Microsoft.AspNetCore.Mvc;
+using System.Threading;
+using System.Threading.Tasks;
 
 namespace FleetManagement.WriteAPI.Controllers
 {
@@ -20,9 +19,9 @@ namespace FleetManagement.WriteAPI.Controllers
             _mediator = mediator;
         }
 
-        [HttpPut("{fuelCardId}")]
+        [HttpPut()]
         public async Task<IActionResult> UpdateFuelCard(
-            [FromModel]UpdateFuelCardCommand updateFuelCardCommand,
+            UpdateFuelCardCommand updateFuelCardCommand,
             CancellationToken cancellationToken)
         {
             var updateFuelCardCommandResult = await _mediator.Send(updateFuelCardCommand, cancellationToken);
@@ -31,8 +30,8 @@ namespace FleetManagement.WriteAPI.Controllers
         }
 
         [HttpPost()]
-        public async Task<IActionResult> AddVehicle(
-         [FromModel] AddFuelCardCommand addFuelCardCommand,
+        public async Task<IActionResult> AddFuelCard(
+         AddFuelCardCommand addFuelCardCommand,
          CancellationToken cancellationToken)
         {
             var addFuelCardCommandResult = await _mediator.Send(addFuelCardCommand, cancellationToken);

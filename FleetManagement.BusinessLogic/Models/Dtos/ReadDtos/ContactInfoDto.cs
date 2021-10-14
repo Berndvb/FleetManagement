@@ -12,21 +12,5 @@ namespace FleetManagement.BLL.Models.Dtos.ReadDtos
         public string PhoneNumber { get; set; }
 
         public AddressDto Address { get; set; }
-
-        public ContactInfoDto(
-            int id,
-            string emailAddress,
-            string phoneNumber,
-            AddressDto address)
-        {
-            Id = id;
-            EmailAddress = emailAddress;
-            PhoneNumber = phoneNumber;
-            Address = address;
-        }
-
-        public ContactInfoDto()
-        {
-        }
     }
 }
