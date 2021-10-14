@@ -1,6 +1,7 @@
 ﻿using System.Threading;
 using System.Threading.Tasks;
 using FleetManagement.BLL.Features.Write.DriverVehicleManagement.UpdateDriverVehicle;
+using FleetManagement.BLL.Features.Write.VehicleManagement.AddVehicle;
 using FleetManagement.BLL.Features.Write.VehicleManagement.UpdateVehicle;
 using MediatR;
 using MediatR.Cqrs;
@@ -38,6 +39,16 @@ namespace FleetManagement.WriteAPI.Controllers
             var updateVehicleCommandResult = await _mediator.Send(updateVehicleCommand, cancellationToken);
 
             return updateVehicleCommandResult.ToActionResult();
+        }
+
+        [HttpPost()]
+        public async Task<IActionResult> AddVehicle(
+           [FromModel] AddVehicleCommand addVehicleCommand,
+           CancellationToken cancellationToken)
+        {
+            var addVehicleCommandResult = await _mediator.Send(addVehicleCommand, cancellationToken);
+
+            return addVehicleCommandResult.ToActionResult();
         }
     }
 }

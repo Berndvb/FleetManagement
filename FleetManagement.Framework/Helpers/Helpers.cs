@@ -145,5 +145,40 @@ namespace FleetManagement.Framework.Helpers
 
             return true;
         }
+
+        public static bool IsValidPostcodeNL(this string postcode)
+        {
+            var postcodeTrimmed = postcode.Trim();
+
+            if (postcodeTrimmed.Length != 7)
+                return false;
+
+            var digits = postcodeTrimmed.Substring(0,4);
+            if (!int.TryParse(digits, out _))
+                return false;
+
+            var space = postcodeTrimmed[5];
+            if (space != ' ')
+                return false;
+
+            var letters = postcodeTrimmed.Substring(5, 2);
+            if (int.TryParse(letters, out _))
+                return false;
+
+            return true;
+        }
+
+        public static bool IsValidPostcodeB(this string postcode)
+        {
+            var postcodeTrimmed = postcode.Trim();
+
+            if (postcodeTrimmed.Length != 4)
+                return false;
+
+            if (!int.TryParse(postcodeTrimmed, out _))
+                return false;
+
+            return true;
+        }
     }
 }

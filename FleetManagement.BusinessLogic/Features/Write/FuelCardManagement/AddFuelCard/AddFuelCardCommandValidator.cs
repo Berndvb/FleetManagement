@@ -1,14 +1,13 @@
 ﻿using FleetManagement.Framework.Helpers;
 using FleetManagement.Framework.Models.Enums;
 using FluentValidation;
-using Microsoft.VisualBasic.FileIO;
 using System;
 
 namespace FleetManagement.BLL.Features.Write.FuelCardManagement.AddFuelCard
 {
-    public class AddFuelCardDriverCommandValidator : AbstractValidator<AddFuelCardCommand>
+    public class AddFuelCardCommandValidator : AbstractValidator<AddFuelCardCommand>
     {
-        public AddFuelCardDriverCommandValidator()
+        public AddFuelCardCommandValidator()
         {
             RuleFor(x => x.FuelCard.ExpirationDate)
                 .NotNull()
@@ -22,7 +21,7 @@ namespace FleetManagement.BLL.Features.Write.FuelCardManagement.AddFuelCard
 
             RuleFor(x => x.FuelCard.AuthenticationType).Must(y => Enum.IsDefined(typeof(AuthenticationType), y));
 
-            RuleFor(x => x.FuelCard.FuelCardOptions.Fueltype).Must(y => Enum.IsDefined(typeof(FieldType), y));
+            RuleFor(x => x.FuelCard.FuelCardOptions.Fueltype).Must(y => Enum.IsDefined(typeof(FuelType), y));
 
         }
     }

@@ -48,7 +48,7 @@ namespace FleetManagement.BLL.Services
         {
             var driverVehicles = await _unitOfWork.DriverVehicles.GetListBy(
                 cancellationToken,
-                filter: x => x.Driver.Id.Equals(driverId) && x.Vehicle.Id.Equals(vehicleId));
+                filter: x => x.Driver.Id.Equals(driverId) || x.Vehicle.Id.Equals(vehicleId) && x.Active);
 
             return driverVehicles.Count switch
             {

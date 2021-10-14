@@ -21,7 +21,9 @@ namespace FleetManagement.BLL.Features.Write.DriverManagement.UpdateDriver
 
             RuleFor(x => x.Driver.Contactinfo.Address.City).NotNull();
 
-            RuleFor(x => x.Driver.Contactinfo.Address.Postcode).NotNull();
+            RuleFor(x => x.Driver.Contactinfo.Address.Postcode)
+                .NotNull()
+                .Must(y => y.IsValidPostcodeNL() || y.IsValidPostcodeB());
 
             RuleFor(x => x.Driver.Contactinfo.Address.Street).NotNull();
 
@@ -37,8 +39,7 @@ namespace FleetManagement.BLL.Features.Write.DriverManagement.UpdateDriver
 
             RuleFor(x => x.Driver.Identity.NationalInsuranceNumber)
                 .NotNull()
-                .Must(y => y.IsValidNationalInsuranceNumber())
-                .WithMessage("Insurance number is invalid.");
+                .Must(y => y.IsValidNationalInsuranceNumber());
         }
     }
 }

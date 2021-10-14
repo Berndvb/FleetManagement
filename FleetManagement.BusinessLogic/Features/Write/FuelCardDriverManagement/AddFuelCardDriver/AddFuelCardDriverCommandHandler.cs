@@ -26,7 +26,6 @@ namespace FleetManagement.BLL.Features.Write.FuelCardDriverManagement.AddFuelCar
             AddFuelCardDriverCommand request,
             CancellationToken cancellationToken)
         {
-
             var errorCode = await _fuelCardDriverService.HasOtherActiveFuelCardDrivers(cancellationToken, request.FuelCardDriver.FuelCardId, request.FuelCardDriver.DriverId);
             if (errorCode != null)
                 BadRequest(errorCode);

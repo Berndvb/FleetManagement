@@ -26,7 +26,7 @@ namespace FleetManagement.ReadAPI.Controllers
             _mediator = mediator;
         }
 
-        [HttpGet("driveroverviews")]
+        [HttpGet()]
         public async Task<IActionResult> GetAllDriverOverviews(
           [FromModel] GetAllDriverOverviewsQuery getAllDriverOverviewsQuery,
           CancellationToken cancellationToken)

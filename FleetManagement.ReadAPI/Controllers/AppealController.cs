@@ -19,7 +19,7 @@ namespace FleetManagement.ReadAPI.Controllers
             _mediator = mediator;
         }
 
-        [HttpGet("all-appeals")]
+        [HttpGet()]
         public async Task<IActionResult> GetAllAppeals(
           [FromModel] GetAllAppealsQuery getAllAppealsQuery,
           CancellationToken cancellationToken)

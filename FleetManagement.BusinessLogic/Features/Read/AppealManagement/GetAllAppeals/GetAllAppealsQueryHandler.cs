@@ -39,7 +39,6 @@ namespace FleetManagement.BLL.Features.Read.AppealManagement.GetAllAppeals
             }
 
             var result = new GetAllAppealsQueryResult(appeals);
-
             if (request.PagingParameters != null)
                 result.FillPagingInfo((PaginatedList<AppealDto>)appeals);
 

@@ -87,7 +87,7 @@ namespace FleetManagement.BLL.Services
         {
             var idValidationCode = await ValidateId(cancellationToken, id);
             if (idValidationCode != InputValidationCodes.OK)
-                return _generalService.ProcessIdError(idValidationCode, nameof(id));
+                return _generalService.ProcessValidationError(idValidationCode, nameof(id));
 
             return null;
         }

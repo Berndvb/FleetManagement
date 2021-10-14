@@ -9,23 +9,19 @@ namespace FleetManagement.BLL.Models.Dtos.ReadDtos
         [EmailAddress]
         public string EmailAddress { get; set; }
 
-        public string CellPhoneNumber { get; set; }
-
-        public string TelephoneNumber { get; set; }
+        public string PhoneNumber { get; set; }
 
         public AddressDto Address { get; set; }
 
         public ContactInfoDto(
             int id,
             string emailAddress,
-            string cellPhoneNumber,
-            string telephoneNumber,
+            string phoneNumber,
             AddressDto address)
         {
             Id = id;
             EmailAddress = emailAddress;
-            CellPhoneNumber = cellPhoneNumber;
-            TelephoneNumber = telephoneNumber;
+            PhoneNumber = phoneNumber;
             Address = address;
         }
 

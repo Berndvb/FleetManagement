@@ -21,7 +21,7 @@ namespace FleetManagement.BLL.Services
                     error.Code = Constants.ErrorCodes.IdNotUnique;
                     break;
                 case InputValidationCodes.MoreThanOneActiveRelation:
-                    error.Message = $"Other active relations have been found.";
+                    error.Message = $"Other active relations have been found for the elements that are being coupled.";
                     error.Code = Constants.ErrorCodes.MoreThanOneActiveRelation;
                     break;
             }

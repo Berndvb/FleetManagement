@@ -5,6 +5,7 @@ using MediatR;
 using MediatR.Cqrs;
 using MediatR.Cqrs.Execution;
 using Microsoft.AspNetCore.Mvc;
+using FleetManagement.BLL.Features.Write.VehicleManagement.AddVehicle;
 
 namespace FleetManagement.ReadAPI.Controllers
 {
@@ -19,7 +20,7 @@ namespace FleetManagement.ReadAPI.Controllers
             _mediator = mediator;
         }
 
-        [HttpGet("vehicles")]
+        [HttpGet()]
         public async Task<IActionResult> GetAllVehicles(
           [FromModel] GetAllVehiclesQuery getAllVehiclesQuery,
           CancellationToken cancellationToken)

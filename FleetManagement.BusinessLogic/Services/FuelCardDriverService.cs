@@ -46,9 +46,10 @@ namespace FleetManagement.BLL.Services
 
         public async Task<ExecutionError> HasOtherActiveFuelCardDrivers(CancellationToken cancellationToken, int fuelCardId, int driverId)
         {
+            //Check to see if there is another FuelCardDriver (connection between driver and fuelcard) that is active and has our driver or fuelcard registered to it.
             var fuelCardDrivers  = await _unitOfWork.FuelCardDrivers.GetListBy(
                 cancellationToken,
-                filter: x => x.Driver.Id.Equals(driverId) && x.FuelCard.Id.Equals(fuelCardId));
+                filter: x => x.Driver.Id.Equals(driverId) || x.FuelCard.Id.Equals(fuelCardId) && x.Active); 
 
             return fuelCardDrivers.Count switch
             {

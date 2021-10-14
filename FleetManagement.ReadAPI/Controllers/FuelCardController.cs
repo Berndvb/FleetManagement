@@ -1,6 +1,7 @@
 ﻿using System.Threading;
 using System.Threading.Tasks;
 using FleetManagement.BLL.Features.Read.FuelcardManagement.GetAllFuelCards;
+using FleetManagement.BLL.Features.Write.FuelCardManagement.AddFuelCard;
 using MediatR;
 using MediatR.Cqrs;
 using MediatR.Cqrs.Execution;
@@ -19,7 +20,7 @@ namespace FleetManagement.ReadAPI.Controllers
             _mediator = mediator;
         }
 
-        [HttpGet("fuelcards")]
+        [HttpGet()]
         public async Task<IActionResult> GetAllFuelCards(
          [FromModel] GetAllFuelCardsQuery getAllFuelCardsQuery,
          CancellationToken cancellationToken)

@@ -23,7 +23,7 @@ namespace FleetManagement.BLL.Features.Read.DriverManagement.GetVehicleInfo
             GetVehicleInfoQuery request,
             CancellationToken cancellationToken)
         {
-            var driverIdError = await _driverService.CheckforIdError(cancellationToken, request.DriverId);
+            var driverIdError = await _driverService.ValidateId(cancellationToken, request.DriverId);
             if (driverIdError != null)
                 return BadRequest(driverIdError);
 
