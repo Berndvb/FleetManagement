@@ -24,7 +24,7 @@ namespace FleetManagement.ReadAPI.Controllers
         }
 
         [HttpGet()]
-        public async Task<IActionResult> GetAllDriverOverviews(
+        public async Task<IActionResult> GetDriverOverviews(
           [FromModel] GetAllDriverOverviewsQuery getAllDriverOverviewsQuery,
           CancellationToken cancellationToken)
         {
@@ -34,7 +34,7 @@ namespace FleetManagement.ReadAPI.Controllers
         }
 
         [HttpGet("{driverId}/appeals")]
-        public async Task<IActionResult> GetAppeals(
+        public async Task<IActionResult> GetAppealsForDriver(
          [FromModel] GetAppealsForDriverQuery getAppealsQuery,
          CancellationToken cancellationToken)
         {
@@ -54,7 +54,7 @@ namespace FleetManagement.ReadAPI.Controllers
         }
 
         [HttpGet("{driverId}/fuelcards")]
-        public async Task<IActionResult> GetFuelCards(
+        public async Task<IActionResult> GetFuelCardsForDriver(
          [FromModel] GetFuelCardsForDriverQuery getFuelCardsQuery,
          CancellationToken cancellationToken)
         {
@@ -64,7 +64,7 @@ namespace FleetManagement.ReadAPI.Controllers
         }
 
         [HttpGet("{driverId}/vehicledetails")]
-        public async Task<IActionResult> GetVehicleDetails(
+        public async Task<IActionResult> GetVehiclesForDriver(
          [FromModel] GetVehiclesForDriverQuery getVehicleDetailsQuery,
          CancellationToken cancellationToken)
         {

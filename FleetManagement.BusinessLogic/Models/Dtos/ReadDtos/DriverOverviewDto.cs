@@ -1,4 +1,6 @@
-﻿namespace FleetManagement.BLL.Models.Dtos.ReadDtos
+﻿using FleetManagement.Framework.Models.Enums;
+
+namespace FleetManagement.BLL.Models.Dtos.ReadDtos
 {
     public class DriverOverviewDto
     {
@@ -8,7 +10,7 @@
 
         public string FirstName { get; set; }
 
-        public string DriversLicenseType { get; set; }
+        public DriversLicenseType DriversLicenseType { get; set; }
 
         public bool InService { get; set; }
     }

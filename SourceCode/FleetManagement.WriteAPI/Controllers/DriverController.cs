@@ -23,8 +23,8 @@ namespace FleetManagement.WriteAPI.Controllers
 
         [HttpPost()]
         public async Task<IActionResult> AddDriver(
-           AddDriverCommand addDriverCommand,
-           CancellationToken cancellationToken)
+         AddDriverCommand addDriverCommand,
+         CancellationToken cancellationToken)
         {
             var addDriverCommandResult = await _mediator.Send(addDriverCommand, cancellationToken);
 
@@ -33,8 +33,8 @@ namespace FleetManagement.WriteAPI.Controllers
 
         [HttpDelete("{driverId}")]
         public async Task<IActionResult> RemoveDriverById(
-          [FromModel] RemoveDriverByIdCommand removeDriverByIdCommand,
-          CancellationToken cancellationToken)
+         [FromModel] RemoveDriverByIdCommand removeDriverByIdCommand,
+         CancellationToken cancellationToken)
         {
             var removeDriverByIdCommandResult = await _mediator.Send(removeDriverByIdCommand, cancellationToken);
 
@@ -43,8 +43,8 @@ namespace FleetManagement.WriteAPI.Controllers
 
         [HttpPut()]
         public async Task<IActionResult> UpdateDriver(
-           UpdateDriverCommand updateDriverCommand,
-           CancellationToken cancellationToken)
+         UpdateDriverCommand updateDriverCommand,
+         CancellationToken cancellationToken)
         {
             var updateDriverCommandResult = await _mediator.Send(updateDriverCommand, cancellationToken);
 

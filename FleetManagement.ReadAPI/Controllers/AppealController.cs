@@ -20,7 +20,7 @@ namespace FleetManagement.ReadAPI.Controllers
         }
 
         [HttpGet()]
-        public async Task<IActionResult> GetAllAppeals(
+        public async Task<IActionResult> GetAppeals(
           [FromModel] GetAppealsQuery getAllAppealsQuery,
           CancellationToken cancellationToken)
         {

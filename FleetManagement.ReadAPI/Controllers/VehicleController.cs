@@ -19,8 +19,8 @@ namespace FleetManagement.ReadAPI.Controllers
             _mediator = mediator;
         }
 
-        [HttpGet("")]
-        public async Task<IActionResult> GetAllVehicles(
+        [HttpGet()]
+        public async Task<IActionResult> GetVehicles(
           [FromModel] GetVehiclesQuery getAllVehiclesQuery,
           CancellationToken cancellationToken)
         {

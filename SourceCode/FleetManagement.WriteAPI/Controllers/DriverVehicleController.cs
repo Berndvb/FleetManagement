@@ -21,8 +21,8 @@ namespace FleetManagement.WriteAPI.Controllers
 
         [HttpPost()]
         public async Task<IActionResult> AddDriverVehicle(
-           AddDriverVehicleCommand addDriverVehicleCommand,
-           CancellationToken cancellationToken)
+         AddDriverVehicleCommand addDriverVehicleCommand,
+         CancellationToken cancellationToken)
         {
             var addDriverVehicleCommandResult = await _mediator.Send(addDriverVehicleCommand, cancellationToken);
 
@@ -31,8 +31,8 @@ namespace FleetManagement.WriteAPI.Controllers
 
         [HttpPut()]
         public async Task<IActionResult> UpdateDriverVehicle(
-           UpdateDriverVehicleCommand updateDriverVehicleCommand,
-           CancellationToken cancellationToken)
+         UpdateDriverVehicleCommand updateDriverVehicleCommand,
+         CancellationToken cancellationToken)
         {
             var updateDriverVehicleCommandResult = await _mediator.Send(updateDriverVehicleCommand, cancellationToken);
 

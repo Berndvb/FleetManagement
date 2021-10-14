@@ -21,7 +21,7 @@ namespace FleetManagement.ReadAPI.Controllers
         }
 
         [HttpGet()]
-        public async Task<IActionResult> GetAllFuelCards(
+        public async Task<IActionResult> GetFuelCards(
          [FromModel] GetFuelCardsQuery getAllFuelCardsQuery,
          CancellationToken cancellationToken)
         {

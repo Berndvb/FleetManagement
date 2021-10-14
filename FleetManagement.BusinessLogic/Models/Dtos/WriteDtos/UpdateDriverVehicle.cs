@@ -4,7 +4,7 @@ using System.Collections.Generic;
 
 namespace FleetManagement.BLL.Models.Dtos.WriteDtos
 {
-    public class UpdateDriverDetailsDto
+    public class UpdateDriverVehicle
     {
         public int Id { get; set; }
 
@@ -21,6 +21,5 @@ namespace FleetManagement.BLL.Models.Dtos.WriteDtos
         public List<DriverVehicleDto> DriverVehicles { get; set; }
 
         public List<AppealDto> Appeals { get; set; }
-
     }
 }

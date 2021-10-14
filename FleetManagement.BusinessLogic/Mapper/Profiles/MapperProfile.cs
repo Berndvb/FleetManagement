@@ -29,25 +29,9 @@ namespace FleetManagement.BLL.Mapper.Profiles
             CreateMap<Address, AddressDto>()
                 .ReverseMap();
 
-            CreateMap<Driver, AppealDto>()
-                .ReverseMap();
-
-            CreateMap<Appeal, AppealDto>()
-                .ReverseMap();
-
             CreateMap<Vehicle, VehicleOverviewDto>()
-                .ReverseMap();
-
-            CreateMap<Appeal, AppealDto>()
-                .ReverseMap();
-
-            CreateMap<FuelCardOptions, FuelCardOptionsDto>()
-                .ReverseMap();
-
-            CreateMap<Vehicle, VehicleOverviewDto>()
-                .ReverseMap();
-
-            CreateMap<Driver, FuelCardDto>()
+                .ForMember(x => x.Brand, y => y.MapFrom(z => z.Identity.Brand))
+                .ForMember(x => x.Model, y => y.MapFrom(z => z.Identity.Model))
                 .ReverseMap();
 
             CreateMap<FuelCard, FuelCardDto>()
@@ -56,13 +40,7 @@ namespace FleetManagement.BLL.Mapper.Profiles
             CreateMap<FuelCardOptions, FuelCardOptionsDto>()
                 .ReverseMap();
 
-            CreateMap<Driver, AppealDto>()
-                .ReverseMap();
-
             CreateMap<Appeal, AppealDto>()
-                .ReverseMap();
-
-            CreateMap<DriverVehicle, VehicleDetailsDto>()
                 .ReverseMap();
 
             CreateMap<IdentityVehicle, IdentityVehicleDto>()
@@ -80,18 +58,13 @@ namespace FleetManagement.BLL.Mapper.Profiles
             CreateMap<Vehicle, VehicleDetailsDto>()
                 .ReverseMap();
 
-            CreateMap<Vehicle, VehicleDetailsDto>()
-                .ReverseMap();
-
-            CreateMap<Driver, AddDriverDetailsDto>();
+            CreateMap<AddDriverDetailsDto, Driver>();
 
             CreateMap<AddDriverVehicleDto, DriverVehicle>();
 
             CreateMap<AddFuelCardDriverDto, FuelCardDriver>();
 
             CreateMap<AddFuelCardOptionsDto, FuelCardOptions>();
-
-            CreateMap<AddDriverDetailsDto, Driver>();
 
             CreateMap<UpdateDriverDetailsDto, Driver>();
 

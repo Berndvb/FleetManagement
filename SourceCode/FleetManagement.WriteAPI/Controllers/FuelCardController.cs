@@ -21,8 +21,8 @@ namespace FleetManagement.WriteAPI.Controllers
 
         [HttpPut()]
         public async Task<IActionResult> UpdateFuelCard(
-            UpdateFuelCardCommand updateFuelCardCommand,
-            CancellationToken cancellationToken)
+         UpdateFuelCardCommand updateFuelCardCommand,
+         CancellationToken cancellationToken)
         {
             var updateFuelCardCommandResult = await _mediator.Send(updateFuelCardCommand, cancellationToken);
 

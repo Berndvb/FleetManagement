@@ -105,17 +105,17 @@ namespace FleetManagement.BLL.Services
                 filter: x => x.DriverVehicles.Any(y => y.Driver.Id.Equals(driverId)),
                 including: x => x
                     .Include(y => y.Identity)
-                    .Include(y => y.DriverVehicles.Where(z => z.Driver.Id.Equals(driverId)))
+                    .Include(y => y.DriverVehicles.Where(z => z.Driver.Id.Equals(driverId))) // ! Needs work !
                     .Include(y => y.Maintenances)
-                    .ThenInclude(z => z.Driver)
-                    .Include(y => y.Maintenances.Select(z => z.Garage))
-                    .ThenInclude(z => z.ContactInfo)
+                    //.Include(y => y.Maintenances.Select(z => z.Garage))
+                    //.ThenInclude(z => z.ContactInfo)
+                    //.Include(y => y.Maintenances.Select(z => z.Driver))
                     .Include(y => y.Reparations)
-                    .ThenInclude(z => z.Driver)
-                    .Include(y => y.Maintenances.Select(z => z.Garage))
-                    .ThenInclude(z => z.ContactInfo)
+                    //.Include(y => y.Reparations.Select(z => z.Garage))
+                    //.ThenInclude(z => z.ContactInfo)
+                    //.Include(y => y.Reparations.Select(z => z.Driver))
                     .Include(y => y.Appeals)
-                    .ThenInclude(z => z.Driver));
+                    .ThenInclude(z => z.Driver)); ;
 
             var vehicleDetailsDtos = _mapper.Map<List<VehicleDetailsDto>>(driverVehicles);
             if (pagingParameter != null)

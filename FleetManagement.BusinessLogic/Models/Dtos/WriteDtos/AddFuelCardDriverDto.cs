@@ -13,18 +13,5 @@ namespace FleetManagement.BLL.Models.Dtos.WriteDtos
         public int FuelCardId { get; set; }
 
         public int DriverId { get; set; }
-
-        public AddFuelCardDriverDto(
-            bool active,
-            DateTime  creationDate,
-            int fuelCardId,
-            int driverId)
-        {
-            Active = active;
-            CreationDate = creationDate;
-            FuelCardId = fuelCardId;
-            DriverId = driverId;
-        }
-
     }
 }
