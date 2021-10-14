@@ -20,9 +20,6 @@ namespace FleetManagement.BLL.Mapper.Profiles
             CreateMap<Driver, DriverDetailsDto>()
                 .ReverseMap();
 
-            CreateMap<Driver, DriverDetailsDto>()
-                .ReverseMap();
-
             CreateMap<IdentityPerson, IdentityPersonDto>()
                 .ReverseMap();
 

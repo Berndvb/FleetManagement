@@ -17,9 +17,6 @@ namespace FleetManagement.BLL.Features.Write.DriverVehicleManagement.UpdateDrive
                 .GreaterThan(Helpers.AllphiStartdate())
                 .GreaterThan(y => y.DriverVehicle.CreationDate);
             });
-
-            RuleFor(x => x.DriverVehicle.Driver).NotNull();
-            RuleFor(x => x.DriverVehicle.Vehicle).NotNull();
         }
     }
 }

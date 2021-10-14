@@ -43,7 +43,7 @@ namespace FleetManagement.BLL.Services
                  .Include(y => y.Identity)
                  .Include(y => y.Maintenances)
                  .Include(y => y.Reparations)
-                 .Include(y => y.Drivers)
+                 .Include(y => y.DriverVehicles)
                  .Include(y => y.Appeals));
 
             var vehicleDtos = _mapper.Map<List<VehicleDetailsDto>>(vehicles);

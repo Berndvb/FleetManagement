@@ -14,11 +14,8 @@ namespace FleetManagement.BLL.Services
         Task<List<DriverOverviewDto>> GetDriverOverviews(CancellationToken cancellationToken, bool onlyInService, PagingParameters pagingParameter = null);
         Task<DriverDetailsDto> GetDriverDetails(CancellationToken cancellationToken, int driverId);
         Task<List<FuelCardDto>> GetFuelCardsForDriver(CancellationToken cancellationToken, int driverId, PagingParameters pagingParameter = null);
-        Task<List<VehicleDetailsDto>> GetVehicleInfoForDriver(CancellationToken cancellationToken, int driverId, PagingParameters pagingParameter = null);
+        Task<List<VehicleDetailsDto>> GetVehiclesForDriver(CancellationToken cancellationToken, int driverId, PagingParameters pagingParameter = null);
         Task<List<AppealDto>> GetAppealsForDriver(CancellationToken cancellationToken, int driverId, PagingParameters pagingParameter = null);
-        Task<List<AppealDto>> GetAppealsForDriverPerCar(CancellationToken cancellationToken, int driverId, int vehicleId, PagingParameters pagingParameter = null);
-        Task<List<MaintenanceDto>> GetMaintenancesForDriverPerCar(CancellationToken cancellationToken, int driverId, int vehicleId, PagingParameters pagingParameter = null);
-        Task<List<RepareDto>> GetRepairsForDriverPerCar(CancellationToken cancellationToken, int driverId, int vehicleId, PagingParameters pagingParameter = null);
         Task UpdateDriver(CancellationToken cancellationToken, UpdateDriverDetailsDto driverDto);
         Task UpdateDriverById(CancellationToken cancellationToken, DriverDetailsDto driverDto, int driverId);
         Task AddDriver(CancellationToken cancellationToken, AddDriverDetailsDto driverDto);

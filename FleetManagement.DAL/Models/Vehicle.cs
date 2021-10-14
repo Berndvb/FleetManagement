@@ -15,7 +15,7 @@ namespace FleetManagement.Domain.Models
 
         public List<Repare> Reparations { get; set; }
 
-        public List<DriverVehicle> Drivers { get; set; }
+        public List<DriverVehicle> DriverVehicles { get; set; }
 
         public List<Appeal> Appeals { get; set; }
     }

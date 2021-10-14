@@ -1,17 +1,14 @@
-﻿using System.Threading;
-using System.Threading.Tasks;
-using FleetManagement.BLL.Features.Read.DriverManagement.GetAllDriverOverviews;
+﻿using FleetManagement.BLL.Features.Read.DriverManagement.GetAllDriverOverviews;
 using FleetManagement.BLL.Features.Read.DriverManagement.GetAppeals;
-using FleetManagement.BLL.Features.Read.DriverManagement.GetAppealsPerCar;
 using FleetManagement.BLL.Features.Read.DriverManagement.GetDriverDetails;
 using FleetManagement.BLL.Features.Read.DriverManagement.GetFuelCards;
-using FleetManagement.BLL.Features.Read.DriverManagement.GetMaintenancesPerCar;
-using FleetManagement.BLL.Features.Read.DriverManagement.GetRepairsPerCar;
 using FleetManagement.BLL.Features.Read.DriverManagement.GetVehicleInfo;
 using MediatR;
 using MediatR.Cqrs;
 using MediatR.Cqrs.Execution;
 using Microsoft.AspNetCore.Mvc;
+using System.Threading;
+using System.Threading.Tasks;
 
 namespace FleetManagement.ReadAPI.Controllers
 {
@@ -46,16 +43,6 @@ namespace FleetManagement.ReadAPI.Controllers
             return getAppealsQueryResult.ToActionResult();
         }
 
-        [HttpGet("{driverId}/appeals-per-car/{vehicleId}")]
-        public async Task<IActionResult> GetAppealsPerCar(
-         [FromModel] GetAppealsPerCarQuery getAppealsPerCarQuery,
-         CancellationToken cancellationToken)
-        {
-            var getAppealsPerCarQueryResult = await _mediator.Send(getAppealsPerCarQuery, cancellationToken);
-
-            return getAppealsPerCarQueryResult.ToActionResult();
-        }
-
         [HttpGet("{driverId}/driverdetails")]
         public async Task<IActionResult> GetDriverDetails(
          [FromModel] GetDriverDetailsQuery getDriverDetailsQuery,
@@ -74,26 +61,6 @@ namespace FleetManagement.ReadAPI.Controllers
             var getAllDriverOverviewsQueryResult = await _mediator.Send(getFuelCardsQuery, cancellationToken);
 
             return getAllDriverOverviewsQueryResult.ToActionResult();
-        }
-
-        [HttpGet("{driverId}/maintenances-per-car/{vehicleId}")]
-        public async Task<IActionResult> GetMaintenancesPerCar(
-         [FromModel] GetMaintenancesPerCarQuery getMaintenancesPerCarQuery,
-         CancellationToken cancellationToken)
-        {
-            var getMaintenancesPerCarQueryResult = await _mediator.Send(getMaintenancesPerCarQuery, cancellationToken);
-
-            return getMaintenancesPerCarQueryResult.ToActionResult();
-        }
-
-        [HttpGet("{driverId}/repairs-per-car/{vehicleId}")]
-        public async Task<IActionResult> GetRepairsPerCar(
-         [FromModel] GetRepairsPerCarQuery getRepairsPerCarQuery,
-         CancellationToken cancellationToken)
-        {
-            var getRepairsPerCarQueryResult = await _mediator.Send(getRepairsPerCarQuery, cancellationToken);
-
-            return getRepairsPerCarQueryResult.ToActionResult();
         }
 
         [HttpGet("{driverId}/vehicledetails")]

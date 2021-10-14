@@ -18,7 +18,7 @@ namespace FleetManagement.Domain.Models
 
         public List<FuelCardDriver> FuelCards { get; set; }
 
-        public List<DriverVehicle> Vehicles { get; set; }
+        public List<DriverVehicle> DriverVehicles { get; set; }
 
         public List<Appeal> Appeals { get; set; }
     }

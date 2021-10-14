@@ -65,7 +65,8 @@ namespace FleetManagement.BLL.Services
                 filter: x => x.Id.Equals(driverId),
                 including: x => x
                     .Include(y => y.Identity)
-                    .Include(y => y.Contactinfo).ThenInclude(y => y.Address));
+                    .Include(y => y.Contactinfo)
+                    .ThenInclude(y => y.Address));
 
             var driverdetaillsDto = _mapper.Map<DriverDetailsDto>(driver);
 
@@ -83,7 +84,8 @@ namespace FleetManagement.BLL.Services
                 filter: x => x.FuelCardDrivers.Any(y => y.Driver.Id.Equals(driverId)),
                 including: x => x
                     .Include(y => y.FuelCardOptions)
-                    .Include(y => y.FuelCardDrivers.Where(z => z.Driver.Id.Equals(driverId)))); 
+                    .Include(y => y.FuelCardDrivers.Where(z => z.Driver.Id.Equals(driverId)))
+                    .ThenInclude(y => y.Driver));
 
             var fuelCardInfoDtos = _mapper.Map<List<FuelCardDto>>(fuelCards);
             if (pagingParameter != null)
@@ -92,7 +94,7 @@ namespace FleetManagement.BLL.Services
             return fuelCardInfoDtos;
         }
 
-        public async Task<List<VehicleDetailsDto>> GetVehicleInfoForDriver(
+        public async Task<List<VehicleDetailsDto>> GetVehiclesForDriver(
             CancellationToken cancellationToken, 
             int driverId, 
             PagingParameters pagingParameter)
@@ -100,10 +102,20 @@ namespace FleetManagement.BLL.Services
             var driverVehicles = await _unitOfWork.Vehicles.GetListBy(
                 cancellationToken,
                 pagingParameter,
-                filter: x => x.Drivers.Any(y => y.Driver.Id.Equals(driverId)),
+                filter: x => x.DriverVehicles.Any(y => y.Driver.Id.Equals(driverId)),
                 including: x => x
                     .Include(y => y.Identity)
-                    .Include(y => y.Drivers.Where(z => z.Driver.Id.Equals(driverId))));
+                    .Include(y => y.DriverVehicles.Where(z => z.Driver.Id.Equals(driverId)))
+                    .Include(y => y.Maintenances)
+                    .ThenInclude(z => z.Driver)
+                    .Include(y => y.Maintenances.Select(z => z.Garage))
+                    .ThenInclude(z => z.ContactInfo)
+                    .Include(y => y.Reparations)
+                    .ThenInclude(z => z.Driver)
+                    .Include(y => y.Maintenances.Select(z => z.Garage))
+                    .ThenInclude(z => z.ContactInfo)
+                    .Include(y => y.Appeals)
+                    .ThenInclude(z => z.Driver));
 
             var vehicleDetailsDtos = _mapper.Map<List<VehicleDetailsDto>>(driverVehicles);
             if (pagingParameter != null)
@@ -121,73 +133,15 @@ namespace FleetManagement.BLL.Services
                 cancellationToken,
                 pagingParameter,
                 filter: x => x.Driver.Id.Equals(driverId),
-                including: x => x.Include(y => y.Vehicle).ThenInclude(z => z.Identity));
+                including: x => x
+                    .Include(y => y.Vehicle)
+                    .ThenInclude(z => z.Identity));
 
             var appealDtos = _mapper.Map<List<AppealDto>>(appeals);
             if (pagingParameter != null)
                 return _mapperService.GetPaginatedData(appealDtos, appeals);
 
             return appealDtos;
-        }
-
-        public async Task<List<AppealDto>> GetAppealsForDriverPerCar(
-            CancellationToken cancellationToken,
-            int driverId, 
-            int vehicleId, 
-            PagingParameters pagingParameter)
-        {
-            var vehicleAppeals = await _unitOfWork.Appeals.GetListBy(
-                cancellationToken,
-                pagingParameter,
-                filter: x => x.Driver.Id.Equals(driverId) && x.Vehicle.Id.Equals(vehicleId));
-
-            var vehicleAppealDtos = _mapper.Map<List<AppealDto>>(vehicleAppeals);
-            if (pagingParameter != null)
-                return _mapperService.GetPaginatedData(vehicleAppealDtos, vehicleAppeals);
-
-            return vehicleAppealDtos;
-        }
-
-        public async Task<List<MaintenanceDto>> GetMaintenancesForDriverPerCar(
-            CancellationToken cancellationToken,
-            int driverId, 
-            int vehicleId, 
-            PagingParameters pagingParameter)
-        {
-            var maintenances = await _unitOfWork.Maintenance.GetListBy(
-                cancellationToken,
-                pagingParameter,
-                filter: x => x.Driver.Id.Equals(driverId) && x.Vehicle.Id.Equals(vehicleId),
-                including: x => x
-                    .Include(y => y.Documents)
-                    .Include(y => y.Garage));
-
-            var maintenanceDtos = _mapper.Map<List<MaintenanceDto>>(maintenances);
-            if (pagingParameter != null)
-                return _mapperService.GetPaginatedData(maintenanceDtos, maintenances);
-
-            return maintenanceDtos;
-        }
-
-        public async Task<List<RepareDto>> GetRepairsForDriverPerCar(
-            CancellationToken cancellationToken,
-            int driverId,
-            int vehicleId, 
-            PagingParameters pagingParameter)
-        {
-            var reparations = await _unitOfWork.Repairs.GetListBy(
-                cancellationToken,
-                pagingParameter,
-                filter: x => x.Driver.Id.Equals(driverId) && x.Vehicle.Id.Equals(vehicleId),
-                including: x => x
-                    .Include(y => y.Documents)
-                    .Include(y => y.Garage));
-
-            var reparationDtos = _mapper.Map<List<RepareDto>>(reparations);
-            if (pagingParameter != null)
-                return _mapperService.GetPaginatedData(reparationDtos, reparations);
-
-            return reparationDtos;
         }
 
         public async Task UpdateDriver(CancellationToken cancellationToken, UpdateDriverDetailsDto driverDto)
@@ -210,7 +164,7 @@ namespace FleetManagement.BLL.Services
                 including: x => x
                     .Include(y => y.Appeals)
                     .Include(y => y.FuelCards)
-                    .Include(y => y.Vehicles));
+                    .Include(y => y.DriverVehicles));
 
             _unitOfWork.Complete();
         }
@@ -242,7 +196,7 @@ namespace FleetManagement.BLL.Services
 
             driver.Appeals = appeals;
             driver.FuelCards = new List<FuelCardDriver>{ fuelCardDriver };
-            driver.Vehicles = new List<DriverVehicle> { driverVehicle };
+            driver.DriverVehicles = new List<DriverVehicle> { driverVehicle };
 
             await _unitOfWork.Drivers.Insert(cancellationToken, driver);
 

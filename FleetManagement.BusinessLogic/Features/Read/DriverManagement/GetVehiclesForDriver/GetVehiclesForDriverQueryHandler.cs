@@ -27,7 +27,7 @@ namespace FleetManagement.BLL.Features.Read.DriverManagement.GetVehicleInfo
             if (driverIdError != null)
                 return BadRequest(driverIdError);
 
-            var vehicles = await _driverService.GetVehicleInfoForDriver(cancellationToken, request.DriverId, request.PagingParameters);
+            var vehicles = await _driverService.GetVehiclesForDriver(cancellationToken, request.DriverId, request.PagingParameters);
             if (vehicles.Count == 0)
             {
                 var warning = new ExecutionWarning("We couldn't find and retrieve any vehicle data.", Constants.WarningCodes.NoData);

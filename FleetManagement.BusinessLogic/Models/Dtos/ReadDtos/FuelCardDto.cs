@@ -1,5 +1,6 @@
 ﻿using FleetManagement.Framework.Models.Enums;
 using System;
+using System.Collections.Generic;
 
 namespace FleetManagement.BLL.Models.Dtos.ReadDtos
 {
@@ -19,6 +20,6 @@ namespace FleetManagement.BLL.Models.Dtos.ReadDtos
 
         public FuelCardOptionsDto FuelCardOptions { get; set; }
 
-        public FuelCardDriverDto CurrentFuelCardDriver { get; set; }
+        public List<FuelCardDriverDto> FuelCardDriver { get; set; }
     }
 }

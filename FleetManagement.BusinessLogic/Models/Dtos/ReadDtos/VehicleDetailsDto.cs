@@ -14,7 +14,7 @@ namespace FleetManagement.BLL.Models.Dtos.ReadDtos
 
         public List<RepareDto> Reparations { get; set; }
 
-        public List<DriverVehicleDto> Drivers { get; set; }
+        public List<DriverVehicleDto> DriverVehicles { get; set; }
 
         public List<AppealDto> Appeals { get; set; }
     }
