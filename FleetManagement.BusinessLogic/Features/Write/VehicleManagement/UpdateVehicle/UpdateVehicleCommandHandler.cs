@@ -26,7 +26,7 @@ namespace FleetManagement.BLL.Features.Write.VehicleManagement.UpdateVehicle
              UpdateVehicleCommand request,
             CancellationToken cancellationToken)
         {
-            _vehicleService.UpdateVehicle(cancellationToken, request.Vehicle);
+            await _vehicleService.UpdateVehicle(cancellationToken, request.Vehicle, request.VehicleId);
 
             return new UpdateVehicleCommandResult();
         }

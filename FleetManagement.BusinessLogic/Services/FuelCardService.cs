@@ -28,11 +28,11 @@ namespace FleetManagement.BLL.Services
             _mapperService = mapperService;
         }
 
-        public async Task UpdateFuelCard(CancellationToken cancellationToken, FuelCardDto fuelCardDto)
+        public async Task UpdateFuelCard(CancellationToken cancellationToken, FuelCardDto fuelCardDto, int fuelCardId)
         {
             var fuelCard = _mapper.Map<FuelCard>(fuelCardDto);
 
-            await Task.Run(() => _unitOfWork.FuelCards.Update(cancellationToken, fuelCard));
+            await Task.Run(() => _unitOfWork.FuelCards.Update(cancellationToken, fuelCard, fuelCardId));
 
             _unitOfWork.Complete();
         }
@@ -42,7 +42,9 @@ namespace FleetManagement.BLL.Services
             var fuelCards = await _unitOfWork.FuelCards.GetListBy(
                 cancellationToken,
                 pagingParameter,
-                including: x => x.Include(y => y.FuelCardOptions).Include(y => y.FuelCardDrivers));
+                including: x => x
+                    .Include(y => y.FuelCardOptions)
+                    .Include(y => y.FuelCardDrivers));
 
             var fuelCardDtos = _mapper.Map<List<FuelCardDto>>(fuelCards);
             if (pagingParameter != null)

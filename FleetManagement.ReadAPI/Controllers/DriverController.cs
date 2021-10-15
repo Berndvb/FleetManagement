@@ -1,5 +1,4 @@
-﻿using FleetManagement.BLL.Features.Read.DriverManagement.GetAllDriverOverviews;
-using FleetManagement.BLL.Features.Read.DriverManagement.GetAppeals;
+﻿using FleetManagement.BLL.Features.Read.DriverManagement.GetAppeals;
 using FleetManagement.BLL.Features.Read.DriverManagement.GetDriverDetails;
 using FleetManagement.BLL.Features.Read.DriverManagement.GetFuelCards;
 using FleetManagement.BLL.Features.Read.DriverManagement.GetVehicleInfo;
@@ -23,14 +22,14 @@ namespace FleetManagement.ReadAPI.Controllers
             _mediator = mediator;
         }
 
-        [HttpGet()]
-        public async Task<IActionResult> GetDriverOverviews(
-          [FromModel] GetAllDriverOverviewsQuery getAllDriverOverviewsQuery,
-          CancellationToken cancellationToken)
+        [HttpGet("{DriverId}")]
+        public async Task<IActionResult> GetDriverDetails(
+         [FromModel] GetDriverDetailsQuery getDriverDetailsQuery,
+         CancellationToken cancellationToken)
         {
-            var getAllDriverOverviewsQueryResult = await _mediator.Send(getAllDriverOverviewsQuery, cancellationToken);
+            var getDriverDetailsQueryResult = await _mediator.Send(getDriverDetailsQuery, cancellationToken);
 
-            return getAllDriverOverviewsQueryResult.ToActionResult();
+            return getDriverDetailsQueryResult.ToActionResult();
         }
 
         [HttpGet("{driverId}/appeals")]
@@ -43,16 +42,6 @@ namespace FleetManagement.ReadAPI.Controllers
             return getAppealsQueryResult.ToActionResult();
         }
 
-        [HttpGet("{driverId}/driverdetails")]
-        public async Task<IActionResult> GetDriverDetails(
-         [FromModel] GetDriverDetailsQuery getDriverDetailsQuery,
-         CancellationToken cancellationToken)
-        {
-            var getDriverDetailsQueryResult = await _mediator.Send(getDriverDetailsQuery, cancellationToken);
-
-            return getDriverDetailsQueryResult.ToActionResult();
-        }
-
         [HttpGet("{driverId}/fuelcards")]
         public async Task<IActionResult> GetFuelCardsForDriver(
          [FromModel] GetFuelCardsForDriverQuery getFuelCardsQuery,
@@ -63,7 +52,7 @@ namespace FleetManagement.ReadAPI.Controllers
             return getAllDriverOverviewsQueryResult.ToActionResult();
         }
 
-        [HttpGet("{driverId}/vehicledetails")]
+        [HttpGet("{driverId}/vehicles")]
         public async Task<IActionResult> GetVehiclesForDriver(
          [FromModel] GetVehiclesForDriverQuery getVehicleDetailsQuery,
          CancellationToken cancellationToken)

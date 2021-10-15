@@ -53,11 +53,11 @@ namespace FleetManagement.BLL.Services
             return vehicleDtos;
         }
 
-        public async Task UpdateVehicle(CancellationToken cancellationToken, VehicleDetailsDto vehicleDto)
+        public async Task UpdateVehicle(CancellationToken cancellationToken, VehicleDetailsDto vehicleDto, int vehicleId)
         {
             var vehicle = _mapper.Map<Vehicle>(vehicleDto);
 
-            await _unitOfWork.Vehicles.Update(cancellationToken, vehicle);
+            await _unitOfWork.Vehicles.Update(cancellationToken, vehicle, vehicleId);
 
             _unitOfWork.Complete();
         }

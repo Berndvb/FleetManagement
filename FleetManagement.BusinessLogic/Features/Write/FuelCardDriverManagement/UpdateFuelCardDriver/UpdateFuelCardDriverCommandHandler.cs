@@ -26,7 +26,7 @@ namespace FleetManagement.BLL.Features.Write.FuelCardDriverManagement.UpdateFuel
              UpdateFuelCardDriverCommand request,
             CancellationToken cancellationToken)
         {
-            _fuelCardDriverService.UpdateFuelCardDriver(cancellationToken, request.FuelCardDriver);
+            await _fuelCardDriverService.UpdateFuelCardDriver(cancellationToken, request.FuelCardDriver, request.FuelCardDriverId);
 
             return new UpdateFuelCardDriverCommandResult();
         }

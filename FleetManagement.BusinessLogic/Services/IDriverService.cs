@@ -1,6 +1,5 @@
 ﻿using FleetManagement.BLL.Models.Dtos.ReadDtos;
 using FleetManagement.BLL.Models.Dtos.WriteDtos;
-using FleetManagement.BLL.Services.Models;
 using FleetManagement.Framework.Paging;
 using MediatR.Cqrs.Execution;
 using System.Collections.Generic;
@@ -16,10 +15,9 @@ namespace FleetManagement.BLL.Services
         Task<List<FuelCardDto>> GetFuelCardsForDriver(CancellationToken cancellationToken, int driverId, PagingParameters pagingParameter = null);
         Task<List<VehicleDetailsDto>> GetVehiclesForDriver(CancellationToken cancellationToken, int driverId, PagingParameters pagingParameter = null);
         Task<List<AppealDto>> GetAppealsForDriver(CancellationToken cancellationToken, int driverId, PagingParameters pagingParameter = null);
-        Task UpdateDriver(CancellationToken cancellationToken, UpdateDriverDetailsDto driverDto);
-        Task UpdateDriverById(CancellationToken cancellationToken, DriverDetailsDto driverDto, int driverId);
+        Task UpdateDriver(CancellationToken cancellationToken, AddDriverDetailsDto driverDto, int driverId);
         Task AddDriver(CancellationToken cancellationToken, AddDriverDetailsDto driverDto);
-        void RemoveDriverById(CancellationToken cancellationToken, int driverId);
+        Task RemoveDriverById(CancellationToken cancellationToken, int driverId);
         Task<ExecutionError> ValidateId(CancellationToken cancellationToken, int id);
     }
 }

@@ -1,6 +1,8 @@
 ﻿using FleetManagement.Domain.Infrastructure.Pagination;
 using FleetManagement.Domain.Interfaces.Models;
+using FleetManagement.Domain.Interfaces.Repositories;
 using FleetManagement.Framework.Paging;
+using FleetManager.EFCore.Infrastructure;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Query;
 using System;
@@ -9,8 +11,6 @@ using System.Linq;
 using System.Linq.Expressions;
 using System.Threading;
 using System.Threading.Tasks;
-using FleetManagement.Domain.Interfaces.Repositories;
-using FleetManager.EFCore.Infrastructure;
 
 namespace FleetManager.EFCore.Repositories
 {
@@ -70,40 +70,36 @@ namespace FleetManager.EFCore.Repositories
             await _dbSet.AddRangeAsync(entities);
         }
 
-        public void Remove(CancellationToken cancellationToken, TEntity entity)
+        public async Task Remove(CancellationToken cancellationToken, TEntity entity)
         {
-            _dbSet.Remove(entity);
+            await Task.Run(() => _dbSet.Remove(entity));
         }
 
         public async Task RemoveById(CancellationToken cancellationToken, int id)
         {
             var toBeRemoved = await GetBy(cancellationToken, x => x.Id.Equals(id));
-            Remove(cancellationToken, toBeRemoved);
+            await Remove(cancellationToken, toBeRemoved);
         }
 
-        public void RemoveRange(CancellationToken cancellationToken, ICollection<TEntity> entities)
+        public async Task RemoveRange(CancellationToken cancellationToken, ICollection<TEntity> entities)
         {
-            _dbSet.RemoveRange(entities);
+            await Task.Run(() => _dbSet.RemoveRange(entities));
         }
 
-        public async Task Update(CancellationToken cancellationToken, TEntity entitie/*, params Expression<Func<TEntity, object>>[] exclusions*/)
-        {
-            await Task.Run(() => _dbSet.Update(entitie));
-        }
-
-        public async Task UpdateById(
-            CancellationToken cancellationToken,
-            int id,
-            TEntity updatedEntity,
+        public async Task Update(
+            CancellationToken cancellationToken, 
+            TEntity entityNew, 
+            int driverId,
             Func<IQueryable<TEntity>, IIncludableQueryable<TEntity, object>> including = null)
         {
-            var entity = await GetBy(cancellationToken, filter: x => x.Id.Equals(id), including);
-            entity = updatedEntity;
-        }
+            var entityOld = await GetBy(
+                cancellationToken,
+                filter: x => x.Id.Equals(driverId),
+                including);
 
-        public void UpdateRange(CancellationToken cancellationToken, IEnumerable<TEntity> entities)
-        {
-            _dbSet.UpdateRange(entities);
+            _context.Entry(entityOld).CurrentValues.SetValues(entityNew); // !!
+
+            await Task.Run(() => _dbSet.Update(entityOld));
         }
 
         public async Task<List<int>> GetIds(CancellationToken cancellationToken, int id) 

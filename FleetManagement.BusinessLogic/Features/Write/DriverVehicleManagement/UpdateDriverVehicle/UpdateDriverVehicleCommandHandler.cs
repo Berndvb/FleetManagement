@@ -26,7 +26,7 @@ namespace FleetManagement.BLL.Features.Write.DriverVehicleManagement.UpdateDrive
              UpdateDriverVehicleCommand request,
             CancellationToken cancellationToken)
         {
-            _driverVehicleService.UpdateDriverVehicle(cancellationToken, request.DriverVehicle);
+            _driverVehicleService.UpdateDriverVehicle(cancellationToken, request.DriverVehicle, request.DriverVehicleId);
 
             return new UpdateDriverVehicleCommandResult();
         }

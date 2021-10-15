@@ -8,8 +8,8 @@ namespace FleetManagement.BLL.Services
 {
     public interface IDriverVehicleService
     {
-        void UpdateDriverVehicle(CancellationToken cancellationToken, DriverVehicleDto driverVehicleDto);
-        void AddDriverVehicle(CancellationToken cancellationToken, AddDriverVehicleDto driverVehicleDto);
+        Task UpdateDriverVehicle(CancellationToken cancellationToken, DriverVehicleDto driverVehicleDto, int driverVehicleId);
+        Task AddDriverVehicle(CancellationToken cancellationToken, AddDriverVehicleDto driverVehicleDto);
         Task<ExecutionError> HasOtherActiveDriverVehicles(CancellationToken cancellationToken, int vehicleId, int driverId);
     }
 }

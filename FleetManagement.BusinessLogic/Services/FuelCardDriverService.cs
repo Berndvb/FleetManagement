@@ -26,27 +26,27 @@ namespace FleetManagement.BLL.Services
             _generalService = generalService;
         }
 
-        public void UpdateFuelCardDriver(CancellationToken cancellationToken, FuelCardDriverDto fuelCardDriverDto)
+        public async Task UpdateFuelCardDriver(CancellationToken cancellationToken, FuelCardDriverDto fuelCardDriverDto, int fuelCardDriverId)
         {
             var fuelCardDriver = _mapper.Map<FuelCardDriver>(fuelCardDriverDto);
 
-            _unitOfWork.FuelCardDrivers.Update(cancellationToken, fuelCardDriver);
+            await _unitOfWork.FuelCardDrivers.Update(cancellationToken, fuelCardDriver, fuelCardDriverId);
 
             _unitOfWork.Complete();
         }
 
-        public void AddFuelCardDriver(CancellationToken cancellationToken, AddFuelCardDriverDto fuelCardDriverDto)
+        public async Task AddFuelCardDriver(CancellationToken cancellationToken, AddFuelCardDriverDto fuelCardDriverDto)
         {
             var fuelCardDriver = _mapper.Map<FuelCardDriver>(fuelCardDriverDto);
 
-            _unitOfWork.FuelCardDrivers.Insert(cancellationToken, fuelCardDriver);
+            await _unitOfWork.FuelCardDrivers.Insert(cancellationToken, fuelCardDriver);
 
             _unitOfWork.Complete();
         }
 
         public async Task<ExecutionError> HasOtherActiveFuelCardDrivers(CancellationToken cancellationToken, int fuelCardId, int driverId)
         {
-            //Check to see if there is another FuelCardDriver (connection between driver and fuelcard) that is active and has our driver or fuelcard registered to it.
+            //Checks to see if there is another FuelCardDriver (connection between driver and fuelcard) that is active and has our driver or fuelcard registered to it.
             var fuelCardDrivers  = await _unitOfWork.FuelCardDrivers.GetListBy(
                 cancellationToken,
                 filter: x => x.Driver.Id.Equals(driverId) || x.FuelCard.Id.Equals(fuelCardId) && x.Active); 

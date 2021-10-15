@@ -1,5 +1,4 @@
-﻿using FleetManagement.BLL.Features.Write.FuelCardManagement.AddFuelCard;
-using FleetManagement.BLL.Features.Write.FuelCardManagement.UpdateFuelCard;
+﻿using FleetManagement.BLL.Features.Write.FuelCardManagement.UpdateFuelCard;
 using MediatR;
 using MediatR.Cqrs.Execution;
 using Microsoft.AspNetCore.Mvc;
@@ -27,16 +26,6 @@ namespace FleetManagement.WriteAPI.Controllers
             var updateFuelCardCommandResult = await _mediator.Send(updateFuelCardCommand, cancellationToken);
 
             return updateFuelCardCommandResult.ToActionResult();
-        }
-
-        [HttpPost()]
-        public async Task<IActionResult> AddFuelCard(
-         AddFuelCardCommand addFuelCardCommand,
-         CancellationToken cancellationToken)
-        {
-            var addFuelCardCommandResult = await _mediator.Send(addFuelCardCommand, cancellationToken);
-
-            return addFuelCardCommandResult.ToActionResult();
         }
     }
 }

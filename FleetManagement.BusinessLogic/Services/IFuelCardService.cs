@@ -9,7 +9,7 @@ namespace FleetManagement.BLL.Services
 {
     public interface IFuelCardService
     {
-        Task UpdateFuelCard(CancellationToken cancellationToken, FuelCardDto fuelCardDto);
+        Task UpdateFuelCard(CancellationToken cancellationToken, FuelCardDto fuelCardDto, int fuelCardId);
         Task<List<FuelCardDto>> GetAllFuelCards(CancellationToken cancellationToken, PagingParameters pagingParameter = null);
         Task AddFuelCard(CancellationToken cancellationToken, AddFuelCardDto fuelCardDto);
     }

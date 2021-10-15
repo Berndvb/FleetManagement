@@ -15,12 +15,5 @@ namespace FleetManagement.BLL.Models.Dtos.WriteDtos
         public DriversLicenseType DriversLicenseType { get; set; }
 
         public bool InService { get; set; }
-
-        public List<FuelCardDriverDto> FuelCards { get; set; }
-
-        public List<DriverVehicleDto> DriverVehicles { get; set; }
-
-        public List<AppealDto> Appeals { get; set; }
-
     }
 }

@@ -19,7 +19,7 @@ namespace FleetManagement.BLL.Features.Write.DriverManagement.UpdateDriver
             UpdateDriverCommand request,
             CancellationToken cancellationToken)
         {
-            await _driverService.UpdateDriver(cancellationToken, request.Driver);
+            await _driverService.UpdateDriver(cancellationToken, request.Driver, request.DriverId);
 
             return new UpdateDriverCommandResult();
         }

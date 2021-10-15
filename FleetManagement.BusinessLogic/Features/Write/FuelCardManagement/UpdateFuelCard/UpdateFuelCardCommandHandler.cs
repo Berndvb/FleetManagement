@@ -26,7 +26,7 @@ namespace FleetManagement.BLL.Features.Write.FuelCardManagement.UpdateFuelCard
              UpdateFuelCardCommand request,
             CancellationToken cancellationToken)
         {
-            _fuelCardService.UpdateFuelCard(cancellationToken, request.FuelCard);
+            _fuelCardService.UpdateFuelCard(cancellationToken, request.FuelCard, request.FuelCardId);
 
             return new UpdateFuelCardCommandResult();
         }

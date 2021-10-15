@@ -8,6 +8,8 @@ using Microsoft.Extensions.Hosting;
 using Microsoft.OpenApi.Models;
 using FluentValidation.AspNetCore;
 using System.Text.Json.Serialization;
+using System.IO;
+using System;
 
 namespace FleetManagement.WriteAPI
 {
@@ -33,6 +35,8 @@ namespace FleetManagement.WriteAPI
             services.AddSwaggerGen(c =>
             {
                 c.SwaggerDoc("v1", new OpenApiInfo { Title = "FleetManagement.WriteAPI", Version = "v1" });
+                var filePath = Path.Combine(AppContext.BaseDirectory, "WebApplication1.xml");
+                c.IncludeXmlComments(filePath);
             });
             services.AddMvc()
                     .AddFluentValidation(fv => fv.RegisterValidatorsFromAssemblyContaining<AddDriverCommandValidator>());

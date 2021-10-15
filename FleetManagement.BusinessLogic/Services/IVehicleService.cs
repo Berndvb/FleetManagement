@@ -12,7 +12,7 @@ namespace FleetManagement.BLL.Services
     public interface IVehicleService
     {
         Task<List<VehicleDetailsDto>> GetAllVehicles(CancellationToken cancellationToken, PagingParameters pagingParameter = null);
-        Task UpdateVehicle(CancellationToken cancellationToken, VehicleDetailsDto vehicleDetailsDto);
+        Task UpdateVehicle(CancellationToken cancellationToken, VehicleDetailsDto vehicleDetailsDto, int vehicleId);
         Task AddVehicle(CancellationToken cancellationToken, AddVehicleDetailsDto addVehicleDto);
         Task<InputValidationCodes> ValidateId(CancellationToken cancellationToken, int id);
         Task<ExecutionError> CheckforIdError(CancellationToken cancellationToken, int id);
