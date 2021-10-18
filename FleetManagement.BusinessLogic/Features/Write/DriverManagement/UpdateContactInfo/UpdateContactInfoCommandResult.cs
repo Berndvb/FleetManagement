@@ -2,7 +2,7 @@
 
 namespace FleetManagement.BLL.Features.Write.DriverManagement.UpdateDriver
 {
-    public class UpdateDriverCommandResult : ExecutionResult
+    public class UpdateContactInfoCommandResult : ExecutionResult
     {
     }
 }

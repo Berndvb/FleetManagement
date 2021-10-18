@@ -3,11 +3,11 @@ using FleetManagement.Framework.Models.Enums;
 using FluentValidation;
 using System;
 
-namespace FleetManagement.BLL.Features.Write.FuelCardManagement.AddFuelCard
+namespace FleetManagement.BLL.Features.Write.AppealManagement.UpdateAppeal
 {
-    public class AddAppealCommandValidator : AbstractValidator<AddAppealCommand>
+    public class UpdateAppealCommandValidator : AbstractValidator<UpdateAppealCommand>
     {
-        public AddAppealCommandValidator()
+        public UpdateAppealCommandValidator()
         {
             RuleFor(x => x.Appeal.CreationDate)
                .NotNull()
@@ -23,7 +23,7 @@ namespace FleetManagement.BLL.Features.Write.FuelCardManagement.AddFuelCard
                    .NotEqual(x => x.Appeal.FirstDatePlanning)
                    .GreaterThan(Helpers.AllphiStartdate());
             });
-
+            
             RuleFor(x => x.Appeal.AppealType).Must(y => Enum.IsDefined(typeof(AppealType), y));
 
             RuleFor(x => x.Appeal.Status).Must(y => Enum.IsDefined(typeof(AppealStatus), y));

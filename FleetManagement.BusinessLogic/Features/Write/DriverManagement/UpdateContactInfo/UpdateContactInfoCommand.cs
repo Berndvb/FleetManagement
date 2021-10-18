@@ -3,7 +3,7 @@ using MediatR.Cqrs.Commands;
 
 namespace FleetManagement.BLL.Features.Write.DriverManagement.UpdateDriver
 {
-    public class UpdateDriverCommand : ICommand<UpdateDriverCommandResult>
+    public class UpdateContactInfoCommand : ICommand<UpdateContactInfoCommandResult>
     {
         public AddDriverDetailsDto Driver { get; set; }
 

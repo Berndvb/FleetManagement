@@ -2,7 +2,7 @@
 
 namespace FleetManagement.BLL.Models.Dtos.ReadDtos
 {
-    public class DriverDetailsDto
+    public class ShowDriverDetailsDto
     {
         public int Id { get; set; }
 

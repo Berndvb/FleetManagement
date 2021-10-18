@@ -1,5 +1,4 @@
-﻿using AutoMapper;
-using FleetManagement.BLL.Models.Dtos.WriteDtos;
+﻿using FleetManagement.BLL.Models.Dtos.WriteDtos;
 using FleetManagement.Domain.Interfaces.Repositories;
 using FleetManagement.Domain.Models;
 using MediatR.Cqrs.Commands;
@@ -11,29 +10,35 @@ namespace FleetManagement.BLL.Features.Write.FuelCardManagement.AddFuelCard
     public class AddAppealCommandHandler : CommandHandler<AddAppealCommand, AddAppealCommandResult>
     {
         private readonly IUnitOfWork _unitOfWork;
-        private readonly IMapper _mapper;
 
         public AddAppealCommandHandler(
-            IUnitOfWork unitOfWork,
-            IMapper mapper)
+            IUnitOfWork unitOfWork)
         {
             _unitOfWork = unitOfWork;
-            _mapper = mapper;
         }
 
         public async override Task<AddAppealCommandResult> Handle(
             AddAppealCommand request,
             CancellationToken cancellationToken)
         {
-
             await AddAppeal(cancellationToken, request.Appeal);
 
             return new AddAppealCommandResult();
         }
 
-        public async Task AddAppeal(CancellationToken cancellationToken, AddAppealDto AppealDto)
+        public async Task AddAppeal(CancellationToken cancellationToken, AddAppealDto appealDto)
         {
-            var appeal = _mapper.Map<Appeal>(AppealDto);
+            var appeal = new Appeal(
+                appealDto.CreationDate,
+                appealDto.AppealType,
+                appealDto.Status,
+                appealDto.Vehicle,
+                appealDto.Driver,
+                appealDto.Repare,
+                appealDto.Maintenance,
+                appealDto.FirstDatePlanning,
+                appealDto.SecondDatePlanning,
+                appealDto.Message);
 
             await _unitOfWork.Appeals.Insert(cancellationToken, appeal);
 

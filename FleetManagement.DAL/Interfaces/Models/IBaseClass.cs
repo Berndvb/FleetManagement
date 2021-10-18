@@ -1,9 +1,10 @@
-﻿namespace FleetManagement.Domain.Interfaces.Models
+﻿using System.ComponentModel.DataAnnotations;
+
+namespace FleetManagement.Domain.Interfaces.Models
 {
     public interface IBaseClass
     {
+        [Key]
         int Id { get; }
-
-        //creationdate bijv. - ruimte voor meer 
     }
 }

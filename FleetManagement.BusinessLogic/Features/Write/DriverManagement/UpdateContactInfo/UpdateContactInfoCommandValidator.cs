@@ -5,9 +5,9 @@ using FleetManagement.Framework.Helpers;
 
 namespace FleetManagement.BLL.Features.Write.DriverManagement.UpdateDriver
 {
-    public class UpdateDriverCommandValidator : AbstractValidator<UpdateDriverCommand>
+    public class UpdateContactInfoCommandValidator : AbstractValidator<UpdateContactInfoCommand>
     {
-        public UpdateDriverCommandValidator()
+        public UpdateContactInfoCommandValidator()
         {
             RuleFor(x => x.Driver.DriversLicenseType).Must(y => Enum.IsDefined(typeof(DriversLicenseType), y));
 

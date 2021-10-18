@@ -38,7 +38,7 @@ namespace FleetManager.EFCore.Repositories
             if (including != null)
                 query = including(query);
 
-            return query.SingleOrDefaultAsync();
+            return query.SingleOrDefaultAsync(cancellationToken);
         }
 
         public async Task<List<TEntity>> GetListBy(
@@ -62,12 +62,12 @@ namespace FleetManager.EFCore.Repositories
 
         public async Task Insert(CancellationToken cancellationToken, TEntity entity)
         {
-            await _dbSet.AddAsync(entity);
+            await _dbSet.AddAsync(entity, cancellationToken);
         }
 
         public async Task InsertRange(CancellationToken cancellationToken, ICollection<TEntity> entities)
         {
-            await _dbSet.AddRangeAsync(entities);
+            await _dbSet.AddRangeAsync(entities, cancellationToken);
         }
 
         public async Task Remove(CancellationToken cancellationToken, TEntity entity)
@@ -88,18 +88,9 @@ namespace FleetManager.EFCore.Repositories
 
         public async Task Update(
             CancellationToken cancellationToken, 
-            TEntity entityNew, 
-            int driverId,
-            Func<IQueryable<TEntity>, IIncludableQueryable<TEntity, object>> including = null)
+            TEntity entityNew)
         {
-            var entityOld = await GetBy(
-                cancellationToken,
-                filter: x => x.Id.Equals(driverId),
-                including);
-
-            _context.Entry(entityOld).CurrentValues.SetValues(entityNew); // !!
-
-            await Task.Run(() => _dbSet.Update(entityOld));
+            await Task.Run(() => _dbSet.Update(entityNew));
         }
 
         public async Task<List<int>> GetIds(CancellationToken cancellationToken, int id) 

@@ -18,9 +18,9 @@ namespace FleetManagement.WriteAPI.Controllers
             _mediator = mediator;
         }
 
-        [HttpPut("{DriverId}")]
-        public async Task<IActionResult> UpdateDriver(
-         UpdateDriverCommand updateDriverCommand, 
+        [HttpPut("{DriverId}/update-contactinfo")]
+        public async Task<IActionResult> UpdateContactInfo(
+         UpdateContactInfoCommand updateDriverCommand, 
          CancellationToken cancellationToken)
         {
             var updateDriverCommandResult = await _mediator.Send(updateDriverCommand, cancellationToken);

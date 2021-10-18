@@ -1,7 +1,6 @@
 ﻿using AutoMapper;
 using FleetManagement.BLL.Models.Dtos.ReadDtos;
 using FleetManagement.Domain.Interfaces.Repositories;
-using FleetManagement.Domain.Models;
 using MediatR.Cqrs.Commands;
 using System.Threading;
 using System.Threading.Tasks;
@@ -11,14 +10,11 @@ namespace FleetManagement.BLL.Features.Write.FuelCardManagement.UpdateFuelCard
     public class UpdateFuelCardCommandHandler : CommandHandler<UpdateFuelCardCommand, UpdateFuelCardCommandResult>
     {
         private readonly IUnitOfWork _unitOfWork;
-        private readonly IMapper _mapper;
 
         public UpdateFuelCardCommandHandler(
-            IUnitOfWork unitOfWork,
-            IMapper mapper)
+            IUnitOfWork unitOfWork)
         {
             _unitOfWork = unitOfWork;
-            _mapper = mapper;
         }
 
         public async override Task<UpdateFuelCardCommandResult> Handle(
@@ -32,9 +28,15 @@ namespace FleetManagement.BLL.Features.Write.FuelCardManagement.UpdateFuelCard
 
         public async Task UpdateFuelCard(CancellationToken cancellationToken, FuelCardDto fuelCardDto, int fuelCardId)
         {
-            var fuelCard = _mapper.Map<FuelCard>(fuelCardDto);
+            var fuelCard = await _unitOfWork.FuelCards.GetBy(
+                cancellationToken,
+                filter: x => x.Id.Equals(fuelCardId));
 
-            await Task.Run(() => _unitOfWork.FuelCards.Update(cancellationToken, fuelCard, fuelCardId));
+            fuelCard.AuthenticationType = fuelCardDto.AuthenticationType;
+            fuelCard.Blocked = fuelCardDto.Blocked;
+            fuelCard.Pincode = fuelCardDto.Pincode;
+
+            await Task.Run(() => _unitOfWork.FuelCards.Update(cancellationToken, fuelCard));
 
             _unitOfWork.Complete();
         }

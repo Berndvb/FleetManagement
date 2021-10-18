@@ -17,7 +17,7 @@ namespace FleetManagement.BLL.Mapper.Profiles
                 .ForMember(x => x.Name, y => y.MapFrom(z => z.Identity.Name))
                 .ReverseMap();
 
-            CreateMap<Driver, DriverDetailsDto>()
+            CreateMap<Driver, ShowDriverDetailsDto>()
                 .ReverseMap();
 
             CreateMap<IdentityPerson, IdentityPersonDto>()

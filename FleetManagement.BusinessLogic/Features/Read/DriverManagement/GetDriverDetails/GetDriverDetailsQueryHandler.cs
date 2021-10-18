@@ -38,7 +38,7 @@ namespace FleetManagement.BLL.Features.Read.DriverManagement.GetDriverDetails
             return new GetDriverDetailsQueryResult(driverDetails);
         }
 
-        public async Task<DriverDetailsDto> GetDriverDetails(CancellationToken cancellationToken, int driverId)
+        public async Task<ShowDriverDetailsDto> GetDriverDetails(CancellationToken cancellationToken, int driverId)
         {
             var driver = await _unitOfWork.Drivers.GetBy(
                 cancellationToken,
@@ -48,7 +48,7 @@ namespace FleetManagement.BLL.Features.Read.DriverManagement.GetDriverDetails
                     .Include(y => y.Contactinfo)
                         .ThenInclude(y => y.Address));
 
-            var driverdetaillsDto = _mapper.Map<DriverDetailsDto>(driver);
+            var driverdetaillsDto = _mapper.Map<ShowDriverDetailsDto>(driver);
 
             return driverdetaillsDto;
         }

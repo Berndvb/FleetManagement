@@ -1,4 +1,5 @@
 ﻿using FleetManagement.BLL.Features.Write.AppealManagement.AddAppeal;
+using FleetManagement.BLL.Features.Write.FuelCardManagement.AddFuelCard;
 using MediatR;
 using MediatR.Cqrs.Execution;
 using Microsoft.AspNetCore.Mvc;
@@ -27,13 +28,13 @@ namespace FleetManagement.WriteAPI.Controllers
             return addAppealCommandResult.ToActionResult();
         }
 
-        //public async Task<IActionResult> UpdateAppeal(
-        // UpdateAppealCommand updateAppealCommand,
-        // CancellationToken cancellationToken)
-        //{
-        //    var updateAppealCommandResult = await _mediator.Send(updateAppealCommand, cancellationToken);
+        public async Task<IActionResult> UpdateAppeal(
+         UpdateAppealCommand updateAppealCommand,
+         CancellationToken cancellationToken)
+        {
+            var updateAppealCommandResult = await _mediator.Send(updateAppealCommand, cancellationToken);
 
-        //    return UpdateAppealCommand.ToActionResult();
-        //}
+            return UpdateAppealCommand.ToActionResult();
+        }
     }
 }

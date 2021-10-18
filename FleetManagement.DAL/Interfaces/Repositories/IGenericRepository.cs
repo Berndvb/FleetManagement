@@ -27,7 +27,7 @@ namespace FleetManagement.Domain.Interfaces.Repositories
         Task Remove(CancellationToken cancellationToken, TEntity entity);
         Task RemoveById(CancellationToken cancellationToken, int id);
         Task RemoveRange(CancellationToken cancellationToken, ICollection<TEntity> entities);
-        Task Update(CancellationToken cancellationToken,TEntity entityNew,int driverId,Func<IQueryable<TEntity>, IIncludableQueryable<TEntity, object>> including = null);
+        Task Update(CancellationToken cancellationToken,TEntity entityNew);
         Task<List<int>> GetIds(CancellationToken cancellationToken, int id);
     }
 }

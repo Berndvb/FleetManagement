@@ -1,4 +1,5 @@
 ﻿using System;
+using FleetManagement.Domain.Models;
 using FleetManagement.Framework.Models.Enums;
 
 namespace FleetManagement.BLL.Models.Dtos.WriteDtos
@@ -15,9 +16,13 @@ namespace FleetManagement.BLL.Models.Dtos.WriteDtos
 
         public AppealStatus Status { get; set; }
 
-        public int VehicleId { get; set; }
+        public Vehicle Vehicle { get; set; }
 
-        public int DriverId { get; set; }
+        public Driver Driver { get; set; }
+
+        public Repare Repare { get; set; }
+
+        public Maintenance Maintenance { get; set; }
 
         public string Message { get; set; }
     }

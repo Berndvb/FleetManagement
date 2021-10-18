@@ -21,12 +21,14 @@ namespace FleetManager.EFCore.Infrastructure
             modelBuilder.Entity<Appeal>()
                 .HasOne(a => a.Repare)
                 .WithOne(b => b.Appeal)
-                .HasForeignKey<Appeal>(b => b.RepareId);
+                .HasForeignKey<Appeal>(b => b.RepareId)
+                .OnDelete(DeleteBehavior.NoAction);
 
             modelBuilder.Entity<Appeal>()
                 .HasOne(a => a.Maintenance)
                 .WithOne(b => b.Appeal)
-                .HasForeignKey<Appeal>(b => b.MaintenanceId);
+                .HasForeignKey<Appeal>(b => b.MaintenanceId)
+                .OnDelete(DeleteBehavior.NoAction);
         }
     }
 }
