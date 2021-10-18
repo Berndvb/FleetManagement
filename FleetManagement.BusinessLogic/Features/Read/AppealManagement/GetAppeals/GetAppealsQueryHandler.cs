@@ -1,5 +1,6 @@
 ﻿using AutoMapper;
 using FleetManagement.BLL.Models.Dtos.ReadDtos;
+using FleetManagement.BLL.Services;
 using FleetManagement.Domain.Infrastructure.Pagination;
 using FleetManagement.Domain.Interfaces.Repositories;
 using FleetManagement.Domain.Models;
@@ -22,13 +23,16 @@ namespace FleetManagement.BLL.Features.Read.AppealManagement.GetAllAppeals
     {
         private readonly IUnitOfWork _unitOfWork;
         private readonly IMapper _mapper;
+        private readonly IGeneralService _generalService;
 
         public GetAppealsQueryHandler(
             IUnitOfWork unitOfWork,
-            IMapper mapper)
+            IMapper mapper,
+            IGeneralService generalService)
         {
             _unitOfWork = unitOfWork;
             _mapper = mapper;
+            _generalService = generalService;
         }
 
         public async override Task<GetAppealsQueryResult> Handle(
@@ -67,8 +71,8 @@ namespace FleetManagement.BLL.Features.Read.AppealManagement.GetAllAppeals
                     .Include(y => y.Driver));
 
             var appealDtos = _mapper.Map<List<AppealDto>>(appeals);
-            //if (pagingParameter != null)
-            //    return _mapperService.GetPaginatedData(appealDtos, appeals);
+            if (pagingParameter != null)
+                return _generalService.GetPaginatedData(appealDtos, appeals);
 
             return appealDtos;
         }
