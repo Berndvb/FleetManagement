@@ -1,22 +1,21 @@
-﻿using FleetManagement.Domain.Interfaces.Models;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 
 namespace FleetManagement.Domain.Models
 {
     public class Vehicle : IBaseClass
     {
-        public int Id { get; set; }
+        public int Id { get; private set; }
 
-        public IdentityVehicle Identity { get; set; }
+        public IdentityVehicle Identity { get; private set; }
 
-        public string Mileage { get; set; }
+        public string Mileage { get; private set; }
 
-        public List<Maintenance> Maintenances { get; set; }
+        public List<Maintenance> Maintenances { get; private set; }
 
-        public List<Repare> Reparations { get; set; }
+        public List<Repare> Reparations { get; private set; }
 
-        public List<DriverVehicle> DriverVehicles { get; set; }
+        public List<DriverVehicle> DriverVehicles { get; private set; }
 
-        public List<Appeal> Appeals { get; set; }
+        public List<Appeal> Appeals { get; private set; }
     }
 }

@@ -1,20 +1,19 @@
-﻿using FleetManagement.Domain.Interfaces.Models;
-using System;
+﻿using System;
 
 namespace FleetManagement.Domain.Models
 {
     public class DriverVehicle : IBaseClass
     {
-        public int Id { get; set; }
+        public int Id { get; private set; }
 
-        public Vehicle Vehicle { get; set; }
+        public Vehicle Vehicle { get; private set; }
 
-        public Driver Driver { get; set; }
+        public Driver Driver { get; private set; }
 
-        public bool Active { get; set; }
+        public bool Active { get; private set; }
 
-        public DateTime CreationDate { get; set; }
+        public DateTime CreationDate { get; private set; }
 
-        public DateTime? ClosureDate { get; set; }
+        public DateTime? ClosureDate { get; private set; }
     }
 }

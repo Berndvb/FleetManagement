@@ -1,10 +1,9 @@
-﻿using FleetManagement.Domain.Interfaces.Models;
-namespace FleetManagement.Domain.Models
+﻿namespace FleetManagement.Domain.Models
 {
     public class ListInsuranceCompanies : IBaseClass
     {
-        public int Id { get; set; }
+        public int Id { get; private set; }
 
-        public string InsuranceCompanies { get; set; }
+        public string InsuranceCompanies { get; private set; }
     }
 }

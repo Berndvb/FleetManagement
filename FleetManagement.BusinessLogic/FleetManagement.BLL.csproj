@@ -15,4 +15,8 @@
     <ProjectReference Include="..\SourceCode\MediatR\MediatR.Cqrs.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="Features\AdministrativeZone\DriverManagement\" />
+  </ItemGroup>
+
 </Project>

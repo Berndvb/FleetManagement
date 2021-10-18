@@ -1,6 +1,4 @@
-﻿using FleetManagement.Domain.Infrastructure.Pagination;
-
-namespace MediatR.Cqrs.Execution
+﻿namespace MediatR.Cqrs.Execution
 {
     public class ExecutionPaging
     {

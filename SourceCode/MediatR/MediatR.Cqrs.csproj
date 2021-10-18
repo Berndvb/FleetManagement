@@ -15,6 +15,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\..\FleetManagement.DAL\FleetManagement.Domain.csproj" />
+    <ProjectReference Include="..\..\FleetManager.DAL.EFCore\FleetManager.EFCore.csproj" />
   </ItemGroup>
 
 </Project>

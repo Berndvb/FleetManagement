@@ -1,8 +1,8 @@
 ﻿using FleetManagement.BLL.Services.Models;
-using FleetManagement.Domain.Interfaces.Repositories;
 using MediatR.Cqrs.Execution;
 using System.Threading;
 using System.Threading.Tasks;
+using FleetManager.EFCore.UOW;
 
 namespace FleetManagement.BLL.Services
 {

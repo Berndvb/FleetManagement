@@ -1,36 +1,35 @@
-﻿using FleetManagement.Domain.Interfaces.Models;
-using FleetManagement.Framework.Models.Enums;
+﻿using FleetManagement.Framework.Models.Enums;
 using System;
 
 namespace FleetManagement.Domain.Models
 {
     public class Appeal : IBaseClass
     {
-        public int Id { get; set; }
+        public int Id { get; private set; }
 
-        public DateTime CreationDate { get; set; }
+        public DateTime CreationDate { get; private set; }
 
-        public AppealType AppealType { get; set; }
+        public AppealType AppealType { get; private set; }
 
-        public DateTime? FirstDatePlanning { get; set; }
+        public DateTime? FirstDatePlanning { get; private set; }
 
-        public DateTime? SecondDatePlanning { get; set; }
+        public DateTime? SecondDatePlanning { get; private set; }
 
-        public AppealStatus Status { get; set; }
+        public AppealStatus Status { get; private set; }
 
-        public Vehicle Vehicle { get; set; }
+        public Vehicle Vehicle { get; private set; }
 
-        public Driver Driver { get; set; }
+        public Driver Driver { get; private set; }
 
-        public int? RepareId { get; set; }
+        public int? RepareId { get; private set; }
 
-        public Repare Repare { get; set; }
+        public Repare Repare { get; private set; }
 
-        public int? MaintenanceId { get; set; }
+        public int? MaintenanceId { get; private set; }
 
-        public Maintenance Maintenance { get; set; }
+        public Maintenance Maintenance { get; private set; }
 
-        public string Message { get; set; }
+        public string Message { get; private set; }
 
         public Appeal(
             DateTime creationDate,
@@ -58,6 +57,18 @@ namespace FleetManagement.Domain.Models
 
         private Appeal()
         {
+        }
+
+        public void ChangeAppealInfoForDriver(
+            AppealType appealType,
+            DateTime? firstDatePlanning,
+            DateTime? secondDatePlanning,
+            string message)
+        {
+            AppealType = appealType;
+            FirstDatePlanning = firstDatePlanning;
+            SecondDatePlanning = secondDatePlanning;
+            Message = message;
         }
     }
 }

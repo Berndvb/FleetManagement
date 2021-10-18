@@ -1,6 +1,7 @@
-﻿using FleetManagement.Domain.Interfaces.Repositories;
-using FleetManagement.Domain.Models;
+﻿using FleetManagement.Domain.Models;
 using FleetManager.EFCore.Infrastructure;
+using FleetManager.EFCore.Infrastructure.DbContext;
+using FleetManager.EFCore.Repositories;
 
 namespace FleetManager.EFCore.UOW
 {

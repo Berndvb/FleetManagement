@@ -1,5 +1,4 @@
 using FleetManagement.BLL.DI;
-using FleetManagement.BLL.Features.Write.FuelCardManagement.AddFuelCard;
 using FluentValidation.AspNetCore;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
@@ -10,6 +9,7 @@ using Microsoft.OpenApi.Models;
 using System;
 using System.IO;
 using System.Text.Json.Serialization;
+using FleetManagement.BLL.Features.DriverZone.AddAppeal;
 
 namespace FleetManagement.WriteAPI
 {

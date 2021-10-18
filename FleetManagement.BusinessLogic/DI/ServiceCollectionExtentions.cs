@@ -1,5 +1,4 @@
 ﻿using AutoMapper;
-using FleetManagement.BLL.Features.Read.DriverManagement.GetDriverDetails;
 using FleetManagement.BLL.Mapper.Profiles;
 using FleetManagement.BLL.Services;
 using FleetManager.EFCore.DI;
@@ -8,6 +7,7 @@ using MediatR;
 using MediatR.Cqrs;
 using Microsoft.Extensions.DependencyInjection;
 using System.Reflection;
+using FleetManagement.BLL.Features.DriverZone.GetDriverDetails;
 
 namespace FleetManagement.BLL.DI
 {

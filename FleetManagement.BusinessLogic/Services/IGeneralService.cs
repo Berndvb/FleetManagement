@@ -1,7 +1,7 @@
 ﻿using FleetManagement.BLL.Services.Models;
-using FleetManagement.Domain.Infrastructure.Pagination;
 using MediatR.Cqrs.Execution;
 using System.Collections.Generic;
+using FleetManager.EFCore.Infrastructure.Pagination;
 
 namespace FleetManagement.BLL.Services
 {

@@ -1,14 +1,13 @@
-﻿using FleetManagement.Domain.Interfaces.Models;
-using FleetManagement.Framework.Models.Enums;
+﻿using FleetManagement.Framework.Models.Enums;
 
 namespace FleetManagement.Domain.Models
 {
     public class FuelCardOptions : IBaseClass
     {
-        public int Id { get; set; }
+        public int Id { get; private set; }
 
-        public FuelType Fueltype { get; set; }
+        public FuelType Fueltype { get; private set; }
 
-        public string ExtraServices { get; set; }
+        public string ExtraServices { get; private set; }
     }
 }
