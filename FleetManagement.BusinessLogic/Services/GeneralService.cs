@@ -1,8 +1,7 @@
 ﻿using FleetManagement.BLL.Services.Models;
-using FleetManagement.Domain.Infrastructure.Pagination;
 using FleetManagement.Framework.Constants;
 using MediatR.Cqrs.Execution;
-using System.Collections.Generic;
+using System.Text;
 
 namespace FleetManagement.BLL.Services
 {
@@ -28,15 +27,6 @@ namespace FleetManagement.BLL.Services
             }
 
             return error;
-        }
-
-        public PaginatedList<TDto> GetPaginatedData<TDto, TEntity>(List<TDto> dtos, List<TEntity> entities)
-        {
-            var pageNumber = (entities as PaginatedList<TEntity>).PageNumber;
-            var pageSize = (entities as PaginatedList<TEntity>).PageSize;
-            var totalCount = (entities as PaginatedList<TEntity>).TotalCount;
-
-            return new PaginatedList<TDto>(dtos, totalCount, pageNumber, pageSize);
         }
     }
 }

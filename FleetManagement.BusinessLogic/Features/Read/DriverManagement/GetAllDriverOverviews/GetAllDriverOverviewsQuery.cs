@@ -3,7 +3,7 @@ using MediatR.Cqrs.Queries;
 
 namespace FleetManagement.BLL.Features.Read.DriverManagement.GetAllDriverOverviews
 {
-    public class GetDriverOverviewsQuery : IQuery<GetDriverOverviewsQueryResult>
+    public class GetAllDriverOverviewsQuery : IQuery<GetAllDriverOverviewsQueryResult>
     {
         public bool OnlyInService { get; set; }
 

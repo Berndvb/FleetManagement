@@ -1,5 +1,6 @@
 ﻿using AutoMapper;
-using FleetManagement.BLL.Features.Read.DriverManagement.GetDriverDetails;
+using FleetManagement.BLL.Features.Read.DriverManagement.GetAppeals;
+using FleetManagement.BLL.Mapper.MapperSercice;
 using FleetManagement.BLL.Mapper.Profiles;
 using FleetManagement.BLL.Services;
 using FleetManager.EFCore.DI;
@@ -22,10 +23,8 @@ namespace FleetManagement.BLL.DI
         public static void AddMediatRCqrsServices(this IServiceCollection services)
         {
             services.AddMvc()
-                .AddFluentValidation(fv => fv.RegisterValidatorsFromAssemblyContaining<GetDriverDetailsQueryValidator>());
-            services.AddMediatR(Assembly.GetExecutingAssembly());
-            services.AddMediatR(typeof(GetDriverDetailsQuery).Assembly);
-
+                .AddFluentValidation(fv => fv.RegisterValidatorsFromAssemblyContaining<GetAppealsForDriverQueryValidator>());
+            services.AddMediatR(typeof(GetAppealsForDriverQuery).GetTypeInfo().Assembly);
             services.AddTransient(typeof(IPipelineBehavior<,>), typeof(ValidationBehaviour<,>));
         }
 
@@ -46,11 +45,20 @@ namespace FleetManagement.BLL.DI
 
             IMapper mapper = mapperConfig.CreateMapper();
             services.AddSingleton(mapper);
+
+            services.AddScoped<IMapperService, MapperService>();
         }
 
         public static void AddEntityServices(this IServiceCollection services)
         {
             services.AddScoped<IDriverService, DriverService>();
+            services.AddScoped<IAppealService, AppealService>();
+            services.AddScoped<IDriverVehicleService, DriverVehicleService>();
+            services.AddScoped<IFuelCardDriverService, FuelCardDriverService>();
+            services.AddScoped<IFuelCardService, FuelCardService>();
+            services.AddScoped<IMaintenanceService, MaintenanceService>();
+            services.AddScoped<IRepareService, RepareService>();
+            services.AddScoped<IVehicleService, VehicleService>();
             services.AddScoped<IGeneralService, GeneralService>();
         }
         #endregion

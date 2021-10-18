@@ -15,9 +15,9 @@ namespace FleetManagement.BLL.Models.Dtos.WriteDtos
 
         public AppealStatus Status { get; set; }
 
-        public int VehicleId { get; set; }
+        public AddVehicleDetailsDto Vehicle { get; set; }
 
-        public int DriverId { get; set; }
+        public AddDriverDetailsDto Driver { get; set; }
 
         public string Message { get; set; }
     }

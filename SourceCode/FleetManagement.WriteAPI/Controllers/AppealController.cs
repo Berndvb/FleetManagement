@@ -1,6 +1,4 @@
-﻿using FleetManagement.BLL.Features.Write.AppealManagement.AddAppeal;
-using MediatR;
-using MediatR.Cqrs.Execution;
+﻿using MediatR;
 using Microsoft.AspNetCore.Mvc;
 using System.Threading;
 using System.Threading.Tasks;
@@ -27,13 +25,13 @@ namespace FleetManagement.WriteAPI.Controllers
             return addAppealCommandResult.ToActionResult();
         }
 
-        //public async Task<IActionResult> UpdateAppeal(
-        // UpdateAppealCommand updateAppealCommand,
-        // CancellationToken cancellationToken)
-        //{
-        //    var updateAppealCommandResult = await _mediator.Send(updateAppealCommand, cancellationToken);
+        public async Task<IActionResult> UpdateAppeal(
+         UpdateAppealCommand updateAppealCommand,
+         CancellationToken cancellationToken)
+        {
+            var updateAppealCommandResult = await _mediator.Send(updateAppealCommand, cancellationToken);
 
-        //    return UpdateAppealCommand.ToActionResult();
-        //}
+            return UpdateAppealCommand.ToActionResult();
+        }
     }
 }

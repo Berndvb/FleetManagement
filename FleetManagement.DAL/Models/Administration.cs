@@ -1,7 +1,6 @@
 ﻿using FleetManagement.Domain.Interfaces.Models;
 using System;
 using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations.Schema;
 
 namespace FleetManagement.Domain.Models
 {
@@ -22,7 +21,5 @@ namespace FleetManagement.Domain.Models
         public List<File> Documents { get; set; }
 
         public Driver Driver { get; set; }
-
-        public Appeal Appeal { get; set; }
     }
 }

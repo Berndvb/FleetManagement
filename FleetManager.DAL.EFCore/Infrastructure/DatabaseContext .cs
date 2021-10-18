@@ -16,17 +16,20 @@ namespace FleetManager.EFCore.Infrastructure
         public DatabaseContext(DbContextOptions<DatabaseContext> options) : base(options)
         {
         }
-        protected override void OnModelCreating(ModelBuilder modelBuilder)
-        {
-            modelBuilder.Entity<Appeal>()
-                .HasOne(a => a.Repare)
-                .WithOne(b => b.Appeal)
-                .HasForeignKey<Appeal>(b => b.RepareId);
 
-            modelBuilder.Entity<Appeal>()
-                .HasOne(a => a.Maintenance)
-                .WithOne(b => b.Appeal)
-                .HasForeignKey<Appeal>(b => b.MaintenanceId);
-        }
+        //protected override void OnModelCreating(DBModelBuilder modelBuilder)
+        //{
+        //    modelBuilder.Entity<Repare>().Map(m =>
+        //    {
+        //        m.MapInheritedProperties();
+        //        m.ToTable("Reparations");
+        //    });
+
+        //    modelBuilder.Entity<Maintenance>().Map(m =>
+        //    {
+        //        m.MapInheritedProperties();
+        //        m.ToTable("CreditCards");
+        //    });
+        //}
     }
 }

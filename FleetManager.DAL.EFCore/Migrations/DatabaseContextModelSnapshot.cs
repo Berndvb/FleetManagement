@@ -99,14 +99,8 @@ namespace FleetManager.EFCore.Migrations
                     b.Property<DateTime?>("FirstDatePlanning")
                         .HasColumnType("datetime2");
 
-                    b.Property<int>("MaintenanceId")
-                        .HasColumnType("int");
-
                     b.Property<string>("Message")
                         .HasColumnType("nvarchar(max)");
-
-                    b.Property<int>("RepareId")
-                        .HasColumnType("int");
 
                     b.Property<DateTime?>("SecondDatePlanning")
                         .HasColumnType("datetime2");
@@ -120,12 +114,6 @@ namespace FleetManager.EFCore.Migrations
                     b.HasKey("Id");
 
                     b.HasIndex("DriverId");
-
-                    b.HasIndex("MaintenanceId")
-                        .IsUnique();
-
-                    b.HasIndex("RepareId")
-                        .IsUnique();
 
                     b.HasIndex("VehicleId");
 
@@ -500,27 +488,11 @@ namespace FleetManager.EFCore.Migrations
                         .WithMany("Appeals")
                         .HasForeignKey("DriverId");
 
-                    b.HasOne("FleetManagement.Domain.Models.Maintenance", "Maintenance")
-                        .WithOne("Appeal")
-                        .HasForeignKey("FleetManagement.Domain.Models.Appeal", "MaintenanceId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.HasOne("FleetManagement.Domain.Models.Repare", "Repare")
-                        .WithOne("Appeal")
-                        .HasForeignKey("FleetManagement.Domain.Models.Appeal", "RepareId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
                     b.HasOne("FleetManagement.Domain.Models.Vehicle", "Vehicle")
                         .WithMany("Appeals")
                         .HasForeignKey("VehicleId");
 
                     b.Navigation("Driver");
-
-                    b.Navigation("Maintenance");
-
-                    b.Navigation("Repare");
 
                     b.Navigation("Vehicle");
                 });
@@ -552,11 +524,11 @@ namespace FleetManager.EFCore.Migrations
             modelBuilder.Entity("FleetManagement.Domain.Models.DriverVehicle", b =>
                 {
                     b.HasOne("FleetManagement.Domain.Models.Driver", "Driver")
-                        .WithMany("DriverVehicles")
+                        .WithMany("Vehicles")
                         .HasForeignKey("DriverId");
 
                     b.HasOne("FleetManagement.Domain.Models.Vehicle", "Vehicle")
-                        .WithMany("DriverVehicles")
+                        .WithMany("Drivers")
                         .HasForeignKey("VehicleId");
 
                     b.Navigation("Driver");
@@ -642,9 +614,9 @@ namespace FleetManager.EFCore.Migrations
                 {
                     b.Navigation("Appeals");
 
-                    b.Navigation("DriverVehicles");
-
                     b.Navigation("FuelCards");
+
+                    b.Navigation("Vehicles");
                 });
 
             modelBuilder.Entity("FleetManagement.Domain.Models.FuelCard", b =>
@@ -656,21 +628,11 @@ namespace FleetManager.EFCore.Migrations
                 {
                     b.Navigation("Appeals");
 
-                    b.Navigation("DriverVehicles");
+                    b.Navigation("Drivers");
 
                     b.Navigation("Maintenances");
 
                     b.Navigation("Reparations");
-                });
-
-            modelBuilder.Entity("FleetManagement.Domain.Models.Maintenance", b =>
-                {
-                    b.Navigation("Appeal");
-                });
-
-            modelBuilder.Entity("FleetManagement.Domain.Models.Repare", b =>
-                {
-                    b.Navigation("Appeal");
                 });
 #pragma warning restore 612, 618
         }

@@ -2,9 +2,9 @@
 
 namespace FleetManagement.BLL.Features.Read.DriverManagement.GetAllDriverOverviews
 {
-    public class GetDriverOverviewsQueryValidator : AbstractValidator<GetDriverOverviewsQuery>
+    public class GetAllDriverOverviewsQueryValidator : AbstractValidator<GetAllDriverOverviewsQuery>
     {
-        public GetDriverOverviewsQueryValidator()
+        public GetAllDriverOverviewsQueryValidator()
         {
             When(x => x.PagingParameters != null, () => {
                 RuleFor(x => x.PagingParameters.PageSize).GreaterThan(0);
