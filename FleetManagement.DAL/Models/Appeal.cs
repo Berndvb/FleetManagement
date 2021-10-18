@@ -22,6 +22,14 @@ namespace FleetManagement.Domain.Models
 
         public Driver Driver { get; set; }
 
+        public int RepareId { get; set; }
+
+        public Repare Repare { get; set; }
+
+        public int MaintenanceId { get; set; }
+
+        public Maintenance Maintenance { get; set; }
+
         public string Message { get; set; }
     }
 }
