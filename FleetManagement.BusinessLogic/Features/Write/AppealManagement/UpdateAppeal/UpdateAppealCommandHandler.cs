@@ -20,15 +20,18 @@ namespace FleetManagement.BLL.Features.Write.AppealManagement.UpdateAppeal
              UpdateAppealCommand request,
             CancellationToken cancellationToken)
         {
-            await UpdateAppeal(cancellationToken, request.Appeal, request.AppealId);
+            await UpdateAppeal(
+                request.Appeal, 
+                request.AppealId, 
+                cancellationToken);
 
             return new UpdateAppealCommandResult();
         }
 
         public async Task UpdateAppeal(
-            CancellationToken cancellationToken, 
             AddAppealDto appealDto, 
-            int appealId)
+            int appealId,
+            CancellationToken cancellationToken)
         {
             var appeal = await _unitOfWork.Appeals.GetBy(
                 cancellationToken,
@@ -39,7 +42,7 @@ namespace FleetManagement.BLL.Features.Write.AppealManagement.UpdateAppeal
             appeal.SecondDatePlanning = appealDto.SecondDatePlanning;
             appeal.Message = appealDto.Message;
 
-            await _unitOfWork.Appeals.Update(cancellationToken, appeal);
+            await _unitOfWork.Appeals.Update(appeal, cancellationToken);
 
             _unitOfWork.Complete();
         }

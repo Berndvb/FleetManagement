@@ -1,15 +1,15 @@
 using FleetManagement.BLL.DI;
-using FleetManagement.BLL.Features.Write.DriverManagement.AddDriver;
+using FleetManagement.BLL.Features.Write.FuelCardManagement.AddFuelCard;
+using FluentValidation.AspNetCore;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.OpenApi.Models;
-using FluentValidation.AspNetCore;
-using System.Text.Json.Serialization;
-using System.IO;
 using System;
+using System.IO;
+using System.Text.Json.Serialization;
 
 namespace FleetManagement.WriteAPI
 {
@@ -39,7 +39,7 @@ namespace FleetManagement.WriteAPI
                 c.IncludeXmlComments(filePath);
             });
             services.AddMvc()
-                    .AddFluentValidation(fv => fv.RegisterValidatorsFromAssemblyContaining<AddDriverCommandValidator>());
+                    .AddFluentValidation(fv => fv.RegisterValidatorsFromAssemblyContaining<AddAppealCommand>());
 
             services.AddDALServices(connectionString);
             services.AddBLLServices();

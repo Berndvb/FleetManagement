@@ -36,7 +36,7 @@ namespace FleetManagement.BLL.Features.Write.FuelCardManagement.UpdateFuelCard
             fuelCard.Blocked = fuelCardDto.Blocked;
             fuelCard.Pincode = fuelCardDto.Pincode;
 
-            await Task.Run(() => _unitOfWork.FuelCards.Update(cancellationToken, fuelCard));
+            await Task.Run(() => _unitOfWork.FuelCards.Update(fuelCard, cancellationToken));
 
             _unitOfWork.Complete();
         }

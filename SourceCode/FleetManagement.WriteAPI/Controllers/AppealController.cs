@@ -1,4 +1,4 @@
-﻿using FleetManagement.BLL.Features.Write.AppealManagement.AddAppeal;
+﻿using FleetManagement.BLL.Features.Write.AppealManagement.UpdateAppeal;
 using FleetManagement.BLL.Features.Write.FuelCardManagement.AddFuelCard;
 using MediatR;
 using MediatR.Cqrs.Execution;
@@ -34,7 +34,7 @@ namespace FleetManagement.WriteAPI.Controllers
         {
             var updateAppealCommandResult = await _mediator.Send(updateAppealCommand, cancellationToken);
 
-            return UpdateAppealCommand.ToActionResult();
+            return updateAppealCommandResult.ToActionResult();
         }
     }
 }

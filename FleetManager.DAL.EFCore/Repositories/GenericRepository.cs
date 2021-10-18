@@ -31,14 +31,19 @@ namespace FleetManager.EFCore.Repositories
             Expression<Func<TEntity, bool>> filter = null,
             Func<IQueryable<TEntity>, IIncludableQueryable<TEntity, object>> including = null)
         {
-            var query = filter == null 
-                ? _dbSet.AsQueryable() 
-                : _dbSet.Where(filter);
+            while (!cancellationToken.IsCancellationRequested)
+            {
+                var query = filter == null
+                    ? _dbSet.AsQueryable()
+                    : _dbSet.Where(filter);
 
-            if (including != null)
-                query = including(query);
+                if (including != null)
+                    query = including(query);
 
-            return query.SingleOrDefaultAsync(cancellationToken);
+                return query.SingleOrDefaultAsync(cancellationToken);
+            }
+
+            return null;
         }
 
         public async Task<List<TEntity>> GetListBy(
@@ -47,60 +52,76 @@ namespace FleetManager.EFCore.Repositories
             Expression<Func<TEntity, bool>> filter = null,
             Func<IQueryable<TEntity>, IIncludableQueryable<TEntity, object>> including = null)
         {
-            var query = filter == null 
-                ? _dbSet.AsQueryable() 
+            while (!cancellationToken.IsCancellationRequested)
+            {
+                var query = filter == null
+                ? _dbSet.AsQueryable()
                 : _dbSet.Where(filter);
 
-            if (including != null)
-                query = including(query);
+                if (including != null)
+                    query = including(query);
 
-            if (pagingParameters != null)
-                return await query.GetPaginatedAsync(pagingParameters.PageNumber, pagingParameters.PageSize, cancellationToken);
+                if (pagingParameters != null)
+                    return await query.GetPaginatedAsync(pagingParameters.PageNumber, pagingParameters.PageSize, cancellationToken);
 
-            return await query.ToListAsync();
+                return await query.ToListAsync();
+            }
+
+            return null;
         }
 
-        public async Task Insert(CancellationToken cancellationToken, TEntity entity)
+        public async Task Insert(TEntity entity, CancellationToken cancellationToken)
         {
-            await _dbSet.AddAsync(entity, cancellationToken);
+            while (!cancellationToken.IsCancellationRequested)
+                await _dbSet.AddAsync(entity, cancellationToken);
         }
 
-        public async Task InsertRange(CancellationToken cancellationToken, ICollection<TEntity> entities)
+        public async Task InsertRange(ICollection<TEntity> entities, CancellationToken cancellationToken)
         {
-            await _dbSet.AddRangeAsync(entities, cancellationToken);
+            while (!cancellationToken.IsCancellationRequested)
+                await _dbSet.AddRangeAsync(entities, cancellationToken);
         }
 
-        public async Task Remove(CancellationToken cancellationToken, TEntity entity)
+        public async Task Remove(TEntity entity, CancellationToken cancellationToken)
         {
-            await Task.Run(() => _dbSet.Remove(entity));
+            while (!cancellationToken.IsCancellationRequested)
+                await Task.Run(() => _dbSet.Remove(entity));
         }
 
-        public async Task RemoveById(CancellationToken cancellationToken, int id)
+        public async Task RemoveById(int id, CancellationToken cancellationToken)
         {
-            var toBeRemoved = await GetBy(cancellationToken, x => x.Id.Equals(id));
-            await Remove(cancellationToken, toBeRemoved);
+            while (!cancellationToken.IsCancellationRequested)
+            {
+                var toBeRemoved = await GetBy(cancellationToken, x => x.Id.Equals(id));
+                await Remove(toBeRemoved, cancellationToken);
+            }
         }
 
-        public async Task RemoveRange(CancellationToken cancellationToken, ICollection<TEntity> entities)
+        public async Task RemoveRange(ICollection<TEntity> entities, CancellationToken cancellationToken)
         {
-            await Task.Run(() => _dbSet.RemoveRange(entities));
+            while (!cancellationToken.IsCancellationRequested)
+                await Task.Run(() => _dbSet.RemoveRange(entities));
         }
 
-        public async Task Update(
-            CancellationToken cancellationToken, 
-            TEntity entityNew)
+        public async Task Update(TEntity entityNew, CancellationToken cancellationToken)
         {
-            await Task.Run(() => _dbSet.Update(entityNew));
+            while (!cancellationToken.IsCancellationRequested)
+                await Task.Run(() => _dbSet.Update(entityNew));
         }
 
-        public async Task<List<int>> GetIds(CancellationToken cancellationToken, int id) 
+        public async Task<List<int>> GetIds(int id, CancellationToken cancellationToken) 
         {
-            var ids = await _dbSet
-                .Where(x => x.Id.Equals(id))
-                .Select(x => x.Id)
-                .ToListAsync();
+            while (!cancellationToken.IsCancellationRequested)
+            {
+                var ids = await _dbSet
+               .Where(x => x.Id.Equals(id))
+               .Select(x => x.Id)
+               .ToListAsync();
 
-            return ids;
+                return ids;
+            }
+
+            return null;
         }
     }
 }

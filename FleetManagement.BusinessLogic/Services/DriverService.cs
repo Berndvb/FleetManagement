@@ -21,7 +21,7 @@ namespace FleetManagement.BLL.Services
 
         public async Task<ExecutionError> ValidateId(CancellationToken cancellationToken, int id)
         {
-            var ids = await _unitOfWork.Drivers.GetIds(cancellationToken, id);
+            var ids = await _unitOfWork.Drivers.GetIds(id, cancellationToken);
 
             var validationCode =  ids.Count switch
             {

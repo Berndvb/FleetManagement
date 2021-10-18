@@ -21,12 +21,18 @@ namespace FleetManagement.BLL.Features.Write.DriverManagement.UpdateDriver
             UpdateContactInfoCommand request,
             CancellationToken cancellationToken)
         {
-            await UpdateContactinfo(cancellationToken, request.Driver, request.DriverId);
+            await UpdateContactinfo(
+                request.Driver, 
+                request.DriverId, 
+                cancellationToken);
 
             return new UpdateContactInfoCommandResult();
         }
 
-        public async Task UpdateContactinfo(CancellationToken cancellationToken, AddDriverDetailsDto driverDto, int driverId)
+        public async Task UpdateContactinfo(
+            AddDriverDetailsDto driverDto, 
+            int driverId,
+            CancellationToken cancellationToken)
         {
             var driver = await _unitOfWork.Drivers.GetBy(
                 cancellationToken,
@@ -42,7 +48,7 @@ namespace FleetManagement.BLL.Features.Write.DriverManagement.UpdateDriver
             driver.Contactinfo.Address.City = driverDto.Contactinfo.Address.City;
             driver.Contactinfo.Address.Postcode = driverDto.Contactinfo.Address.Postcode;
 
-            await _unitOfWork.Drivers.Update(cancellationToken, driver);
+            await _unitOfWork.Drivers.Update(driver, cancellationToken);
 
             _unitOfWork.Complete();
         }

@@ -21,12 +21,12 @@ namespace FleetManagement.BLL.Features.Write.FuelCardManagement.AddFuelCard
             AddAppealCommand request,
             CancellationToken cancellationToken)
         {
-            await AddAppeal(cancellationToken, request.Appeal);
+            await AddAppeal(request.Appeal, cancellationToken);
 
             return new AddAppealCommandResult();
         }
 
-        public async Task AddAppeal(CancellationToken cancellationToken, AddAppealDto appealDto)
+        public async Task AddAppeal(AddAppealDto appealDto, CancellationToken cancellationToken)
         {
             var appeal = new Appeal(
                 appealDto.CreationDate,
@@ -40,7 +40,7 @@ namespace FleetManagement.BLL.Features.Write.FuelCardManagement.AddFuelCard
                 appealDto.SecondDatePlanning,
                 appealDto.Message);
 
-            await _unitOfWork.Appeals.Insert(cancellationToken, appeal);
+            await _unitOfWork.Appeals.Insert(appeal, cancellationToken);
 
             _unitOfWork.Complete();
         }
