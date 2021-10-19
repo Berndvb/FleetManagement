@@ -1,6 +1,4 @@
-﻿using System;
-using FleetManagement.Framework.Helpers;
-using FleetManagement.Framework.Models.Enums;
+﻿using FleetManagement.Framework.Helpers;
 using FluentValidation;
 
 namespace FleetManagement.BLL.Features.DriverZone.UpdateContactInfo
@@ -26,8 +24,6 @@ namespace FleetManagement.BLL.Features.DriverZone.UpdateContactInfo
             RuleFor(x => x.PhoneNumber)
                 .NotEmpty()
                 .Must(y => int.TryParse(y, out _));
-
-            RuleFor(x => x.DriverId).GreaterThan(0);
         }
     }
 }

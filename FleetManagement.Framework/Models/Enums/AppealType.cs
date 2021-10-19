@@ -1,4 +1,6 @@
-﻿namespace FleetManagement.Framework.Models.Enums
+﻿using System.Runtime.Serialization;
+
+namespace FleetManagement.Framework.Models.Enums
 {
     public enum AppealType
     {

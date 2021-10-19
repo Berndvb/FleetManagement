@@ -1,5 +1,7 @@
-﻿using FleetManagement.Framework.Paging;
-using FleetManager.EFCore.Infrastructure;
+﻿using FleetManagement.Domain.Models;
+using FleetManagement.Framework.Paging;
+using FleetManager.EFCore.Infrastructure.DbContext;
+using FleetManager.EFCore.Infrastructure.Pagination;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Query;
 using System;
@@ -8,9 +10,6 @@ using System.Linq;
 using System.Linq.Expressions;
 using System.Threading;
 using System.Threading.Tasks;
-using FleetManagement.Domain.Models;
-using FleetManager.EFCore.Infrastructure.DbContext;
-using FleetManager.EFCore.Infrastructure.Pagination;
 
 namespace FleetManager.EFCore.Repositories
 {
@@ -89,7 +88,6 @@ namespace FleetManager.EFCore.Repositories
                 await Task.Run(() => _dbSet.Remove(entity));
 
             }
-
         }
 
         public async Task RemoveById(int id, CancellationToken cancellationToken)

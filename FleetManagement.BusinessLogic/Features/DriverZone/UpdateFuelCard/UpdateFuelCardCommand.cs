@@ -1,6 +1,6 @@
 ﻿using FleetManagement.Framework.Models.Enums;
 using MediatR.Cqrs.Commands;
-using Newtonsoft.Json;
+using System.Text.Json.Serialization;
 
 namespace FleetManagement.BLL.Features.DriverZone.UpdateFuelCard
 {

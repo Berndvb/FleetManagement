@@ -1,17 +1,20 @@
 ﻿using FleetManagement.Framework.Models.Enums;
 using MediatR.Cqrs.Commands;
-using Newtonsoft.Json;
 using System;
+using System.ComponentModel;
+using Newtonsoft.Json;
 
 namespace FleetManagement.BLL.Features.DriverZone.UpdateAppeal
 {
     public class UpdateAppealInfoCommand : ICommand<UpdateAppealInfoCommandResult>
     {
-        [JsonIgnore]
+        [System.Text.Json.Serialization.JsonIgnore]
         public int AppealId { get; set; }
 
         public AppealType AppealType { get; set; }
 
+        [JsonProperty(PropertyName = "FirstDatePlanning", DefaultValueHandling = DefaultValueHandling.Populate)]
+        [DefaultValue("")]
         public DateTime? FirstDatePlanning { get; set; }
 
         public DateTime? SecondDatePlanning { get; set; }

@@ -1,6 +1,8 @@
 ﻿using FleetManagement.Framework.Models.Enums;
 using System;
 using System.Collections.Generic;
+using System.Text.Json.Serialization;
+using Newtonsoft.Json.Converters;
 
 namespace FleetManagement.BLL.Models.Dtos.ReadDtos
 {
@@ -14,6 +16,7 @@ namespace FleetManagement.BLL.Models.Dtos.ReadDtos
 
         public string Pincode { get; set; }
 
+        [JsonConverter(typeof(JsonStringEnumConverter))]
         public AuthenticationType AuthenticationType { get; set; }
 
         public bool Blocked { get; set; }

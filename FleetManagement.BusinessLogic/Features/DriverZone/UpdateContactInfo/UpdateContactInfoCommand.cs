@@ -1,5 +1,4 @@
-﻿using FleetManagement.BLL.Models.Dtos.WriteDtos;
-using MediatR.Cqrs.Commands;
+﻿using MediatR.Cqrs.Commands;
 using System.ComponentModel.DataAnnotations;
 using System.Text.Json.Serialization;
 

@@ -38,9 +38,7 @@ namespace FleetManagement.WriteAPI
                 var filePath = Path.Combine(AppContext.BaseDirectory, "WebApplication1.xml");
                 c.IncludeXmlComments(filePath);
             });
-            services.AddMvc()
-                    .AddFluentValidation(fv => fv.RegisterValidatorsFromAssemblyContaining<AddAppealCommand>());
-
+ 
             services.AddDALServices(connectionString);
             services.AddBLLServices();
             services.AddMediatRCqrsServices();

@@ -9,8 +9,6 @@ namespace FleetManagement.BLL.Features.DriverZone.UpdateFuelCard
     {
         public UpdateFuelCardCommandValidator()
         {
-            RuleFor(x => x.FuelCardId).Must(y => y > 0);
-
             RuleFor(x => x.Pincode)
                 .Must(y => y.Length.Equals(4))
                 .Must(y => int.TryParse(y, out _));
