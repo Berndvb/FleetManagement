@@ -21,54 +21,35 @@ namespace FleetManagement.WriteAPI.Controllers
             _mediator = mediator;
         }
 
-        /// <summary>
-        /// As a driver there is the possibility to update a restricted amount of the driver-info.
-        /// </summary>
-        /// <param name="updateDriverCommand"></param>
-        /// <param name="cancellationToken"></param>
-        /// <returns></returns>
-        [HttpPut("driver/{DriverId}")]
+        [HttpPut("driver/{driverId}")]
         public async Task<IActionResult> UpdateContactInfo(
-         UpdateContactInfoCommand updateDriverCommand, 
+         UpdateContactInfoCommand updateContactInfoCommand, 
+         int driverId,
          CancellationToken cancellationToken)
         {
-            var updateDriverCommandResult = await _mediator.Send(updateDriverCommand, cancellationToken);
+            var updateContactInfoCommandResult = await _mediator.Send(updateContactInfoCommand.WithId(driverId), cancellationToken);
 
-            return updateDriverCommandResult.ToActionResult();
+            return updateContactInfoCommandResult.ToActionResult();
         }
 
-
-        /// <summary>
-        /// As a driver there is the possibility to update a restricted amount of the fuelcard-info.
-        /// </summary>
-        /// <param name="updateFuelCardCommand"></param>
-        /// <param name="cancellationToken"></param>
-        /// <returns></returns>
         [HttpPut("fuelCard/{fuelCardId}")]
         public async Task<IActionResult> UpdateFuelCard(
             UpdateFuelCardCommand updateFuelCardCommand,
             int fuelCardId,
             CancellationToken cancellationToken)
         {
-            var updateFuelCardCommandResult = await _mediator.Send(updateFuelCardCommand, cancellationToken);
+            var updateFuelCardCommandResult = await _mediator.Send(updateFuelCardCommand.WithId(fuelCardId), cancellationToken);
 
             return updateFuelCardCommandResult.ToActionResult();
         }
 
-
-        /// <summary>
-        /// As a driver there is the possibility to update a restricted amount of the appeal-info.
-        /// </summary>
-        /// <param name="updateAppealCommand"></param>
-        /// <param name="cancellationToken"></param>
-        /// <returns></returns>
         [HttpPut("appeal/{appealId}")]
-        public async Task<IActionResult> UpdateAppeal(
-            UpdateAppealCommand updateAppealCommand,
+        public async Task<IActionResult> UpdateAppealInfo(
+            UpdateAppealInfoCommand updateAppealCommand,
             int appealId,
             CancellationToken cancellationToken)
         {
-            var updateAppealCommandResult = await _mediator.Send(updateAppealCommand, cancellationToken);
+            var updateAppealCommandResult = await _mediator.Send(updateAppealCommand.WithId(appealId), cancellationToken);
 
             return updateAppealCommandResult.ToActionResult();
         }

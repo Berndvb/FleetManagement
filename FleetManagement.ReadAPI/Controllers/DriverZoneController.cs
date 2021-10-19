@@ -32,7 +32,7 @@ namespace FleetManagement.ReadAPI.Controllers
             return getDriverDetailsQueryResult.ToActionResult();
         }
 
-        [HttpGet("driver/{driverId}/appeals")]
+        [HttpGet("driver/{DriverId}/appeals")]
         public async Task<IActionResult> GetAppealsForDriver(
          [FromModel] GetAppealsForDriverQuery getAppealsQuery,
          CancellationToken cancellationToken)
@@ -42,7 +42,7 @@ namespace FleetManagement.ReadAPI.Controllers
             return getAppealsQueryResult.ToActionResult();
         }
 
-        [HttpGet("driver/{driverId}/fuelcards")]
+        [HttpGet("driver/{DriverId}/fuelcards")]
         public async Task<IActionResult> GetFuelCardsForDriver(
          [FromModel] GetFuelCardsForDriverQuery getFuelCardsQuery,
          CancellationToken cancellationToken)
@@ -52,7 +52,7 @@ namespace FleetManagement.ReadAPI.Controllers
             return getAllDriverOverviewsQueryResult.ToActionResult();
         }
 
-        [HttpGet("driver/{driverId}/vehicles")]
+        [HttpGet("driver/{DriverId}/vehicles")]
         public async Task<IActionResult> GetVehiclesForDriver(
          [FromModel] GetVehiclesForDriverQuery getVehicleDetailsQuery,
          CancellationToken cancellationToken)

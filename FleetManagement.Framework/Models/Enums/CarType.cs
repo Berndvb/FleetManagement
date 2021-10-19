@@ -2,7 +2,7 @@
 {
     public enum CarType
     {
-        Persoonswagen,
+        Persoonswagen = 1,
         LichteVracht
     }
 }

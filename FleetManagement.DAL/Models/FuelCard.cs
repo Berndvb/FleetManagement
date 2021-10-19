@@ -6,30 +6,20 @@ namespace FleetManagement.Domain.Models
 {
     public class FuelCard : IBaseClass
     {
-        public int Id { get; private set; }
+        public int Id { get; set; }
 
-        public string CardNumber { get; private set; }
+        public string CardNumber { get; set; }
 
-        public DateTime ExpirationDate { get; private set; }
+        public DateTime ExpirationDate { get; set; }
 
-        public string Pincode { get; private set; }
+        public string Pincode { get; set; }
 
-        public AuthenticationType AuthenticationType { get; private set; }
+        public AuthenticationType AuthenticationType { get; set; }
 
-        public bool Blocked { get; private set; }
+        public bool Blocked { get; set; }
 
-        public FuelCardOptions FuelCardOptions { get; private set; }
+        public FuelCardOptions FuelCardOptions { get; set; }
 
-        public List<FuelCardDriver> FuelCardDrivers { get; private set; }
-
-        public void ChangeFuelCardInfoForDriver(
-            AuthenticationType authenticationType, 
-            bool blocked, 
-            string pincode)
-        {
-            AuthenticationType = authenticationType;
-            Blocked = blocked;
-            Pincode = pincode;
-        }
+        public List<FuelCardDriver> FuelCardDrivers { get; set; }
     }
 }

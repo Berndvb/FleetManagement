@@ -2,12 +2,12 @@
 {
     public class ContactInfo : IBaseClass
     {
-        public int Id { get; internal set; }
+        public int Id { get; set; }
 
-        public string EmailAddress { get; internal set; }
+        public string EmailAddress { get; set; }
 
-        public string PhoneNumber { get; internal set; }
+        public string PhoneNumber { get; set; }
 
-        public Address Address { get; internal set; }
+        public Address Address { get; set; }
     }
 }

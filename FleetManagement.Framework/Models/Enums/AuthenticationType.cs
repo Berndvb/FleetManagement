@@ -3,6 +3,6 @@
     public enum AuthenticationType
     {
         Pin = 1,
-        PinMileage = 2
+        PinMileage
     }
 }

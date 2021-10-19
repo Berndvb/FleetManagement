@@ -78,6 +78,17 @@ namespace FleetManagement.Framework.Helpers
             return 0;
         }
 
+        public static AppealType StringToAppealType(this string source)
+        {
+            if (!String.IsNullOrEmpty(source))
+            {
+                var sourceCorrected = System.Globalization.CultureInfo.CurrentCulture.TextInfo.ToTitleCase(source.ToLower());
+                var appealType = Enum.Parse(typeof(AppealType), sourceCorrected);
+                return (AppealType)appealType;
+            }
+            return 0;
+        }
+
         public static DriversLicenseType StringToDriversLicense(this string source)
         {
             if (!String.IsNullOrEmpty(source))

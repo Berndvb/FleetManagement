@@ -85,7 +85,11 @@ namespace FleetManager.EFCore.Repositories
         public async Task Remove(TEntity entity, CancellationToken cancellationToken)
         {
             while (!cancellationToken.IsCancellationRequested)
+            {
                 await Task.Run(() => _dbSet.Remove(entity));
+
+            }
+
         }
 
         public async Task RemoveById(int id, CancellationToken cancellationToken)
@@ -106,7 +110,11 @@ namespace FleetManager.EFCore.Repositories
         public async Task Update(TEntity entityNew, CancellationToken cancellationToken)
         {
             while (!cancellationToken.IsCancellationRequested)
-                await Task.Run(() => _dbSet.Update(entityNew));
+            {
+                var task = await Task.Run(() => _dbSet.Update(entityNew));
+                if (task.State is EntityState.Modified or EntityState.Added)
+                    break;
+            }
         }
 
         public async Task<List<int>> GetIds(int id, CancellationToken cancellationToken) 

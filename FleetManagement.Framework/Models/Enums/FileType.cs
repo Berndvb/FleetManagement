@@ -2,7 +2,7 @@
 {
     public enum FileType
     {
-        Invoice,
+        Invoice = 1,
         Photo,
         OnkostenNota,
         Correspondence,

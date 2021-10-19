@@ -20,6 +20,6 @@ namespace FleetManagement.BLL.Models.Dtos.ReadDtos
 
         public FuelCardOptionsDto FuelCardOptions { get; set; }
 
-        public List<FuelCardDriverDto> FuelCardDriver { get; set; }
+        public List<FuelCardDriverDto> FuelCardDrivers { get; set; }
     }
 }

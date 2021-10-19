@@ -2,7 +2,7 @@
 {
     public enum ReparationStatus
     {
-        InfoCollectionDriver,
+        InfoCollectionDriver = 1,
         ProcessingFleetManagement,
         TransportVehicle,
         ExecutionReparation,

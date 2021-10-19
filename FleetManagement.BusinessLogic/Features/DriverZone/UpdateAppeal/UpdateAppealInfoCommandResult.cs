@@ -2,7 +2,7 @@
 
 namespace FleetManagement.BLL.Features.DriverZone.UpdateAppeal
 {
-    public class UpdateAppealCommandResult : ExecutionResult
+    public class UpdateAppealInfoCommandResult : ExecutionResult
     {
     }
 }

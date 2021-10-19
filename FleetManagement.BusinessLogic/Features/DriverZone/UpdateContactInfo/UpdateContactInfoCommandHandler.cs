@@ -21,33 +21,28 @@ namespace FleetManagement.BLL.Features.DriverZone.UpdateContactInfo
             UpdateContactInfoCommand request,
             CancellationToken cancellationToken)
         {
-            await UpdateContactinfo(
-                request.Driver, 
-                request.DriverId, 
-                cancellationToken);
+            await UpdateContactinfo(request, cancellationToken);
 
             return new UpdateContactInfoCommandResult();
         }
 
         public async Task UpdateContactinfo(
-            AddDriverDetailsDto driverDto, 
-            int driverId,
+            UpdateContactInfoCommand request,
             CancellationToken cancellationToken)
         {
             var driver = await _unitOfWork.Drivers.GetBy(
                 cancellationToken,
-                filter: x => x.Id.Equals(driverId),
+                filter: x => x.Id.Equals(request.DriverId),
                 including: x => x
                     .Include(y => y.Contactinfo)
-                        .ThenInclude(z => z.Address));
+                         .ThenInclude(y => y.Address));
 
-            driver.ChangeContactInfoForDriver(
-                driverDto.Contactinfo.EmailAddress,
-                driverDto.Contactinfo.PhoneNumber,
-                driverDto.Contactinfo.Address.Street,
-                driverDto.Contactinfo.Address.StreetNumber,
-                driverDto.Contactinfo.Address.City,
-                driverDto.Contactinfo.Address.Postcode);
+            driver.Contactinfo.EmailAddress = request.EmailAddress;
+            driver.Contactinfo.PhoneNumber = request.PhoneNumber;
+            driver.Contactinfo.Address.Street = request.Street;
+            driver.Contactinfo.Address.StreetNumber = request.StreetNumber;
+            driver.Contactinfo.Address.City = request.City;
+            driver.Contactinfo.Address.Postcode = request.Postcode;
 
             await _unitOfWork.Drivers.Update(driver, cancellationToken);
 

@@ -67,14 +67,13 @@ namespace FleetManagement.BLL.Features.DriverZone.GetFuelCardsForDriver
                 filter: x => x.FuelCardDrivers.Any(y => y.Driver.Id.Equals(driverId)),
                 including: x => x
                     .Include(y => y.FuelCardOptions)
-                    .Include(y => y.FuelCardDrivers.Where(z => z.Driver.Id.Equals(driverId)))
-                        .ThenInclude(y => y.Driver));
+                    .Include(y => y.FuelCardDrivers.Where(z => z.Driver.Id.Equals(driverId))));
 
-            var fuelCardInfoDtos = _mapper.Map<List<FuelCardDto>>(fuelCards);
+            var fuelCardDto = _mapper.Map<List<FuelCardDto>>(fuelCards);
             if (pagingParameter != null)
-                return _generalService.GetPaginatedData(fuelCardInfoDtos, fuelCards);
+                return _generalService.GetPaginatedData(fuelCardDto, fuelCards);
 
-            return fuelCardInfoDtos;
+            return fuelCardDto;
         }
     }
 }

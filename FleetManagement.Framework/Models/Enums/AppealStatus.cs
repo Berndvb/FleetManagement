@@ -3,7 +3,7 @@
     public enum AppealStatus
     {
         New = 1,
-        Open = 2,
-        Closed = 3
+        Open,
+        Closed 
     }
 }

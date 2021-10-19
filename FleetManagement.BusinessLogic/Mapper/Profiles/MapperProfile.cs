@@ -36,7 +36,8 @@ namespace FleetManagement.BLL.Mapper.Profiles
 
             CreateMap<FuelCard, FuelCardDto>()
                 .ReverseMap();
-
+            CreateMap<FuelCardDriver, FuelCardDriverDto>()
+                .ReverseMap();
             CreateMap<FuelCardOptions, FuelCardOptionsDto>()
                 .ReverseMap();
 
@@ -58,34 +59,12 @@ namespace FleetManagement.BLL.Mapper.Profiles
             CreateMap<Vehicle, VehicleDetailsDto>()
                 .ReverseMap();
 
-            CreateMap<AddDriverDetailsDto, Driver>();
-
-            CreateMap<AddDriverVehicleDto, DriverVehicle>();
-
-            CreateMap<AddFuelCardDriverDto, FuelCardDriver>();
-
-            CreateMap<AddFuelCardOptionsDto, FuelCardOptions>();
-
-            CreateMap<UpdateDriverDetailsDto, Driver>();
-
-            CreateMap<AddIdentityPersonDto, IdentityPerson>();
-
-            CreateMap<AddContactInfoDto, ContactInfo>();
-
-            CreateMap<AddAddressDto, Address>();
-
-            CreateMap<AddFuelCardDto, FuelCard>();
-
-            CreateMap<AddVehicleDetailsDto, Vehicle>()
-                .ForMember(x => x.Mileage, y => y.MapFrom(z => z.Mileage.ToString()));
-
-            CreateMap<AddIdentityVehicleDto, IdentityVehicle>();
-
             //Extra convertingmaps
             CreateMap<string, List<string>>().ConvertUsing<StringToStringsConverter>();
             CreateMap<string, List<int>>().ConvertUsing<StringToIntsConverter>();
             CreateMap<string, AppealStatus>().ConvertUsing<StringToAppealStatus>();
             CreateMap<string, DriversLicenseType>().ConvertUsing<StringToDriversLicense>();
+            CreateMap<string, AppealType>().ConvertUsing<StringToAppealType>();
         }
     }
 }

@@ -4,10 +4,10 @@ namespace FleetManagement.Domain.Models
 {
     public class FuelCardOptions : IBaseClass
     {
-        public int Id { get; private set; }
+        public int Id { get; set; }
 
-        public FuelType Fueltype { get; private set; }
+        public FuelType Fueltype { get; set; }
 
-        public string ExtraServices { get; private set; }
+        public string ExtraServices { get; set; }
     }
 }

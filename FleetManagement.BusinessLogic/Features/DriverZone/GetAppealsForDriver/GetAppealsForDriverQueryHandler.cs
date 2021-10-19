@@ -66,9 +66,12 @@ namespace FleetManagement.BLL.Features.DriverZone.GetAppealsForDriver
                 filter: x => x.Driver.Id.Equals(driverId),
                 including: x => x
                     .Include(y => y.Vehicle)
+                        .ThenInclude(z => z.Identity)
+                    .Include(y => y.Driver)
                         .ThenInclude(z => z.Identity));
 
             var appealDtos = _mapper.Map<List<AppealDto>>(appeals);
+
             if (pagingParameter != null)
                 return _generalService.GetPaginatedData(appealDtos, appeals);
 

@@ -17,32 +17,27 @@ namespace FleetManagement.BLL.Features.DriverZone.UpdateFuelCard
         }
 
         public async override Task<UpdateFuelCardCommandResult> Handle(
-             UpdateFuelCardCommand request,
+            UpdateFuelCardCommand request,
             CancellationToken cancellationToken)
         {
-            await UpdateFuelCard(
-                request.FuelCard,
-                request.FuelCardId, 
-                cancellationToken);
+            await UpdateFuelCard(request, cancellationToken);
 
             return new UpdateFuelCardCommandResult();
         }
 
         public async Task UpdateFuelCard(
-            FuelCardDto fuelCardDto, 
-            int fuelCardId, 
+            UpdateFuelCardCommand request,
             CancellationToken cancellationToken)
         {
             var fuelCard = await _unitOfWork.FuelCards.GetBy(
                 cancellationToken,
-                filter: x => x.Id.Equals(fuelCardId));
+                filter: x => x.Id.Equals(request.FuelCardId));
 
-            fuelCard.ChangeFuelCardInfoForDriver(
-                fuelCardDto.AuthenticationType, 
-                fuelCardDto.Blocked, 
-                fuelCardDto.Pincode);
+            fuelCard.AuthenticationType = request.AuthenticationType;
+            fuelCard.Blocked = request.Blocked;
+            fuelCard.Pincode = request.Pincode;
 
-            await Task.Run(() => _unitOfWork.FuelCards.Update(fuelCard, cancellationToken));
+            await _unitOfWork.FuelCards.Update(fuelCard, cancellationToken);
 
             _unitOfWork.Complete();
         }

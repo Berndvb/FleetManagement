@@ -11,7 +11,5 @@ namespace FleetManagement.BLL.Models.Dtos.ReadDtos
         public DateTime CreationDate { get; set; }
 
         public DateTime? ClosureDate { get; set; }
-
-        public DriverOverviewDto Driver { get; set; }
     }
 }
