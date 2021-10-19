@@ -1,7 +1,7 @@
 ﻿using FleetManagement.Framework.Paging;
 using MediatR.Cqrs.Queries;
 
-namespace FleetManagement.BLL.Features.DriverZone.GetDriverOverviews
+namespace FleetManagement.BLL.Features.AdministrativeZone.DriverManagement.GetDriverOverviews
 {
     public class GetDriverOverviewsQuery : IQuery<GetDriverOverviewsQueryResult>
     {

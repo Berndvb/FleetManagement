@@ -1,10 +1,9 @@
-﻿using System.Collections.Generic;
-using AutoMapper;
+﻿using AutoMapper;
 using FleetManagement.BLL.Mapper.Converters;
 using FleetManagement.BLL.Models.Dtos.ReadDtos;
-using FleetManagement.BLL.Models.Dtos.WriteDtos;
 using FleetManagement.Domain.Models;
 using FleetManagement.Framework.Models.Enums;
+using System.Collections.Generic;
 
 namespace FleetManagement.BLL.Mapper.Profiles
 {
@@ -17,7 +16,7 @@ namespace FleetManagement.BLL.Mapper.Profiles
                 .ForMember(x => x.Name, y => y.MapFrom(z => z.Identity.Name))
                 .ReverseMap();
 
-            CreateMap<Driver, ShowDriverDetailsDto>()
+            CreateMap<Driver, DriverDetailsDto>()
                 .ReverseMap();
 
             CreateMap<IdentityPerson, IdentityPersonDto>()

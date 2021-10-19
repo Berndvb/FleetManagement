@@ -80,6 +80,7 @@ namespace FleetManagement.BLL.Features.DriverZone.GetVehiclesForDriver
                     .Include(y => y.DriverVehicles.Where(z => z.Driver.Id.Equals(driverId))));
 
             var vehicleDetailsDtos = _mapper.Map<List<VehicleDetailsDto>>(driverVehicles);
+
             if (pagingParameter != null)
                 return _generalService.GetPaginatedData(vehicleDetailsDtos, driverVehicles);
 

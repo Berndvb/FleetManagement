@@ -9,28 +9,38 @@ namespace FleetManagement.BLL.Features.DriverZone.AddAppeal
     {
         public AddAppealCommandValidator()
         {
-            RuleFor(x => x.Appeal.CreationDate)
+            RuleFor(x => x.CreationDate)
                .NotNull()
                .GreaterThan(Helpers.AllphiStartdate());
 
-            When(x => x.Appeal.FirstDatePlanning != null, () => {
-                RuleFor(x => x.Appeal.FirstDatePlanning)
+            When(x => x.FirstDatePlanning != null, () => {
+                RuleFor(x => x.FirstDatePlanning)
                     .GreaterThan(Helpers.AllphiStartdate());
             });
 
-            When(x => x.Appeal.FirstDatePlanning != null, () => {
-                RuleFor(x => x.Appeal.SecondDatePlanning)
-                   .NotEqual(x => x.Appeal.FirstDatePlanning)
+            When(x => x.FirstDatePlanning != null, () => {
+                RuleFor(x => x.SecondDatePlanning)
+                   .NotEqual(x => x.FirstDatePlanning)
                    .GreaterThan(Helpers.AllphiStartdate());
             });
 
-            RuleFor(x => x.Appeal.AppealType).Must(y => Enum.IsDefined(typeof(AppealType), y));
+            When(x => x.AppealType == AppealType.Reparation, () =>
+            {
+                RuleFor(x => x.DamageDescription).NotEmpty();
+                RuleFor(x => x.VehicleLocation).NotEmpty();
+                RuleFor(x => x.IncidentDate)
+                    .NotNull()
+                    .GreaterThan(Helpers.AllphiStartdate());
+            });
 
-            RuleFor(x => x.Appeal.Status).Must(y => Enum.IsDefined(typeof(AppealStatus), y));
+            RuleFor(x => x.AppealType).Must(y => Enum.IsDefined(typeof(AppealType), y));
 
-            RuleFor(x => x.Appeal.Message).Must(y => y != null || y.Length < 200);
+            RuleFor(x => x.Status).Must(y => Enum.IsDefined(typeof(AppealStatus), y));
 
-            RuleFor(x => x.Appeal.Driver).NotNull();
+            RuleFor(x => x.Message).Must(y => y != null || y.Length < 200); // will it ever be sent as null or rather just string.empty?
+
+            RuleFor(x => x.DriverId).GreaterThan(0);
+            RuleFor(x => x.VehicleId).GreaterThan(0);
         }
     }
 }

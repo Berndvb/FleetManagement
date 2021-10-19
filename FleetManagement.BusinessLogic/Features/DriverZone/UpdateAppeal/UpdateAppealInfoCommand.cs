@@ -13,8 +13,6 @@ namespace FleetManagement.BLL.Features.DriverZone.UpdateAppeal
 
         public AppealType AppealType { get; set; }
 
-        [JsonProperty(PropertyName = "FirstDatePlanning", DefaultValueHandling = DefaultValueHandling.Populate)]
-        [DefaultValue("")]
         public DateTime? FirstDatePlanning { get; set; }
 
         public DateTime? SecondDatePlanning { get; set; }

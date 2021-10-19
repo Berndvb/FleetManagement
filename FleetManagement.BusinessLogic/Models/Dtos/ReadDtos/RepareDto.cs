@@ -5,7 +5,6 @@ using Newtonsoft.Json.Converters;
 
 namespace FleetManagement.BLL.Models.Dtos.ReadDtos
 {
-
     public class RepareDto : AdministrationDto
     {
         [JsonConverter(typeof(JsonStringEnumConverter))]

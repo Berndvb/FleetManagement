@@ -1,8 +1,7 @@
-﻿using System;
-using FleetManagement.Framework.Helpers;
+﻿using FleetManagement.Framework.Helpers;
 using FleetManagement.Framework.Models.Enums;
 using FluentValidation;
-using Microsoft.AspNetCore.Mvc;
+using System;
 
 namespace FleetManagement.BLL.Features.DriverZone.UpdateAppeal
 {

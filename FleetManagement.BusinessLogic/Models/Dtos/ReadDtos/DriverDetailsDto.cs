@@ -4,7 +4,7 @@ using Newtonsoft.Json.Converters;
 
 namespace FleetManagement.BLL.Models.Dtos.ReadDtos
 {
-    public class ShowDriverDetailsDto
+    public class DriverDetailsDto
     {
         public int Id { get; set; }
 

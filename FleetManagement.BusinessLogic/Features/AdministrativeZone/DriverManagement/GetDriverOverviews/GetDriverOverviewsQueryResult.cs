@@ -2,7 +2,7 @@
 using FleetManagement.BLL.Models.Dtos.ReadDtos;
 using MediatR.Cqrs.Execution;
 
-namespace FleetManagement.BLL.Features.DriverZone.GetDriverOverviews
+namespace FleetManagement.BLL.Features.AdministrativeZone.DriverManagement.GetDriverOverviews
 {
     public class GetDriverOverviewsQueryResult : ExecutionResult
     {

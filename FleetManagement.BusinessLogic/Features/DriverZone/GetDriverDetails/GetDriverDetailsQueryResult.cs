@@ -5,9 +5,9 @@ namespace FleetManagement.BLL.Features.DriverZone.GetDriverDetails
 {
     public class GetDriverDetailsQueryResult : ExecutionResult
     {
-        public ShowDriverDetailsDto DriverDetails { get; }
+        public DriverDetailsDto DriverDetails { get; }
 
-        public GetDriverDetailsQueryResult(ShowDriverDetailsDto driverDetails)
+        public GetDriverDetailsQueryResult(DriverDetailsDto driverDetails)
         {
             DriverDetails = driverDetails;
         }

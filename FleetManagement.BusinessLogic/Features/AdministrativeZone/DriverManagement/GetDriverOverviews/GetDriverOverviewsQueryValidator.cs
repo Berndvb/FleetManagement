@@ -1,6 +1,6 @@
 ﻿using FluentValidation;
 
-namespace FleetManagement.BLL.Features.DriverZone.GetDriverOverviews
+namespace FleetManagement.BLL.Features.AdministrativeZone.DriverManagement.GetDriverOverviews
 {
     public class GetDriverOverviewsQueryValidator : AbstractValidator<GetDriverOverviewsQuery>
     {

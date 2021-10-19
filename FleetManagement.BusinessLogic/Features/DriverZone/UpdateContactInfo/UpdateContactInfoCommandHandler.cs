@@ -1,9 +1,8 @@
-﻿using System.Threading;
-using System.Threading.Tasks;
-using FleetManagement.BLL.Models.Dtos.WriteDtos;
-using FleetManager.EFCore.UOW;
+﻿using FleetManager.EFCore.UOW;
 using MediatR.Cqrs.Commands;
 using Microsoft.EntityFrameworkCore;
+using System.Threading;
+using System.Threading.Tasks;
 
 namespace FleetManagement.BLL.Features.DriverZone.UpdateContactInfo
 {

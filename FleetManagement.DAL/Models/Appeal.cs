@@ -37,11 +37,11 @@ namespace FleetManagement.Domain.Models
             AppealStatus status,
             Vehicle vehicle,
             Driver driver,
-            Repare repare = null,
-            Maintenance maintenance = null,
             DateTime? firstDatePlanning = null,
             DateTime? secondDatePlanning = null,
-            string message = null)
+            string message = null,
+            Repare repare = null,
+            Maintenance maintenance = null)
         {
             CreationDate = creationDate;
             AppealType = appealType;
