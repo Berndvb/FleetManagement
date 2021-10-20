@@ -33,8 +33,8 @@ namespace FleetManagement.ReadAPI
             services.AddSwaggerGen(c =>
             {
                 c.SwaggerDoc("v1", new OpenApiInfo { Title = "FleetManagement.ReadAPI", Version = "v1" });
-                var filePath = Path.Combine(AppContext.BaseDirectory, "WebApplication1.xml");
-                c.IncludeXmlComments(filePath);
+                //var filePath = Path.Combine(AppContext.BaseDirectory, "WebApplication1.xml");
+                //c.IncludeXmlComments(filePath);
             });
 
             services.AddDALServices(connectionString);

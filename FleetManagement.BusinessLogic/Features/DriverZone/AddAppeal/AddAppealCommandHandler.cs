@@ -67,12 +67,12 @@ namespace FleetManagement.BLL.Features.DriverZone.AddAppeal
 
             var messageBuilder = new StringBuilder().Append(description);
 
-            if (request.AppealType != AppealType.Reparation) return messageBuilder.ToString();
+            if (request.AppealType != AppealType.Reparation) 
+                return messageBuilder.ToString();
 
             messageBuilder.Append($"- IncidentDate: {request.IncidentDate.ToString()}<br />");
             messageBuilder.Append($"- Damage description: {request.DamageDescription}<br />");
             messageBuilder.Append($"- Vehicle location: {request.VehicleLocation}<br />");
-
             return messageBuilder.ToString();
         }
     }

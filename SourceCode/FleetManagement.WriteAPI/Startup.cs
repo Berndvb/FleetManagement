@@ -1,5 +1,4 @@
 using FleetManagement.BLL.DI;
-using FluentValidation.AspNetCore;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
@@ -9,7 +8,6 @@ using Microsoft.OpenApi.Models;
 using System;
 using System.IO;
 using System.Text.Json.Serialization;
-using FleetManagement.BLL.Features.DriverZone.AddAppeal;
 
 namespace FleetManagement.WriteAPI
 {
@@ -35,8 +33,8 @@ namespace FleetManagement.WriteAPI
             services.AddSwaggerGen(c =>
             {
                 c.SwaggerDoc("v1", new OpenApiInfo { Title = "FleetManagement.WriteAPI", Version = "v1" });
-                var filePath = Path.Combine(AppContext.BaseDirectory, "WebApplication1.xml");
-                c.IncludeXmlComments(filePath);
+                //var filePath = Path.Combine(AppContext.BaseDirectory, "WebApplication1.xml");
+                //c.IncludeXmlComments(filePath);
             });
  
             services.AddDALServices(connectionString);

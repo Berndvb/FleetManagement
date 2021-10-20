@@ -14,29 +14,23 @@ namespace FleetManagement.BLL.Features.DriverZone.GetDriverDetails
 {
     public class GetDriverDetailsQueryHandler : QueryHandler<GetDriverDetailsQuery, GetDriverDetailsQueryResult>
     {
-        private readonly IDriverService _driverService;
         private readonly IUnitOfWork _unitOfWork;
         private readonly IMapper _mapper;
-        private readonly IGeneralService _generalService;
 
         public GetDriverDetailsQueryHandler(
-            IDriverService driverService, 
             IUnitOfWork unitOfWork, 
-            IMapper mapper,
-            IGeneralService generalService)
+            IMapper mapper)
         {
-            _driverService = driverService;
             _unitOfWork = unitOfWork;
             _mapper = mapper;
-            _generalService = generalService;
         }
 
         public async override Task<GetDriverDetailsQueryResult> Handle(
             GetDriverDetailsQuery request,
             CancellationToken cancellationToken)
         {
-            var driverDetails = await GetDriverDetails(cancellationToken, request.DriverId);
-            if (driverDetails != null)
+            var driverDetails = await GetDriverDetails(request.DriverId, cancellationToken);
+            if (driverDetails == null)
             {
                 var error = new ExecutionError("We couldn't find and retrieve any driver data.", Constants.ErrorCodes.DataNotFound);
                 return BadRequest(error);
@@ -45,9 +39,9 @@ namespace FleetManagement.BLL.Features.DriverZone.GetDriverDetails
             return new GetDriverDetailsQueryResult(driverDetails);
         }
 
-        public async Task<DriverDetailsDto> GetDriverDetails(CancellationToken cancellationToken, int driverId)
+        public async Task<DriverDetailsDto> GetDriverDetails(int driverId, CancellationToken cancellationToken)
         {
-            var driver = await _unitOfWork.Drivers.GetBy(
+             var driver = await _unitOfWork.Drivers.GetBy(
                 cancellationToken,
                 filter: x => x.Id.Equals(driverId),
                 including: x => x

@@ -1,0 +1,32 @@
+﻿{
+  "driverDetails": {
+    "id": 1,
+    "identity": {
+      "id": 1,
+      "name": "Van Belle",
+      "firstName": "Bernd",
+      "nationalInsuranceNumber": "89080210316",
+      "dateOfBirth": "1989-08-02T00:00:00"
+    },
+    "contactinfo": {
+      "id": 1,
+      "emailAddress": "berndvb@hotmail.com",
+      "phoneNumber": "0478732373",
+      "address": {
+        "id": 1,
+        "street": "Update-20-10-2021",
+        "streetNumber": "85",
+        "city": "Gent",
+        "postcode": "9000"
+      }
+    },
+    "driversLicenseType": "B",
+    "inService": true
+  },
+  "executionPaging": null,
+  "errorType": null,
+  "warningType": null,
+  "hasSucceeded": true,
+  "hasWarnings": false,
+  "hasPaging": false
+}

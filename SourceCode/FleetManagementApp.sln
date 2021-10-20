@@ -35,7 +35,9 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "FleetManager.Dapper", "..\F
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "FleetManagement.WriteAPI", "FleetManagement.WriteAPI\FleetManagement.WriteAPI.csproj", "{B4A379EE-C5DB-4DED-83DD-B2FC7C92E03F}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MediatR.Cqrs", "MediatR\MediatR.Cqrs.csproj", "{1C0C8366-807D-49DF-9F1A-5A7DD9CC1F1A}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MediatR.Cqrs", "MediatR\MediatR.Cqrs.csproj", "{1C0C8366-807D-49DF-9F1A-5A7DD9CC1F1A}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FleetManager.UnitTest", "FleetManager.UnitTest\FleetManager.UnitTest.csproj", "{75ACAA78-F123-48E7-AA7A-31DF501F2D22}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -75,6 +77,10 @@ Global
 		{1C0C8366-807D-49DF-9F1A-5A7DD9CC1F1A}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{1C0C8366-807D-49DF-9F1A-5A7DD9CC1F1A}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{1C0C8366-807D-49DF-9F1A-5A7DD9CC1F1A}.Release|Any CPU.Build.0 = Release|Any CPU
+		{75ACAA78-F123-48E7-AA7A-31DF501F2D22}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{75ACAA78-F123-48E7-AA7A-31DF501F2D22}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{75ACAA78-F123-48E7-AA7A-31DF501F2D22}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{75ACAA78-F123-48E7-AA7A-31DF501F2D22}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -90,6 +96,7 @@ Global
 		{DFD6AB62-3336-4437-B1D3-D349579AE0A7} = {E840E1D3-BC98-4AB7-9FE6-4474E67C00EE}
 		{B4A379EE-C5DB-4DED-83DD-B2FC7C92E03F} = {5D7E715D-FD5E-4BCB-A775-135F5B6CBBE6}
 		{1C0C8366-807D-49DF-9F1A-5A7DD9CC1F1A} = {10C3D546-DC63-481A-8552-9BCD4BAD11E8}
+		{75ACAA78-F123-48E7-AA7A-31DF501F2D22} = {165AFCAF-46AB-4E82-96FB-3001FBC02724}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {164121FE-8757-4507-9B7B-5ACD655C7D15}
