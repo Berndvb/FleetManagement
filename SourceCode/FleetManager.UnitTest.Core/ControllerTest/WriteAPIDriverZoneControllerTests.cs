@@ -24,9 +24,10 @@ namespace FleetManager.UnitTest.Core.ControllerTest
     /// <returns></returns>
     public class WriteAPIDriverZoneControllerTests
     {
-        const int driverId = 1;
-        const int fuelCardId = 1;
-        const int appealId = 1;
+        private const int driverId = 1;
+        private const int fuelCardId = 1;
+        private const int appealId = 1;
+        private readonly CancellationToken _cancellationToken = CancellationToken.None;
         private readonly Mock<IMediator> _mediator;
         private readonly DriverZoneController _controller;
 
@@ -43,15 +44,14 @@ namespace FleetManager.UnitTest.Core.ControllerTest
             var command = new UpdateContactInfoCommand { DriverId = driverId };
             var commandError = new ExecutionError("Id-Error", Constants.ErrorCodes.InvalidRequestInput);
             var commandRespons = ExecutionResult.BadRequest(commandError).As<UpdateContactInfoCommandResult>();
-            var cancellationToken = CancellationToken.None;
 
             _mediator.Setup(x => x.Send(
                 It.Is<UpdateContactInfoCommand>(y => y.DriverId == driverId),
-                It.Is<CancellationToken>(z => z.Equals(cancellationToken))))
+                It.Is<CancellationToken>(z => z.Equals(_cancellationToken))))
                 .ReturnsAsync(commandRespons);
 
             //Act
-            var result = await _controller.UpdateContactInfo(command, driverId, cancellationToken);
+            var result = await _controller.UpdateContactInfo(command, driverId, _cancellationToken);
 
             //Assert
             result.Should().BeOfType(typeof(BadRequestObjectResult));
@@ -66,15 +66,14 @@ namespace FleetManager.UnitTest.Core.ControllerTest
             //Arrange
             var command = new UpdateContactInfoCommand { DriverId = driverId };
             var commandRespons = new UpdateContactInfoCommandResult();
-            var cancellationToken = CancellationToken.None;
 
             _mediator.Setup(x => x.Send(
                     It.Is<UpdateContactInfoCommand>(y => y.DriverId == driverId),
-                    It.Is<CancellationToken>(z => z.Equals(cancellationToken))))
+                    It.Is<CancellationToken>(z => z.Equals(_cancellationToken))))
                 .ReturnsAsync(commandRespons);
 
             //Act
-            var result = await _controller.UpdateContactInfo(command, driverId, cancellationToken);
+            var result = await _controller.UpdateContactInfo(command, driverId, _cancellationToken);
 
             //Assert
             result.Should().BeOfType(typeof(OkObjectResult));
@@ -90,15 +89,14 @@ namespace FleetManager.UnitTest.Core.ControllerTest
             var command = new UpdateFuelCardInfoCommand() { FuelCardId = fuelCardId };
             var commandError = new ExecutionError("Id-Error", Constants.ErrorCodes.InvalidRequestInput);
             var commandRespons = ExecutionResult.BadRequest(commandError).As<UpdateFuelCardInfoCommandResult>();
-            var cancellationToken = CancellationToken.None;
 
             _mediator.Setup(x => x.Send(
                 It.Is<UpdateFuelCardInfoCommand>(y => y.FuelCardId == fuelCardId),
-                It.Is<CancellationToken>(z => z.Equals(cancellationToken))))
+                It.Is<CancellationToken>(z => z.Equals(_cancellationToken))))
                 .ReturnsAsync(commandRespons);
 
             //Act
-            var result = await _controller.UpdateFuelCard(command, fuelCardId, cancellationToken);
+            var result = await _controller.UpdateFuelCard(command, fuelCardId, _cancellationToken);
 
             //Assert
             result.Should().BeOfType(typeof(BadRequestObjectResult));
@@ -113,15 +111,14 @@ namespace FleetManager.UnitTest.Core.ControllerTest
             //Arrange
             var command = new UpdateFuelCardInfoCommand() { FuelCardId = fuelCardId };
             var commandRespons = new UpdateFuelCardInfoCommandResult();
-            var cancellationToken = CancellationToken.None;
 
             _mediator.Setup(x => x.Send(
                     It.Is<UpdateFuelCardInfoCommand>(y => y.FuelCardId == fuelCardId),
-                    It.Is<CancellationToken>(z => z.Equals(cancellationToken))))
+                    It.Is<CancellationToken>(z => z.Equals(_cancellationToken))))
                 .ReturnsAsync(commandRespons);
 
             //Act
-            var result = await _controller.UpdateFuelCard(command, fuelCardId, cancellationToken);
+            var result = await _controller.UpdateFuelCard(command, fuelCardId, _cancellationToken);
 
             //Assert
             result.Should().BeOfType(typeof(OkObjectResult));
@@ -137,15 +134,14 @@ namespace FleetManager.UnitTest.Core.ControllerTest
             var command = new UpdateAppealInfoCommand() { AppealId = appealId };
             var commandError = new ExecutionError("Id-Error", Constants.ErrorCodes.InvalidRequestInput);
             var commandRespons = ExecutionResult.BadRequest(commandError).As<UpdateAppealInfoCommandResult>();
-            var cancellationToken = CancellationToken.None;
 
             _mediator.Setup(x => x.Send(
                     It.Is<UpdateAppealInfoCommand>(y => y.AppealId == appealId),
-                    It.Is<CancellationToken>(z => z.Equals(cancellationToken))))
+                    It.Is<CancellationToken>(z => z.Equals(_cancellationToken))))
                 .ReturnsAsync(commandRespons);
 
             //Act
-            var result = await _controller.UpdateAppealInfo(command, appealId, cancellationToken);
+            var result = await _controller.UpdateAppealInfo(command, appealId, _cancellationToken);
 
             //Assert
             result.Should().BeOfType(typeof(BadRequestObjectResult));
@@ -161,15 +157,14 @@ namespace FleetManager.UnitTest.Core.ControllerTest
             //Arrange
             var command = new UpdateAppealInfoCommand() { AppealId = appealId };
             var commandRespons = new UpdateAppealInfoCommandResult();
-            var cancellationToken = CancellationToken.None;
 
             _mediator.Setup(x => x.Send(
                     It.Is<UpdateAppealInfoCommand>(y => y.AppealId == appealId),
-                    It.Is<CancellationToken>(z => z.Equals(cancellationToken))))
+                    It.Is<CancellationToken>(z => z.Equals(_cancellationToken))))
                 .ReturnsAsync(commandRespons);
 
             //Act
-            var result = await _controller.UpdateAppealInfo(command, appealId, cancellationToken);
+            var result = await _controller.UpdateAppealInfo(command, appealId, _cancellationToken);
 
             //Assert
             result.Should().BeOfType(typeof(OkObjectResult));
@@ -185,15 +180,14 @@ namespace FleetManager.UnitTest.Core.ControllerTest
             var command = new AddAppealCommand() { DriverId = driverId };
             var commandError = new ExecutionError("Id-Error", Constants.ErrorCodes.InvalidRequestInput);
             var commandRespons = ExecutionResult.BadRequest(commandError).As<AddAppealCommandResult>();
-            var cancellationToken = CancellationToken.None;
 
             _mediator.Setup(x => x.Send(
                     It.Is<AddAppealCommand>(y => y.DriverId == driverId),
-                    It.Is<CancellationToken>(z => z.Equals(cancellationToken))))
+                    It.Is<CancellationToken>(z => z.Equals(_cancellationToken))))
                 .ReturnsAsync(commandRespons);
 
             //Act
-            var result = await _controller.AddAppeal(command, cancellationToken);
+            var result = await _controller.AddAppeal(command, _cancellationToken);
 
             //Assert
             result.Should().BeOfType(typeof(BadRequestObjectResult));
@@ -208,15 +202,14 @@ namespace FleetManager.UnitTest.Core.ControllerTest
             //Arrange
             var command = new AddAppealCommand() { DriverId = driverId };
             var commandRespons = new AddAppealCommandResult();
-            var cancellationToken = CancellationToken.None;
 
             _mediator.Setup(x => x.Send(
                     It.Is<AddAppealCommand>(y => y.DriverId == driverId),
-                    It.Is<CancellationToken>(z => z.Equals(cancellationToken))))
+                    It.Is<CancellationToken>(z => z.Equals(_cancellationToken))))
                 .ReturnsAsync(commandRespons);
 
             //Act
-            var result = await _controller.AddAppeal(command, cancellationToken);
+            var result = await _controller.AddAppeal(command, _cancellationToken);
 
             //Assert
             result.Should().BeOfType(typeof(OkObjectResult));

@@ -1,34 +1,34 @@
 ﻿using System;
+using System.Collections.Generic;
+using System.Linq;
 using System.Linq.Expressions;
-using AutoMapper;
-using FleetManagement.BLL.Features.DriverZone.GetDriverDetails;
-using FleetManagement.BLL.Models.Dtos.ReadDtos;
-using FleetManagement.Domain.Models;
-using FleetManager.EFCore.UOW;
-using Moq;
 using System.Threading;
 using System.Threading.Tasks;
-using FleetManager.EFCore.Repositories;
-using FluentAssertions;
-using MediatR.Cqrs.Execution;
-using Xunit;
-using System.Linq;
-using FleetManagement.BLL.Features.DriverZone.GetAppealsForDriver;
-using FleetManagement.BLL.Services;
-using FleetManagement.Framework.Paging;
-using Microsoft.EntityFrameworkCore.Query;
-using System.Collections.Generic;
+using AutoMapper;
 using FleetManagement.BLL.Features.DriverZone.AddAppeal;
+using FleetManagement.BLL.Features.DriverZone.GetAppealsForDriver;
+using FleetManagement.BLL.Features.DriverZone.GetDriverDetails;
 using FleetManagement.BLL.Features.DriverZone.GetFuelCardsForDriver;
 using FleetManagement.BLL.Features.DriverZone.GetVehiclesForDriver;
 using FleetManagement.BLL.Features.DriverZone.UpdateAppeal;
 using FleetManagement.BLL.Features.DriverZone.UpdateContactInfo;
 using FleetManagement.BLL.Features.DriverZone.UpdateFuelCard;
+using FleetManagement.BLL.Models.Dtos.ReadDtos;
+using FleetManagement.BLL.Services;
+using FleetManagement.Domain.Models;
 using FleetManagement.Framework.Models.Enums;
+using FleetManagement.Framework.Paging;
 using FleetManager.EFCore.Infrastructure.Pagination;
+using FleetManager.EFCore.Repositories;
+using FleetManager.EFCore.UOW;
+using FluentAssertions;
+using MediatR.Cqrs.Execution;
+using Microsoft.EntityFrameworkCore.Query;
+using Moq;
+using Xunit;
 using FuelCard = FleetManagement.Domain.Models.FuelCard;
 
-namespace FleetManager.UnitTest.Core
+namespace FleetManager.UnitTest.Core.HandlerTest
 {
     /// <summary>
     /// Can the handler:
@@ -71,11 +71,10 @@ namespace FleetManager.UnitTest.Core
             var handler = new GetDriverDetailsQueryHandler(_unitOfWork.Object, _mapper.Object);
             var query = new GetDriverDetailsQuery();
             var driver = new Driver();
-            var cancellationToken = CancellationToken.None;
 
             _driverRepo
                 .Setup(x => x.GetBy(
-                        It.Is<CancellationToken>(y => y.Equals(cancellationToken)),
+                        It.Is<CancellationToken>(y => y.Equals(_cancellationToken)),
                         It.IsAny<Expression<Func<Driver, bool>>>(),
                     It.IsAny<Func<IQueryable<Driver>, IIncludableQueryable<Driver, object>>>()))
                 .ReturnsAsync(driver);
@@ -87,7 +86,7 @@ namespace FleetManager.UnitTest.Core
                 .Returns((DriverDetailsDto)null);
 
             //Act
-            var result = await handler.Handle(query, cancellationToken);
+            var result = await handler.Handle(query, _cancellationToken);
 
             //Assert
             result.Should().BeOfType(typeof(GetDriverDetailsQueryResult));
@@ -108,11 +107,10 @@ namespace FleetManager.UnitTest.Core
             var query = new GetDriverDetailsQuery();
             var driver = new Driver{Id = driverId, InService = true};
             var driverDetailsDto = new DriverDetailsDto{Id = driverId, InService = true};
-            var cancellationToken = CancellationToken.None;
 
             _driverRepo
                 .Setup(x => x.GetBy(
-                    It.Is<CancellationToken>(y => y.Equals(cancellationToken)),
+                    It.Is<CancellationToken>(y => y.Equals(_cancellationToken)),
                     It.IsAny<Expression<Func<Driver, bool>>>(),
                     It.IsAny<Func<IQueryable<Driver>, IIncludableQueryable<Driver, object>>>()))
                 .ReturnsAsync(driver);
@@ -124,7 +122,7 @@ namespace FleetManager.UnitTest.Core
                 .Returns(driverDetailsDto);
 
             //Act
-            var result = await handler.Handle(query, cancellationToken);
+            var result = await handler.Handle(query, _cancellationToken);
 
             //Assert
             result.Should().BeOfType(typeof(GetDriverDetailsQueryResult));
@@ -144,11 +142,10 @@ namespace FleetManager.UnitTest.Core
             var query = new GetAppealsForDriverQuery();
             var appeals = new List<Appeal>();
             var appealDtos = new List<AppealDto>();
-            var cancellationToken = CancellationToken.None;
 
             _appealRepo
                 .Setup(x => x.GetListBy(
-                    It.Is<CancellationToken>(y => y.Equals(cancellationToken)),
+                    It.Is<CancellationToken>(y => y.Equals(_cancellationToken)),
                     It.IsAny<PagingParameters>(),
                     It.IsAny<Expression<Func<Appeal, bool>>>(),
                     It.IsAny<Func<IQueryable<Appeal>, IIncludableQueryable<Appeal, object>>>()))
@@ -161,7 +158,7 @@ namespace FleetManager.UnitTest.Core
                 .Returns(appealDtos);
 
             //Act
-            var result = await handler.Handle(query, cancellationToken);
+            var result = await handler.Handle(query, _cancellationToken);
 
             //Assert
             result.Should().BeOfType(typeof(GetAppealsForDriverQueryResult));
@@ -184,11 +181,10 @@ namespace FleetManager.UnitTest.Core
             var appeals = new List<Appeal>();
             var appealDtos = new List<AppealDto>{new AppealDto()};
             var paginationResult = new PaginatedList<AppealDto>(appealDtos, 1, 1, 5);
-            var cancellationToken = CancellationToken.None;
 
             _appealRepo
                 .Setup(x => x.GetListBy(
-                    It.Is<CancellationToken>(y => y.Equals(cancellationToken)),
+                    It.Is<CancellationToken>(y => y.Equals(_cancellationToken)),
                     It.Is<PagingParameters>(y => y.PageSize.Equals(pagingParameters.PageSize)),
                     It.IsAny<Expression<Func<Appeal, bool>>>(),
                     It.IsAny<Func<IQueryable<Appeal>, IIncludableQueryable<Appeal, object>>>()))
@@ -204,7 +200,7 @@ namespace FleetManager.UnitTest.Core
                 .Returns(paginationResult);
 
             //Act
-            var result = await handler.Handle(query, cancellationToken);
+            var result = await handler.Handle(query, _cancellationToken);
 
             //Assert
             result.Should().BeOfType(typeof(GetAppealsForDriverQueryResult));
@@ -225,11 +221,10 @@ namespace FleetManager.UnitTest.Core
             var query = new GetFuelCardsForDriverQuery();
             var fuelCards = new List<FuelCard>();
             var fuelCardDtos = new List<FuelCardDto>();
-            var cancellationToken = CancellationToken.None;
 
             _fuelCardRepo
                 .Setup(x => x.GetListBy(
-                    It.Is<CancellationToken>(y => y.Equals(cancellationToken)),
+                    It.Is<CancellationToken>(y => y.Equals(_cancellationToken)),
                     It.IsAny<PagingParameters>(),
                     It.IsAny<Expression<Func<FuelCard, bool>>>(),
                     It.IsAny<Func<IQueryable<FuelCard>, IIncludableQueryable<FuelCard, object>>>()))
@@ -242,7 +237,7 @@ namespace FleetManager.UnitTest.Core
                 .Returns(fuelCardDtos);
 
             //Act
-            var result = await handler.Handle(query, cancellationToken);
+            var result = await handler.Handle(query, _cancellationToken);
 
             //Assert
             result.Should().BeOfType(typeof(GetFuelCardsForDriverQueryResult));
@@ -265,11 +260,10 @@ namespace FleetManager.UnitTest.Core
             var fuelCards = new List<FuelCard>();
             var fuelCardDtos = new List<FuelCardDto> { new FuelCardDto() };
             var paginationResult = new PaginatedList<FuelCardDto>(fuelCardDtos, 1, 1, 5);
-            var cancellationToken = CancellationToken.None;
 
             _fuelCardRepo
                 .Setup(x => x.GetListBy(
-                    It.Is<CancellationToken>(y => y.Equals(cancellationToken)),
+                    It.Is<CancellationToken>(y => y.Equals(_cancellationToken)),
                     It.Is<PagingParameters>(y => y.PageSize.Equals(pagingParameters.PageSize)),
                     It.IsAny<Expression<Func<FuelCard, bool>>>(),
                     It.IsAny<Func<IQueryable<FuelCard>, IIncludableQueryable<FuelCard, object>>>()))
@@ -285,7 +279,7 @@ namespace FleetManager.UnitTest.Core
                 .Returns(paginationResult);
 
             //Act
-            var result = await handler.Handle(query, cancellationToken);
+            var result = await handler.Handle(query, _cancellationToken);
 
             //Assert
             result.Should().BeOfType(typeof(GetFuelCardsForDriverQueryResult));
@@ -306,11 +300,10 @@ namespace FleetManager.UnitTest.Core
             var query = new GetVehiclesForDriverQuery();
             var vehicles = new List<Vehicle>();
             var vehicleDetailsDtos = new List<VehicleDetailsDto>();
-            var cancellationToken = CancellationToken.None;
 
             _vehicleRepo
                 .Setup(x => x.GetListBy(
-                    It.Is<CancellationToken>(y => y.Equals(cancellationToken)),
+                    It.Is<CancellationToken>(y => y.Equals(_cancellationToken)),
                     It.IsAny<PagingParameters>(),
                     It.IsAny<Expression<Func<Vehicle, bool>>>(),
                     It.IsAny<Func<IQueryable<Vehicle>, IIncludableQueryable<Vehicle, object>>>()))
@@ -323,7 +316,7 @@ namespace FleetManager.UnitTest.Core
                 .Returns(vehicleDetailsDtos);
 
             //Act
-            var result = await handler.Handle(query, cancellationToken);
+            var result = await handler.Handle(query, _cancellationToken);
 
             //Assert
             result.Should().BeOfType(typeof(GetVehiclesForDriverQueryResult));
@@ -346,11 +339,10 @@ namespace FleetManager.UnitTest.Core
             var vehicles = new List<Vehicle>();
             var vehicleDetailsDtos = new List<VehicleDetailsDto> { new VehicleDetailsDto() };
             var paginationResult = new PaginatedList<VehicleDetailsDto>(vehicleDetailsDtos, 1, 1, 5);
-            var cancellationToken = CancellationToken.None;
 
             _vehicleRepo
                 .Setup(x => x.GetListBy(
-                    It.Is<CancellationToken>(y => y.Equals(cancellationToken)),
+                    It.Is<CancellationToken>(y => y.Equals(_cancellationToken)),
                     It.Is<PagingParameters>(y => y.PageSize.Equals(pagingParameters.PageSize)),
                     It.IsAny<Expression<Func<Vehicle, bool>>>(),
                     It.IsAny<Func<IQueryable<Vehicle>, IIncludableQueryable<Vehicle, object>>>()))
@@ -366,7 +358,7 @@ namespace FleetManager.UnitTest.Core
                 .Returns(paginationResult);
 
             //Act
-            var result = await handler.Handle(query, cancellationToken);
+            var result = await handler.Handle(query, _cancellationToken);
 
             //Assert
             result.Should().BeOfType(typeof(GetVehiclesForDriverQueryResult));
@@ -387,24 +379,23 @@ namespace FleetManager.UnitTest.Core
             var driverIdentity = new IdentityPerson{FirstName = "TestFirstName", Name = "TestName"};
             var driver = new Driver{ Identity = driverIdentity};
             var command = new AddAppealCommand();
-            var cancellationToken = CancellationToken.None;
 
             _vehicleRepo
                 .Setup(x => x.GetBy(
-                    It.Is<CancellationToken>(y => y.Equals(cancellationToken)),
+                    It.Is<CancellationToken>(y => y.Equals(_cancellationToken)),
                     It.IsAny<Expression<Func<Vehicle, bool>>>(),
                     It.IsAny<Func<IQueryable<Vehicle>, IIncludableQueryable<Vehicle, object>>>()))
                 .ReturnsAsync((Vehicle)null);
             _driverRepo
                 .Setup(x => x.GetBy(
-                    It.Is<CancellationToken>(y => y.Equals(cancellationToken)),
+                    It.Is<CancellationToken>(y => y.Equals(_cancellationToken)),
                     It.IsAny<Expression<Func<Driver, bool>>>(),
                     It.IsAny<Func<IQueryable<Driver>, IIncludableQueryable<Driver, object>>>()))
                 .ReturnsAsync(driver);
             _appealRepo
                 .Setup(x => x.Insert(
                 It.Is<Appeal>(y => y.Driver.Id.Equals(driverId)),
-                It.Is<CancellationToken>(y => y.Equals(cancellationToken))));
+                It.Is<CancellationToken>(y => y.Equals(_cancellationToken))));
             _unitOfWork
                 .Setup(x => x.Vehicles)
                 .Returns(_vehicleRepo.Object);
@@ -416,7 +407,7 @@ namespace FleetManager.UnitTest.Core
                 .Returns(_appealRepo.Object);
 
             //Act
-            var result = await handler.Handle(command, cancellationToken);
+            var result = await handler.Handle(command, _cancellationToken);
 
             //Assert
             result.Should().BeOfType(typeof(AddAppealCommandResult));

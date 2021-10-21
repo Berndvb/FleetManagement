@@ -1,4 +1,11 @@
+using System.Collections.Generic;
+using System.Threading;
+using System.Threading.Tasks;
+using FleetManagement.BLL.Features.DriverZone.GetAppealsForDriver;
 using FleetManagement.BLL.Features.DriverZone.GetDriverDetails;
+using FleetManagement.BLL.Features.DriverZone.GetFuelCardsForDriver;
+using FleetManagement.BLL.Features.DriverZone.GetVehiclesForDriver;
+using FleetManagement.BLL.Models.Dtos.ReadDtos;
 using FleetManagement.Framework.Constants;
 using FleetManagement.ReadAPI.Controllers;
 using FluentAssertions;
@@ -6,16 +13,9 @@ using MediatR;
 using MediatR.Cqrs.Execution;
 using Microsoft.AspNetCore.Mvc;
 using Moq;
-using System.Threading;
-using System.Threading.Tasks;
-using FleetManagement.BLL.Features.DriverZone.GetAppealsForDriver;
-using FleetManagement.BLL.Features.DriverZone.GetFuelCardsForDriver;
-using FleetManagement.BLL.Features.DriverZone.GetVehiclesForDriver;
-using FleetManagement.BLL.Models.Dtos.ReadDtos;
 using Xunit;
-using System.Collections.Generic;
 
-namespace FleetManager.UnitTest.Core
+namespace FleetManager.UnitTest.Core.ControllerTest
 {
     /// <summary>
     /// Can the controller:
@@ -26,7 +26,8 @@ namespace FleetManager.UnitTest.Core
     /// <returns></returns>
     public class ReadAPIDriverZoneControllerTests
     {
-        const int driverId = 1;
+        private const int driverId = 1;
+        private readonly CancellationToken _cancellationToken = CancellationToken.None;
         private readonly Mock<IMediator> _mediator;
         private readonly DriverZoneController _controller;
 
@@ -43,15 +44,14 @@ namespace FleetManager.UnitTest.Core
             var query = new GetDriverDetailsQuery {DriverId = driverId};
             var queryError = new ExecutionError("Id-Error", Constants.ErrorCodes.IdNotUnique);
             var queryRespons = ExecutionResult.BadRequest(queryError).As<GetDriverDetailsQueryResult>();
-            var cancellationToken = CancellationToken.None;
 
             _mediator.Setup(x => x.Send(
                 It.Is<GetDriverDetailsQuery>(y => y.DriverId == driverId),
-                It.Is<CancellationToken>(z => z.Equals(cancellationToken))))
+                It.Is<CancellationToken>(z => z.Equals(_cancellationToken))))
                 .ReturnsAsync(queryRespons);
 
             //Act
-            var result = await _controller.GetDriverDetails(query, cancellationToken);
+            var result = await _controller.GetDriverDetails(query, _cancellationToken);
 
             //Assert
             result.Should().BeOfType(typeof(BadRequestObjectResult));
@@ -66,15 +66,14 @@ namespace FleetManager.UnitTest.Core
             //Arrange
             var query = new GetDriverDetailsQuery { DriverId = driverId };
             var queryRespons = new GetDriverDetailsQueryResult(new DriverDetailsDto());
-            var cancellationToken = CancellationToken.None;
 
             _mediator.Setup(x => x.Send(
                     It.Is<GetDriverDetailsQuery>(y => y.DriverId == driverId),
-                    It.Is<CancellationToken>(z => z.Equals(cancellationToken))))
+                    It.Is<CancellationToken>(z => z.Equals(_cancellationToken))))
                 .ReturnsAsync(queryRespons);
 
             //Act
-            var result = await _controller.GetDriverDetails(query, cancellationToken);
+            var result = await _controller.GetDriverDetails(query, _cancellationToken);
 
             //Assert
             result.Should().BeOfType(typeof(OkObjectResult));
@@ -90,15 +89,14 @@ namespace FleetManager.UnitTest.Core
             var query = new GetFuelCardsForDriverQuery() { DriverId = driverId };
             var queryError = new ExecutionError("Id-Error", Constants.ErrorCodes.IdNotUnique);
             var queryRespons = ExecutionResult.BadRequest(queryError).As<GetFuelCardsForDriverQueryResult>();
-            var cancellationToken = CancellationToken.None;
 
             _mediator.Setup(x => x.Send(
                     It.Is<GetFuelCardsForDriverQuery>(y => y.DriverId == driverId),
-                    It.Is<CancellationToken>(z => z.Equals(cancellationToken))))
+                    It.Is<CancellationToken>(z => z.Equals(_cancellationToken))))
                 .ReturnsAsync(queryRespons);
 
             //Act
-            var result = await _controller.GetFuelCardsForDriver(query, cancellationToken);
+            var result = await _controller.GetFuelCardsForDriver(query, _cancellationToken);
 
             //Assert
             result.Should().BeOfType(typeof(BadRequestObjectResult));
@@ -114,15 +112,14 @@ namespace FleetManager.UnitTest.Core
             //Arrange
             var query = new GetFuelCardsForDriverQuery() { DriverId = driverId };
             var queryRespons = new GetFuelCardsForDriverQueryResult(new List<FuelCardDto>());
-            var cancellationToken = CancellationToken.None;
 
             _mediator.Setup(x => x.Send(
                     It.Is<GetFuelCardsForDriverQuery>(y => y.DriverId == driverId),
-                    It.Is<CancellationToken>(z => z.Equals(cancellationToken))))
+                    It.Is<CancellationToken>(z => z.Equals(_cancellationToken))))
                 .ReturnsAsync(queryRespons);
 
             //Act
-            var result = await _controller.GetFuelCardsForDriver(query, cancellationToken);
+            var result = await _controller.GetFuelCardsForDriver(query, _cancellationToken);
 
             //Assert
             result.Should().BeOfType(typeof(OkObjectResult));
@@ -138,15 +135,14 @@ namespace FleetManager.UnitTest.Core
             var query = new GetAppealsForDriverQuery() { DriverId = driverId };
             var queryError = new ExecutionError("Id-Error", Constants.ErrorCodes.IdNotUnique);
             var queryRespons = ExecutionResult.BadRequest(queryError).As<GetAppealsForDriverQueryResult>();
-            var cancellationToken = CancellationToken.None;
 
             _mediator.Setup(x => x.Send(
                     It.Is<GetAppealsForDriverQuery>(y => y.DriverId == driverId),
-                    It.Is<CancellationToken>(z => z.Equals(cancellationToken))))
+                    It.Is<CancellationToken>(z => z.Equals(_cancellationToken))))
                 .ReturnsAsync(queryRespons);
 
             //Act
-            var result = await _controller.GetAppealsForDriver(query, cancellationToken);
+            var result = await _controller.GetAppealsForDriver(query, _cancellationToken);
 
             //Assert
             result.Should().BeOfType(typeof(BadRequestObjectResult));
@@ -161,15 +157,14 @@ namespace FleetManager.UnitTest.Core
             //Arrange
             var query = new GetFuelCardsForDriverQuery() { DriverId = driverId };
             var queryRespons = new GetFuelCardsForDriverQueryResult(new List<FuelCardDto>());
-            var cancellationToken = CancellationToken.None;
 
             _mediator.Setup(x => x.Send(
                     It.Is<GetFuelCardsForDriverQuery>(y => y.DriverId == driverId),
-                    It.Is<CancellationToken>(z => z.Equals(cancellationToken))))
+                    It.Is<CancellationToken>(z => z.Equals(_cancellationToken))))
                 .ReturnsAsync(queryRespons);
 
             //Act
-            var result = await _controller.GetFuelCardsForDriver(query, cancellationToken);
+            var result = await _controller.GetFuelCardsForDriver(query, _cancellationToken);
 
             //Assert
             result.Should().BeOfType(typeof(OkObjectResult));
@@ -186,15 +181,14 @@ namespace FleetManager.UnitTest.Core
             var query = new GetVehiclesForDriverQuery() { DriverId = driverId };
             var queryError = new ExecutionError("Id-Error", Constants.ErrorCodes.IdNotUnique);
             var queryRespons = ExecutionResult.BadRequest(queryError).As<GetVehiclesForDriverQueryResult>();
-            var cancellationToken = CancellationToken.None;
 
             _mediator.Setup(x => x.Send(
                     It.Is<GetVehiclesForDriverQuery>(y => y.DriverId == driverId),
-                    It.Is<CancellationToken>(z => z.Equals(cancellationToken))))
+                    It.Is<CancellationToken>(z => z.Equals(_cancellationToken))))
                 .ReturnsAsync(queryRespons);
 
             //Act
-            var result = await _controller.GetVehiclesForDriver(query, cancellationToken);
+            var result = await _controller.GetVehiclesForDriver(query, _cancellationToken);
 
             //Assert
             result.Should().BeOfType(typeof(BadRequestObjectResult)); 
@@ -209,15 +203,14 @@ namespace FleetManager.UnitTest.Core
             //Arrange
             var query = new GetVehiclesForDriverQuery() { DriverId = driverId };
             var queryRespons = new GetVehiclesForDriverQueryResult(new List<VehicleDetailsDto>());
-            var cancellationToken = CancellationToken.None;
 
             _mediator.Setup(x => x.Send(
                     It.Is<GetVehiclesForDriverQuery>(y => y.DriverId == driverId),
-                    It.Is<CancellationToken>(z => z.Equals(cancellationToken))))
+                    It.Is<CancellationToken>(z => z.Equals(_cancellationToken))))
                 .ReturnsAsync(queryRespons);
 
             //Act
-            var result = await _controller.GetVehiclesForDriver(query, cancellationToken);
+            var result = await _controller.GetVehiclesForDriver(query, _cancellationToken);
 
             //Assert
             result.Should().BeOfType(typeof(OkObjectResult));
