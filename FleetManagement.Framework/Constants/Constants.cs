@@ -22,5 +22,18 @@ namespace FleetManagement.Framework.Constants
         {
             public const string StartAllPhi = "20110812";
         }
+
+        public static class Json
+        {
+            public const string DefaultCulture = "en-US";
+
+            public const string DefaultDateTimeFormat = "yyyy-MM-ddTHH:mm:ssZ"; //
+        }
+
+        public static class Env
+        {
+            public const string IntegrationTesting = "integrationtesting";
+            public const string UnitTesting = "unittesting";
+        }
     }
 }

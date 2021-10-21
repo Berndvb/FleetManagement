@@ -1,5 +1,7 @@
 ﻿using FleetManagement.Domain.Models;
+using FleetManagement.WriteAPI;
 using FleetManager.EFCore.Repositories;
+using FleetManager.UnitTest.Integration.Setup;
 using Microsoft.EntityFrameworkCore.Query;
 using Microsoft.Extensions.DependencyInjection;
 using Moq;
@@ -17,21 +19,21 @@ using JsonSerializer = Newtonsoft.Json.JsonSerializer;
 
 namespace FleetManager.UnitTest.Features.DriverZone.Factory
 {
-    public class DriverZoneClientFactory /*: AuthenticatedFixture<DriverZoneClientFactory>*/
+    public class DriverZoneFactory : CustomWebApplicationFactory<Startup>
     {
         private readonly string _assemblyName;
         protected readonly List<Action<IServiceCollection>> Registrations = new List<Action<IServiceCollection>>();
         private readonly Mock<IGenericRepository<Driver>> _mockDriverRepository;
 
-        public DriverZoneClientFactory()
+        public DriverZoneFactory()
         {
-            _assemblyName = Assembly.GetAssembly(typeof(DriverZoneClientFactory)).GetName().Name;
+            _assemblyName = Assembly.GetExecutingAssembly().GetName().Name;
             _mockDriverRepository = new Mock<IGenericRepository<Driver>>();
         }
 
-        public DriverZoneClientFactory GetDriverDetails(int driverId)
+        public DriverZoneFactory WithDriverDetails(int driverId)
         {
-            var entityResponse = ReadResponseFromEmbeddedFile<Driver>(_assemblyName, $"GetDriverDetails");
+            var entityResponse = ReadResponseFromEmbeddedFile<Driver>(_assemblyName, $"GetDriverDetails.json");
 
             _mockDriverRepository.Setup(x =>
                 x.GetBy(
@@ -43,11 +45,10 @@ namespace FleetManager.UnitTest.Features.DriverZone.Factory
             return this;
         }
 
-        public override Task<HttpClient> CreateClient()
+        public DriverZoneFactory SwapService()
         {
             Registrations.Add(services => { services.SwapTransient(provider => _mockDriverRepository.Object); });
-
-            return base.CreateClient();
+            return this;
         }
 
         public TK ReadResponseFromEmbeddedFile<TK>(string assemblyName, string fileName)
@@ -62,6 +63,11 @@ namespace FleetManager.UnitTest.Features.DriverZone.Factory
                     return serializer.Deserialize<TK>(jsonTextReader);
                 }
             }
+        }
+
+        public async Task<HttpClient> CreateClient()
+        {
+            return await base.CreateClient();
         }
 
         public static class FileUtils
@@ -93,27 +99,6 @@ namespace FleetManager.UnitTest.Features.DriverZone.Factory
                     stream.CopyTo(ms);
                 }
                 return ms;
-            }
-
-            /// <summary>
-            /// Get the content of the embedded resources as string
-            /// </summary>
-            /// <param name="assemblyName">Name of the assembly</param>
-            /// <param name="resource">Filename of the resource. If the file is located in a subfolder, use dots instead of slashes</param>
-            /// <returns></returns>
-            public static async Task<string> LoadEmbeddedResourceAsString(
-                string assemblyName, string resource)
-            {
-                string output;
-
-                var ms = LoadEmbeddedResourceAsStream(assemblyName, resource);
-                ms.Position = 0;
-
-                using (var reader = new StreamReader(ms))
-                    output = await reader.ReadToEndAsync();
-
-
-                return output;
             }
         }
     }

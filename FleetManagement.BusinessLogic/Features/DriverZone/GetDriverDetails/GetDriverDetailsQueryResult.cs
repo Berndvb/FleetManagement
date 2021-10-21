@@ -1,5 +1,7 @@
 ﻿using FleetManagement.BLL.Models.Dtos.ReadDtos;
+using MediatR;
 using MediatR.Cqrs.Execution;
+using System;
 
 namespace FleetManagement.BLL.Features.DriverZone.GetDriverDetails
 {
