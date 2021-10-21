@@ -1,4 +1,6 @@
-﻿using FleetManagement.BLL.Features.DriverZone.AddAppeal;
+﻿using System.Threading;
+using System.Threading.Tasks;
+using FleetManagement.BLL.Features.DriverZone.AddAppeal;
 using FleetManagement.BLL.Features.DriverZone.UpdateAppeal;
 using FleetManagement.BLL.Features.DriverZone.UpdateContactInfo;
 using FleetManagement.BLL.Features.DriverZone.UpdateFuelCard;
@@ -9,11 +11,9 @@ using MediatR;
 using MediatR.Cqrs.Execution;
 using Microsoft.AspNetCore.Mvc;
 using Moq;
-using System.Threading;
-using System.Threading.Tasks;
 using Xunit;
 
-namespace FleetManager.UnitTest.Core
+namespace FleetManager.UnitTest.Core.ControllerTest
 {
     /// <summary>
     /// Can the controller:
@@ -87,13 +87,13 @@ namespace FleetManager.UnitTest.Core
         public async Task Should_not_update_fuelCard_for_driver()
         {
             //Arrange
-            var command = new UpdateFuelCardCommand() { FuelCardId = fuelCardId };
+            var command = new UpdateFuelCardInfoCommand() { FuelCardId = fuelCardId };
             var commandError = new ExecutionError("Id-Error", Constants.ErrorCodes.InvalidRequestInput);
-            var commandRespons = ExecutionResult.BadRequest(commandError).As<UpdateFuelCardCommandResult>();
+            var commandRespons = ExecutionResult.BadRequest(commandError).As<UpdateFuelCardInfoCommandResult>();
             var cancellationToken = CancellationToken.None;
 
             _mediator.Setup(x => x.Send(
-                It.Is<UpdateFuelCardCommand>(y => y.FuelCardId == fuelCardId),
+                It.Is<UpdateFuelCardInfoCommand>(y => y.FuelCardId == fuelCardId),
                 It.Is<CancellationToken>(z => z.Equals(cancellationToken))))
                 .ReturnsAsync(commandRespons);
 
@@ -111,12 +111,12 @@ namespace FleetManager.UnitTest.Core
         public async Task Should_update_fuelCard_for_driver()
         {
             //Arrange
-            var command = new UpdateFuelCardCommand() { FuelCardId = fuelCardId };
-            var commandRespons = new UpdateFuelCardCommandResult();
+            var command = new UpdateFuelCardInfoCommand() { FuelCardId = fuelCardId };
+            var commandRespons = new UpdateFuelCardInfoCommandResult();
             var cancellationToken = CancellationToken.None;
 
             _mediator.Setup(x => x.Send(
-                    It.Is<UpdateFuelCardCommand>(y => y.FuelCardId == fuelCardId),
+                    It.Is<UpdateFuelCardInfoCommand>(y => y.FuelCardId == fuelCardId),
                     It.Is<CancellationToken>(z => z.Equals(cancellationToken))))
                 .ReturnsAsync(commandRespons);
 
@@ -127,7 +127,7 @@ namespace FleetManager.UnitTest.Core
             result.Should().BeOfType(typeof(OkObjectResult));
             var objectResult = result as OkObjectResult;
             objectResult.Value.Should().NotBeNull();
-            objectResult.Value.Should().BeOfType(typeof(UpdateFuelCardCommandResult));
+            objectResult.Value.Should().BeOfType(typeof(UpdateFuelCardInfoCommandResult));
         }
 
         [Fact]

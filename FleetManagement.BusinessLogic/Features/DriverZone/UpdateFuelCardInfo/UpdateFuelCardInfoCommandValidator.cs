@@ -5,9 +5,9 @@ using FluentValidation;
 
 namespace FleetManagement.BLL.Features.DriverZone.UpdateFuelCard
 {
-    public class UpdateFuelCardCommandValidator : AbstractValidator<UpdateFuelCardCommand>
+    public class UpdateFuelCardInfoCommandValidator : AbstractValidator<UpdateFuelCardInfoCommand>
     {
-        public UpdateFuelCardCommandValidator()
+        public UpdateFuelCardInfoCommandValidator()
         {
             RuleFor(x => x.Pincode)
                 .Must(y => y.Length.Equals(4))

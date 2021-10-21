@@ -34,7 +34,7 @@ namespace FleetManagement.WriteAPI.Controllers
 
         [HttpPut("fuelCard/{fuelCardId}")]
         public async Task<IActionResult> UpdateFuelCard(
-            UpdateFuelCardCommand updateFuelCardCommand,
+            UpdateFuelCardInfoCommand updateFuelCardCommand,
             int fuelCardId,
             CancellationToken cancellationToken)
         {

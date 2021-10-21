@@ -15,7 +15,7 @@ namespace FleetManagement.Domain.Models
 
         public bool InService { get; set; }
 
-        public List<FuelCardDriver> FuelCards { get; set; }
+        public List<FuelCardDriver> FuelCardDrivers { get; set; }
 
         public List<DriverVehicle> DriverVehicles { get; set; }
 

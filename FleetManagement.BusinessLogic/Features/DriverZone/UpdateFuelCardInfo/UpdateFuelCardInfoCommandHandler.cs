@@ -6,27 +6,27 @@ using MediatR.Cqrs.Commands;
 
 namespace FleetManagement.BLL.Features.DriverZone.UpdateFuelCard
 {
-    public class UpdateFuelCardCommandHandler : CommandHandler<UpdateFuelCardCommand, UpdateFuelCardCommandResult>
+    public class UpdateFuelCardInfoCommandHandler : CommandHandler<UpdateFuelCardInfoCommand, UpdateFuelCardInfoCommandResult>
     {
         private readonly IUnitOfWork _unitOfWork;
 
-        public UpdateFuelCardCommandHandler(
+        public UpdateFuelCardInfoCommandHandler(
             IUnitOfWork unitOfWork)
         {
             _unitOfWork = unitOfWork;
         }
 
-        public async override Task<UpdateFuelCardCommandResult> Handle(
-            UpdateFuelCardCommand request,
+        public async override Task<UpdateFuelCardInfoCommandResult> Handle(
+            UpdateFuelCardInfoCommand request,
             CancellationToken cancellationToken)
         {
             await UpdateFuelCard(request, cancellationToken);
 
-            return new UpdateFuelCardCommandResult();
+            return new UpdateFuelCardInfoCommandResult();
         }
 
         public async Task UpdateFuelCard(
-            UpdateFuelCardCommand request,
+            UpdateFuelCardInfoCommand request,
             CancellationToken cancellationToken)
         {
             var fuelCard = await _unitOfWork.FuelCards.GetBy(

@@ -2,7 +2,7 @@
 
 namespace FleetManagement.BLL.Features.DriverZone.UpdateFuelCard
 {
-    public class UpdateFuelCardCommandResult : ExecutionResult
+    public class UpdateFuelCardInfoCommandResult : ExecutionResult
     {
     }
 }

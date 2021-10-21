@@ -4,7 +4,7 @@ using System.Text.Json.Serialization;
 
 namespace FleetManagement.BLL.Features.DriverZone.UpdateFuelCard
 {
-    public class UpdateFuelCardCommand : ICommand<UpdateFuelCardCommandResult>
+    public class UpdateFuelCardInfoCommand : ICommand<UpdateFuelCardInfoCommandResult>
     {
         [JsonIgnore]
         public int FuelCardId { get; set; }
@@ -15,7 +15,7 @@ namespace FleetManagement.BLL.Features.DriverZone.UpdateFuelCard
 
         public bool Blocked { get; set; }
 
-        public UpdateFuelCardCommand WithId(int id)
+        public UpdateFuelCardInfoCommand WithId(int id)
         {
             FuelCardId = id;
             return this;
