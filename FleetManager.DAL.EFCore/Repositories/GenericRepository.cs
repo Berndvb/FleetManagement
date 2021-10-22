@@ -77,17 +77,6 @@ namespace FleetManager.EFCore.Repositories
             await Task.Run(() => _dbSet.Remove(entity), cancellationToken);
         }
 
-        public async Task RemoveById(int id, CancellationToken cancellationToken)
-        {
-            var toBeRemoved = await GetBy(cancellationToken, x => x.Id.Equals(id));
-            await Remove(toBeRemoved, cancellationToken);
-        }
-
-        public async Task RemoveRange(ICollection<TEntity> entities, CancellationToken cancellationToken)
-        {
-            await Task.Run(() => _dbSet.RemoveRange(entities), cancellationToken);
-        }
-
         public async Task Update(TEntity entityNew, CancellationToken cancellationToken)
         {
             await Task.Run(() => _dbSet.Update(entityNew), cancellationToken);
