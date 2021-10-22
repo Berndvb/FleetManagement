@@ -1,20 +1,18 @@
-using System.Net;
-using FleetManagement.BLL.Models.Dtos.ReadDtos;
-using FleetManager.UnitTest.Features.DriverZone.Factory;
-using Xunit;
-using FleetManager.UnitTest.Http;
-using FluentAssertions;
 using System.Threading.Tasks;
-using System.IO;
-using System.Reflection;
+using FleetManagement.BLL.Models.Dtos.ReadDtos;
+using FleetManagement.WriteAPI.Controllers;
+using FleetManager.EFCore.Infrastructure.DbContext;
+using FleetManager.UnitTest.Integration.Setup;
+using Microsoft.EntityFrameworkCore;
+using Xunit;
 
 namespace FleetManager.UnitTest
 {
-    public class DriverZoneTests : IClassFixture<DriverZoneFactory>
+    public class DriverZoneTests
     {
-        private readonly DriverZoneFactory _factory;
-
-        public DriverZoneTests(DriverZoneFactory factory)
+        private static string CustomerZoneRoute => "api/v1/my";
+        public DriverZoneClientFactory _factory;
+        public DriverZoneTests(DriverZoneClientFactory factory)
         {
             _factory = factory;
         }
@@ -22,22 +20,16 @@ namespace FleetManager.UnitTest
         [Fact]
         public async Task Should_get_driverDetailsAsync()
         {
-
             // Arrange
-            var driverId = 1;
-
             var client = await _factory
-                .WithDriverDetails(driverId)
-                .SwapService()
+                .WithDriverById()
                 .CreateClient();
 
-            var url = $"https://localhost:44331/readapi/Driver/2/driverdetails";
-
             // Act
-            var respons = await client.GetAsync<DriverDetailsDto>(url);
+            var url = $"readapi/driver/1";
+            var result = client.GetAsync<DriverDetailsDto>(url);
 
             // Assert
-            respons.ResponseMessage.StatusCode.Should().Be(HttpStatusCode.OK);
 
         }
     }

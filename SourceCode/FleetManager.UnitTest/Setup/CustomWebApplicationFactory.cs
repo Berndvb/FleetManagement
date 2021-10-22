@@ -12,9 +12,11 @@ using Serilog;
 using System;
 using System.Collections.Generic;
 using System.IO;
+using System.Linq;
 using System.Net.Http;
+using System.Text;
 using System.Threading.Tasks;
-using Checkpoint = Respawn.Checkpoint;
+using System.Diagnostics;
 
 namespace FleetManager.UnitTest.Integration.Setup
 {
@@ -26,6 +28,13 @@ namespace FleetManager.UnitTest.Integration.Setup
         private readonly Checkpoint _checkpoint;
 
         protected readonly List<Action<IServiceCollection>> Registrations = new List<Action<IServiceCollection>>();
+
+        public new virtual async Task<HttpClient> CreateClient()
+        {
+            var client = base.CreateClient();
+            await ResetCheckpoint();
+            return client;
+        }
 
         protected CustomWebApplicationFactory(Action<IServiceCollection> registrations = null)
         {
@@ -49,13 +58,6 @@ namespace FleetManager.UnitTest.Integration.Setup
             };
         }
 
-        public new virtual async Task<HttpClient> CreateClient()
-        {
-            var client = base.CreateClient();
-            await ResetCheckpoint();
-            return client;
-        }
-
         protected Task ResetCheckpoint()
         {
             return ResetCheckpoint(Services);
@@ -71,7 +73,7 @@ namespace FleetManager.UnitTest.Integration.Setup
             {
                 // Makes sure the tests use the appsettings within the current project
                 b.SetBasePath(Directory.GetCurrentDirectory());
-                b.AddJsonFile("appsettings.test.json");
+                b.AddJsonFile("testsettings.json");
                 b.AddEnvironmentVariables();
                 context.HostingEnvironment.EnvironmentName = Constants.Env.IntegrationTesting;
             });
@@ -92,8 +94,8 @@ namespace FleetManager.UnitTest.Integration.Setup
                     configuration) =>
                 {
                     configuration.MinimumLevel.Verbose();
-                    //configuration.WriteTo.Debug();
-                    //configuration.WriteTo.File("testlog.txt");
+                    configuration.WriteTo.Debug();
+                    configuration.WriteTo.File("testlog.txt");
                 });
         }
 
@@ -108,7 +110,7 @@ namespace FleetManager.UnitTest.Integration.Setup
 
         private async Task ResetCheckpoint(IServiceProvider serviceProvider)
         {
-            var configuration = serviceProvider.GetService<Microsoft.Extensions.Configuration.IConfiguration>();
+            var configuration = serviceProvider.GetService<IConfiguration>();
             if (_connection == null)
             {
                 _connection = new MySqlConnection(configuration.GetConnectionString(nameof(DatabaseContext)));

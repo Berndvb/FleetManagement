@@ -27,10 +27,6 @@ namespace FleetManager.UnitTest.Core.RepoTest
         private const int driverId = 1;
         private readonly CancellationToken _cancellationToken = CancellationToken.None;
 
-        public RepoTests()
-        {
-        }
-
         [Fact]
         public async Task Should_get_filtered_driverList_by_inService()
         {
@@ -41,18 +37,27 @@ namespace FleetManager.UnitTest.Core.RepoTest
             using (var context = new DatabaseContext(options))
             {
                 //Arrange
-                var drivers = new List<Driver> { new Driver { Id = 1, InService = true }, new Driver { Id = 2, InService = false } };
+                var drivers = new List<Driver> { 
+                    new Driver { Id = 1, InService = true },
+                    new Driver { Id = 2, InService = false }};
                 context.Drivers.AddRange(drivers);
                 context.SaveChanges();
+
                 Expression<Func<Driver, bool>> filter = x => x.InService.Equals(true);
                 var repo = new GenericRepository<Driver>(context);
 
                 //Act
-                var result = await repo.GetListBy(_cancellationToken, pagingParameters: null, filter, including: null);
+                var result = await repo.GetListBy(
+                    _cancellationToken, 
+                    pagingParameters: null,
+                    filter, 
+                    including: null);
 
                 //Assert
                 result.Count.Should().Be(1);
-                result.FirstOrDefault().Id.Should().Be(driverId);
+                var foundDriver = result.FirstOrDefault();
+                foundDriver.Id.Should().Be(driverId);
+                foundDriver.InService.Should().BeTrue();
                 result.Should().BeOfType(typeof(List<Driver>));
 
                 context.Database.EnsureDeleted();
@@ -69,14 +74,21 @@ namespace FleetManager.UnitTest.Core.RepoTest
             using (var context = new DatabaseContext(options))
             {
                 //Arrange
-                var drivers = new List<Driver> { new Driver { Id = 1, InService = true }, new Driver { Id = 2, InService = false } };
+                var drivers = new List<Driver> {
+                    new Driver { Id = 1, InService = true }, 
+                    new Driver { Id = 2, InService = false }};
                 context.Drivers.AddRange(drivers);
                 context.SaveChanges();
+
                 var pagingParameters = new PagingParameters { PageSize = 5, PageNumber = 1 };
                 var repo = new GenericRepository<Driver>(context);
 
                 //Act
-                var result = await repo.GetListBy(_cancellationToken, pagingParameters, filter: null, including: null);
+                var result = await repo.GetListBy(
+                    _cancellationToken, 
+                    pagingParameters, 
+                    filter: null, 
+                    including: null);
 
                 //Assert
                 result.Count.Should().Be(2);
@@ -104,14 +116,22 @@ namespace FleetManager.UnitTest.Core.RepoTest
             {
                 //Arrange
                 var identity = new IdentityPerson { Id = 1, Name = "TestName", FirstName = "TestFirstName" };
-                var drivers = new List<Driver> { new Driver { Id = 1, InService = true, Identity = identity }, new Driver { Id = 2, InService = false } };
+                var drivers = new List<Driver> {
+                    new Driver { Id = 1, InService = true, Identity = identity }, 
+                    new Driver { Id = 2, InService = false }};
                 context.Drivers.AddRange(drivers);
                 context.SaveChanges();
-                Func<IQueryable<Driver>, IIncludableQueryable<Driver, object>> including = x => x.Include(y => y.Identity);
+
+                Func<IQueryable<Driver>, IIncludableQueryable<Driver, object>> including = 
+                    x => x.Include(y => y.Identity);
                 var repo = new GenericRepository<Driver>(context);
 
                 //Act
-                var result = await repo.GetListBy(_cancellationToken, pagingParameters: null, filter: null, including);
+                var result = await repo.GetListBy(
+                    _cancellationToken,
+                    pagingParameters: null, 
+                    filter: null, 
+                    including);
 
                 //Assert
                 result.Count.Should().Be(2);
@@ -139,6 +159,7 @@ namespace FleetManager.UnitTest.Core.RepoTest
                 var driver = new Driver { Id = 1, InService = true };
                 context.Drivers.Add(driver);
                 context.SaveChanges();
+
                 Expression<Func<Driver, bool>> filter = x => x.Id.Equals(driverId);
                 var repo = new GenericRepository<Driver>(context);
 
@@ -167,8 +188,10 @@ namespace FleetManager.UnitTest.Core.RepoTest
                 var driver = new Driver { Id = 1, InService = true, Identity = identity };
                 context.Drivers.Add(driver);
                 context.SaveChanges();
+
                 Expression<Func<Driver, bool>> filter = x => x.Id.Equals(driverId);
-                Func<IQueryable<Driver>, IIncludableQueryable<Driver, object>> including = x => x.Include(y => y.Identity);
+                Func<IQueryable<Driver>, IIncludableQueryable<Driver, object>> including = 
+                    x => x.Include(y => y.Identity);
                 var repo = new GenericRepository<Driver>(context);
 
                 //Act
@@ -196,9 +219,12 @@ namespace FleetManager.UnitTest.Core.RepoTest
             using (var context = new DatabaseContext(options))
             {
                 //Arrange
-                var drivers = new List<Driver> { new Driver { Id = 1, InService = true }, new Driver { Id = 2, InService = false } };
+                var drivers = new List<Driver> {
+                    new Driver { Id = 1, InService = true }, 
+                    new Driver { Id = 2, InService = false }};
                 context.Drivers.AddRange(drivers);
                 context.SaveChanges();
+
                 Expression<Func<Driver, bool>> filter = x => x.Id.Equals(driverId);
                 var repo = new GenericRepository<Driver>(context);
 
@@ -256,7 +282,9 @@ namespace FleetManager.UnitTest.Core.RepoTest
             {
                 //Arrange
                 var identity = new IdentityPerson { Id = 1, Name = "TestName", FirstName = "TestFirstName" };
-                var drivers = new List<Driver> { new Driver { Id = 1, InService = true, Identity = identity }, new Driver { Id = 2, InService = false } };
+                var drivers = new List<Driver> {
+                    new Driver { Id = 1, InService = true, Identity = identity }, 
+                    new Driver { Id = 2, InService = false }};
                 var repo = new GenericRepository<Driver>(context);
 
                 //Act
@@ -265,7 +293,7 @@ namespace FleetManager.UnitTest.Core.RepoTest
 
                 //Assert
                 context.Drivers.Count().Should().Be(2);
-                var firstDriver = context.Drivers.First();
+                var firstDriver = context.Drivers.First(); 
                 firstDriver.Id.Should().Be(driverId);
                 firstDriver.Identity.FirstName.Should().Be("TestFirstName");
                 firstDriver.Identity.Name.Should().Be("TestName");
@@ -289,6 +317,7 @@ namespace FleetManager.UnitTest.Core.RepoTest
                 var driverSecond = new Driver { Id = 2, InService = false };
                 context.Drivers.AddRange(driverFirst, driverSecond);
                 context.SaveChanges();
+
                 var repo = new GenericRepository<Driver>(context);
 
                 //Act
@@ -315,11 +344,14 @@ namespace FleetManager.UnitTest.Core.RepoTest
             using (var context = new DatabaseContext(options))
             {
                 //Arrange
-                var repo = new GenericRepository<IdentityPerson>(context);
                 var identity = new IdentityPerson { Id = 1, Name = "TestName", FirstName = "TestFirstName" };
-                var drivers = new List<Driver> { new Driver { Id = 1, InService = true, Identity = identity }, new Driver { Id = 2, InService = false } };
+                var drivers = new List<Driver> {
+                    new Driver { Id = 1, InService = true, Identity = identity }, 
+                    new Driver { Id = 2, InService = false }};
                 context.Drivers.AddRange(drivers);
                 context.SaveChanges();
+
+                var repo = new GenericRepository<IdentityPerson>(context);
 
                 //Act
                 await repo.Remove(identity, _cancellationToken);
@@ -346,14 +378,17 @@ namespace FleetManager.UnitTest.Core.RepoTest
             using (var context = new DatabaseContext(options))
             {
                 //Arrange
-                var drivers = new List<Driver> { new Driver { Id = 1, InService = true }, new Driver { Id = 2, InService = false } };
+                var drivers = new List<Driver> {
+                    new Driver { Id = 1, InService = true }, 
+                    new Driver { Id = 2, InService = false }};
                 context.Drivers.AddRange(drivers);
                 context.SaveChanges();
+
                 var driverFound = context.Drivers.SingleOrDefault(x => x.Id.Equals(driverId));
-                driverFound.InService = false;
                 var repo = new GenericRepository<Driver>(context);
 
                 //Act
+                driverFound.InService = false;
                 await repo.Update(driverFound, _cancellationToken);
                 context.SaveChanges();
 
