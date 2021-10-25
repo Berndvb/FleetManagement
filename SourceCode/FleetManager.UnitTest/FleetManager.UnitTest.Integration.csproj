@@ -1,4 +1,4 @@
-<Project Sdk="Microsoft.NET.Sdk">
+﻿<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
     <TargetFramework>net5.0</TargetFramework>
@@ -7,11 +7,19 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <None Remove="Features\DriverZone\ResponseFiles\GetAppealsForDriver.json" />
+    <None Remove="Features\DriverZone\ResponseFiles\GetDriverById.json" />
     <None Remove="Features\DriverZone\ResponseFiles\GetDrivers.json" />
+    <None Remove="Features\DriverZone\ResponseFiles\GetFuelCardsForDriver.json" />
+    <None Remove="Features\DriverZone\ResponseFiles\GetVehiclesForDriver.json" />
   </ItemGroup>
 
   <ItemGroup>
+    <EmbeddedResource Include="Features\DriverZone\ResponseFiles\GetAppealsForDriver.json" />
+    <EmbeddedResource Include="Features\DriverZone\ResponseFiles\GetDriverById.json" />
     <EmbeddedResource Include="Features\DriverZone\ResponseFiles\GetDrivers.json" />
+    <EmbeddedResource Include="Features\DriverZone\ResponseFiles\GetFuelCardsForDriver.json" />
+    <EmbeddedResource Include="Features\DriverZone\ResponseFiles\GetVehiclesForDriver.json" />
   </ItemGroup>
 
   <ItemGroup>
@@ -20,10 +28,11 @@
     <PackageReference Include="Microsoft.AspNetCore.Mvc.Testing" Version="5.0.11" />
     <PackageReference Include="Microsoft.Azure.EventHubs.Processor" Version="4.3.2" />
     <PackageReference Include="Microsoft.EntityFrameworkCore.InMemory" Version="5.0.11" />
+    <PackageReference Include="Microsoft.Extensions.Configuration.Json" Version="5.0.0" />
     <PackageReference Include="Microsoft.Extensions.DependencyInjection" Version="5.0.2" />
     <PackageReference Include="Microsoft.NET.Test.Sdk" Version="16.9.4" />
     <PackageReference Include="Moq" Version="4.16.1" />
-    <PackageReference Include="MySql.Data" Version="8.0.27" />
+    <PackageReference Include="MySqlConnector" Version="1.3.14" />
     <PackageReference Include="Respawn" Version="4.0.0" />
     <PackageReference Include="Serilog.Extensions.Hosting" Version="4.1.2" />
     <PackageReference Include="Serilog.Sinks.Console" Version="4.0.0" />
@@ -48,6 +57,12 @@
     <ProjectReference Include="..\..\FleetManagement.BusinessLogic\FleetManagement.BLL.csproj" />
     <ProjectReference Include="..\..\FleetManager.DAL.EFCore\FleetManager.EFCore.csproj" />
     <ProjectReference Include="..\FleetManagement.WriteAPI\FleetManagement.WriteAPI.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Update="testsettings.json">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
   </ItemGroup>
 
 </Project>

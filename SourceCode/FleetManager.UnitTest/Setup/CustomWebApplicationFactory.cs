@@ -3,20 +3,19 @@ using FleetManager.EFCore.Infrastructure.DbContext;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Mvc.Testing;
 using Microsoft.AspNetCore.TestHost;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
-using MySql.Data.MySqlClient;
 using Respawn;
 using Serilog;
 using System;
 using System.Collections.Generic;
 using System.IO;
-using System.Linq;
 using System.Net.Http;
-using System.Text;
 using System.Threading.Tasks;
-using System.Diagnostics;
+using MySqlConnector;
+using System.Data.Common;
 
 namespace FleetManager.UnitTest.Integration.Setup
 {
@@ -24,7 +23,7 @@ namespace FleetManager.UnitTest.Integration.Setup
     public class CustomWebApplicationFactory<TStartup> : WebApplicationFactory<TStartup>
         where TStartup : class
     {
-        private MySqlConnection _connection;
+        private DbConnection _connection;
         private readonly Checkpoint _checkpoint;
 
         protected readonly List<Action<IServiceCollection>> Registrations = new List<Action<IServiceCollection>>();
@@ -113,7 +112,16 @@ namespace FleetManager.UnitTest.Integration.Setup
             var configuration = serviceProvider.GetService<IConfiguration>();
             if (_connection == null)
             {
-                _connection = new MySqlConnection(configuration.GetConnectionString(nameof(DatabaseContext)));
+                IConfigurationRoot configuration2 = new ConfigurationBuilder()
+                .SetBasePath(Directory.GetCurrentDirectory())
+                .AddJsonFile("testsettings.json")
+                .Build();
+                var connectionString = configuration.GetConnectionString("DatabaseContext");
+                var builder = new DbContextOptionsBuilder<DatabaseContext>();
+                builder.UseSqlServer(connectionString);
+                var context = new DatabaseContext(builder.Options);
+                _connection = context.Database.GetDbConnection();
+                //_connection = new MySqlConnection(configuration.GetConnectionString(nameof(DatabaseContext)));
                 _connection.Open();
             }
 

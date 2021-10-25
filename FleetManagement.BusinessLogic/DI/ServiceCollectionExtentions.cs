@@ -7,7 +7,6 @@ using FluentValidation.AspNetCore;
 using MediatR;
 using MediatR.Cqrs;
 using Microsoft.Extensions.DependencyInjection;
-using System.Reflection;
 
 
 namespace FleetManagement.BLL.DI

@@ -1,11 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Linq.Expressions;
-using System.Threading;
-using System.Threading.Tasks;
-using AutoMapper;
-using FleetManagement.BLL.Features.DriverZone.AddAppeal;
+﻿using FleetManagement.BLL.Features.DriverZone.AddAppeal;
 using FleetManagement.BLL.Features.DriverZone.GetAppealsForDriver;
 using FleetManagement.BLL.Features.DriverZone.GetDriverDetails;
 using FleetManagement.BLL.Features.DriverZone.GetFuelCardsForDriver;
@@ -14,17 +7,21 @@ using FleetManagement.BLL.Features.DriverZone.UpdateAppeal;
 using FleetManagement.BLL.Features.DriverZone.UpdateContactInfo;
 using FleetManagement.BLL.Features.DriverZone.UpdateFuelCard;
 using FleetManagement.BLL.Models.Dtos.ReadDtos;
-using FleetManagement.BLL.Services;
 using FleetManagement.Domain.Models;
 using FleetManagement.Framework.Models.Enums;
 using FleetManagement.Framework.Paging;
 using FleetManager.EFCore.Infrastructure.Pagination;
-using FleetManager.EFCore.Repositories;
-using FleetManager.EFCore.UOW;
+using FleetManager.UnitTest.Core.HandlerTest.Setup;
 using FluentAssertions;
 using MediatR.Cqrs.Execution;
 using Microsoft.EntityFrameworkCore.Query;
 using Moq;
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Linq.Expressions;
+using System.Threading;
+using System.Threading.Tasks;
 using Xunit;
 using FuelCard = FleetManagement.Domain.Models.FuelCard;
 
@@ -37,53 +34,16 @@ namespace FleetManager.UnitTest.Core.HandlerTest
     /// - convert the UnitOfWork-result to the propper ExecutionResult?
     /// </summary>
     /// <returns></returns>
-    public class DriverZoneHandlerTests
+    public class DriverZoneHandlerTests : QueryHandlerFactory
     {
-        private int driverId = 1;
-        private const int fuelCardId = 1;
-        private const int appealId = 1;
-        private  readonly CancellationToken _cancellationToken = CancellationToken.None;
-        private readonly Mock<IUnitOfWork> _unitOfWork;
-        private readonly Mock<IMapper> _mapper;
-        private readonly Mock<IGenericRepository<Driver>> _driverRepo;
-        private readonly Mock<IGenericRepository<Appeal>> _appealRepo;
-        private readonly Mock<IGenericRepository<FuelCard>> _fuelCardRepo;
-        private readonly Mock<IGenericRepository<Vehicle>> _vehicleRepo;
-        private readonly Mock<IDriverService> _driverService;
-        private readonly Mock<IGeneralService> _generalService;
-
-        public DriverZoneHandlerTests()
-        {
-            _unitOfWork = new Mock<IUnitOfWork>();
-            _mapper = new Mock<IMapper>();
-            _driverRepo = new Mock<IGenericRepository<Driver>>();
-            _appealRepo = new Mock<IGenericRepository<Appeal>>();
-            _fuelCardRepo = new Mock<IGenericRepository<FuelCard>>();
-            _vehicleRepo = new Mock<IGenericRepository<Vehicle>>();
-            _driverService = new Mock<IDriverService>();
-            _generalService = new Mock<IGeneralService>();
-        }
-
+        // ! All unittesting should have a seperate mock-section like 'Should_not_get_driver_details' and the logic in 'QueryHandlerFactory' !
+        // No time to implement though - so every mock is still written inside each unittest.
         [Fact]
         public async Task Should_not_get_driver_details()
         {
             //Arrange
-            var handler = new GetDriverDetailsQueryHandler(_unitOfWork.Object, _mapper.Object);
+            var handler = new GetDriverDetailsQueryHandler(WithUnitOfWorkForDriver(), WithMapperForDriver());
             var query = new GetDriverDetailsQuery();
-            var driver = new Driver();
-
-            _driverRepo
-                .Setup(x => x.GetBy(
-                        It.Is<CancellationToken>(y => y.Equals(_cancellationToken)),
-                        It.IsAny<Expression<Func<Driver, bool>>>(),
-                    It.IsAny<Func<IQueryable<Driver>, IIncludableQueryable<Driver, object>>>()))
-                .ReturnsAsync(driver);
-            _unitOfWork
-                .Setup(x => x.Drivers)
-                .Returns(_driverRepo.Object);
-            _mapper
-                .Setup(x => x.Map<DriverDetailsDto>(It.IsAny<Driver>()))
-                .Returns((DriverDetailsDto)null);
 
             //Act
             var result = await handler.Handle(query, _cancellationToken);
@@ -103,23 +63,8 @@ namespace FleetManager.UnitTest.Core.HandlerTest
         public async Task Should_get_driver_details()
         {
             //Arrange
-            var handler = new GetDriverDetailsQueryHandler(_unitOfWork.Object, _mapper.Object);
+            var handler = new GetDriverDetailsQueryHandler(WithUnitOfWorkForDriver(), WithMapperForDriverDetails());
             var query = new GetDriverDetailsQuery();
-            var driver = new Driver{Id = driverId, InService = true};
-            var driverDetailsDto = new DriverDetailsDto{Id = driverId, InService = true};
-
-            _driverRepo
-                .Setup(x => x.GetBy(
-                    It.Is<CancellationToken>(y => y.Equals(_cancellationToken)),
-                    It.IsAny<Expression<Func<Driver, bool>>>(),
-                    It.IsAny<Func<IQueryable<Driver>, IIncludableQueryable<Driver, object>>>()))
-                .ReturnsAsync(driver);
-            _unitOfWork
-                .Setup(x => x.Drivers)
-                .Returns(_driverRepo.Object);
-            _mapper
-                .Setup(x => x.Map<DriverDetailsDto>(It.IsAny<Driver>()))
-                .Returns(driverDetailsDto);
 
             //Act
             var result = await handler.Handle(query, _cancellationToken);

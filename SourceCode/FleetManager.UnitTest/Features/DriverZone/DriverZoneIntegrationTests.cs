@@ -1,14 +1,11 @@
 using System.Threading.Tasks;
 using FleetManagement.BLL.Models.Dtos.ReadDtos;
-using FleetManagement.WriteAPI.Controllers;
-using FleetManager.EFCore.Infrastructure.DbContext;
 using FleetManager.UnitTest.Integration.Setup;
-using Microsoft.EntityFrameworkCore;
 using Xunit;
 
-namespace FleetManager.UnitTest
+namespace FleetManager.UnitTest.Integration.Features.DriverZone
 {
-    public class DriverZoneTests
+    public class DriverZoneTests : IClassFixture<DriverZoneClientFactory>
     {
         private static string CustomerZoneRoute => "api/v1/my";
         public DriverZoneClientFactory _factory;

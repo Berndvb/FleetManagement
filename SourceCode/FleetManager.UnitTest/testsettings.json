@@ -1,0 +1,15 @@
+﻿{
+  "ConnectionStrings": {
+    "DatabaseContext": "Server=DESKTOP-1SUAPOV; Database=Test_FleetManager; Trusted_Connection=True; MultipleActiveResultSets=true"
+  },
+
+  "Logging": {
+    "LogLevel": {
+      "Default": "Information",
+      "Microsoft": "Warning",
+      "Microsoft.Hosting.Lifetime": "Information"
+    }
+  },
+
+  "AllowedHosts": "*"
+}

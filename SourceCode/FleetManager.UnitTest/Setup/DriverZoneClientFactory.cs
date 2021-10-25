@@ -37,7 +37,7 @@ namespace FleetManager.UnitTest.Integration.Setup
             Registrations.Add(services => { services.SwapTransient(provider => _mockDriverRepository.Object); });
             Registrations.Add(services => { services.SwapTransient(provider => _mockAppealRepository.Object); });
             Registrations.Add(services => { services.SwapTransient(provider => _mockVehicleRepository.Object); });
-            Registrations.Add(services => { services.SwapTransient(provider => _mockFuelCardRepository.Object); });
+            Registrations.Add(services => {  services.SwapTransient(provider => _mockFuelCardRepository.Object); });
 
             return base.CreateClient();
         }

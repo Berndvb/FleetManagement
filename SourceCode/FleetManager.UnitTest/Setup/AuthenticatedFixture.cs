@@ -7,9 +7,6 @@ namespace FleetManager.UnitTest.Integration.Setup
     public abstract class AuthenticatedFixture<T> : BaseFixture<T>
            where T : class
     {
-        private AuthenticationHeaderValue _authenticationHeaderValue;
-        private bool _useApiKeyAuthentication;
-
         public override async Task<HttpClient> CreateClient()
         {
             ClientOptions.AllowAutoRedirect = false;
