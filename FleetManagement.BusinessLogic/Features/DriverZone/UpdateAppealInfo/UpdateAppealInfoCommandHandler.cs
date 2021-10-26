@@ -1,9 +1,9 @@
-﻿using FleetManager.EFCore.UOW;
-using MediatR.Cqrs.Commands;
-using System.Threading;
+﻿using System.Threading;
 using System.Threading.Tasks;
+using FleetManager.EFCore.UOW;
+using MediatR.Cqrs.Commands;
 
-namespace FleetManagement.BLL.Features.DriverZone.UpdateAppeal
+namespace FleetManagement.BLL.Features.DriverZone.UpdateAppealInfo
 {
     public class UpdateAppealInfoCommandHandler : CommandHandler<UpdateAppealInfoCommand, UpdateAppealInfoCommandResult>
     {

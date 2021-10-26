@@ -16,6 +16,7 @@ namespace FleetManager.EFCore.Infrastructure.DbContext
         public DatabaseContext(DbContextOptions<DatabaseContext> options) : base(options)
         {
         }
+
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             modelBuilder.Entity<Appeal>()

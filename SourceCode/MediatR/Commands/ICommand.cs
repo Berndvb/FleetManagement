@@ -2,11 +2,8 @@
 
 namespace MediatR.Cqrs.Commands
 {
-    public  interface ICommand<out TRes> : IRequest<TRes>
-    {
-    }
-
-    public interface ICommand : IRequest<ExecutionResult>
+    public interface ICommand<out TRes> : IRequest<TRes>
+        where TRes : ExecutionResult
     {
     }
 }

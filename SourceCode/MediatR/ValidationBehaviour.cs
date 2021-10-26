@@ -1,12 +1,11 @@
-﻿using FluentValidation;
+﻿using FleetManagement.Framework.Constants;
+using FluentValidation;
+using MediatR.Cqrs.Execution;
 using System.Collections.Generic;
 using System.Linq;
-using System.Reflection.Metadata;
 using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
-using FleetManagement.Framework.Constants;
-using MediatR.Cqrs.Execution;
 
 namespace MediatR.Cqrs
 {

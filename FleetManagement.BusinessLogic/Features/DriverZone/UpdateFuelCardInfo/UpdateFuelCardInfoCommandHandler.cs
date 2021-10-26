@@ -1,10 +1,9 @@
 ﻿using System.Threading;
 using System.Threading.Tasks;
-using FleetManagement.BLL.Models.Dtos.ReadDtos;
 using FleetManager.EFCore.UOW;
 using MediatR.Cqrs.Commands;
 
-namespace FleetManagement.BLL.Features.DriverZone.UpdateFuelCard
+namespace FleetManagement.BLL.Features.DriverZone.UpdateFuelCardInfo
 {
     public class UpdateFuelCardInfoCommandHandler : CommandHandler<UpdateFuelCardInfoCommand, UpdateFuelCardInfoCommandResult>
     {

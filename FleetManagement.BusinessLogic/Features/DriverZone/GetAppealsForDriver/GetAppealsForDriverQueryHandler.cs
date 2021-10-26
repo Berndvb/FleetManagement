@@ -1,16 +1,15 @@
-﻿using System.Collections.Generic;
-using System.Threading;
-using System.Threading.Tasks;
-using AutoMapper;
+﻿using AutoMapper;
 using FleetManagement.BLL.Models.Dtos.ReadDtos;
 using FleetManagement.BLL.Services;
 using FleetManagement.Framework.Constants;
 using FleetManagement.Framework.Paging;
-using FleetManager.EFCore.Infrastructure.Pagination;
 using FleetManager.EFCore.UOW;
 using MediatR.Cqrs.Execution;
 using MediatR.Cqrs.Queries;
 using Microsoft.EntityFrameworkCore;
+using System.Collections.Generic;
+using System.Threading;
+using System.Threading.Tasks;
 
 namespace FleetManagement.BLL.Features.DriverZone.GetAppealsForDriver
 {

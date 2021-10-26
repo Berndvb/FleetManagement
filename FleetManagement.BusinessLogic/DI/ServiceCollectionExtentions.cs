@@ -1,5 +1,5 @@
 ﻿using AutoMapper;
-using FleetManagement.BLL.Features.DriverZone.GetDriverDetails;
+using FleetManagement.BLL.Features.DriverZone.GetAppealsForDriver;
 using FleetManagement.BLL.Mapper.Profiles;
 using FleetManagement.BLL.Services;
 using FleetManager.EFCore.DI;
@@ -23,9 +23,9 @@ namespace FleetManagement.BLL.DI
         {
             services.AddFluentValidation(config => {
                 config.AutomaticValidationEnabled = false;
-                config.RegisterValidatorsFromAssemblyContaining<GetDriverDetailsQueryValidator>();
+                config.RegisterValidatorsFromAssemblyContaining<GetAppealsForDriverQueryResult>();
             });
-            services.AddMediatR(typeof(GetDriverDetailsQuery).Assembly);
+            services.AddMediatR(typeof(GetAppealsForDriverQueryResult).Assembly);
             services.AddTransient(typeof(IPipelineBehavior<,>), typeof(ValidationBehaviour<,>));
         }
 

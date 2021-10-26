@@ -30,25 +30,4 @@ namespace MediatR.Cqrs.Commands
             return ExecutionResult.InternalServerError(error).As<TRes>(); 
         }
     }
-
-    //public abstract class CommandHandler<TReq> : ICommandHandler<TReq>
-    //    where TReq : ICommand
-    //{
-    //    public abstract Task<ExecutionResult> Handle(TReq request, CancellationToken cancellationToken);
-
-    //    protected ExecutionResult NotFound(ExecutionError error = null)
-    //    {
-    //        return ExecutionResult.NotFound(error);
-    //    }
-
-    //    protected ExecutionResult BadRequest(ExecutionError error = null)
-    //    {
-    //        return ExecutionResult.BadRequest(error);
-    //    }
-
-    //    protected ExecutionResult Forbidden()
-    //    {
-    //        return ExecutionResult.Forbidden();
-    //    }
-    //}
 }

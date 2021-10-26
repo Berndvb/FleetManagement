@@ -1,10 +1,8 @@
-﻿using FleetManagement.Framework.Models.Enums;
+﻿using System;
+using FleetManagement.Framework.Models.Enums;
 using MediatR.Cqrs.Commands;
-using System;
-using System.ComponentModel;
-using Newtonsoft.Json;
 
-namespace FleetManagement.BLL.Features.DriverZone.UpdateAppeal
+namespace FleetManagement.BLL.Features.DriverZone.UpdateAppealInfo
 {
     public class UpdateAppealInfoCommand : ICommand<UpdateAppealInfoCommandResult>
     {

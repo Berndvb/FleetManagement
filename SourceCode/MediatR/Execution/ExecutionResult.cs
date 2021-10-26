@@ -1,4 +1,5 @@
-﻿using FleetManager.EFCore.Infrastructure.Pagination;
+﻿using FleetManagement.Framework.Paging;
+using FleetManager.EFCore.Infrastructure.Pagination;
 using System;
 using System.Collections.Generic;
 using System.Linq;

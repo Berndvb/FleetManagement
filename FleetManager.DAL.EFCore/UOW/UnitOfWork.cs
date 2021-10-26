@@ -1,11 +1,10 @@
 ﻿using FleetManagement.Domain.Models;
-using FleetManager.EFCore.Infrastructure;
 using FleetManager.EFCore.Infrastructure.DbContext;
 using FleetManager.EFCore.Repositories;
 
 namespace FleetManager.EFCore.UOW
 {
-    public class UnitOfWork : IUnitOfWork
+    internal class UnitOfWork : IUnitOfWork
     {
         private readonly DatabaseContext _context;
 
@@ -58,11 +57,6 @@ namespace FleetManager.EFCore.UOW
         public int Complete()
         {
             return _context.SaveChanges();
-        }
-
-        public void Dispose()
-        {
-            _context.Dispose();
         }
 
         ~UnitOfWork() { _context.Dispose(); } //DESTUCTOR!

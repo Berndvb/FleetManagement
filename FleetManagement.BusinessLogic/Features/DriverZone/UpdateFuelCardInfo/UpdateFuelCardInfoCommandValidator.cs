@@ -1,9 +1,8 @@
 ﻿using System;
-using FleetManagement.Framework.Helpers;
 using FleetManagement.Framework.Models.Enums;
 using FluentValidation;
 
-namespace FleetManagement.BLL.Features.DriverZone.UpdateFuelCard
+namespace FleetManagement.BLL.Features.DriverZone.UpdateFuelCardInfo
 {
     public class UpdateFuelCardInfoCommandValidator : AbstractValidator<UpdateFuelCardInfoCommand>
     {

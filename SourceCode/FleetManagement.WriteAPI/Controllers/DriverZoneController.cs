@@ -4,9 +4,9 @@ using Microsoft.AspNetCore.Mvc;
 using System.Threading;
 using System.Threading.Tasks;
 using FleetManagement.BLL.Features.DriverZone.AddAppeal;
-using FleetManagement.BLL.Features.DriverZone.UpdateAppeal;
+using FleetManagement.BLL.Features.DriverZone.UpdateAppealInfo;
 using FleetManagement.BLL.Features.DriverZone.UpdateContactInfo;
-using FleetManagement.BLL.Features.DriverZone.UpdateFuelCard;
+using FleetManagement.BLL.Features.DriverZone.UpdateFuelCardInfo;
 
 namespace FleetManagement.WriteAPI.Controllers
 {

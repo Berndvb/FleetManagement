@@ -1,8 +1,8 @@
-﻿using FleetManagement.Framework.Models.Enums;
+﻿using System.Text.Json.Serialization;
+using FleetManagement.Framework.Models.Enums;
 using MediatR.Cqrs.Commands;
-using System.Text.Json.Serialization;
 
-namespace FleetManagement.BLL.Features.DriverZone.UpdateFuelCard
+namespace FleetManagement.BLL.Features.DriverZone.UpdateFuelCardInfo
 {
     public class UpdateFuelCardInfoCommand : ICommand<UpdateFuelCardInfoCommandResult>
     {

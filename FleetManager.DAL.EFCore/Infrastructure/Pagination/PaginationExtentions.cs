@@ -1,6 +1,7 @@
 ﻿using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
+using FleetManagement.Framework.Paging;
 using Microsoft.EntityFrameworkCore;
 
 namespace FleetManager.EFCore.Infrastructure.Pagination

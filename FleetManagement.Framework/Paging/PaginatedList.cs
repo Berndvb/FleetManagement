@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 
-namespace FleetManager.EFCore.Infrastructure.Pagination
+namespace FleetManagement.Framework.Paging
 {
     public class PaginatedList<T> : List<T>
     {

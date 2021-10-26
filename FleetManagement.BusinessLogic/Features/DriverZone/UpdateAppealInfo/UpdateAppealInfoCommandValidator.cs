@@ -1,9 +1,9 @@
-﻿using FleetManagement.Framework.Helpers;
+﻿using System;
+using FleetManagement.Framework.Helpers;
 using FleetManagement.Framework.Models.Enums;
 using FluentValidation;
-using System;
 
-namespace FleetManagement.BLL.Features.DriverZone.UpdateAppeal
+namespace FleetManagement.BLL.Features.DriverZone.UpdateAppealInfo
 {
     public class UpdateAppealInfoCommandValidator : AbstractValidator<UpdateAppealInfoCommand>
     {

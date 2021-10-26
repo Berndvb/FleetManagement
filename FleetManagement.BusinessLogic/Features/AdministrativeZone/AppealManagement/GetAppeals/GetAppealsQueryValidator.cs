@@ -9,8 +9,6 @@ namespace FleetManagement.BLL.Features.AdministrativeZone.AppealManagement.GetAp
     {
         public GetAppealsQueryValidator()
         {
-            //RuleFor(x => x.AppealStatus).Must(y => y >= 0 && (int)y < 4);
-
             When(x => !String.IsNullOrEmpty(x.AppealStatus), () =>
            {
                RuleFor(x => x.AppealStatus)

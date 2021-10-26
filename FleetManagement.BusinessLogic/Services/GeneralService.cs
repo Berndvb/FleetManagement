@@ -1,8 +1,11 @@
 ﻿using FleetManagement.BLL.Services.Models;
 using FleetManagement.Framework.Constants;
+using FleetManagement.Framework.Paging;
 using MediatR.Cqrs.Execution;
+using Microsoft.AspNetCore.Mvc;
 using System.Collections.Generic;
-using FleetManager.EFCore.Infrastructure.Pagination;
+using System.Threading;
+using System.Threading.Tasks;
 
 namespace FleetManagement.BLL.Services
 {
@@ -38,5 +41,45 @@ namespace FleetManagement.BLL.Services
 
             return new PaginatedList<TDto>(dtos, totalCount, pageNumber, pageSize);
         }
+        
+        #region logic for service-pattern
+
+        //logic to implement service-pattern for GetDriverDetails (as practice)
+        public async Task<IActionResult> SingleReturnToActionResult<TRes>(TRes entity) where TRes : class
+        {
+            if (entity == null)
+            {
+                var error = new ErrorResponse("We couldn't find and retrieve any data.", Constants.ErrorCodes.DataNotFound);
+                return new BadRequestObjectResult(error);
+            }
+
+            return new OkObjectResult(entity);
+        }
+
+        public BadRequestObjectResult IsValidId(int id)
+        {
+            if (id <= 0)
+            {
+                var error = new ErrorResponse("Id isn't valid.", Constants.ErrorCodes.InvalidRequestInput);
+                return new BadRequestObjectResult(error);
+            }
+
+            return null;
+        }
+
+        public class ErrorResponse
+        {
+            public string Message { get; set; }
+
+            public string Code { get; set; }
+
+            public ErrorResponse(string message, string code)
+            {
+                Message = message;
+                Code = code;
+            }
+        }
+
+        #endregion
     }
 }

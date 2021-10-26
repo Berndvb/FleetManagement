@@ -3,9 +3,7 @@ using FleetManagement.BLL.Features.DriverZone.GetAppealsForDriver;
 using FleetManagement.BLL.Features.DriverZone.GetDriverDetails;
 using FleetManagement.BLL.Features.DriverZone.GetFuelCardsForDriver;
 using FleetManagement.BLL.Features.DriverZone.GetVehiclesForDriver;
-using FleetManagement.BLL.Features.DriverZone.UpdateAppeal;
 using FleetManagement.BLL.Features.DriverZone.UpdateContactInfo;
-using FleetManagement.BLL.Features.DriverZone.UpdateFuelCard;
 using FleetManagement.BLL.Models.Dtos.ReadDtos;
 using FleetManagement.Domain.Models;
 using FleetManagement.Framework.Models.Enums;
@@ -22,6 +20,8 @@ using System.Linq;
 using System.Linq.Expressions;
 using System.Threading;
 using System.Threading.Tasks;
+using FleetManagement.BLL.Features.DriverZone.UpdateAppealInfo;
+using FleetManagement.BLL.Features.DriverZone.UpdateFuelCardInfo;
 using Xunit;
 using FuelCard = FleetManagement.Domain.Models.FuelCard;
 
