@@ -49,7 +49,7 @@ namespace FleetManagement.BLL.Features.AdministrativeZone.DriverManagement.GetDr
         }
 
 
-        public async Task<List<DriverOverviewDto>> GetDriverOverviews(
+        private async Task<List<DriverOverviewDto>> GetDriverOverviews(
             CancellationToken cancellationToken,
             bool onlyInService,
             PagingParameters pagingParameter)

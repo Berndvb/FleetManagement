@@ -28,7 +28,7 @@ namespace FleetManagement.BLL.Features.DriverZone.AddAppeal
             return new AddAppealCommandResult();
         }
 
-        public async Task AddAppeal(AddAppealCommand request, CancellationToken cancellationToken)
+        private async Task AddAppeal(AddAppealCommand request, CancellationToken cancellationToken)
         {
             var vehicle = await _unitOfWork.Vehicles.GetBy(
                 cancellationToken,
@@ -57,7 +57,7 @@ namespace FleetManagement.BLL.Features.DriverZone.AddAppeal
             _unitOfWork.Complete();
         }
 
-        public string BuildAppealMessage(AddAppealCommand request, string name, string firstname)
+        private string BuildAppealMessage(AddAppealCommand request, string name, string firstname)
         {
             var description = @$"Appeal from {firstname + name} regarding: '{request.AppealType}'.<br />
                 <br />            

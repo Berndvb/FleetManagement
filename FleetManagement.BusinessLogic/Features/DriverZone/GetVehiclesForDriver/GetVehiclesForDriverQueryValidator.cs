@@ -12,6 +12,7 @@ namespace FleetManagement.BLL.Features.DriverZone.GetVehiclesForDriver
                 RuleFor(x => x.PagingParameters.PageSize).GreaterThan(0);
                 RuleFor(x => x.PagingParameters.PageNumber).GreaterThan(0);
             });
+
         }
     }
 }

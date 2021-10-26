@@ -25,7 +25,7 @@ namespace FleetManagement.BLL.Features.DriverZone.UpdateContactInfo
             return new UpdateContactInfoCommandResult();
         }
 
-        public async Task UpdateContactinfo(
+        private async Task UpdateContactinfo(
             UpdateContactInfoCommand request,
             CancellationToken cancellationToken)
         {

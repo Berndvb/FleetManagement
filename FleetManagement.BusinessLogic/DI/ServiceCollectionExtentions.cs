@@ -21,8 +21,10 @@ namespace FleetManagement.BLL.DI
 
         public static void AddMediatRCqrsServices(this IServiceCollection services)
         {
-            services.AddMvc()
-                .AddFluentValidation(fv => fv.RegisterValidatorsFromAssemblyContaining<GetDriverDetailsQueryValidator>());
+            services.AddFluentValidation(config => {
+                config.AutomaticValidationEnabled = false;
+                config.RegisterValidatorsFromAssemblyContaining<GetDriverDetailsQueryValidator>();
+            });
             services.AddMediatR(typeof(GetDriverDetailsQuery).Assembly);
             services.AddTransient(typeof(IPipelineBehavior<,>), typeof(ValidationBehaviour<,>));
         }

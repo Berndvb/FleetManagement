@@ -56,7 +56,7 @@ namespace FleetManagement.BLL.Features.DriverZone.GetVehiclesForDriver
             return result;
         }
 
-        public async Task<List<VehicleDetailsDto>> GetVehiclesForDriver(
+        private async Task<List<VehicleDetailsDto>> GetVehiclesForDriver(
             CancellationToken cancellationToken,
             int driverId,
             PagingParameters pagingParameter)

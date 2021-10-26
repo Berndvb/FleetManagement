@@ -24,7 +24,7 @@ namespace FleetManagement.BLL.Features.DriverZone.UpdateAppeal
             return new UpdateAppealInfoCommandResult();
         }
 
-        public async Task UpdateAppealInfo(
+        private async Task UpdateAppealInfo(
             UpdateAppealInfoCommand request, 
             CancellationToken cancellationToken)
         {

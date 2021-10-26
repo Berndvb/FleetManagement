@@ -4,7 +4,7 @@ using FleetManagement.Framework.Models.Enums;
 
 namespace FleetManagement.BLL.Mapper.Converters
 {
-    public class StringToAppealStatus : ITypeConverter<string, AppealStatus>
+    internal class StringToAppealStatus : ITypeConverter<string, AppealStatus>
     {
         public AppealStatus Convert(string source, AppealStatus destination, ResolutionContext context)
         {

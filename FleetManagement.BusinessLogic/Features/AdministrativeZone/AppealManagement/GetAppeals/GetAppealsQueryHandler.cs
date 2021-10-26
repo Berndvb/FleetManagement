@@ -53,7 +53,7 @@ namespace FleetManagement.BLL.Features.AdministrativeZone.AppealManagement.GetAp
             return result;
         }
 
-        public async Task<List<AppealDto>> GetAllAppeals(
+        private async Task<List<AppealDto>> GetAllAppeals(
             CancellationToken cancellationToken, 
             PagingParameters pagingParameter = null, 
             AppealStatus appealstatus = 0)

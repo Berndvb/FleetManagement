@@ -56,7 +56,7 @@ namespace FleetManagement.BLL.Features.DriverZone.GetFuelCardsForDriver
             return result;
         }
 
-        public async Task<List<FuelCardDto>> GetFuelCardsForDriver(
+        private async Task<List<FuelCardDto>> GetFuelCardsForDriver(
            CancellationToken cancellationToken,
            int driverId,
            PagingParameters pagingParameter)

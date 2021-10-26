@@ -55,7 +55,7 @@ namespace FleetManagement.BLL.Features.DriverZone.GetAppealsForDriver
             return result;
         }
 
-        public async Task<List<AppealDto>> GetAppealsForDriver(
+        private async Task<List<AppealDto>> GetAppealsForDriver(
             CancellationToken cancellationToken,
             int driverId,
             PagingParameters pagingParameter)

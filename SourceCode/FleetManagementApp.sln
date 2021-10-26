@@ -39,7 +39,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MediatR.Cqrs", "MediatR\Med
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "FleetManager.UnitTest.Integration", "FleetManager.UnitTest\FleetManager.UnitTest.Integration.csproj", "{75ACAA78-F123-48E7-AA7A-31DF501F2D22}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FleetManager.UnitTest.Core", "FleetManager.UnitTest.Core\FleetManager.UnitTest.Core.csproj", "{5EA6C833-3949-479E-9AD5-731F373034D1}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "FleetManager.UnitTest.Core", "FleetManager.UnitTest.Core\FleetManager.UnitTest.Core.csproj", "{5EA6C833-3949-479E-9AD5-731F373034D1}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

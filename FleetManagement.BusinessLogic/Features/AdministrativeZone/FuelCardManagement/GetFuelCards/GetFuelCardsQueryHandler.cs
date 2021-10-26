@@ -48,7 +48,7 @@ namespace FleetManagement.BLL.Features.AdministrativeZone.FuelCardManagement.Get
             return result;
         }
 
-        public async Task<List<FuelCardDto>> GetAllFuelCards(CancellationToken cancellationToken, PagingParameters pagingParameter = null)
+        private async Task<List<FuelCardDto>> GetAllFuelCards(CancellationToken cancellationToken, PagingParameters pagingParameter = null)
         {
             var fuelCards = await _unitOfWork.FuelCards.GetListBy(
                 cancellationToken,

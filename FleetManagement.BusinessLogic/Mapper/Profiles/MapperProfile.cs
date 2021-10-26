@@ -7,9 +7,9 @@ using System.Collections.Generic;
 
 namespace FleetManagement.BLL.Mapper.Profiles
 {
-    public class MapperProfile : Profile
+    internal class MapperProfile : Profile
     {
-        public MapperProfile()
+        internal MapperProfile()
         {
             CreateMap<Driver, DriverOverviewDto>()
                 .ForMember(x => x.FirstName, y => y.MapFrom(z => z.Identity.FirstName))

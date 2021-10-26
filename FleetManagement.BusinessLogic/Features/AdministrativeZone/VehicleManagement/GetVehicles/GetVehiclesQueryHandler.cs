@@ -48,7 +48,7 @@ namespace FleetManagement.BLL.Features.AdministrativeZone.VehicleManagement.GetV
             return result;
         }
 
-        public async Task<List<VehicleDetailsDto>> GetAllVehicles(CancellationToken cancellationToken, PagingParameters pagingParameter)
+        private async Task<List<VehicleDetailsDto>> GetAllVehicles(CancellationToken cancellationToken, PagingParameters pagingParameter)
         {
             var vehicles = await _unitOfWork.Vehicles.GetListBy(
                 cancellationToken,

@@ -5,9 +5,9 @@ using Microsoft.EntityFrameworkCore;
 
 namespace FleetManager.EFCore.Infrastructure.Pagination
 {
-    public static class PaginationExtentions
+    internal static class PaginationExtentions
     {
-        public static async Task<PaginatedList<T>> GetPaginatedAsync<T>(
+        internal static async Task<PaginatedList<T>> GetPaginatedAsync<T>(
             this IQueryable<T> source,
             int PageNumber,
             int pageSize,

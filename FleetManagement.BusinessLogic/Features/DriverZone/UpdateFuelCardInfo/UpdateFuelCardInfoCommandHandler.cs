@@ -25,7 +25,7 @@ namespace FleetManagement.BLL.Features.DriverZone.UpdateFuelCard
             return new UpdateFuelCardInfoCommandResult();
         }
 
-        public async Task UpdateFuelCard(
+        private async Task UpdateFuelCard(
             UpdateFuelCardInfoCommand request,
             CancellationToken cancellationToken)
         {

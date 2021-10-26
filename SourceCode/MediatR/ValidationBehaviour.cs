@@ -1,12 +1,16 @@
 ﻿using FluentValidation;
 using System.Collections.Generic;
 using System.Linq;
+using System.Reflection.Metadata;
+using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
+using FleetManagement.Framework.Constants;
+using MediatR.Cqrs.Execution;
 
 namespace MediatR.Cqrs
 {
-    public class ValidationBehaviour<TReq, TRes> : IPipelineBehavior<TReq, TRes> where TReq : IRequest<TRes>
+    public class ValidationBehaviour<TReq, TRes> : IPipelineBehavior<TReq, TRes> where TReq : IRequest<TRes> where TRes : ExecutionResult
     {
         private readonly IEnumerable<IValidator<TReq>> _validators;
 
@@ -15,7 +19,7 @@ namespace MediatR.Cqrs
             _validators = validators;
         }
 
-        public async Task<TRes> Handle(TReq request, CancellationToken cancellationToken, RequestHandlerDelegate<TRes> next)
+        public async Task<TRes> Handle(TReq request, CancellationToken cancellationToken, RequestHandlerDelegate<TRes> next) 
         {
             if (_validators.Any())
             {
@@ -24,7 +28,12 @@ namespace MediatR.Cqrs
                 var failures = validationResults.SelectMany(x => x.Errors).Where(y => y != null).ToList();
 
                 if (failures.Count != 0)
-                    throw new ValidationException(failures);
+                {
+                    var failureMessages = new StringBuilder();
+                    failures.ForEach(x => failureMessages.Append(x));
+                    var error = new ExecutionError(failureMessages.ToString(), Constants.ErrorCodes.InvalidRequestInput);
+                    return ExecutionResult.BadRequest(error).As<TRes>();
+                }
             }
 
             return await next();

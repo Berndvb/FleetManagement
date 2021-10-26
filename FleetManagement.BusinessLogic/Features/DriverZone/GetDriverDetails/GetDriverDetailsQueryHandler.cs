@@ -39,7 +39,7 @@ namespace FleetManagement.BLL.Features.DriverZone.GetDriverDetails
             return new GetDriverDetailsQueryResult(driverDetails);
         }
 
-        public async Task<DriverDetailsDto> GetDriverDetails(int driverId, CancellationToken cancellationToken)
+        private async Task<DriverDetailsDto> GetDriverDetails(int driverId, CancellationToken cancellationToken)
         {
              var driver = await _unitOfWork.Drivers.GetBy(
                 cancellationToken,
