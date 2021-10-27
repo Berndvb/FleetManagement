@@ -8,6 +8,6 @@ namespace FleetManagement.BLL.Services
     public interface IDriverService
     {
         Task<DriverDetailsDto> GetDriverDetails(int driverId, CancellationToken cancellationToken);
-        Task<ExecutionError> ValidateId(CancellationToken cancellationToken, int id);
+        Task<ExecutionError> ValidateId(int id, CancellationToken cancellationToken);
     }
 }

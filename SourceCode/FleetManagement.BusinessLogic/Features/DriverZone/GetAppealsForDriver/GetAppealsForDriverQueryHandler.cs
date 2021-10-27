@@ -36,7 +36,7 @@ namespace FleetManagement.BLL.Features.DriverZone.GetAppealsForDriver
             GetAppealsForDriverQuery request,
             CancellationToken cancellationToken)
         {
-            var idError = await _driverService.ValidateId(cancellationToken, request.DriverId);
+            var idError = await _driverService.ValidateId(request.DriverId, cancellationToken);
             if (idError != null)
                 return BadRequest(idError);
 

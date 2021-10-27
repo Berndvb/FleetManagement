@@ -41,7 +41,7 @@ namespace FleetManagement.ReadAPI.Controllers
 
             var driverDetails = await _driverService.GetDriverDetails(driverId, cancellationToken);
 
-            return await _generalService.SingleReturnToActionResult(driverDetails);
+            return _generalService.SingleReturnToActionResult(driverDetails);
         }
 
         [HttpGet("driver/{DriverId}/appeals")]

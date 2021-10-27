@@ -15,7 +15,7 @@ namespace FleetManagement.BLL.Services
     {
         ExecutionError ProcessValidationError(InputValidationCodes validationCode, string idName = null);
         PaginatedList<TDto> GetPaginatedData<TDto, TEntity>(List<TDto> dtos, List<TEntity> entities);
-        Task<IActionResult> SingleReturnToActionResult<TRes>(TRes entity) where TRes : class;
+        IActionResult SingleReturnToActionResult<TRes>(TRes entity) where TRes : class;
         BadRequestObjectResult IsValidId(int id);
     }
 }

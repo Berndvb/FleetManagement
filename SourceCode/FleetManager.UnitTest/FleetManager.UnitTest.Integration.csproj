@@ -54,9 +54,9 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\..\FleetManagement.BusinessLogic\FleetManagement.BLL.csproj" />
-    <ProjectReference Include="..\..\FleetManager.DAL.EFCore\FleetManager.EFCore.csproj" />
+    <ProjectReference Include="..\FleetManagement.BusinessLogic\FleetManagement.BLL.csproj" />
     <ProjectReference Include="..\FleetManagement.WriteAPI\FleetManagement.WriteAPI.csproj" />
+    <ProjectReference Include="..\FleetManager.DAL.EFCore\FleetManager.EFCore.csproj" />
   </ItemGroup>
 
   <ItemGroup>

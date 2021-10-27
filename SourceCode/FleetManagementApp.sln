@@ -21,17 +21,20 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "ReadAPI", "ReadAPI", "{31DC
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "WriteAPI", "WriteAPI", "{5D7E715D-FD5E-4BCB-A775-135F5B6CBBE6}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "FleetManagement.Domain", "..\FleetManagement.DAL\FleetManagement.Domain.csproj", "{457646F2-AD65-4DDB-8B4A-123921785876}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "FleetManagement.Domain", "FleetManagement.DAL\FleetManagement.Domain.csproj", "{457646F2-AD65-4DDB-8B4A-123921785876}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "FleetManagement.Framework", "..\FleetManagement.Framework\FleetManagement.Framework.csproj", "{5D07FA25-D5E3-4FF2-920E-8322C29DBA1D}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "FleetManagement.Framework", "FleetManagement.Framework\FleetManagement.Framework.csproj", "{5D07FA25-D5E3-4FF2-920E-8322C29DBA1D}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "FleetManagement.BLL", "..\FleetManagement.BusinessLogic\FleetManagement.BLL.csproj", "{C538D721-4E12-42AF-9645-544B77518BB9}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "FleetManagement.BLL", "FleetManagement.BusinessLogic\FleetManagement.BLL.csproj", "{C538D721-4E12-42AF-9645-544B77518BB9}"
+	ProjectSection(ProjectDependencies) = postProject
+		{1C0C8366-807D-49DF-9F1A-5A7DD9CC1F1A} = {1C0C8366-807D-49DF-9F1A-5A7DD9CC1F1A}
+	EndProjectSection
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "FleetManagement.ReadAPI", "..\FleetManagement.ReadAPI\FleetManagement.ReadAPI.csproj", "{6368B2B8-1634-425D-BA8F-592F24C727AC}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "FleetManagement.ReadAPI", "FleetManagement.ReadAPI\FleetManagement.ReadAPI.csproj", "{6368B2B8-1634-425D-BA8F-592F24C727AC}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "FleetManager.EFCore", "..\FleetManager.DAL.EFCore\FleetManager.EFCore.csproj", "{505907DF-73B8-4630-8666-941E72438668}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "FleetManager.EFCore", "FleetManager.DAL.EFCore\FleetManager.EFCore.csproj", "{505907DF-73B8-4630-8666-941E72438668}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "FleetManager.Dapper", "..\FleetManager.Dapper\FleetManager.Dapper.csproj", "{DFD6AB62-3336-4437-B1D3-D349579AE0A7}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "FleetManager.Dapper", "FleetManager.Dapper\FleetManager.Dapper.csproj", "{DFD6AB62-3336-4437-B1D3-D349579AE0A7}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "FleetManagement.WriteAPI", "FleetManagement.WriteAPI\FleetManagement.WriteAPI.csproj", "{B4A379EE-C5DB-4DED-83DD-B2FC7C92E03F}"
 EndProject

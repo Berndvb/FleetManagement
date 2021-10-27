@@ -25,7 +25,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\..\FleetManagement.ReadAPI\FleetManagement.ReadAPI.csproj" />
+    <ProjectReference Include="..\FleetManagement.ReadAPI\FleetManagement.ReadAPI.csproj" />
     <ProjectReference Include="..\FleetManagement.WriteAPI\FleetManagement.WriteAPI.csproj" />
   </ItemGroup>
 

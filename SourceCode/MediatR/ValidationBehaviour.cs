@@ -31,6 +31,7 @@ namespace MediatR.Cqrs
                     var failureMessages = new StringBuilder();
                     failures.ForEach(x => failureMessages.Append(x));
                     var error = new ExecutionError(failureMessages.ToString(), Constants.ErrorCodes.InvalidRequestInput);
+                    
                     return ExecutionResult.BadRequest(error).As<TRes>();
                 }
             }

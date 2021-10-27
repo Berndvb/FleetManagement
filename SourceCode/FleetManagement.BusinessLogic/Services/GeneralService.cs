@@ -4,8 +4,6 @@ using FleetManagement.Framework.Paging;
 using MediatR.Cqrs.Execution;
 using Microsoft.AspNetCore.Mvc;
 using System.Collections.Generic;
-using System.Threading;
-using System.Threading.Tasks;
 
 namespace FleetManagement.BLL.Services
 {
@@ -42,10 +40,10 @@ namespace FleetManagement.BLL.Services
             return new PaginatedList<TDto>(dtos, totalCount, pageNumber, pageSize);
         }
         
-        #region logic for service-pattern
+        #region logic for service-pattern test
 
         //logic to implement service-pattern for GetDriverDetails (as practice)
-        public async Task<IActionResult> SingleReturnToActionResult<TRes>(TRes entity) where TRes : class
+        public IActionResult SingleReturnToActionResult<TRes>(TRes entity) where TRes : class
         {
             if (entity == null)
             {
