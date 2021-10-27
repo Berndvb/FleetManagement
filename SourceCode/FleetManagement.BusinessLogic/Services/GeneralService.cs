@@ -43,7 +43,7 @@ namespace FleetManagement.BLL.Services
         #region logic for service-pattern test
 
         //logic to implement service-pattern for GetDriverDetails (as practice)
-        public IActionResult SingleReturnToActionResult<TRes>(TRes entity) where TRes : class
+        public IActionResult ValidateEntity<TRes>(TRes entity) where TRes : class
         {
             if (entity == null)
             {
@@ -54,7 +54,7 @@ namespace FleetManagement.BLL.Services
             return new OkObjectResult(entity);
         }
 
-        public BadRequestObjectResult IsValidId(int id)
+        public BadRequestObjectResult ValidateId(int id)
         {
             if (id <= 0)
             {

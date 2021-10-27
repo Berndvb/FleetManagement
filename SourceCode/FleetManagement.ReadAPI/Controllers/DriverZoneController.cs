@@ -35,13 +35,7 @@ namespace FleetManagement.ReadAPI.Controllers
          int driverId,
          CancellationToken cancellationToken)
         {
-            var validationError = _generalService.IsValidId(driverId);
-            if (validationError != null)
-                return validationError;
-
-            var driverDetails = await _driverService.GetDriverDetails(driverId, cancellationToken);
-
-            return _generalService.SingleReturnToActionResult(driverDetails);
+            return await _driverService.GetValidDriverDetails(driverId, cancellationToken);
         }
 
         [HttpGet("driver/{DriverId}/appeals")]

@@ -38,7 +38,7 @@ namespace FleetManagement.BLL.Features.DriverZone.GetFuelCardsForDriver
             GetFuelCardsForDriverQuery request,
             CancellationToken cancellationToken)
         {
-            var idError = await _driverService.ValidateId(request.DriverId, cancellationToken);
+            var idError = await _driverService.ValidateDriverId(request.DriverId, cancellationToken);
             if (idError != null)
                 return BadRequest(idError);
 

@@ -1,11 +1,12 @@
-﻿using FleetManagement.BLL.Services.Models;
+﻿using AutoMapper;
+using FleetManagement.BLL.Models.Dtos.ReadDtos;
+using FleetManagement.BLL.Services.Models;
+using FleetManager.EFCore.UOW;
 using MediatR.Cqrs.Execution;
+using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 using System.Threading;
 using System.Threading.Tasks;
-using AutoMapper;
-using FleetManager.EFCore.UOW;
-using FleetManagement.BLL.Models.Dtos.ReadDtos;
-using Microsoft.EntityFrameworkCore;
 
 namespace FleetManagement.BLL.Services
 {
@@ -27,9 +28,9 @@ namespace FleetManagement.BLL.Services
 
    
 
-        public async Task<ExecutionError> ValidateId(int id, CancellationToken cancellationToken)
+        public async Task<ExecutionError> ValidateDriverId(int driverId, CancellationToken cancellationToken)
         {
-            var ids = await _unitOfWork.Drivers.GetIds(id, cancellationToken);
+            var ids = await _unitOfWork.Drivers.GetIds(driverId, cancellationToken);
 
             var validationCode =  ids.Count switch
             {
@@ -39,7 +40,7 @@ namespace FleetManagement.BLL.Services
             };
 
             if (validationCode != InputValidationCodes.OK)
-                return _generalService.ProcessValidationError(validationCode, nameof(id));
+                return _generalService.ProcessValidationError(validationCode, nameof(driverId));
 
             return null;
         }
@@ -47,19 +48,27 @@ namespace FleetManagement.BLL.Services
         #region logic for service-pattern
 
         //logic to implement service-pattern for GetDriverDetails (as practice)
-        public async Task<DriverDetailsDto> GetDriverDetails(int driverId, CancellationToken cancellationToken)
+        public async Task<IActionResult> GetValidDriverDetails(int driverId, CancellationToken cancellationToken)
         {
+            var idValidationError = _generalService.ValidateId(driverId);
+            if (idValidationError != null)
+                return idValidationError;
+
             var driver = await _unitOfWork.Drivers.GetBy(
                 cancellationToken,
                 filter: x => x.Id.Equals(driverId),
                 including: x => x
                     .Include(y => y.Identity)
                     .Include(y => y.Contactinfo)
-                    .ThenInclude(y => y.Address));
+                        .ThenInclude(y => y.Address));
 
-            var driverdetaillsDto = _mapper.Map<DriverDetailsDto>(driver);
+            var entityValidationError = _generalService.ValidateEntity(driver);
+            if (entityValidationError != null)
+                return entityValidationError;
 
-            return driverdetaillsDto;
+            var driverdetailsDto = _mapper.Map<DriverDetailsDto>(driver);
+
+            return new OkObjectResult(driverdetailsDto);
         }
 
         #endregion

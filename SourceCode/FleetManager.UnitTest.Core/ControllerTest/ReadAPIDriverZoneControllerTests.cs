@@ -46,11 +46,13 @@ namespace FleetManager.UnitTest.Core.ControllerTest
         [Fact]
         public async Task Should_not_get_driver_details()
         {
+            var queryResponse = new BadRequestObjectResult(new ErrorResponse("Test", Constants.ErrorCodes.DataNotFound));
+
             //Arrange
-            _driverService.Setup(x => x.GetDriverDetails(
+            _driverService.Setup(x => x.GetValidDriverDetails(
                 It.Is<int>(y => y == driverId),
                 It.Is<CancellationToken>(z => z.Equals(_cancellationToken))))
-                .ReturnsAsync((DriverDetailsDto)null);
+                .ReturnsAsync(queryResponse);
 
             //Act
             var result = await _controller.GetDriverDetails(driverId, _cancellationToken);
@@ -66,9 +68,9 @@ namespace FleetManager.UnitTest.Core.ControllerTest
         public async Task Should_get_driver_details()
         {
             //Arrange
-            var queryRespons = new DriverDetailsDto{ Id = driverId };
+            var queryRespons = new OkObjectResult(new DriverDetailsDto { Id = driverId });
 
-            _driverService.Setup(x => x.GetDriverDetails(
+            _driverService.Setup(x => x.GetValidDriverDetails(
                     It.Is<int>(y => y == driverId),
                     It.Is<CancellationToken>(z => z.Equals(_cancellationToken))))
                 .ReturnsAsync(queryRespons);
