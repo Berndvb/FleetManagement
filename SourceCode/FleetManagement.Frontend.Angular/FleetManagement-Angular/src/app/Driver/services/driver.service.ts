@@ -2,14 +2,14 @@ import { HttpClient, HttpErrorResponse } from "@angular/common/http";
 import { Injectable } from '@angular/core';
 import { Observable, throwError } from "rxjs";
 import { catchError, tap } from 'rxjs/operators';
-import { IAppeal } from "./models/read/iappeal";
-import { IDriverDetails } from "./models/read/idriver-details";
-import { IFuelCard } from "./models/read/ifuel-card";
-import { IVehicleDetails } from "./models/read/ivehicle-details";
-import { ICreateAppeal } from "./models/read/write/icreate-appeal";
-import { IUpdateAppealInfo } from "./models/read/write/iupdate-appeal-info";
-import { IUpdateContactInfo } from "./models/read/write/iupdate-contact-info";
-import { IUpdateFuelCardInfo } from "./models/read/write/iupdate-fuel-card-info";
+import { IAppeal } from "../models/read/iappeal";
+import { IDriverDetails } from "../models/read/idriver-details";
+import { IFuelCard } from "../models/read/ifuel-card";
+import { IVehicleDetails } from "../models/read/ivehicle-details";
+import { ICreateAppeal } from "../models/read/write/icreate-appeal";
+import { IUpdateAppealInfo } from "../models/read/write/iupdate-appeal-info";
+import { IUpdateContactInfo } from "../models/read/write/iupdate-contact-info";
+import { IUpdateFuelCardInfo } from "../models/read/write/iupdate-fuel-card-info";
 
 @Injectable({ 
   providedIn: 'root'//creates a single, shared instance of service and injects it into any class that asks for it
@@ -85,10 +85,10 @@ export class DriverService {
       catchError(x => this.handleError(x))); 
   }
 
-  private handleError(errorResponse: HttpErrorResponse): Observable<never>
+  private handleError(errorResponse: HttpErrorResponse): Observable<never> // ? empty type set - the type of values that never occur
   {
     let errorMessage = '';
-    if(errorResponse.error != null && errorResponse.error instanceof ErrorEvent) //double check needed?
+    if(errorResponse.error != null && errorResponse.error instanceof ErrorEvent) // ? double check needed?
         errorMessage = `An error occurred: ${errorResponse.error.message}`;
     else 
       errorMessage = `Server returned code: ${errorResponse.status}, error message is: ${errorResponse.message}`;
