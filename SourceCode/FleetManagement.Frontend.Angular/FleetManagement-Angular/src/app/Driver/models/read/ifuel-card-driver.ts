@@ -1,5 +1,5 @@
 export interface IFuelCardDriver {
-    fuelCardDriverId: number;
+    id: number;
     active: boolean;
     creationDate: Date;
     closerDate?: Date;

@@ -3,6 +3,7 @@ import { Subscription } from 'rxjs';
 import { IDriverDetails } from '../../models/read/idriver-details';
 import { DriverService } from '../../services/driver.service';
 
+
 @Component({
   selector: 'fm-driverdetails',
   templateUrl: './driverdetails.component.html',
@@ -19,10 +20,10 @@ export class Driverdetailscomponent implements OnInit {
 
   ngOnInit(): void {
     const id = 1; //how will the id be decided? 
-    this.getProduct(id);
+    this.getDriverDetails(id);
   }
 
-  getProduct(id: number): void{ 
+  getDriverDetails(id: number): void{ 
     this.sub = this.driverService.GetDriverDetails(1).subscribe({
       next: driver => { this.driverDetails = driver; },
       error: error => this.errorMessage = error

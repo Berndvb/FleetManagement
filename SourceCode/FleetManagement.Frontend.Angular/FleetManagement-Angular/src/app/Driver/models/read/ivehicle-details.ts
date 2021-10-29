@@ -5,7 +5,7 @@ import { IMaintenance } from "./imaintenance";
 import { IRepare } from "./irepare";
 
 export interface IVehicleDetails {
-    vehicleId: number;
+    id: number;
     identity: IIdentityVehicle;
     mileage: number[];
     maintenance: IMaintenance[];

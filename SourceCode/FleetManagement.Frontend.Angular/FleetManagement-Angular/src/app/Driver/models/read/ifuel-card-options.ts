@@ -1,5 +1,5 @@
 export interface IFuelCardOptions {
-    fuelCardOptionsId: number;
-    fuelType: string;
+    id: number;
+    fueltype: string;
     extraServices: string[];
 }

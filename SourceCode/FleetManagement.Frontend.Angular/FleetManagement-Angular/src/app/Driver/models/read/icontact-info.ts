@@ -1,7 +1,7 @@
 import { IAddress } from "./iaddress";
 
 export interface IContactInfo {
-    contactInfoId: number;
+    id: number;
     emailAddress: string;
     phoneNumber: string;
     address: IAddress;

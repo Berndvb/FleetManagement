@@ -1,0 +1,13 @@
+<p> has warnings: {{vehicleInfo?.hasWarnings}}  </p>
+<p> has succeeded: {{vehicleInfo?.hasSucceeded}}  </p>
+<p> has paging: {{vehicleInfo?.hasPaging}}  </p>
+<p> pagesize: {{vehicleInfo?.executionPaging?.pageSize}}  </p>
+<p> total pages: {{vehicleInfo?.executionPaging?.totalPages}}  </p>
+<p> has next: {{vehicleInfo?.executionPaging?.hasNext}}  </p>
+>
+<div *ngFor='let vehicle of vehicleInfo?.vehicleDetails'>
+    <p>
+       {{ vehicle.identity.brand }}
+    </p>
+</div>
+<

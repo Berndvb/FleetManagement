@@ -2,7 +2,7 @@ import { IDriverOverview } from "./idriver-overview";
 import { IVehicleOverview } from "./ivehicle-overview";
 
 export interface IAppeal {
-    appealId: number;
+    id: number;
     creationDate: Date;
     appealType: string;
     firstDatePlanning: Date;

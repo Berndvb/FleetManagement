@@ -5,6 +5,7 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.OpenApi.Models;
+using Microsoft.Owin.Cors;
 using System.Text.Json.Serialization;
 
 namespace FleetManagement.ReadAPI
@@ -38,6 +39,8 @@ namespace FleetManagement.ReadAPI
             services.AddDALServices(connectionString);
             services.AddBLLServices();
             services.AddMediatRCqrsServices();
+
+            services.AddCors();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -55,6 +58,8 @@ namespace FleetManagement.ReadAPI
             app.UseRouting();
 
             app.UseAuthorization();
+
+            app.UseCors(x => x.AllowAnyOrigin().AllowAnyMethod().AllowAnyHeader());
 
             app.UseEndpoints(endpoints =>
             {

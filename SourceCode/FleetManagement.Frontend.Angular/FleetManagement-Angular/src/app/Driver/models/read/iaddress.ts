@@ -3,5 +3,5 @@ export interface IAddress {
     street: string;
     streetNumber: string;
     city: string;
-    Postcode: string;
+    postcode: string;
 }

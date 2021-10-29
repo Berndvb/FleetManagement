@@ -1,0 +1,18 @@
+<p> has warnings: {{appealInfo?.hasWarnings}}  </p>
+<p> has succeeded: {{appealInfo?.hasSucceeded}}  </p>
+<p> has paging: {{appealInfo?.hasPaging}}  </p>
+<p> pagesize: {{appealInfo?.executionPaging?.pageSize}}  </p>
+<p> total pages: {{appealInfo?.executionPaging?.totalPages}}  </p>
+<p> has next: {{appealInfo?.executionPaging?.hasNext}}  </p>
+
+    <div *ngFor='let appeal of appealInfo?.appeals'>
+        <p>
+         id: {{ appeal.id }}
+        </p>
+        <p>
+          type: {{ appeal.appealType }}
+         </p>
+         <p>
+          status: {{ appeal.status }}
+         </p>
+      </div>

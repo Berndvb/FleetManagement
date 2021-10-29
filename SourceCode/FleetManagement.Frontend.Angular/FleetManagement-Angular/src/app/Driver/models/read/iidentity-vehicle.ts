@@ -1,5 +1,5 @@
 export interface IIdentityVehicle {
-    identityVehicleId: number;
+    id: number;
     fuelType: string;
     brand: string;
     model: string;

@@ -1,5 +1,5 @@
 export interface IIdentityPerson {
-    personId: number;
+    id: number;
     name: string;
     firstName: string;
     nationalInsuranceNumber: string;

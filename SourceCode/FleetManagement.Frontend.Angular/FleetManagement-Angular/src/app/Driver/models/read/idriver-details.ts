@@ -2,9 +2,9 @@ import { IContactInfo } from "./icontact-info";
 import { IIdentityPerson } from "./iidentity-person";
 
 export interface IDriverDetails {
-    driverId: number;
-    identityPerson: IIdentityPerson;
-    contactInfo: IContactInfo;
-    driversLicenceType: string;
+    id: number;
+    identity: IIdentityPerson;
+    contactinfo: IContactInfo;
+    driversLicenseType: string;
     inService: boolean;
 }

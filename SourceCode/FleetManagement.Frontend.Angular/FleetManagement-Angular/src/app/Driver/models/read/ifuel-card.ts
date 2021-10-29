@@ -2,7 +2,7 @@ import { IFuelCardDriver } from "./ifuel-card-driver";
 import { IFuelCardOptions } from "./ifuel-card-options";
 
 export interface IFuelCard {
-    fuelCardId: number;
+    id: number;
     cardNumber: string;
     expirationDate: Date;
     pincode: string;
