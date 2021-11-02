@@ -9,6 +9,9 @@ import { VehicleinfoComponent } from './Driver/components/showvehicleinfo/vehicl
 import { UpdateappealinfoComponent } from './Driver/components/updateappealinfo/updateappealinfo.component';
 import { CreateappealComponent } from './Driver/components/createappeal/createappeal.component';
 import { ReactiveFormsModule } from '@angular/forms';
+import { UpdatefuelcardinfoComponent } from './Driver/components/updatefuelcardinfo/updatefuelcardinfo.component';
+import { UpdatecontactinfoComponent } from './Driver/components/updatecontactinfo/updatecontactinfo.component';
+import { RouterModule, Routes } from '@angular/router';
 
 
 @NgModule({
@@ -19,12 +22,22 @@ import { ReactiveFormsModule } from '@angular/forms';
     FuelcardinfoComponent,
     VehicleinfoComponent,
     UpdateappealinfoComponent,
-    CreateappealComponent
+    CreateappealComponent,
+    UpdatefuelcardinfoComponent,
+    UpdatecontactinfoComponent,
   ],
   imports: [
     HttpClientModule,
     BrowserModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    RouterModule.forRoot([
+      { path: 'showdriverdetails', component: Driverdetailscomponent },
+      { path: 'updatecontactinfo', component: UpdatecontactinfoComponent },
+      { path: 'updatefuelcardinfo', component: UpdatefuelcardinfoComponent },
+      { path: 'showfuelcardinfo', component:  FuelcardinfoComponent},
+      { path: 'updateappealinfo', component: UpdateappealinfoComponent },
+      { path: 'showappealinfo', component: AppealinfoComponent }
+    ]),
   ],
   providers: [],
   bootstrap: [AppComponent]

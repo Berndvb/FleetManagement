@@ -1,5 +1,10 @@
 import { Component, OnInit } from '@angular/core';
-import { FormControl } from '@angular/forms';
+import { FormControl, FormGroup  } from '@angular/forms';
+import { Subscription } from 'rxjs';
+import { Appealtype } from '../../models/enums/appealtype';
+import { ICreateAppeal } from '../../models/write/icreate-appeal';
+import { IUpdateAppealInfo } from '../../models/write/iupdate-appeal-info';
+import { DriverService } from '../../services/driver.service';
 
 
 @Component({
@@ -9,14 +14,32 @@ import { FormControl } from '@angular/forms';
 })
 export class UpdateappealinfoComponent implements OnInit {
 
-  formControl = new FormControl('');
+  updateAppealForm = new FormGroup({
+    appealType : new FormControl(''),
+    firstDatePlanning : new FormControl(null),
+    secondDatePlanning : new FormControl(null),
+    message : new FormControl('')});
+  
+    appealId = 2;
+    appealtype = Appealtype;
+    
+    sub!: Subscription;
+    response: any;
+    errorMessage = '';
+  
+    constructor(private driverService: DriverService) { }
+  
+    onSubmit(body: IUpdateAppealInfo): void{
+      this.sub = this.driverService.UpdateAppealInfo(this.appealId, body).subscribe({
+        next: createResponse => this.response = createResponse,
+        error: error => this.errorMessage = error
+      })
+    }
 
-  constructor() { }
+    ngOnInit(): void {
+    }
 
-  ngOnInit(): void {
-  }
-
-  submitted = false;
-
-  onSubmit() { this.submitted = true; }
+    ngOnDestroy(): void {
+      this.sub.unsubscribe();
+    }
 }

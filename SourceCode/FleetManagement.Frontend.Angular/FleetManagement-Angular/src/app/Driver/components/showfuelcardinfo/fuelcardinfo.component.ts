@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 import { Subscription } from 'rxjs';
 import { IFuelCard } from '../../models/read/ifuel-card';
 import { IResponse } from '../../models/standardresponse/iresponse';
@@ -15,13 +16,11 @@ export class FuelcardinfoComponent implements OnInit {
   fuelCardInfo: IResponse<IFuelCard> | undefined;
   errorMessage = '';
   sub!: Subscription; 
+  isVisible = true;
 
-  constructor(private driverService: DriverService) { }
-
-  ngOnInit(): void {
-    const id = 1; 
-    this.getFuelCards(id);
-  }
+  constructor(
+    private driverService: DriverService,
+    private router: Router) { }
 
   getFuelCards(id: number): void{ 
     this.sub = this.driverService.GetFuelCardsForDriver(1).subscribe({
@@ -29,7 +28,17 @@ export class FuelcardinfoComponent implements OnInit {
       error: error => this.errorMessage = error
     });
   }
-  
+
+  goToUpdateFuelCardInfo(){
+    this.isVisible = !this.isVisible;
+    this.router.navigate(['/updatefuelcardinfo'])
+  }
+
+  ngOnInit(): void {
+    const id = 1; 
+    this.getFuelCards(id);
+  }
+
   ngOnDestroy(): void {
     this.sub.unsubscribe();
   }

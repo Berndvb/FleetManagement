@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 import { Subscription } from 'rxjs';
 import { IDriverDetails } from '../../models/read/idriver-details';
 import { DriverService } from '../../services/driver.service';
@@ -15,13 +16,11 @@ export class Driverdetailscomponent implements OnInit {
   driverDetails: IDriverDetails | undefined;
   errorMessage = '';
   sub!: Subscription; //defnite assignment assertion?
+  isVisible = true;
 
-  constructor(private driverService: DriverService) { }
-
-  ngOnInit(): void {
-    const id = 1; //how will the id be decided? 
-    this.getDriverDetails(id);
-  }
+  constructor(
+    private driverService: DriverService,
+    private router: Router) { }
 
   getDriverDetails(id: number): void{ 
     this.sub = this.driverService.GetDriverDetails(1).subscribe({
@@ -29,7 +28,17 @@ export class Driverdetailscomponent implements OnInit {
       error: error => this.errorMessage = error
     });
   }
+
+  goToUpdateContactInfo(){
+    this.isVisible = !this.isVisible;
+    this.router.navigate(['/updatecontactinfo'])
+  }
   
+  ngOnInit(): void {
+    const id = 1; //how will the id be decided? 
+    this.getDriverDetails(id);
+  }
+
   ngOnDestroy(): void {
     this.sub.unsubscribe();
   }

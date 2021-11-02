@@ -1,0 +1,25 @@
+<form [formGroup]="updateAppealForm" (ngSubmit)="onSubmit(updateAppealForm.getRawValue()); updateAppealForm.reset()">
+
+    <label for="appealType">Appealtype: </label>
+    <select id="appealType" formControlName="appealType">
+        <option [ngValue]="null" disabled>Choose your type</option>
+        <option *ngFor="let type of appealtype | keyvalue" [ngValue]="type.value">
+         {{ type.value }}
+        </option>
+      </select> 
+    <br /> 
+    <label for="firstDatePlanning">FirstDatePlanning: </label>
+    <input id="firstDatePlanning" type="text" formControlName="firstDatePlanning">
+    <br /> 
+    <label for="secondDatePlanning">SecondDatePlanning: </label>
+    <input id="secondDatePlanning" type="text" formControlName="secondDatePlanning">
+    <br /> 
+    <label for="message">Message: </label>
+    <input id="message" type="text" formControlName="message">
+    <br /> 
+    <!-- <button type="submit" class="btn btn-success" [disabled]="!createAppealForm.form.valid">Submit</button> -->
+    <button type="submit" class="btn btn-success">Submit</button>
+    
+</form>
+
+

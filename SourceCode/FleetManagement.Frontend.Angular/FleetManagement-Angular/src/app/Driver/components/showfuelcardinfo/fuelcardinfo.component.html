@@ -1,26 +1,37 @@
-<p> has warnings: {{fuelCardInfo?.hasWarnings}}  </p>
-<p> has succeeded: {{fuelCardInfo?.hasSucceeded}}  </p>
-<p> has paging: {{fuelCardInfo?.hasPaging}}  </p>
-<p> pagesize: {{fuelCardInfo?.executionPaging?.pageSize}}  </p>
-<p> total pages: {{fuelCardInfo?.executionPaging?.totalPages}}  </p>
-<p> has next: {{fuelCardInfo?.executionPaging?.hasNext}}  </p>
-
-    <div *ngFor='let fuelCard of fuelCardInfo?.fuelCards'>
-        <p>
-         id: {{ fuelCard.id }}
-        </p>
-        <p>
-            cardNumber: {{ fuelCard.cardNumber }}
-        </p>
-        <p>
-            fcoptions, extraservices: {{ fuelCard.fuelCardOptions.extraServices }}
-        </p>
-        <p>
-            fuelType: {{ fuelCard.fuelCardOptions.fueltype }}
-        </p>
-        <div *ngFor='let fuelCardDriver of fuelCard?.fuelCardDrivers'>
-            <p>
-             fuelCardDriver: {{ fuelCardDriver.active }}
-            </p>
-          </div>
+      <div *ngIf= isVisible >
+        <p> has warnings: {{fuelCardInfo?.hasWarnings}}  </p>
+        <p> has succeeded: {{fuelCardInfo?.hasSucceeded}}  </p>
+        <p> has paging: {{fuelCardInfo?.hasPaging}}  </p>
+        <p> pagesize: {{fuelCardInfo?.executionPaging?.pageSize}}  </p>
+        <p> total pages: {{fuelCardInfo?.executionPaging?.totalPages}}  </p>
+        <p> has next: {{fuelCardInfo?.executionPaging?.hasNext}}  </p>
+        
+            <div *ngFor='let fuelCard of fuelCardInfo?.fuelCards'>
+                <p>
+                 id: {{ fuelCard.id }}
+                </p>
+                <p>
+                    cardNumber: {{ fuelCard.cardNumber }}
+                </p>
+                <p>
+                    fcoptions, extraservices: {{ fuelCard.fuelCardOptions.extraServices }}
+                </p>
+                <p>
+                    fuelType: {{ fuelCard.fuelCardOptions.fueltype }}
+                </p>
+                <div *ngFor='let fuelCardDriver of fuelCard?.fuelCardDrivers'>
+                    <p>
+                     fuelCardDriver: {{ fuelCardDriver.active }}
+                    </p>
+                  </div>
+              </div>
+      
+        <button>
+          <a class='nav-link' (click)= "goToUpdateFuelCardInfo()">updateFuelCardInfo</a>
+        </button>   
       </div>
+        
+      <div class='container' *ngIf= !isVisible>
+        <router-outlet></router-outlet>
+      </div>
+      

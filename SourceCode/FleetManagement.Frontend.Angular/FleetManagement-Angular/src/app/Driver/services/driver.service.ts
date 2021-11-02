@@ -86,6 +86,7 @@ export class DriverService {
   {
     let bodyConverted = JSON.stringify(body);
     console.warn(bodyConverted);
+    console.warn(body);
     return this._httpClient.post<any>(`${this.writeApiUrl}/appeal`, bodyConverted, { headers: this.headers })
     .pipe(  	
       tap(x => console.log('Response contains: ', JSON.stringify(x))), 

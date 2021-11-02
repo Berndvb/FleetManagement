@@ -1,4 +1,5 @@
-<p> has warnings: {{appealInfo?.hasWarnings}}  </p>
+<div *ngIf= isVisible >
+  <p> has warnings: {{appealInfo?.hasWarnings}}  </p>
 <p> has succeeded: {{appealInfo?.hasSucceeded}}  </p>
 <p> has paging: {{appealInfo?.hasPaging}}  </p>
 <p> pagesize: {{appealInfo?.executionPaging?.pageSize}}  </p>
@@ -16,3 +17,12 @@
           status: {{ appeal.status }}
          </p>
       </div>
+
+  <button>
+    <a class='nav-link' (click)= "goToUpdateAppealInfo()">updateAppealInfo</a>
+  </button>   
+</div>
+  
+<div class='container' *ngIf= !isVisible>
+  <router-outlet></router-outlet>
+</div>

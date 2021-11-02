@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 import { Subscription } from 'rxjs';
 import { IVehicleDetails } from '../../models/read/ivehicle-details';
 import { IResponse } from '../../models/standardresponse/iresponse';
@@ -15,13 +16,11 @@ export class VehicleinfoComponent implements OnInit {
   vehicleInfo: IResponse<IVehicleDetails> | undefined;
   errorMessage = '';
   sub!: Subscription; 
+  isVisible = true;
 
-  constructor(private driverService: DriverService) { }
-
-  ngOnInit(): void {
-    const id = 1; 
-    this.getVehicles(id);
-  }
+  constructor(
+    private driverService: DriverService,
+    private router: Router) { }
 
   getVehicles(id: number): void{ 
     this.sub = this.driverService.GetVehiclesForDriver(1).subscribe({
@@ -30,6 +29,16 @@ export class VehicleinfoComponent implements OnInit {
     });
   }
   
+  goToUpdateVehicleInfo(){
+    this.isVisible = !this.isVisible;
+    this.router.navigate(['/updatevehicleinfo'])
+  }
+  
+  ngOnInit(): void {
+    const id = 1; 
+    this.getVehicles(id);
+  }
+
   ngOnDestroy(): void {
     this.sub.unsubscribe();
   }

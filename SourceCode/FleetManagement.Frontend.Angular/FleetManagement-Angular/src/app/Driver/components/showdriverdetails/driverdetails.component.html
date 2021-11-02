@@ -1,11 +1,21 @@
 
-<p> Name: {{driverDetails?.identity?.firstName}} {{driverDetails?.identity?.name}} </p>  
-<p> birthday: {{driverDetails?.identity?.dateOfBirth}}</p>  
-<p> NIN: {{driverDetails?.identity?.nationalInsuranceNumber}}</p>  
-<p> driversLicenseType: {{driverDetails?.driversLicenseType}} </p>  
-<p> emailaddress: {{driverDetails?.contactinfo?.emailAddress}} </p>  
-<p> Phonenumber: {{driverDetails?.contactinfo?.phoneNumber}} </p>  
-<p> address: {{driverDetails?.contactinfo?.address?.street}} {{driverDetails?.contactinfo?.address?.streetNumber}} </p>  
-<p> {{driverDetails?.contactinfo?.address?.city}} {{driverDetails?.contactinfo?.address?.postcode}} </p>  
-<p> in service: {{driverDetails?.inService}} </p> 
+
+<div *ngIf= isVisible >
+  <p> Name: {{driverDetails?.identity?.firstName}} {{driverDetails?.identity?.name}} </p>  
+  <p> birthday: {{driverDetails?.identity?.dateOfBirth}}</p>  
+  <p> NIN: {{driverDetails?.identity?.nationalInsuranceNumber}}</p>  
+  <p> driversLicenseType: {{driverDetails?.driversLicenseType}} </p>  
+  <p> emailaddress: {{driverDetails?.contactinfo?.emailAddress}} </p>  
+  <p> Phonenumber: {{driverDetails?.contactinfo?.phoneNumber}} </p>  
+  <p> address: {{driverDetails?.contactinfo?.address?.street}} {{driverDetails?.contactinfo?.address?.streetNumber}} </p>  
+  <p> {{driverDetails?.contactinfo?.address?.city}} {{driverDetails?.contactinfo?.address?.postcode}} </p>  
+  <p> in service: {{driverDetails?.inService}} </p> 
+  <button>
+    <a class='nav-link' (click)= "goToUpdateContactInfo()">updatecontactinfo</a>
+  </button>   
+</div>
+  
+<div class='container' *ngIf= !isVisible>
+  <router-outlet></router-outlet>
+</div>
 

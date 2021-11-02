@@ -1,0 +1,24 @@
+<form [formGroup]="updateContactInfoForm" (ngSubmit)="onSubmit(updateContactInfoForm.getRawValue()); updateContactInfoForm.reset()">
+
+    <label for="emailAddress">EmailAddress: </label>
+    <input id="emailAddress" type="text" formControlName="emailAddress">
+    <br /> 
+    <label for="phoneNumber">PhoneNumber: </label>
+    <input id="phoneNumber" type="text" formControlName="phoneNumber">
+    <br /> 
+    <label for="street">Street: </label>
+    <input id="street" type="text" formControlName="street">
+    <br /> 
+    <label for="streetNumber">StreetNumber: </label>
+    <input id="streetNumber" type="text" formControlName="streetNumber">
+    <br /> 
+    <label for="city">City: </label>
+    <input id="city" type="text" formControlName="city">
+    <br /> 
+    <label for="postcode">Postcode: </label>
+    <input id="postcode" type="text" formControlName="postcode">
+    <br /> 
+    <!-- <button type="submit" class="btn btn-success" [disabled]="!createAppealForm.form.valid">Submit</button> -->
+    <button type="submit" class="btn btn-success">Submit</button>
+    
+</form>

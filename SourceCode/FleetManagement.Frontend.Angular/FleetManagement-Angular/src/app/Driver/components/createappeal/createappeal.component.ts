@@ -3,7 +3,7 @@ import { FormControl, FormGroup } from '@angular/forms';
 import { DriverService } from '../../services/driver.service';
 import { ICreateAppeal } from '../../models/write/icreate-appeal';
 import { Subscription } from 'rxjs';
-import { Appealtype } from '../../models/appealtype';
+import { Appealtype } from '../../models/enums/appealtype';
 
 
 @Component({
@@ -44,6 +44,7 @@ export class CreateappealComponent implements OnInit {
     body.vehicleId = 1;
     body.driverId = 1;
     body.creationDate = new Date();
+    console.warn(body);
     return body;
   }
 
