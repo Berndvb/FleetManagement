@@ -37,7 +37,7 @@ namespace FleetManagement.BLL.Features.DriverZone.AddAppeal
 
             RuleFor(x => x.Status).Must(y => Enum.IsDefined(typeof(AppealStatus), y));
 
-            RuleFor(x => x.Message).Must(y => y != null || y.Length < 200); // will it ever be sent as null or rather just string.empty?
+            RuleFor(x => x.Message).Must(y => y != null || y?.Length < 200); // will it ever be sent as null or rather just string.empty?
 
             RuleFor(x => x.DriverId).GreaterThan(0);
 

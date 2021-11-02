@@ -1,4 +1,4 @@
-import { HttpClient, HttpErrorResponse } from "@angular/common/http";
+import { HttpClient, HttpErrorResponse, HttpHeaders } from "@angular/common/http";
 import { Injectable } from '@angular/core';
 import { Observable, throwError } from "rxjs";
 import { catchError, tap } from 'rxjs/operators';
@@ -18,14 +18,17 @@ import { IResponse } from "../models/standardresponse/iresponse";
 
 export class DriverService {
 
-  private baseUrl = 'https://localhost:44331/readapi/DriverZone';
-  private addPaging = '?PagingParameters.PageNumber=1&PagingParameters.PageSize=5'
+  private readonly readApiUrl = 'https://localhost:44331/readapi/DriverZone';
+  private readonly writeApiUrl = 'https://localhost:44383/writeapi/DriverZone';
+  private readonly addPaging = '?PagingParameters.PageNumber=1&PagingParameters.PageSize=5'
+  private readonly headers = new HttpHeaders().set('Content-Type', 'application/json; charset=utf-8');
+
 
   constructor(private _httpClient: HttpClient) { }
 
   GetDriverDetails(id: number): Observable<IDriverDetails | undefined> 
   {
-    return this._httpClient.get<IDriverDetails>(`${this.baseUrl}/driver/${id}`)
+    return this._httpClient.get<IDriverDetails>(`${this.readApiUrl}/driver/${id}`)
     .pipe(  	
       tap(x => console.log('Data contains: ', JSON.stringify(x))), // js-object to json string
       catchError(x => this.handleError(x))); 
@@ -33,7 +36,7 @@ export class DriverService {
 
   GetAppealsForDriver(id: number): Observable<IResponse<IAppeal>> 
   {
-    return this._httpClient.get<IResponse<IAppeal>>(`${this.baseUrl}/driver/${id}/appeals${this.addPaging}`)
+    return this._httpClient.get<IResponse<IAppeal>>(`${this.readApiUrl}/driver/${id}/appeals${this.addPaging}`)
     .pipe(  	
       tap(x => console.log('Data contains: ', JSON.stringify(x))),
       catchError(x => this.handleError(x)));
@@ -41,7 +44,7 @@ export class DriverService {
 
   GetFuelCardsForDriver(id: number): Observable<IResponse<IFuelCard>> 
   {
-    return this._httpClient.get<IResponse<IFuelCard>>(`${this.baseUrl}/driver/${id}/fuelcards${this.addPaging}`)
+    return this._httpClient.get<IResponse<IFuelCard>>(`${this.readApiUrl}/driver/${id}/fuelcards${this.addPaging}`)
     .pipe(  	
       tap(x => console.log('Data contains: ', JSON.stringify(x))),
       catchError(x => this.handleError(x)));
@@ -49,7 +52,7 @@ export class DriverService {
 
   GetVehiclesForDriver(id: number): Observable<IResponse<IVehicleDetails>> 
   {
-    return this._httpClient.get<IResponse<IVehicleDetails>>(`${this.baseUrl}/driver/${id}/vehicles${this.addPaging}`)
+    return this._httpClient.get<IResponse<IVehicleDetails>>(`${this.readApiUrl}/driver/${id}/vehicles${this.addPaging}`)
     .pipe(  	
       tap(x => console.log('Data contains: ', JSON.stringify(x))),
       catchError(x => this.handleError(x)));
@@ -57,7 +60,7 @@ export class DriverService {
 
   UpdateContactInfo(id: number, body: IUpdateContactInfo): Observable<any | undefined> 
   {
-    return this._httpClient.put<any>(`${this.baseUrl}/driver/${id}`, body)
+    return this._httpClient.put<any>(`${this.writeApiUrl}/driver/${id}`, body)
     .pipe(  	
       tap(x => console.log('Response contains: ', JSON.stringify(x))), 
       catchError(x => this.handleError(x))); 
@@ -65,7 +68,7 @@ export class DriverService {
 
   UpdateFuelCardInfo(id: number, body: IUpdateFuelCardInfo): Observable<any | undefined> 
   {
-    return this._httpClient.put<any>(`${this.baseUrl}/fuelCard/${id}`, body)
+    return this._httpClient.put<any>(`${this.writeApiUrl}/fuelCard/${id}`, body)
     .pipe(  	
       tap(x => console.log('Response contains: ', JSON.stringify(x))), 
       catchError(x => this.handleError(x))); 
@@ -73,7 +76,7 @@ export class DriverService {
 
   UpdateAppealInfo(id: number, body: IUpdateAppealInfo): Observable<any | undefined> 
   {
-    return this._httpClient.put<any>(`${this.baseUrl}/appeal/${id}`, body)
+    return this._httpClient.put<any>(`${this.writeApiUrl}/appeal/${id}`, body)
     .pipe(  	
       tap(x => console.log('Response contains: ', JSON.stringify(x))), 
       catchError(x => this.handleError(x))); 
@@ -81,7 +84,9 @@ export class DriverService {
 
   CreateAppeal(body: ICreateAppeal): Observable<any | undefined> 
   {
-    return this._httpClient.post<any>(`${this.baseUrl}/appeal`, body)
+    let bodyConverted = JSON.stringify(body);
+    console.warn(bodyConverted);
+    return this._httpClient.post<any>(`${this.writeApiUrl}/appeal`, bodyConverted, { headers: this.headers })
     .pipe(  	
       tap(x => console.log('Response contains: ', JSON.stringify(x))), 
       catchError(x => this.handleError(x))); 

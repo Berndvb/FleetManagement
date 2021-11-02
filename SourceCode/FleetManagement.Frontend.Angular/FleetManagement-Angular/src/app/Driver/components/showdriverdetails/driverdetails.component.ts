@@ -25,7 +25,7 @@ export class Driverdetailscomponent implements OnInit {
 
   getDriverDetails(id: number): void{ 
     this.sub = this.driverService.GetDriverDetails(1).subscribe({
-      next: driver => { this.driverDetails = driver; },
+      next: driver => this.driverDetails = driver,
       error: error => this.errorMessage = error
     });
   }
