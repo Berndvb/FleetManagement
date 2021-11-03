@@ -1,0 +1,32 @@
+.test {
+    width: 100%;
+    height: auto;
+    border: 1px solid red;
+    display: block;
+}
+
+.inner {
+  display: inline-block;
+  height: 350px;
+  margin: 0px -6px 0px 0px;
+  position: relative;
+  width: 49%;
+  border: 2px solid green;
+  padding: 15px;
+  margin: 5px;
+  vertical-align: top;
+}
+
+.navbar {
+    box-shadow: inset 0 -1px 0 rgba(0, 0, 0, .1);
+  }
+  
+  @media (min-width: 767.98px) {
+    .navbar {
+      top: 0;
+      position: sticky;
+      z-index: 999;
+    }
+  }
+
+
