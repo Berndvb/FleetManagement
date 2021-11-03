@@ -22,8 +22,8 @@ export class Driverdetailscomponent implements OnInit {
     private driverService: DriverService,
     private router: Router) { }
 
-  getDriverDetails(id: number): void{ 
-    this.sub = this.driverService.GetDriverDetails(1).subscribe({
+  async getDriverDetails(id: number): Promise<void>{ 
+    this.sub = await this.driverService.GetDriverDetails(1).subscribe({
       next: driver => this.driverDetails = driver,
       error: error => this.errorMessage = error
     });
