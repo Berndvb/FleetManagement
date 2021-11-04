@@ -1,37 +1,30 @@
-      <div *ngIf= isVisible >
-        <p> has warnings: {{fuelCardInfo?.hasWarnings}}  </p>
-        <p> has succeeded: {{fuelCardInfo?.hasSucceeded}}  </p>
-        <p> has paging: {{fuelCardInfo?.hasPaging}}  </p>
-        <p> pagesize: {{fuelCardInfo?.executionPaging?.pageSize}}  </p>
-        <p> total pages: {{fuelCardInfo?.executionPaging?.totalPages}}  </p>
-        <p> has next: {{fuelCardInfo?.executionPaging?.hasNext}}  </p>
-        
-            <div *ngFor='let fuelCard of fuelCardInfo?.fuelCards'>
-                <p>
-                 id: {{ fuelCard.id }}
-                </p>
-                <p>
-                    cardNumber: {{ fuelCard.cardNumber }}
-                </p>
-                <p>
-                    fcoptions, extraservices: {{ fuelCard.fuelCardOptions.extraServices }}
-                </p>
-                <p>
-                    fuelType: {{ fuelCard.fuelCardOptions.fueltype }}
-                </p>
-                <div *ngFor='let fuelCardDriver of fuelCard?.fuelCardDrivers'>
-                    <p>
-                     fuelCardDriver: {{ fuelCardDriver.active }}
-                    </p>
-                  </div>
-              </div>
-      
-        <button>
-          <a class='nav-link' (click)= "goToUpdateFuelCardInfo()">updateFuelCardInfo</a>
-        </button>   
+<div class="container">
+  <div class="items-head">
+    <p>Fuelcards</p>
+    <hr>
+  </div>
+  <div class="items-body">
+    <div *ngIf=isVisible>
+      <div *ngFor='let fuelCard of fuelCardInfo?.fuelCards; index as i'>
+        <ul>
+          <div class="items-body-content">
+            <button class='fuelcard-button' (click)="goToUpdateFuelCardInfo()">Fuelcard n°{{i+1}}</button>
+            <i class="fa fa-angle-right"></i>
+          </div>
+          <li>CardNumber: {{ fuelCard.cardNumber }}</li>
+          <li>Pincode: {{ fuelCard.pincode }}</li>
+          <li>Expirationdate: {{ fuelCard.expirationDate }}</li>
+          <li>Extraservices: {{ fuelCard.fuelCardOptions.extraServices }}</li>
+          <li>FuelType: {{ fuelCard.fuelCardOptions.fueltype }}</li>
+          <div *ngFor='let fuelCardDriver of fuelCard?.fuelCardDrivers'>
+            <li>FuelCardDriver: {{ fuelCardDriver.active }}</li>
+            <li>FuelCardDriver: {{ fuelCardDriver.creationDate }}</li>
+            <li>FuelCardDriver: {{ fuelCardDriver.closureDate}}</li>
+          </div>
+        </ul>
       </div>
-        
-      <div class='container' *ngIf= !isVisible>
-        <router-outlet></router-outlet>
-      </div>
-      
+    </div>
+</div>
+<div class='outlet' *ngIf=!isVisible>
+  <router-outlet></router-outlet>
+</div>

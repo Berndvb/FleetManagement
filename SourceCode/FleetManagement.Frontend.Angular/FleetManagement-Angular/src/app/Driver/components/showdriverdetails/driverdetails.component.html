@@ -1,21 +1,28 @@
-
-
-<div *ngIf= isVisible >
-  <p> Name: {{driverDetails?.identity?.firstName}} {{driverDetails?.identity?.name}} </p>  
-  <p> birthday: {{driverDetails?.identity?.dateOfBirth}}</p>  
-  <p> NIN: {{driverDetails?.identity?.nationalInsuranceNumber}}</p>  
-  <p> driversLicenseType: {{driverDetails?.driversLicenseType}} </p>  
-  <p> emailaddress: {{driverDetails?.contactinfo?.emailAddress}} </p>  
-  <p> Phonenumber: {{driverDetails?.contactinfo?.phoneNumber}} </p>  
-  <p> address: {{driverDetails?.contactinfo?.address?.street}} {{driverDetails?.contactinfo?.address?.streetNumber}} </p>  
-  <p> {{driverDetails?.contactinfo?.address?.city}} {{driverDetails?.contactinfo?.address?.postcode}} </p>  
-  <p> in service: {{driverDetails?.inService}} </p> 
-  <button>
-    <a class='nav-link' (click)= "goToUpdateContactInfo()">updatecontactinfo</a>
-  </button>   
-</div>
-  
-<div class='container' *ngIf= !isVisible>
+<div class="container">
+  <div class="items-head">
+    <p>Driverinfo</p>
+    <hr>
+  </div>
+  <div class="items-body">
+    <div *ngIf=isVisible>
+      <ul>
+        <li>Name: {{driverDetails?.identity?.firstName}} {{driverDetails?.identity?.name}}</li>
+        <li>Birthday: {{driverDetails?.identity?.dateOfBirth}}</li>
+        <li>NIN: {{driverDetails?.identity?.nationalInsuranceNumber}}</li>
+        <li>DriversLicenseType: {{driverDetails?.driversLicenseType}}</li>
+        <li>Emailaddress: {{driverDetails?.contactinfo?.emailAddress}} </li>
+        <li>Phonenumber: {{driverDetails?.contactinfo?.phoneNumber}}</li>
+        <li>Address: {{driverDetails?.contactinfo?.address?.street}}
+          {{driverDetails?.contactinfo?.address?.streetNumber}}</li>
+        <li>{{driverDetails?.contactinfo?.address?.city}} {{driverDetails?.contactinfo?.address?.postcode}}</li>
+        <li>In service: {{driverDetails?.inService}}</li>
+      </ul>
+      <div class="items-body-content">
+        <button class='driverdetails-button' (click)="goToUpdateContactInfo()">Update</button>
+        <i class="fa fa-angle-right"></i>
+      </div>
+    </div>
+  </div>
+<div class='outlet' *ngIf=!isVisible>
   <router-outlet></router-outlet>
 </div>
-

@@ -12,6 +12,9 @@ import { ReactiveFormsModule } from '@angular/forms';
 import { UpdatefuelcardinfoComponent } from './Driver/components/updatefuelcardinfo/updatefuelcardinfo.component';
 import { UpdatecontactinfoComponent } from './Driver/components/updatecontactinfo/updatecontactinfo.component';
 import { RouterModule, Routes } from '@angular/router';
+import { SidebarComponent } from './shared/sidebar/sidebar.component';
+import { NavbarComponent } from './shared/navbar/navbar.component';
+import { FooterComponent } from './shared/footer/footer.component';
 
 
 @NgModule({
@@ -25,6 +28,9 @@ import { RouterModule, Routes } from '@angular/router';
     CreateappealComponent,
     UpdatefuelcardinfoComponent,
     UpdatecontactinfoComponent,
+    SidebarComponent,
+    NavbarComponent,
+    FooterComponent,
   ],
   imports: [
     HttpClientModule,
