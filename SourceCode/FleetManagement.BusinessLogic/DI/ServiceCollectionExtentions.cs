@@ -17,7 +17,6 @@ namespace FleetManagement.BLL.DI
         {
             services.AddMapper();
             services.AddEntityServices();
-            //test
         }
 
         public static void AddMediatRCqrsServices(this IServiceCollection services)
