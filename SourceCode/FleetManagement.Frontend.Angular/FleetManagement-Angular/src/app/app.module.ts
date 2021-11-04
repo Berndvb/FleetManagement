@@ -15,6 +15,7 @@ import { RouterModule, Routes } from '@angular/router';
 import { SidebarComponent } from './shared/sidebar/sidebar.component';
 import { NavbarComponent } from './shared/navbar/navbar.component';
 import { FooterComponent } from './shared/footer/footer.component';
+import { DashboardlayoutComponent } from './layout/dashboardlayout/dashboardlayout.component';
 
 
 @NgModule({
@@ -31,6 +32,7 @@ import { FooterComponent } from './shared/footer/footer.component';
     SidebarComponent,
     NavbarComponent,
     FooterComponent,
+    DashboardlayoutComponent,
   ],
   imports: [
     HttpClientModule,
